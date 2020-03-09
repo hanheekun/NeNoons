@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.ui.exercise;
+package com.pixelro.eyelab.menu.my;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.eyelab.R;
 
-public class ExerciseFragment extends Fragment {
+public class MyFragment extends Fragment {
 
-    private ExerciseViewModel exerciseViewModel;
+    private MyViewModel myViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        exerciseViewModel =
-                ViewModelProviders.of(this).get(ExerciseViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_exercise, container, false);
-        final TextView textView = root.findViewById(R.id.text_exercise);
-        exerciseViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        myViewModel =
+                ViewModelProviders.of(this).get(MyViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_my, container, false);
+        final TextView textView = root.findViewById(R.id.text_my);
+        myViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

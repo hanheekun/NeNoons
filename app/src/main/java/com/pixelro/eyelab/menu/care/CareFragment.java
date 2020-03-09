@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.ui.care;
+package com.pixelro.eyelab.menu.care;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,16 +1,16 @@
-package com.pixelro.eyelab.ui.home;
+package com.pixelro.eyelab.menu.care;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class CareViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public CareViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is care fragment");
     }
 
     public LiveData<String> getText() {
