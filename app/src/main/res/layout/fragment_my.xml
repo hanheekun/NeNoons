@@ -9,6 +9,11 @@
 <!--    test6-->
 
 
+    <!--    test7-->
+
+    <!--    test8-->
+
+
     <TextView
         android:id="@+id/text_my"
         android:layout_width="match_parent"
