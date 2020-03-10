@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.eyelab.R;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
 
@@ -30,6 +30,18 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        root.findViewById(R.id.button_home_test).setOnClickListener(this);
+
         return root;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.button_home_test:
+
+                break;
+        }
     }
 }
