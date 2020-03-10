@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.menu.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.test.Test01Activity;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -40,7 +42,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.button_home_test:
-
+                Intent intent = new Intent(getContext(), Test01Activity.class);
+                startActivity(intent);
                 break;
         }
     }

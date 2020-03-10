@@ -4,4 +4,8 @@
     <string name="title_care">Care</string>
     <string name="title_my">MY</string>
     <string name="title_exercise">Exercise</string>
+
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="face_detector_dependency_error">Face detector dependencies are not yet available</string>
+
 </resources>
