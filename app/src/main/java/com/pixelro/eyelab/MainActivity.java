@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,6 +19,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends BaseActivity {
+
+    private long mBackKeyPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,27 @@ public class MainActivity extends BaseActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        // 두번 눌러 종료 추가
+        if (System.currentTimeMillis() > mBackKeyPressedTime + 2000) {
+            mBackKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        (new Handler()).postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        finishAffinity();
+                    }
+                }
+                , 200);
 
     }
 
