@@ -9,6 +9,15 @@
         android:id="@+id/navigation_test_01"
         android:name="com.pixelro.eyelab.test.Test01Fragment"
         tools:layout="@layout/fragment_test_01">
+        <action
+            android:id="@+id/action_navigation_test_01_to_navigation_test_02"
+            app:destination="@id/navigation_test_02" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_02"
+        android:name="com.pixelro.eyelab.test.Test02Fragment"
+        tools:layout="@layout/fragment_test_02">
     </fragment>
 
 </navigation>

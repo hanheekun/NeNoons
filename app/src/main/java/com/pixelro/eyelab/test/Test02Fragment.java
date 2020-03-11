@@ -1,6 +1,5 @@
 package com.pixelro.eyelab.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.login.LoginHelloFragment;
 
-public class Test01Fragment extends Fragment  implements View.OnClickListener{
+public class Test02Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = LoginHelloFragment.class.getSimpleName();
     private View mView;
@@ -24,7 +22,7 @@ public class Test01Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_01, container, false);
+        return inflater.inflate(R.layout.fragment_test_02, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
