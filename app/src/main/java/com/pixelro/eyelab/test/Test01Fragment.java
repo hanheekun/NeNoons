@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
-public class Test01Fragment extends Fragment {
+public class Test01Fragment extends Fragment  implements View.OnClickListener{
 
     @Override
     public View onCreateView(
@@ -25,12 +26,24 @@ public class Test01Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
+        button_arrow_back_background
+
+//        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                NavHostFragment.findNavController(FirstFragment.this)
+////                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+//            }
+//        });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.view_main_age_result_btn:
+                Intent intent = new Intent(getContext(), TestActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

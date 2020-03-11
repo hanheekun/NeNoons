@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/test_navigation"
-    app:startDestination="@+id/navigation_test_01">
+    app:startDestination="@+id/navigation_login_hello">
 
     <fragment
-        android:id="@+id/navigation_test_01"
-        android:name="com.pixelro.eyelab.test.Test01Fragment"
-        tools:layout="@layout/fragment_test_01">
+        android:id="@+id/navigation_login_hello"
+        android:name="com.pixelro.eyelab.login.LoginHelloFragment"
+        tools:layout="@layout/fragment_login_hello">
     </fragment>
 
 </navigation>

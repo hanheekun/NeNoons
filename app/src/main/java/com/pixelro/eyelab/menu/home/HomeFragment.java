@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.test.Test01Activity;
+import com.pixelro.eyelab.test.TestActivity;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -25,15 +25,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_home);
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
 
-        root.findViewById(R.id.button_home_test).setOnClickListener(this);
+        root.findViewById(R.id.view_main_age_result_btn).setOnClickListener(this);
 
         return root;
     }
@@ -41,8 +41,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_home_test:
-                Intent intent = new Intent(getContext(), Test01Activity.class);
+            case R.id.view_main_age_result_btn:
+                Intent intent = new Intent(getContext(), TestActivity.class);
                 startActivity(intent);
                 break;
         }

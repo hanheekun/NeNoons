@@ -30,9 +30,9 @@ import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
 
-public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
+public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
 
-    private final static String TAG = Test01Activity.class.getSimpleName();
+    private final static String TAG = TestActivity.class.getSimpleName();
     private TextView mTvData;
 
     private static final int REQUEST_CAMERA = 1;
@@ -42,7 +42,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
     private EyeDistanceMeasureService mEyeDistanceMeasureService = null;
     private boolean mBindStatus = false;
     private SendMassgeHandler mMainHandler = null;
-    private Test01Activity mThis = null;
+    private TestActivity mThis = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
         }
 
-        //mTvData = (TextView) findViewById(R.id.textView_test01_distance);
+        mTvData = (TextView) findViewById(R.id.textView_test01_distance);
 
         mThis = this;
 
@@ -133,7 +133,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
                         @Override
                         public void run() {
 
-                            ///////mTvData.setText(distance + "  C2M");
+                            mTvData.setText(distance + "  C2M");
 
                         }
                     });
@@ -270,7 +270,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
             final String action = intent.getAction();
             if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
-                ////////mTvData.setText(distance + "cm");
+                mTvData.setText(distance + "cm");
                 Log.d(TAG, "????????????????????????????????");
             }
 
@@ -308,7 +308,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Test01Activity.this, "확인 했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestActivity.this, "확인 했습니다.", Toast.LENGTH_SHORT).show();
 
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
@@ -317,7 +317,7 @@ public class Test01Activity  extends BaseActivity  implements IEyeDistanceMeasur
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Test01Activity.this, "취소 했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestActivity.this, "취소 했습니다.", Toast.LENGTH_SHORT).show();
                 finish();
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
