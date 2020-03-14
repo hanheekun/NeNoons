@@ -43,8 +43,8 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.view_main_age_result_btn:
-                getActivity().finish();
+            case R.id.button_arrow_back_background:
+                getActivity().onBackPressed();
                 //NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
                 break;
         }
