@@ -24,8 +24,33 @@
     <string name="account_login_btn">로그인</string>
     <string name="account_login_other">또는</string>
     <string name="account_login_forget">아이디/비밀번호를 잊으셨나요?</string>
-
     <!--    account-join-->
-
+    <string name="account_join_tos_title">이용약관</string>
+    <string name="account_join_tos"></string>
+    <string name="account_join_tos_agree">동의</string>
+    <string name="account_join_title">Sign Up</string>
+    <string name="account_join_email">e-mail</string>
+    <string name="account_join_email_hint">Your e-mail</string>
+    <string name="account_join_pass">Password</string>
+    <string name="account_join_pass_hint">Password</string>
+    <string name="account_join_pass_conf_hint">Password</string>
+    <string name="account_join_next">다음</string>
+    <string name="account_join_join">가입하기</string>
+    <string name="account_join_profile">프로필 설정</string>
+    <string name="account_join_name">이름</string>
+    <string name="account_join_gender">성별</string>
+    <string name="account_join_birthday">생년월일</string>
+    <string name="account_join_job">직업</string>
+    <string name="account_join_phone">핸드폰 번호</string>
+    <string name="account_join_content">사용자의 정보에따라 눈 건강 테스트 결과값이 다를 수 있으니
+        \n원활한 테스트를 진행을 위해서 본인의 정보를 입력해주세요.</string>
+    <string name="account_join_survey">사용자 정보</string>
+    <string name="account_join_glasses">안경을 쓰시나요?</string>
+    <string name="account_join_left">시력 좌</string>
+    <string name="account_join_right">시력 우</string>
+    <string name="account_join_status">근시/정시/난시 인가요?</string>
+    <string name="account_join_surgery">눈 관련 수술을 하신적이 있나요?</string>
+    <string name="account_join_exercise">평소에 눈운동을 하시나요?</string>
+    <string name="account_join_food">눈 건강 보조식품을 드시나요?</string>
 
 </resources>

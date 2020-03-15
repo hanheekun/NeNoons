@@ -21,12 +21,21 @@
         android:id="@+id/navigation_account_login"
         android:name="com.pixelro.eyelab.account.AccountLoginFragment"
         tools:layout="@layout/fragment_account_login">
+        <action
+            android:id="@+id/action_navigation_account_login_to_navigation_account_find"
+            app:destination="@id/navigation_account_find" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account_find"
+        android:name="com.pixelro.eyelab.account.AccountFindFragment"
+        tools:layout="@layout/fragment_account_find">
     </fragment>
 
     <fragment
         android:id="@+id/navigation_account_join"
-        android:name="com.pixelro.eyelab.account.AccountJoinFragment"
-        tools:layout="@layout/fragment_account_join">
+        android:name="com.pixelro.eyelab.account.AccountTosFragment"
+        tools:layout="@layout/fragment_account_tos">
     </fragment>
 
 </navigation>

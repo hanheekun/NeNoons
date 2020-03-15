@@ -27,11 +27,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText_account_login_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:background="@drawable/account_login_edit_box"
+        android:background="@drawable/account_login_edit_box_n"
         android:ems="10"
         android:hint="@string/account_login_email_hint"
         android:inputType="textEmailAddress"
@@ -61,11 +61,11 @@
         android:layout_marginBottom="5dp"
         android:text="@string/account_login_email"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_account_login_email"
+        app:layout_constraintStart_toStartOf="@+id/editText_account_login_email" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText_account_login_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -75,8 +75,8 @@
         android:inputType="textPassword"
         android:paddingStart="20sp"
         android:textSize="21sp"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="@+id/editText_account_login_email"
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_login_email" />
 
     <TextView
         android:id="@+id/textView8"
@@ -85,30 +85,31 @@
         android:layout_marginBottom="5dp"
         android:text="@string/account_login_pass"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
-        app:layout_constraintStart_toStartOf="@+id/editText2" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_account_login_password"
+        app:layout_constraintStart_toStartOf="@+id/editText_account_login_password" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switch_account_login_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="@string/account_login_save_login"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintEnd_toEndOf="@+id/editText_account_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_login_password" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_account_login_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@drawable/account_login_btn_login_n"
+        android:background="@drawable/account_login_btn_login"
+        android:enabled="false"
         android:text="@string/account_login_btn"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintStart_toStartOf="@+id/editText_account_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_login_password" />
 
     <View
         android:id="@+id/view"
@@ -126,11 +127,11 @@
         android:layout_height="wrap_content"
         android:text="@string/account_login_other"
         android:textColor="#9b9b9b"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton_account_facebook"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton_account_login_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/button_account_login_login"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintStart_toStartOf="@+id/button_account_login_login"
+        app:layout_constraintTop_toBottomOf="@+id/button_account_login_login" />
 
     <View
         android:id="@+id/view2"
@@ -143,64 +144,65 @@
         app:layout_constraintTop_toTopOf="@+id/textView9" />
 
     <ImageButton
-        android:id="@+id/imageButton_account_facebook"
+        android:id="@+id/imageButton_account_login_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:background="#00000000"
         android:src="@drawable/account_login_bnt_facebook"
         app:layout_constraintBottom_toTopOf="@+id/textView_account_login_forget"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_account_login_google"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButton_account_login_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/account_login_bnt_google"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_account_login_qq"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton_account_facebook"
-        app:layout_constraintTop_toTopOf="@+id/imageButton_account_facebook" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton_account_login_facebook"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_facebook" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imageButton_account_login_qq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/account_login_bnt_qq"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_account_login_kakao"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton_account_login_google"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_google" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/imageButton_account_login_kakao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/account_login_bnt_kakao"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_account_login_naver"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toTopOf="@+id/imageButton3" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton_account_login_qq"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_qq" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/imageButton_account_login_naver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/account_login_bnt_naver"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_account_login_wechat"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton_account_login_kakao"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_kakao" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/imageButton_account_login_wechat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -208,14 +210,15 @@
         android:src="@drawable/account_login_bnt_wechat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/imageButton5" />
+        app:layout_constraintStart_toEndOf="@+id/imageButton_account_login_naver"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_naver" />
 
     <TextView
         android:id="@+id/textView_account_login_forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
         android:text="@string/account_login_forget"
         android:textColor="#9b9b9b"
         android:textSize="14sp"
@@ -223,7 +226,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_account_facebook" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_account_login_facebook" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
