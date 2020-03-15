@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@drawable/account_login_btn_login"
+        android:background="@drawable/account_login_btn_login_n"
         android:text="@string/account_login_btn"
         android:textColor="#ffffff"
         android:textSize="20sp"
