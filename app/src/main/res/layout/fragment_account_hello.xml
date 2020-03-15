@@ -16,15 +16,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24000001" />
+        app:layout_constraintVertical_bias="0.24000001"
+        app:srcCompat="@drawable/account_hello"/>
 
     <Button
-        android:id="@+id/button_login_hello_login"
+        android:id="@+id/button_account_hello_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:background="@drawable/but_login"
-        app:layout_constraintBottom_toTopOf="@+id/button_login_hello_join"
+        android:text="@string/account_hello_btn_login"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_account_hello_join"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4" />
 
@@ -37,24 +41,28 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.92"
+        app:srcCompat="@drawable/account_hello_logo" />
 
     <Button
-        android:id="@+id/button_login_hello_join"
+        android:id="@+id/button_account_hello_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="22dp"
         android:background="@drawable/but_signup"
+        android:text="@string/account_hello_btn_join"
+        android:textColor="#0143be"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/button_login_hello_login"
-        app:layout_constraintStart_toStartOf="@+id/button_login_hello_login" />
+        app:layout_constraintEnd_toEndOf="@+id/button_account_hello_login"
+        app:layout_constraintStart_toStartOf="@+id/button_account_hello_login" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:text="환영합니다"
+        android:text="@string/account_hello_title"
         android:textColor="#001331"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
@@ -67,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="눈 건강 테스트 후 눈 운동을 하여\n눈을 건강하게 관리하세요."
+        android:text="@string/account_hello_subtitle"
         android:textColor="#5d7292"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"

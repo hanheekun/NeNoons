@@ -8,4 +8,24 @@
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
     <string name="face_detector_dependency_error">Face detector dependencies are not yet available</string>
 
+    <!--    account-->
+    <!--    account-hello-->
+    <string name="account_hello_title">환영합니다.</string>
+    <string name="account_hello_subtitle">눈 건강 테스트 후 눈 운동을 하여 \n눈을 건강하게 관리하세요.</string>
+    <string name="account_hello_btn_login">로그인</string>
+    <string name="account_hello_btn_join">가입하기</string>
+    <!--    account-login-->
+    <string name="account_login_title">Log In</string>
+    <string name="account_login_email">e-mail</string>
+    <string name="account_login_email_hint">Your e-mail</string>
+    <string name="account_login_pass">Password</string>
+    <string name="account_login_pass_hint">Password</string>
+    <string name="account_login_save_login">로그인 기억하기 </string>
+    <string name="account_login_btn">로그인</string>
+    <string name="account_login_other">또는</string>
+    <string name="account_login_forget">아이디/비밀번호를 잊으셨나요?</string>
+
+    <!--    account-join-->
+
+
 </resources>

@@ -1,18 +1,18 @@
-package com.pixelro.eyelab.login;
+package com.pixelro.eyelab.account;
 
 import android.os.Bundle;
 
 import com.pixelro.eyelab.BaseActivity;
 import com.pixelro.eyelab.R;
 
-public class LoginActivity extends BaseActivity{
+public class AccountActivity extends BaseActivity{
 
-    private final static String TAG = LoginActivity.class.getSimpleName();
+    private final static String TAG = AccountActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_account);
 
     }
 

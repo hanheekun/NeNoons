@@ -61,7 +61,11 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
 
         mThis = this;
 
-        showDialog();
+        TestDialog dlg = new TestDialog(this);
+
+        dlg.showDialog();
+
+        //showDialog();
 
     }
 

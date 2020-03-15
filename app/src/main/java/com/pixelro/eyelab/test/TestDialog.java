@@ -33,8 +33,6 @@ public class TestDialog {
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
         dlg.setContentView(R.layout.dialog_test);
 
-
-
         // 커스텀 다이얼로그를 노출한다.
         dlg.show();
 
@@ -51,6 +49,7 @@ public class TestDialog {
                 dlg.dismiss();
             }
         });
+
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".account.AccountActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity

@@ -1,6 +1,5 @@
 package com.pixelro.eyelab.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.login.LoginHelloFragment;
+import com.pixelro.eyelab.account.AccountHelloFragment;
 
 public class Test01Fragment extends Fragment  implements View.OnClickListener{
 
-    private final static String TAG = LoginHelloFragment.class.getSimpleName();
+    private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
 
     Adapter adapter;

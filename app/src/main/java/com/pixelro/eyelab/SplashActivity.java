@@ -1,20 +1,13 @@
 package com.pixelro.eyelab;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.pixelro.eyelab.login.LoginActivity;
+import com.pixelro.eyelab.account.AccountActivity;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -46,7 +39,7 @@ public class SplashActivity extends BaseActivity{
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, AccountActivity.class);
                 SplashActivity.this.startActivity(mainIntent);
                 //SplashActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 SplashActivity.this.finish();

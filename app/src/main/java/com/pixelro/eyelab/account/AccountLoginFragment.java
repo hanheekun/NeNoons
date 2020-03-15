@@ -1,5 +1,6 @@
-package com.pixelro.eyelab.test;
+package com.pixelro.eyelab.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test02Fragment extends Fragment  implements View.OnClickListener{
+public class AccountLoginFragment extends Fragment implements View.OnClickListener {
 
-    private final static String TAG = AccountHelloFragment.class.getSimpleName();
+    private final static String TAG = AccountLoginFragment.class.getSimpleName();
     private View mView;
 
     @Override
@@ -22,7 +23,7 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_02, container, false);
+        return inflater.inflate(R.layout.fragment_account_login, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -31,21 +32,13 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
-//        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                NavHostFragment.findNavController(FirstFragment.this)
-////                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-//            }
-//        });
     }
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()){
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
-                //NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
                 break;
         }
     }
