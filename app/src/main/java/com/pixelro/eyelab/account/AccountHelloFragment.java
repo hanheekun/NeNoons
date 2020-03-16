@@ -39,8 +39,10 @@ public class AccountHelloFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_account_hello_login:
-            case R.id.button_account_hello_join:
                 NavHostFragment.findNavController(AccountHelloFragment.this).navigate(R.id.action_navigation_account_hello_to_navigation_account_login);
+                break;
+            case R.id.button_account_hello_join:
+                NavHostFragment.findNavController(AccountHelloFragment.this).navigate(R.id.action_navigation_account_hello_to_navigation_account_join);
 //                Intent intent = new Intent(getContext(), AccountLoginFragment.class);
 //                startActivity(intent);
                 break;
