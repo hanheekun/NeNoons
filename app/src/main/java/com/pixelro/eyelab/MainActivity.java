@@ -1,10 +1,13 @@
 package com.pixelro.eyelab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pixelro.eyelab.test.TestActivity;
+import com.pixelro.eyelab.test.TestDialog;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -30,6 +33,17 @@ public class MainActivity extends BaseActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        FirstDialog dlg = new FirstDialog(this);
+        dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
+            @Override
+            public void ResultEvent(boolean result) {
+                if (result){
+                    Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        dlg.showDialog();
 
     }
 

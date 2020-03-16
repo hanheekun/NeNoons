@@ -1,22 +1,33 @@
-package com.pixelro.eyelab.test;
+package com.pixelro.eyelab;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.test.TestActivity;
 
-public class TestDialog {
+public class FirstDialog {
 
     private Context context;
 
-    public TestDialog(Context context) {
+    public FirstDialog(Context context) {
         this.context = context;
+    }
+
+    public interface OnResultEventListener {
+        public void ResultEvent(boolean result);
+    }
+
+    private OnResultEventListener onResultEventListener;
+
+    public void setOnResultEventListener(OnResultEventListener listener){
+
+        onResultEventListener = listener;
+
     }
 
     // 호출할 다이얼로그 함수를 정의한다.
@@ -33,21 +44,21 @@ public class TestDialog {
         dlg.getWindow().setDimAmount(0.7f);
 
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlg.setContentView(R.layout.dialog_test);
+        dlg.setContentView(R.layout.dialog_first);
 
         // 커스텀 다이얼로그를 노출한다.
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
-
-
-        final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
+        final Button okButton = (Button) dlg.findViewById(R.id.button_dialog_first_ok);
+        final Button cancelButton = (Button) dlg.findViewById(R.id.button_dialog_first_cancel);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(context, "확인 했습니다.", Toast.LENGTH_SHORT).show();
+
+                onResultEventListener.ResultEvent(true);
 
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
@@ -59,9 +70,13 @@ public class TestDialog {
             public void onClick(View view) {
                 //Toast.makeText(context, "취소 했습니다.", Toast.LENGTH_SHORT).show();
 
+                onResultEventListener.ResultEvent(false);
+
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
             }
         });
+
+
     }
 }
