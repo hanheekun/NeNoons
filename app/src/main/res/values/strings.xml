@@ -57,4 +57,21 @@
     <string name="account_join_survey_exercise">평소에 눈운동을 하시나요?</string>
     <string name="account_join_survey_food">눈 건강 보조식품을 드시나요?</string>
 
+    <!--    test-dialog-->
+    <string name="test_dialog_first_title">아이랩에 처음 오셨나요?\n먼저, 나의 눈 상태를 알아보세요.</string>
+    <string name="test_dialog_first_btn_ok">눈 건강 테스트하기</string>
+    <string name="test_dialog_first_btn_no">둘러보기</string>
+    <string name="test_dialog_warning_title">잠깐! 아이랩의 눈 건강 테스트는 시기능연구소 연구원들의 의견을 토대로 만들어진 간이 테스트입니다.좀 더 정확한 진단을 원하신다면 안경점 또는 안과에 방문하여 전문가의 진단받으시길 바랍니다.</string>
+    <string name="test_dialog_warning_btn_ok">테스트 하기</string>
+    <string name="test_dialog_warning_btn_no">취소</string>
+    <!--    test-guide-->
+    <string name="test_guide_title_01">한쪽</string>
+    <string name="test_guide_title_02">거리</string>
+    <string name="test_guide_01">아이랩 눈 건강 굴절력 테스트는\n오른쪽 눈, 왼쪽 눈 따로 진행합니다.\n눈을 가릴 안대를 준비해주세요.</string>
+    <string name="test_guide_02">팔을 최대한 길게 뻗어 눈과 스마트폰\n사이의 거리를 넓혀주세요.</string>
+    <string name="test_guide_03">카메라가 눈 사이를 인식하여 사용자\n와의 거리를 측정합니다. 문자표가 \n흐리게 보일 때까지 스마트폰과의\n 거리를 가깝게 당겨주세요.</string>
+    <string name="test_guide_04">카메라가 눈 사이를 인식하여 사용자\n와의 거리를 측정합니다. 문자표가 \n흐리게 보일 때까지 스마트폰과의\n 거리를 가깝게 당겨주세요.</string>
+
+
+
 </resources>

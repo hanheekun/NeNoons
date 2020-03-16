@@ -39,24 +39,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_account_tos_next"
+        android:id="@+id/button_account_id_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/account_join_tos_next"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintHorizontal_bias="0.877"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="148dp"
         android:ems="10"
         android:hint="@string/account_join_id_email_hint"
         android:inputType="textEmailAddress"
+        android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,17 +69,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/account_join_id_email"
+        android:textColor="#6b6c6f"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintStart_toStartOf="@+id/editText" />
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="wrap_content"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="@string/account_join_id_pass_hint"
         android:inputType="textPassword"
+        android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editText"
@@ -90,26 +94,29 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:text="@string/account_join_id_pass"
+        android:textColor="#6b6c6f"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintStart_toStartOf="@+id/editText3" />
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="wrap_content"
+        android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/account_join_id_pass_conf_hint"
         android:inputType="textPassword"
+        android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="@+id/editText3"
         app:layout_constraintStart_toStartOf="@+id/editText3"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="408dp"
+        android:layout_width="0dp"
         android:layout_height="217dp"
-        android:background="#4f4f4f"
+        android:background="@drawable/bot_social_back"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

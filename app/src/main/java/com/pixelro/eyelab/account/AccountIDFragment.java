@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
@@ -29,6 +30,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener 
         mView = view;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_account_id_next).setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +38,9 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener 
         switch (view.getId()){
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
+                break;
+            case R.id.button_account_id_next:
+                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
                 break;
         }
     }

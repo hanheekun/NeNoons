@@ -15,6 +15,8 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
     private final static String TAG = AccountSurveyFragment.class.getSimpleName();
     private View mView;
 
+
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
