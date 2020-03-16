@@ -14,7 +14,7 @@
             app:destination="@id/navigation_account_login" />
         <action
             android:id="@+id/action_navigation_account_hello_to_navigation_account_join"
-            app:destination="@id/navigation_account_join" />
+            app:destination="@id/navigation_account_tos" />
     </fragment>
 
     <fragment
@@ -33,9 +33,36 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_account_join"
+        android:id="@+id/navigation_account_tos"
         android:name="com.pixelro.eyelab.account.AccountTosFragment"
         tools:layout="@layout/fragment_account_tos">
+        <action
+            android:id="@+id/action_navigation_account_tos_to_navigation_account_id"
+            app:destination="@id/navigation_account_id" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account_id"
+        android:name="com.pixelro.eyelab.account.AccountIDFragment"
+        tools:layout="@layout/fragment_account_id">
+        <action
+            android:id="@+id/action_navigation_account_id_to_navigation_account_profile"
+            app:destination="@id/navigation_account_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account_profile"
+        android:name="com.pixelro.eyelab.account.AccountProfileFragment"
+        tools:layout="@layout/fragment_account_profile">
+        <action
+            android:id="@+id/action_navigation_account_profile_to_navigation_account_survey"
+            app:destination="@id/navigation_account_survey" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_account_survey"
+        android:name="com.pixelro.eyelab.account.AccountSurveyFragment"
+        tools:layout="@layout/fragment_account_survey">
     </fragment>
 
 </navigation>
