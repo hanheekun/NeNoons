@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="my_array">
-    <item>아이템0</item>
-    <item>아이템1</item>
-    <item>아이템2</item>
-    <item>아이템3</item>
-    <item>아이템4</item>
-</string-array></resources>
+    <string-array name="survey_glasses">
+        <item>@string/account_join_survey_glasses</item>
+        <item>@string/account_join_survey_glasses_a_1</item>
+        <item>@string/account_join_survey_glasses_a_2</item>
+        <item>@string/account_join_survey_glasses_a_3</item>
+    </string-array>
+
+    <string-array name="survey_left_right">
+        <item>~0.0</item>
+        <item>0.1</item>
+        <item>0.2</item>
+        <item>0.3</item>
+        <item>0.4</item>
+        <item>0.5</item>
+        <item>0.6</item>
+        <item>0.7</item>
+        <item>0.8</item>
+        <item>0.9</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+
+    <string-array name="survey_status">
+        <item>@string/account_join_survey_status</item>
+        <item>@string/account_join_survey_status_a_1</item>
+        <item>@string/account_join_survey_status_a_2</item>
+        <item>@string/account_join_survey_status_a_3</item>
+    </string-array>
+
+    <string-array name="survey_surgery">
+        <item>@string/account_join_survey_surgery</item>
+        <item>@string/account_join_survey_surgery_a_1</item>
+        <item>@string/account_join_survey_surgery_a_2</item>
+        <item>@string/account_join_survey_surgery_a_3</item>
+    </string-array>
+
+    <string-array name="survey_exercise">
+        <item>@string/account_join_survey_exercise</item>
+        <item>@string/account_join_survey_exercise_a_1</item>
+        <item>@string/account_join_survey_exercise_a_2</item>
+        <item>@string/account_join_survey_exercise_a_3</item>
+    </string-array>
+
+    <string-array name="survey_food">
+        <item>@string/account_join_survey_food</item>
+        <item>@string/account_join_survey_food_a_1</item>
+        <item>@string/account_join_survey_food_a_2</item>
+        <item>@string/account_join_survey_food_a_3</item>
+    </string-array>
+
+
+</resources>

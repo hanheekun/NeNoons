@@ -50,12 +50,28 @@
     <!--    account-survey-->
     <string name="account_join_survey_title">사용자 정보</string>
     <string name="account_join_survey_glasses">안경을 쓰시나요?</string>
+    <string name="account_join_survey_glasses_a_1">네</string>
+    <string name="account_join_survey_glasses_a_2">아니요</string>
+    <string name="account_join_survey_glasses_a_3">때때로</string>
     <string name="account_join_survey_left">시력 좌</string>
     <string name="account_join_survey_right">시력 우</string>
     <string name="account_join_survey_status">근시/정시/난시 인가요?</string>
+    <string name="account_join_survey_status_a_1">근시</string>
+    <string name="account_join_survey_status_a_2">정시</string>
+    <string name="account_join_survey_status_a_3">난시</string>
     <string name="account_join_survey_surgery">눈 관련 수술을 하신적이 있나요?</string>
+    <string name="account_join_survey_surgery_a_1">난시 교정</string>
+    <string name="account_join_survey_surgery_a_2">노안 교정</string>
+    <string name="account_join_survey_surgery_a_3">백내장 수술</string>
+    <string name="account_join_survey_surgery_a_4">기타</string>
     <string name="account_join_survey_exercise">평소에 눈운동을 하시나요?</string>
+    <string name="account_join_survey_exercise_a_1">네</string>
+    <string name="account_join_survey_exercise_a_2">아니요</string>
+    <string name="account_join_survey_exercise_a_3">때때로</string>
     <string name="account_join_survey_food">눈 건강 보조식품을 드시나요?</string>
+    <string name="account_join_survey_food_a_1">네</string>
+    <string name="account_join_survey_food_a_2">아니요</string>
+    <string name="account_join_survey_food_a_3">때때로</string>
 
     <!--    test-dialog-->
     <string name="test_dialog_first_title">아이랩에 처음 오셨나요?\n먼저, 나의 눈 상태를 알아보세요.</string>
