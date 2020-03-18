@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.SplashActivity;
 
 public class AccountLoginFragment extends Fragment implements View.OnClickListener {
 
@@ -45,52 +48,54 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.imageButton_account_login_kakao).setOnClickListener(this);
         view.findViewById(R.id.imageButton_account_login_naver).setOnClickListener(this);
         view.findViewById(R.id.imageButton_account_login_wechat).setOnClickListener(this);
+        view.findViewById(R.id.button_account_login_login).setOnClickListener(this);
 
 
         BtnLogin = (Button)(getActivity().findViewById(R.id.button_account_login_login));
         BtnLogin.setOnClickListener(this);
 
-        EtEmail = (EditText)(getActivity().findViewById(R.id.editText_account_login_email));
-        EtEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(EtEmail.length() > 0 && EtPass.length() > 0){
-                    BtnLogin.setEnabled(true);
-                }
-                else {
-                    BtnLogin.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
-        EtPass = (EditText)(getActivity().findViewById(R.id.editText_account_login_password));
-        EtPass.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(EtEmail.length() > 0 && EtPass.length() > 0 ){
-                    BtnLogin.setEnabled(true);
-                }
-                else {
-                    BtnLogin.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
+//        EtEmail = (EditText)(getActivity().findViewById(R.id.editText_account_login_email));
+//        EtEmail.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                if(EtEmail.length() > 0 && EtPass.length() > 0){
+//                    BtnLogin.setEnabled(true);
+//                }
+//                else {
+//                    BtnLogin.setEnabled(false);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
+//
+//        EtPass = (EditText)(getActivity().findViewById(R.id.editText_account_login_password));
+//        EtPass.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                if(EtEmail.length() > 0 && EtPass.length() > 0 ){
+//                    BtnLogin.setEnabled(true);
+//                }
+//                else {
+//                    BtnLogin.setEnabled(false);
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
 
     }
 
@@ -115,6 +120,14 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.imageButton_account_login_wechat:
                 break;
+            case R.id.button_account_login_login:
+                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                getActivity().startActivity(mainIntent);
+                getActivity().finish();
+                break;
+
+
+
         }
     }
 }

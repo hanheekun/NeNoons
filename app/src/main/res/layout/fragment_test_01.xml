@@ -29,8 +29,10 @@
         android:id="@+id/button_test_01_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/but_next_2"
-        android:text="Button"
+        android:background="@drawable/btn_xs_b"
+        android:text="시작하기"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"
@@ -39,8 +41,8 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_test_guide"
-        android:layout_width="415dp"
-        android:layout_height="447dp"
+        android:layout_width="wrap_content"
+        android:layout_height="520dp"
         android:layout_marginTop="88dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -43,6 +43,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".menu.exercise.Ex01Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+
         <service
             android:name=".distance.EyeDistanceMeasureService"
             android:enabled="true"

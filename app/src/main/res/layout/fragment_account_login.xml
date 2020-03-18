@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_l_b"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/account_login_btn"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_account_login_password" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/test_06_color_1"
         android:layout_width="148dp"
         android:layout_height="1dp"
         android:layout_marginEnd="10dp"
