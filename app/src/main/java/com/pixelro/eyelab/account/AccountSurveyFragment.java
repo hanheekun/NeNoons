@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.account;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
 
 public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
@@ -44,6 +46,8 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         mView = view;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
+
 
         SpGlasses = (Spinner)( view.findViewById(R.id.spinner1));
         SpLeft = (Spinner)( view.findViewById(R.id.spinner2));
@@ -76,7 +80,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -86,7 +90,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         };
 
         // Initializing an ArrayAdapter
-        final ArrayAdapter<String> spinner2ArrayAdapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_left_right)){
+        final ArrayAdapter<String> spinner2ArrayAdapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_left)){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -107,7 +111,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -117,7 +121,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         };
 
         // Initializing an ArrayAdapter
-        final ArrayAdapter<String> spinner3ArrayAdapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_left_right)){
+        final ArrayAdapter<String> spinner3ArrayAdapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_right)){
             @Override
             public boolean isEnabled(int position){
                 if(position == 0)
@@ -138,7 +142,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -169,7 +173,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -200,7 +204,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -231,7 +235,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -262,7 +266,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 TextView tv = (TextView) view;
                 if(position == 0){
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(Color.rgb(1,67,190));
                 }
                 else {
                     tv.setTextColor(Color.BLACK);
@@ -294,6 +298,13 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
                 break;
+            case R.id.button_account_survey_next:
+                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                getActivity().startActivity(mainIntent);
+                getActivity().finish();
+                break;
+
+
         }
     }
 }

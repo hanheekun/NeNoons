@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     android:background="#00000000">
 
-    <ImageView
-        android:id="@+id/imageView_test_first_guide"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="#00000000"
-        app:layout_constraintTop_toBottomOf="@+id/textView_test_first_guide" />
-
     <TextView
         android:id="@+id/textView12"
         style="@style/TestTitle"
@@ -45,5 +35,25 @@
         app:layout_constraintEnd_toEndOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <ImageView
+        android:id="@+id/imageView_test_first_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_test_first_guide" />
+
+    <ImageView
+        android:id="@+id/imageView_test_first_guide_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_test_first_guide"
+        app:layout_constraintStart_toStartOf="@+id/imageView_test_first_guide"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_test_first_guide"
+        app:srcCompat="@drawable/dot_3_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

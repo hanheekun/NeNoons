@@ -44,6 +44,8 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
     private SendMassgeHandler mMainHandler = null;
     private TestActivity mThis = null;
 
+    public int mCurrentDistance = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
