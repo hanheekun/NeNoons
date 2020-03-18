@@ -15,7 +15,7 @@
         android:layout_marginTop="42dp"
         android:background="@drawable/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" /> 
 
     <Button
         android:id="@+id/button_arrow_back_background"
@@ -30,8 +30,8 @@
         android:id="@+id/editText_account_login_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:background="@drawable/account_login_edit_box"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_l_w_edit"
         android:ems="10"
         android:hint="@string/account_login_email_hint"
         android:inputType="textEmailAddress"
@@ -46,12 +46,11 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="116dp"
         android:text="@string/account_login_title"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@drawable/account_login_edit_box"
+        android:background="@drawable/btn_l_w_edit"
         android:ems="10"
         android:hint="@string/account_login_pass_hint"
         android:inputType="textPassword"
@@ -104,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@drawable/account_login_btn_login"
+        android:background="@drawable/btn_l_b"
         android:enabled="false"
         android:text="@string/account_login_btn"
         android:textColor="#ffffff"
@@ -149,14 +148,14 @@
         android:id="@+id/textView_account_login_forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="80dp"
         android:clickable="true"
         android:text="@string/account_login_forget"
         android:textColor="#9b9b9b"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
