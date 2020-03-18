@@ -43,8 +43,12 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button_ex_02:
+                intent = new Intent(getActivity(), Ex02Activity.class);
+                startActivity(intent);
                 break;
             case R.id.button_ex_03:
+                intent = new Intent(getActivity(), Ex03Activity.class);
+                startActivity(intent);
                 break;
         }
 

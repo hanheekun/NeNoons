@@ -24,12 +24,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.BaseActivity;
+import com.pixelro.eyelab.FirstDialog;
+import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
+import com.pixelro.eyelab.test.Test08Fragment;
+import com.pixelro.eyelab.test.TestActivity;
 import com.pixelro.eyelab.test.TestDialog;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
 
@@ -46,6 +54,8 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     private Ex01Activity mThis = null;
 
     public int mCurrentDistance = 0;
+
+    public Timer mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +74,20 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
 
         mThis = this;
 
-        TestDialog dlg = new TestDialog(this);
-
-        dlg.showDialog();
+        mTimer = new Timer();
+        mTimer.schedule(new Ex01Activity.setinstruction(0),5000);
+        mTimer.schedule(new Ex01Activity.setinstruction(1),10000);
+        mTimer.schedule(new Ex01Activity.setinstruction(0),15000);
+        mTimer.schedule(new Ex01Activity.setinstruction(1),20000);
+        mTimer.schedule(new Ex01Activity.setinstruction(0),25000);
+        mTimer.schedule(new Ex01Activity.setinstruction(1),30000);
+        mTimer.schedule(new Ex01Activity.goNext(),35000);
+        //mTimer.schedule(new Ex01Activity.setinstruction(0),2000);
+        //mTimer.schedule(new Ex01Activity.setinstruction(1),2000);
 
         //showDialog();
+
+
 
     }
 
@@ -100,6 +119,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mGattUpdateReceiver);
+        mTimer.cancel();
     }
 
     private void initService() {    // added by Alex, 2018.08.20
@@ -111,6 +131,61 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
             bindService();
         } else {
             Log.d(TAG, "BleCommunicationService is already running...");
+        }
+    }
+
+    class goNext extends TimerTask {
+
+        public goNext(){}
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ExDialog dlg = new ExDialog(Ex01Activity.this);
+                    dlg.setOnResultEventListener(new ExDialog.OnResultEventListener() {
+                        @Override
+                        public void ResultEvent(boolean result) {
+                            if (result){
+                                finish();
+                            }
+                        }
+                    });
+                    dlg.showDialog();
+                }
+            });
+
+        }
+    }
+
+    class setinstruction extends TimerTask {
+
+        private int mLevel;
+
+        public setinstruction(int level){
+            mLevel = level;
+        }
+
+        @Override
+        public void run() {
+            if (mLevel == 0){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((TextView)findViewById(R.id.textView_ex_1_guide)).setText("붉은점을 최대한 \"멀리\" 하세요");
+                    }
+                });
+
+            }
+            else if (mLevel == 1){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((TextView)findViewById(R.id.textView_ex_1_guide)).setText("붉은점을 최대한 \"가깝게\" 하세요");
+                    }
+                });
+            }
         }
     }
 

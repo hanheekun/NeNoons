@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="눈 근육 운동"
+        android:text="눈 근육 측정/운동"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,27 +38,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView27"
+        android:id="@+id/imageView_ex_03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ex_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:src="@drawable/ex_03_1"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView46" />
-
-    <ImageView
-        android:id="@+id/imageView28"
-        android:layout_width="82dp"
-        android:layout_height="80dp"
-        android:src="@drawable/oval"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView27"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/imageView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView46"
-        app:layout_constraintVertical_bias="0.359" />
 
     <ImageView
         android:id="@+id/imageView29"
@@ -80,26 +67,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView27"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_ex_03"
         app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/textView_test01_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="-cm"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView27"
-        app:layout_constraintEnd_toEndOf="@+id/imageView27"
-        app:layout_constraintStart_toStartOf="@+id/imageView27" />
 
     <TextView
         android:id="@+id/textView_ex_1_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text='붉은점을 최대한 \"가깝게\" 하세요'
+        android:text="5초동안 원통의 빨간점에 초점을 두세요."
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView29"
@@ -108,16 +83,23 @@
         app:layout_constraintTop_toTopOf="@+id/imageView30"
         app:layout_constraintVertical_bias="0.41000003" />
 
-    <TextView
-        android:id="@+id/textView49"
+    <ImageView
+        android:id="@+id/imageView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="붉은점에 초점 맞추기"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:src="@drawable/ex_03_gray"
+        app:layout_constraintStart_toEndOf="@+id/imageView_ex_03"
+        app:layout_constraintTop_toTopOf="@+id/imageView_ex_03" />
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@drawable/oval"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_ex_03"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView27" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/imageView_ex_03"
+        app:layout_constraintTop_toTopOf="@+id/imageView_ex_03" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
