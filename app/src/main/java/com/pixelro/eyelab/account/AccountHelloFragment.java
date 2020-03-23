@@ -1,6 +1,5 @@
 package com.pixelro.eyelab.account;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
 
 public class AccountHelloFragment extends Fragment implements View.OnClickListener {
@@ -37,14 +35,12 @@ public class AccountHelloFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_account_hello_login:
                 NavHostFragment.findNavController(AccountHelloFragment.this).navigate(R.id.action_navigation_account_hello_to_navigation_account_login);
                 break;
             case R.id.button_account_hello_join:
                 NavHostFragment.findNavController(AccountHelloFragment.this).navigate(R.id.action_navigation_account_hello_to_navigation_account_join);
-//                Intent intent = new Intent(getContext(), AccountLoginFragment.class);
-//                startActivity(intent);
                 break;
         }
     }

@@ -129,4 +129,46 @@
         app:layout_constraintBottom_toTopOf="@+id/spinner1"
         app:layout_constraintStart_toStartOf="@+id/spinner1" />
 
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner1"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner4"
+        app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner5"
+        app:layout_constraintTop_toBottomOf="@+id/spinner5" />
+
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner6"
+        app:layout_constraintTop_toBottomOf="@+id/spinner6" />
+
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner7"
+        app:layout_constraintTop_toBottomOf="@+id/spinner7" />
+
+    <View
+        android:layout_width="347dp"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        app:layout_constraintStart_toStartOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

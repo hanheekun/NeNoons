@@ -19,7 +19,7 @@
     <string name="account_login_email">e-mail</string>
     <string name="account_login_email_hint">Your e-mail</string>
     <string name="account_login_pass">Password</string>
-    <string name="account_login_pass_hint">Password</string>
+    <string name="account_login_pass_hint">Your Password</string>
     <string name="account_login_save_login">로그인 기억하기 </string>
     <string name="account_login_btn">로그인</string>
     <string name="account_login_other">또는</string>
@@ -33,7 +33,7 @@
     <string name="account_join_id_email">e-mail</string>
     <string name="account_join_id_email_hint">Your e-mail</string>
     <string name="account_join_id_pass">Password</string>
-    <string name="account_join_id_pass_hint">Password</string>
+    <string name="account_join_id_pass_hint">Your Password</string>
     <string name="account_join_id_pass_conf_hint">Password</string>
     <string name="account_join_id_other">메신져로 간편가입하세요.</string>
     <string name="account_join_id_next">다음</string>
@@ -42,6 +42,8 @@
     <string name="account_join_profile_profile">프로필 설정</string>
     <string name="account_join_profile_name">이름</string>
     <string name="account_join_profile_gender">성별</string>
+    <string name="account_join_profile_gender_male">남성</string>
+    <string name="account_join_profile_gender_female">여성</string>
     <string name="account_join_profile_birthday">생년월일</string>
     <string name="account_join_profile_job">직업</string>
     <string name="account_join_profile_phone">핸드폰 번호</string>

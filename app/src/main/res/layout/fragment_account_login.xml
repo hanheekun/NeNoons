@@ -93,6 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        android:checked="false"
         android:text="@string/account_login_save_login"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/editText_account_login_password"

@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText_account_profile_name"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -62,11 +62,11 @@
         android:hint="@string/account_join_profile_name"
         android:inputType="textPersonName"
         android:paddingStart="20dp"
-        app:layout_constraintStart_toStartOf="@+id/editText5"
+        app:layout_constraintStart_toStartOf="@+id/editText_account_profile_gender"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editText_account_profile_gender"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -76,24 +76,24 @@
         android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_name" />
 
     <EditText
-        android:id="@+id/editText_test"
+        android:id="@+id/editText_account_profile_birthday"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/account_join_profile_birthday"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_gender" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/editText_account_profile_job"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -104,20 +104,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_test" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_birthday" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/editText_account_profile_phone"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/account_join_profile_phone"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_job" />
 
     <TextView
         android:id="@+id/textView24"
@@ -127,8 +127,8 @@
         android:text="@string/account_join_profile_profile"
         android:textColor="#6b6c6f"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
-        app:layout_constraintStart_toStartOf="@+id/editText2" />
+        app:layout_constraintBottom_toTopOf="@+id/editText_account_profile_name"
+        app:layout_constraintStart_toStartOf="@+id/editText_account_profile_name" />
 
     <TextView
         android:id="@+id/textView30"
@@ -138,8 +138,8 @@
         android:text="@string/account_join_profile_content"
         android:textColor="#5d7292"
         android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@+id/editText8"
-        app:layout_constraintStart_toStartOf="@+id/editText8"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintEnd_toEndOf="@+id/editText_account_profile_phone"
+        app:layout_constraintStart_toStartOf="@+id/editText_account_profile_phone"
+        app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_phone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
