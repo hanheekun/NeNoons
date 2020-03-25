@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">EyeLab</string>
-    <string name="title_home">Home</string>
-    <string name="title_care">Care</string>
-    <string name="title_my">MY</string>
-    <string name="title_exercise">Exercise</string>
+    <string name="title_home">홈</string>
+    <string name="title_care">케어</string>
+    <string name="title_my">더보기</string>
+    <string name="title_exercise">눈운동</string>
+
+<!--    <string name="title_home">Home</string>-->
+<!--    <string name="title_care">Care</string>-->
+<!--    <string name="title_my">MY</string>-->
+<!--    <string name="title_exercise">Exercise</string>-->
 
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
     <string name="face_detector_dependency_error">Face detector dependencies are not yet available</string>
@@ -20,7 +25,7 @@
     <string name="account_login_email_hint">Your e-mail</string>
     <string name="account_login_pass">Password</string>
     <string name="account_login_pass_hint">Your Password</string>
-    <string name="account_login_save_login">로그인 기억하기 </string>
+    <string name="account_login_save_login">로그인 기억하기</string>
     <string name="account_login_btn">로그인</string>
     <string name="account_login_other">또는</string>
     <string name="account_login_forget">아이디/비밀번호를 잊으셨나요?</string>
@@ -37,6 +42,9 @@
     <string name="account_join_id_pass_conf_hint">Password</string>
     <string name="account_join_id_other">메신져로 간편가입하세요.</string>
     <string name="account_join_id_next">다음</string>
+    <string name="account_join_id_pass_compare_ok">일치</string>
+    <string name="account_join_id_pass_compare_no">불일치</string>
+
     <!--    account-profile-->
     <string name="account_join_profile_title">가입하기</string>
     <string name="account_join_profile_profile">프로필 설정</string>

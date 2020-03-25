@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,11 +16,18 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
-public class AccountProfileFragment extends Fragment implements View.OnClickListener {
+public class AccountProfileFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener{
 
     private final static String TAG = AccountProfileFragment.class.getSimpleName();
     private View mView;
     DatePickerDialog mDialog;
+
+    private EditText EtName;
+    private EditText EtGender;
+    private EditText EtBirthday;
+    private EditText Etjob;
+    private EditText EtPhoneNumber;
+
 
     // profile
     String mName;
@@ -45,10 +52,16 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_profile_next).setOnClickListener(this);
-        view.findViewById(R.id.editText_account_profile_gender).setOnClickListener(this);
-        view.findViewById(R.id.editText_account_profile_birthday).setOnClickListener(this);
 
-        mDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, listener, 1970, 1, 1);
+        EtName = (EditText)(view.findViewById(R.id.editText_account_profile_name));
+        EtGender = (EditText)(view.findViewById(R.id.editText_account_profile_gender));
+        EtGender.setOnFocusChangeListener(this);
+        EtBirthday = (EditText)(view.findViewById(R.id.editText_account_profile_birthday));
+        EtBirthday.setOnFocusChangeListener(this);
+        Etjob = (EditText)(view.findViewById(R.id.editText_account_profile_job));
+        EtPhoneNumber = (EditText)(view.findViewById(R.id.editText_account_profile_phone));
+
+        mDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, DatePickerListener, 1970, 1, 1);
     }
 
     @Override
@@ -57,44 +70,55 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
                 break;
-            case R.id.editText_account_profile_gender:
-                CharSequence info[] = new CharSequence[]{getString(R.string.account_join_profile_gender_male), getString(R.string.account_join_profile_gender_female)};
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setItems(info, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-
-                                break;
-                            case 1:
-
-                                break;
-                        }
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
-                break;
-            case R.id.editText_account_profile_birthday:
-                mDialog.show();
-                break;
             case R.id.button_account_profile_next:
-                NavHostFragment.findNavController(AccountProfileFragment.this).navigate(R.id.action_navigation_account_profile_to_navigation_account_survey);
 
-                // data 가져오는 부분 추가 예정
+                // 정보 입력 완료 // 아직 내용 check 안함
+
+                // 다음 페이지 전환
+                NavHostFragment.findNavController(AccountProfileFragment.this).navigate(R.id.action_navigation_account_profile_to_navigation_account_survey);
 
                 break;
         }
     }
 
-    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener DatePickerListener = new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            //TvBirthday.setText( year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
+            EtBirthday.setText( year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
         }
     };
 
 
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        switch (view.getId()) {
+            case R.id.editText_account_profile_gender:
+                if (b){
+                    CharSequence info[] = new CharSequence[]{getString(R.string.account_join_profile_gender_male), getString(R.string.account_join_profile_gender_female)};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setItems(info, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                    EtGender.setText(R.string.account_join_profile_gender_male);
+                                    break;
+                                case 1:
+                                    EtGender.setText(R.string.account_join_profile_gender_female);
+                                    break;
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
+                break;
+            case R.id.editText_account_profile_birthday:
+                if (b){
+                    mDialog.show();
+                }
+                break;
+        }
+    }
 }
