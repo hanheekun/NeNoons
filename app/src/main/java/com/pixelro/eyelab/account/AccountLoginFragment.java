@@ -38,7 +38,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
     //private SharedPreferences appData;
 
-    private String masterKeyAlias;
+    private String masterKeyAlias;  
     private SharedPreferences sharedPreferences;
 
     @Override
