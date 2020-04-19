@@ -46,10 +46,18 @@
         android:id="@+id/button_ex_03"
         android:layout_width="161dp"
         android:layout_height="161dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/ex_btn_03"
         app:layout_constraintStart_toStartOf="@+id/button_ex_01"
         app:layout_constraintTop_toBottomOf="@+id/button_ex_01" />
+
+    <Button
+        android:id="@+id/button_ex_04"
+        android:layout_width="161dp"
+        android:layout_height="161dp"
+        android:background="@drawable/ex_btn_04"
+        app:layout_constraintStart_toStartOf="@+id/button_ex_02"
+        app:layout_constraintTop_toTopOf="@+id/button_ex_03" />
 
     <Button
         android:id="@+id/button_ex_02"

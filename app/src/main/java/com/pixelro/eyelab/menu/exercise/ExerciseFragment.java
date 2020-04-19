@@ -30,6 +30,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
         root.findViewById(R.id.button_ex_01).setOnClickListener(this);
         root.findViewById(R.id.button_ex_02).setOnClickListener(this);
         root.findViewById(R.id.button_ex_03).setOnClickListener(this);
+        root.findViewById(R.id.button_ex_04).setOnClickListener(this);
 
         return root;
     }
@@ -48,6 +49,10 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_ex_03:
                 intent = new Intent(getActivity(), Ex03Activity.class);
+                startActivity(intent);
+                break;
+            case R.id.button_ex_04:
+                intent = new Intent(getActivity(), Ex04Activity.class);
                 startActivity(intent);
                 break;
         }

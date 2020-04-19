@@ -89,12 +89,85 @@
         app:layout_constraintTop_toTopOf="@+id/imageView10"
         app:layout_constraintVertical_bias="0.38" />
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <FrameLayout
+        android:id="@+id/frameLayout_font_1"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#fffff8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView10">
+
+        <TextView
+            android:id="@+id/textView_font_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            style="@style/TestSampleText"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout_font_2"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#f6fbf6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_1">
+
+        <TextView
+            android:id="@+id/textView_font_2"
+            style="@style/TestSampleText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dall01r"
+            android:gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout_font_3"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#fffcf6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_2">
+
+        <TextView
+            android:id="@+id/textView_font_3"
+            style="@style/TestSampleText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dall01b"
+            android:gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout_font_4"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_3">
+
+        <TextView
+            android:id="@+id/textView_font_4"
+            style="@style/TestSampleText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/dall01eb"
+            android:gravity="center" />
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

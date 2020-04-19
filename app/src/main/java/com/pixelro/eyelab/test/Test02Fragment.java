@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,16 +25,30 @@ import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 
-public class Test02Fragment extends Fragment  implements View.OnClickListener{
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class Test02Fragment extends Fragment  implements View.OnClickListener, SensorEventListener {
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
+    private TextView mTvMoving;
+    private TextView mTvCount;
 
-    Handler h1;
-    Handler h2;
-    Handler h3;
-    Handler h4;
-    Handler h5;
+    public Timer mTimer;
+
+//    Handler h1;
+//    Handler h2;
+//    Handler h3;
+//    Handler h4;
+//    Handler h5;
+
+    // for sensor
+    private SensorManager mSensorManager = null;
+    private double preSum = 0;
+    private double preX = 0;
+    private double preY = 0;
+    private double preZ = 0;
 
     @Override
     public View onCreateView(
@@ -46,44 +64,51 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
         mView = view;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        mTvMoving = (TextView)view.findViewById(R.id.textView_test_02_moving);
+        mTvCount = (TextView)mView.findViewById(R.id.textView_test_02_count);
 
-        h1 = new Handler();
-        h1.postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                NavHostFragment.findNavController(Test02Fragment.this).navigate(R.id.action_navigation_test_02_to_navigation_test_03);
-            }
-        }, 7500);
+        //Using the Gyroscope & Accelometer
+        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
 
-        h2 = new Handler();
-        h2.postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("④");
-            }
-        }, 1500);
-        h3 = new Handler();
-        h3.postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("③");
-            }
-        }, 3000);
-        h4 = new Handler();
-        h4.postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("②");
-            }
-        }, 4500);
-        h5 = new Handler();
-        h5.postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("①");
-                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setTextColor(Color.rgb(255,0,0));
-            }
-        }, 6000);
+
+//        h1 = new Handler();
+//        h1.postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//                NavHostFragment.findNavController(Test02Fragment.this).navigate(R.id.action_navigation_test_02_to_navigation_test_03);
+//            }
+//        }, 7500);
+//
+//        h2 = new Handler();
+//        h2.postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("④");
+//            }
+//        }, 1500);
+//        h3 = new Handler();
+//        h3.postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("③");
+//            }
+//        }, 3000);
+//        h4 = new Handler();
+//        h4.postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("②");
+//            }
+//        }, 4500);
+//        h5 = new Handler();
+//        h5.postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setText("①");
+//                ((TextView)mView.findViewById(R.id.textView_test_02_count)).setTextColor(Color.rgb(255,0,0));
+//            }
+//        }, 6000);
 
     }
 
@@ -98,11 +123,14 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
         super.onPause();
         getActivity().unregisterReceiver(mGattUpdateReceiver);
 
-        h1.removeCallbacksAndMessages(null);
-        h2.removeCallbacksAndMessages(null);
-        h3.removeCallbacksAndMessages(null);
-        h4.removeCallbacksAndMessages(null);
-        h5.removeCallbacksAndMessages(null);
+        mTimer.cancel();
+        mSensorManager.unregisterListener(this);
+
+//        h1.removeCallbacksAndMessages(null);
+//        h2.removeCallbacksAndMessages(null);
+//        h3.removeCallbacksAndMessages(null);
+//        h4.removeCallbacksAndMessages(null);
+//        h5.removeCallbacksAndMessages(null);
     }
 
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
@@ -113,13 +141,8 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
 
                 ((TextView)mView.findViewById(R.id.textView_test_02_distance)).setText(distance + "cm");
-
-                Log.d(TAG, "????????????????????????????????");
-
                 ((TestActivity)getActivity()).mCurrentDistance = distance;
             }
-
-
         }
     };
 
@@ -138,4 +161,99 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener{
                 break;
         }
     }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            int sum = (int)((Math.abs(preX - x) + Math.abs(preY - y) + Math.abs(preZ - z))*100);
+
+            //double mAccelCurrent = Math.sqrt(x*x + y*y + z*z);
+
+            if (sum > 50){
+                mTvMoving.setText("moving...");
+
+                if (mTimer != null){
+                    mTimer.cancel();
+                    mTimer = null;
+                    mTvCount.setText("");
+                }
+            }
+            else{
+                mTvMoving.setText("");
+
+                if (mTimer == null){
+                    mTimer = new Timer();
+                    mTimer.schedule(new setCountTextView(3),1000);
+                    mTimer.schedule(new setCountTextView(2),2000);
+                    mTimer.schedule(new setCountTextView(1),3000);
+                    mTimer.schedule(new setCountTextView(0),4000);
+                }
+            }
+
+            preX = x;
+            preY = y;
+            preZ = z;
+
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    class setCountTextView extends TimerTask {
+
+        private int mCount;
+
+        public setCountTextView(int count){
+            mCount = count;
+        }
+
+        @Override
+        public void run() {
+            if (mCount == 3)
+            {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvCount.setText("③");
+                        mTvCount.setTextColor(Color.rgb(255,255,255));
+                    }
+                });
+            }
+            else if (mCount == 2)
+            {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvCount.setText("②");
+                        mTvCount.setTextColor(Color.rgb(255,255,255));
+                    }
+                });
+
+            }
+            else if (mCount == 1)
+            {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvCount.setText("①");
+                        mTvCount.setTextColor(Color.rgb(255,0,0));
+                    }
+                });
+            }
+            else if (mCount == 0)
+            {
+                NavHostFragment.findNavController(Test02Fragment.this).navigate(R.id.action_navigation_test_02_to_navigation_test_03);
+            }
+        }
+    }
+
+
 }

@@ -29,4 +29,9 @@
         android:label="@string/title_my"
         tools:layout="@layout/fragment_my" />
 
+    <fragment
+        android:id="@+id/navigation_care_map"
+        android:name="com.pixelro.eyelab.menu.map.MapsFragment"
+        tools:layout="@layout/fragment_maps" />
+
 </navigation>

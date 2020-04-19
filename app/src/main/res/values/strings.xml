@@ -98,5 +98,10 @@
     <string name="test_guide_03">카메라가 눈 사이를 인식하여 사용자\n와의 거리를 측정합니다. 문자표가 \n흐리게 보일 때까지 스마트폰과의\n 거리를 가깝게 당겨주세요.</string>
     <string name="test_guide_04">시표가 흐리게 보일 때까지 스마트폰과의\n거리를 가깝게 당겨 5초안에 멈춰주세요.</string>
 
+    <!--    test-sample-context-->
+    <string name="test_sample">다람쥐 헌 쳇바퀴에 타고파</string>
+
+    다람쥐 헌 쳇바퀴에 타고파
+
 
 </resources>
