@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,7 +26,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_care, container, false);
 
         root.findViewById(R.id.button_care_o2o).setOnClickListener(this);
-        root.findViewById(R.id.button_care_info).setOnClickListener(this);
+        //root.findViewById(R.id.button_care_info).setOnClickListener(this);
 
 
 //        final TextView textView = root.findViewById(R.id.text_care);
@@ -45,9 +46,9 @@ public class CareFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getActivity(), O2OActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.button_care_info:
+            //case R.id.button_care_info:
 
-                break;
+                //break;
         }
     }
 }

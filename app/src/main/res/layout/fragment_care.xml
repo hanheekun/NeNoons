@@ -28,22 +28,15 @@
                     android:id="@+id/button_care_o2o"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="160dp"
                     android:layout_marginTop="152dp"
-                    android:text="map"
+                    android:background="@drawable/btn_m_b"
+                    android:text="안경점"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/button_care_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:text="info"
-                    app:layout_constraintEnd_toEndOf="@+id/button_care_o2o"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/button_care_o2o"
-                    app:layout_constraintTop_toBottomOf="@+id/button_care_o2o" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -11,7 +11,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
-public class AccountHelloFragment extends Fragment implements View.OnClickListener {
+public class
+AccountHelloFragment extends Fragment implements View.OnClickListener {
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;

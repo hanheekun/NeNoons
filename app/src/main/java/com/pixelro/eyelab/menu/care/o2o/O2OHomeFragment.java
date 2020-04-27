@@ -14,8 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.test.Test03Fragment;
 
-public class O2OHomeFragment extends Fragment {
+public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = O2OHomeFragment.class.getSimpleName();
     private View mView;
@@ -35,6 +36,9 @@ public class O2OHomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mView = view;
+
+        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+
         // 웹뷰 시작
         mWebView = (WebView) mView.findViewById(R.id.webView);
 
@@ -51,7 +55,7 @@ public class O2OHomeFragment extends Fragment {
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        mWebView.loadUrl("http://o2o2.pixelro.com.s3-website.ap-northeast-2.amazonaws.com/"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -78,4 +82,12 @@ public class O2OHomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.button_arrow_back_background:
+                getActivity().finish();
+                break;
+        }
+    }
 }

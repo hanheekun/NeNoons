@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/textView_test_09_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView25" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/textView_test_09_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -70,7 +70,7 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_test_09_age" />
 
     <Button
         android:id="@+id/imageButton"
@@ -87,7 +87,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView43" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_test_09_result" />
 
     <Button
         android:id="@+id/imageButton3"
