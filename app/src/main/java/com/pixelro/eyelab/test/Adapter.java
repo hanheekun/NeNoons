@@ -14,8 +14,8 @@ import com.pixelro.eyelab.R;
 
 public class Adapter extends PagerAdapter {
 
-    private int[] images = {R.drawable.test_guide_01,
-            R.drawable.test_guide_02,
+    private int[] images = {R.drawable.test_01_dis_02,
+            R.drawable.test_01_dis_01,
             R.drawable.test_guide_03};
 
     private int[] dots = {R.drawable.dot_3_1,

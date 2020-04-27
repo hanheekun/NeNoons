@@ -10,8 +10,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,7 @@ import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Test02Fragment extends Fragment  implements View.OnClickListener, SensorEventListener {
+public class Test01Dis05Fragment extends Fragment  implements View.OnClickListener, SensorEventListener {
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -56,7 +54,7 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener, S
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_02, container, false);
+        return inflater.inflate(R.layout.fragment_test_01_dis_05, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -250,7 +248,7 @@ public class Test02Fragment extends Fragment  implements View.OnClickListener, S
             }
             else if (mCount == 0)
             {
-                NavHostFragment.findNavController(Test02Fragment.this).navigate(R.id.action_navigation_test_02_to_navigation_test_03);
+                NavHostFragment.findNavController(Test01Dis05Fragment.this).navigate(R.id.action_navigation_test_01_dis_05_to_navigation_test_01_dis_06);
             }
         }
     }

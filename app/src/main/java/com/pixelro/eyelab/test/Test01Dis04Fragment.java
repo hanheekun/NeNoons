@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test04Fragment extends Fragment  implements View.OnClickListener{
+public class Test01Dis04Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -24,7 +23,7 @@ public class Test04Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_04, container, false);
+        return inflater.inflate(R.layout.fragment_test_01_dis_04, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class Test04Fragment extends Fragment  implements View.OnClickListener{
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
     }
 
@@ -44,10 +42,7 @@ public class Test04Fragment extends Fragment  implements View.OnClickListener{
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test04Fragment.this).navigate(R.id.navigation_test_05);
-                break;
-            case R.id.button_test_prev:
-                getActivity().onBackPressed();
+                NavHostFragment.findNavController(Test01Dis04Fragment.this).navigate(R.id.action_navigation_test_01_dis_04_to_navigation_test_01_dis_05);
                 break;
         }
     }

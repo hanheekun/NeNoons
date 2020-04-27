@@ -1,7 +1,5 @@
 package com.pixelro.eyelab.test;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test07Fragment extends Fragment  implements View.OnClickListener{
+public class Test05FontFragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -36,7 +34,7 @@ public class Test07Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_07, container, false);
+        return inflater.inflate(R.layout.fragment_test_05_font, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -80,7 +78,7 @@ public class Test07Fragment extends Fragment  implements View.OnClickListener{
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test07Fragment.this).navigate(R.id.navigation_test_08);
+                NavHostFragment.findNavController(Test05FontFragment.this).navigate(R.id.action_navigation_test_05_font_to_navigation_test_06_complete);
                 break;
             case R.id.button_test_prev:
                 getActivity().onBackPressed();

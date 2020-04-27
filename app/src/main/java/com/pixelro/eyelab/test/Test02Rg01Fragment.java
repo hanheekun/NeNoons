@@ -12,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test05Fragment extends Fragment  implements View.OnClickListener{
+public class Test02Rg01Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -23,7 +23,7 @@ public class Test05Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_05, container, false);
+        return inflater.inflate(R.layout.fragment_test_02_gr_01, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -32,7 +32,6 @@ public class Test05Fragment extends Fragment  implements View.OnClickListener{
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
     }
 
@@ -43,10 +42,7 @@ public class Test05Fragment extends Fragment  implements View.OnClickListener{
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test05Fragment.this).navigate(R.id.navigation_test_06);
-                break;
-            case R.id.button_test_prev:
-                getActivity().onBackPressed();
+                NavHostFragment.findNavController(Test02Rg01Fragment.this).navigate(R.id.action_navigation_test_02_gr_01_to_navigation_test_02_gr_02);
                 break;
         }
     }

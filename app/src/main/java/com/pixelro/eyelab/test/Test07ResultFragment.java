@@ -8,12 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test09Fragment extends Fragment  implements View.OnClickListener{
+public class Test07ResultFragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -28,7 +27,7 @@ public class Test09Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_09, container, false);
+        return inflater.inflate(R.layout.fragment_test_07_result, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

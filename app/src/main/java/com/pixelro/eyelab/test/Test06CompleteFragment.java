@@ -1,6 +1,5 @@
 package com.pixelro.eyelab.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.pixelro.eyelab.account.AccountHelloFragment;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Test08Fragment extends Fragment{
+public class Test06CompleteFragment extends Fragment{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -32,7 +31,7 @@ public class Test08Fragment extends Fragment{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_08, container, false);
+        return inflater.inflate(R.layout.fragment_test_06_complete, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -82,7 +81,7 @@ public class Test08Fragment extends Fragment{
 
         @Override
         public void run() {
-            NavHostFragment.findNavController(Test08Fragment.this).navigate(R.id.navigation_test_09);
+            NavHostFragment.findNavController(Test06CompleteFragment.this).navigate(R.id.action_navigation_test_06_complete_to_navigation_test_07_result);
         }
     }
 }

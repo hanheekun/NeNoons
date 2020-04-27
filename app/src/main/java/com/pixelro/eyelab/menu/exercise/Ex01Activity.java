@@ -24,17 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.BaseActivity;
-import com.pixelro.eyelab.FirstDialog;
-import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
-import com.pixelro.eyelab.test.Test08Fragment;
-import com.pixelro.eyelab.test.TestActivity;
-import com.pixelro.eyelab.test.TestDialog;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test06Fragment extends Fragment  implements View.OnClickListener{
+public class Test04ColorFragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -40,7 +40,7 @@ public class Test06Fragment extends Fragment  implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_06, container, false);
+        return inflater.inflate(R.layout.fragment_test_04_color, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class Test06Fragment extends Fragment  implements View.OnClickListener{
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test06Fragment.this).navigate(R.id.navigation_test_07);
+                NavHostFragment.findNavController(Test04ColorFragment.this).navigate(R.id.action_navigation_test_04_color_to_navigation_test_05_font);
                 break;
             case R.id.button_test_prev:
                 getActivity().onBackPressed();

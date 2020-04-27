@@ -61,7 +61,7 @@ public class Test01Fragment extends Fragment  implements View.OnClickListener{
             case R.id.button_test_01_next:
                 //NavHostFragment.findNavController(Test01Fragment.this).navigate(R.id.action_navigation_test_01_to_navigation_test_02);
 
-                NavHostFragment.findNavController(Test01Fragment.this).navigate(R.id.navigation_test_02);
+                NavHostFragment.findNavController(Test01Fragment.this).navigate(R.id.navigation_test_01_dis_05);
 
                 break;
         }
