@@ -29,7 +29,7 @@
         android:id="@+id/button_test_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_xs_b"
+        android:background="@drawable/btn_s_b"
         android:text="다음"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -89,19 +89,88 @@
         app:layout_constraintTop_toTopOf="@+id/imageView10"
         app:layout_constraintVertical_bias="0.38" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout_color_1"
+<!--    <FrameLayout-->
+<!--        android:layout_width="205dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background=" #ff9d9d"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/frameLayout_color_1"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/frameLayout_color_1">-->
+<!--    </FrameLayout>-->
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/frameLayout"-->
+<!--        android:layout_width="205dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background=" #fbf6f6"-->
+<!--        tools:layout_editor_absoluteX="1dp"></FrameLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_1"
         android:layout_width="410dp"
         android:layout_height="58dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="19dp"
-        android:background=" #fbf6f6"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout_color_2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10">
 
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_1"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #ff9d9d"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1">
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_1"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #fbf6f6"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1">
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #fbf6f6"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1">
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout_color_2"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        android:background="#fffff8"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout_color_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_1">
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:background=" #ffff53"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background=" #fffff8"></FrameLayout>
+
         <TextView
-            android:id="@+id/textView_color_1"
+            android:id="@+id/textView_color_2"
             style="@style/TestSampleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -110,116 +179,128 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout_color_2"
-        android:layout_width="410dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="8dp"
-        android:background="#fffff8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_1">
-
-        <TextView
-            android:id="@+id/textView_color_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/frameLayout_color_3"
         android:layout_width="410dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:background="#f6fbf6"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout_color_4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_2">
 
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:background=" #b9ff7d"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background=" #f6fbf6"></FrameLayout>
+
         <TextView
             android:id="@+id/textView_color_3"
+            style="@style/TestSampleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
+            android:gravity="center" />
     </FrameLayout>
+
     <FrameLayout
         android:id="@+id/frameLayout_color_4"
         android:layout_width="410dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:background="#fffcf6"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout_color_5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_3">
 
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:background=" #ffd165"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background=" #fffcf6"></FrameLayout>
+
         <TextView
             android:id="@+id/textView_color_4"
+            style="@style/TestSampleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
+            android:gravity="center" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout_color_5"
         android:layout_width="410dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:background="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout_color_6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_4">
 
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:background=" #e7e7e7"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background=" #ffffff"></FrameLayout>
+
         <TextView
             android:id="@+id/textView_color_5"
+            style="@style/TestSampleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
+            android:gravity="center" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout_color_6"
         android:layout_width="410dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
         android:background="#fafdff"
+        app:layout_constraintBottom_toTopOf="@+id/button_test_next"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_5">
 
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:background=" #7bcaff"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background=" #fafdff"></FrameLayout>
+
         <TextView
             android:id="@+id/textView_color_6"
+            style="@style/TestSampleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout_color_7"
-        android:layout_width="410dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="8dp"
-        android:background="#f6f8fe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_color_6">
-
-        <TextView
-            android:id="@+id/textView_color_7"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
+            android:gravity="center" />
     </FrameLayout>
 
 

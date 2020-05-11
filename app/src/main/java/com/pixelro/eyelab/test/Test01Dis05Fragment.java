@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -32,6 +33,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
     private View mView;
     private TextView mTvMoving;
     private TextView mTvCount;
+    private ConstraintLayout Cl;
 
     public Timer mTimer;
 
@@ -40,6 +42,8 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
 //    Handler h3;
 //    Handler h4;
 //    Handler h5;
+
+    // 294129 979797
 
     // for sensor
     private SensorManager mSensorManager = null;
@@ -64,6 +68,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         mTvMoving = (TextView)view.findViewById(R.id.textView_test_02_moving);
         mTvCount = (TextView)mView.findViewById(R.id.textView_test_02_count);
+        Cl = (ConstraintLayout)view.findViewById(R.id.layout_test_01_bg);
 
         //Using the Gyroscope & Accelometer
         mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
@@ -172,18 +177,22 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
 
             //double mAccelCurrent = Math.sqrt(x*x + y*y + z*z);
 
-            if (sum > 50){
-                mTvMoving.setText("moving...");
+            if (sum > 60){
+                //mTvMoving.setText("moving...");
+                mTvMoving.setText("");
 
                 if (mTimer != null){
                     mTimer.cancel();
                     mTimer = null;
                     mTvCount.setText("");
                 }
+
+                //Cl.setBackgroundColor(Color.parseColor("#979797"));
+
             }
             else{
                 mTvMoving.setText("");
-
+                //Cl.setBackgroundColor(Color.parseColor("#294129"));
                 if (mTimer == null){
                     mTimer = new Timer();
                     mTimer.schedule(new setCountTextView(3),1000);
@@ -242,7 +251,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
                     @Override
                     public void run() {
                         mTvCount.setText("①");
-                        mTvCount.setTextColor(Color.rgb(255,0,0));
+                        mTvCount.setTextColor(Color.parseColor("#ffe800"));
                     }
                 });
             }

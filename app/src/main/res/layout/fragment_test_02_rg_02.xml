@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
-        android:text="완료"
+        android:text="다음"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="폰트 선택"
+        android:text="적녹 테스트"
         android:textColor="#131340"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,94 +80,35 @@
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문자가 가장 잘 보이는\n폰트를 선택해주세요."
+        android:text="문자가 잘 보이는 쪽을 선택해주세요."
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.35" />
 
-
-    <FrameLayout
-        android:id="@+id/frameLayout_font_1"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="24dp"
-        android:background="#fffff8"
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10">
 
-        <TextView
-            android:id="@+id/textView_font_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            style="@style/TestSampleText"/>
-    </FrameLayout>
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/test_02_red" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout_font_2"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="24dp"
-        android:background="#f6fbf6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_1">
-
-        <TextView
-            android:id="@+id/textView_font_2"
-            style="@style/TestSampleText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:fontFamily="@font/dall01r"
-            android:gravity="center" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout_font_3"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="24dp"
-        android:background="#fffcf6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_2">
-
-        <TextView
-            android:id="@+id/textView_font_3"
-            style="@style/TestSampleText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:fontFamily="@font/dall01b"
-            android:gravity="center" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayout_font_4"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="24dp"
-        android:background="#ffffff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_3">
-
-        <TextView
-            android:id="@+id/textView_font_4"
-            style="@style/TestSampleText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:fontFamily="@font/dall01eb"
-            android:gravity="center" />
-    </FrameLayout>
-
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/test_02_green" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

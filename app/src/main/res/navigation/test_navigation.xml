@@ -61,8 +61,8 @@
 
     <fragment
         android:id="@+id/navigation_test_02_gr_01"
-        android:name="com.pixelro.eyelab.test.Test02Rg01Fragment"
-        tools:layout="@layout/fragment_test_02_gr_01">
+        android:name="com.pixelro.eyelab.test.Test02RedGreen01Fragment"
+        tools:layout="@layout/fragment_test_02_rg_01">
         <action
             android:id="@+id/action_navigation_test_02_gr_01_to_navigation_test_02_gr_02"
             app:destination="@id/navigation_test_02_gr_02" />
@@ -70,8 +70,8 @@
 
     <fragment
         android:id="@+id/navigation_test_02_gr_02"
-        android:name="com.pixelro.eyelab.test.Test02Rg02Fragment"
-        tools:layout="@layout/fragment_test_02_gr_02">
+        android:name="com.pixelro.eyelab.test.Test02RedGreen02Fragment"
+        tools:layout="@layout/fragment_test_02_rg_02">
 
         <action
             android:id="@+id/action_navigation_test_02_gr_02_to_navigation_test_03_diff"
@@ -80,8 +80,8 @@
 
     <fragment
         android:id="@+id/navigation_test_03_diff"
-        android:name="com.pixelro.eyelab.test.Test03DiffFragment"
-        tools:layout="@layout/fragment_test_03_diff">
+        android:name="com.pixelro.eyelab.test.Test03BrightFragment"
+        tools:layout="@layout/fragment_test_03_bright_01">
         <action
             android:id="@+id/action_navigation_test_03_diff_to_navigation_test_04_color"
             app:destination="@id/navigation_test_04_color" />
