@@ -21,19 +21,26 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
     private ConstraintLayout ClColor1;
+    private ConstraintLayout ClColor2;
+    private ConstraintLayout ClColor3;
+    private ConstraintLayout ClColor4;
+    private ConstraintLayout ClColor5;
+    private ConstraintLayout ClColor6;
+
     private FrameLayout FlColor1;
     private FrameLayout FlColor2;
     private FrameLayout FlColor3;
     private FrameLayout FlColor4;
     private FrameLayout FlColor5;
     private FrameLayout FlColor6;
-    private FrameLayout FlColor7;
-    private TextView TvColor1;
-    private TextView TvColor2;
-    private TextView TvColor3;
-    private TextView TvColor4;
-    private TextView TvColor5;
-    private TextView TvColor6;
+
+    private FrameLayout FlColorLight1;
+    private FrameLayout FlColorLight2;
+    private FrameLayout FlColorLight3;
+    private FrameLayout FlColorLight4;
+    private FrameLayout FlColorLight5;
+    private FrameLayout FlColorLight6;
+
 
     @Override
     public View onCreateView(
@@ -53,34 +60,42 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
         ClColor1 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_1);
-        FlColor2 = (FrameLayout)view.findViewById(R.id.frameLayout_color_2);
-        FlColor3 = (FrameLayout)view.findViewById(R.id.frameLayout_color_3);
-        FlColor4 = (FrameLayout)view.findViewById(R.id.frameLayout_color_4);
-        FlColor5 = (FrameLayout)view.findViewById(R.id.frameLayout_color_5);
-        FlColor6 = (FrameLayout)view.findViewById(R.id.frameLayout_color_6);
-        ClColor1.setOnClickListener(this);
-        FlColor2.setOnClickListener(this);
-        FlColor3.setOnClickListener(this);
-        FlColor4.setOnClickListener(this);
-        FlColor5.setOnClickListener(this);
-        FlColor6.setOnClickListener(this);
+        ClColor2 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_2);
+        ClColor3 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_3);
+        ClColor4 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_4);
+        ClColor5 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_5);
+        ClColor6 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_6);
+
         FlColor1 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_1);
-//        TvColor1 = (TextView)view.findViewById(R.id.textView_color_1);
-//        TvColor2 = (TextView)view.findViewById(R.id.textView_color_2);
-//        TvColor3 = (TextView)view.findViewById(R.id.textView_color_3);
-//        TvColor4 = (TextView)view.findViewById(R.id.textView_color_4);
-//        TvColor5 = (TextView)view.findViewById(R.id.textView_color_5);
-//        TvColor6 = (TextView)view.findViewById(R.id.textView_color_6);
+        FlColor2 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_2);
+        FlColor3 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_3);
+        FlColor4 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_4);
+        FlColor5 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_5);
+        FlColor6 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_6);
+
+        FlColorLight1 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_1);
+        FlColorLight2 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_2);
+        FlColorLight3 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_3);
+        FlColorLight4 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_4);
+        FlColorLight5 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_5);
+        FlColorLight6 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_6);
+
+        ClColor1.setOnClickListener(this);
+        ClColor2.setOnClickListener(this);
+        ClColor3.setOnClickListener(this);
+        ClColor4.setOnClickListener(this);
+        ClColor5.setOnClickListener(this);
+        ClColor6.setOnClickListener(this);
 
     }
 
     private void setAllColorButtonReset(){
         FlColor1.setBackgroundResource(0);
-//        TvColor2.setBackgroundResource(0);
-//        TvColor3.setBackgroundResource(0);
-//        TvColor4.setBackgroundResource(0);
-//        TvColor5.setBackgroundResource(0);
-//        TvColor6.setBackgroundResource(0);
+        FlColor2.setBackgroundResource(0);
+        FlColor3.setBackgroundResource(0);
+        FlColor4.setBackgroundResource(0);
+        FlColor5.setBackgroundResource(0);
+        FlColor6.setBackgroundResource(0);
     }
 
     @Override
@@ -98,32 +113,32 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
             case R.id.constraintlayout_color_1:
                 setAllColorButtonReset();
                 FlColor1.setBackgroundResource(R.drawable.test_color_outline);
-                //((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable) FlColor1.getBackground()).getColor();
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable) FlColorLight1.getBackground()).getColor();
                 break;
-            case R.id.frameLayout_color_2:
+            case R.id.constraintlayout_color_2:
                 setAllColorButtonReset();
-                TvColor2.setBackgroundResource(R.drawable.test_color_outline);
-                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColor2.getBackground()).getColor();
+                FlColor2.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight2.getBackground()).getColor();
                 break;
-            case R.id.frameLayout_color_3:
+            case R.id.constraintlayout_color_3:
                 setAllColorButtonReset();
-                TvColor3.setBackgroundResource(R.drawable.test_color_outline);
-                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColor3.getBackground()).getColor();
+                FlColor3.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight3.getBackground()).getColor();
                 break;
-            case R.id.frameLayout_color_4:
+            case R.id.constraintlayout_color_4:
                 setAllColorButtonReset();
-                TvColor4.setBackgroundResource(R.drawable.test_color_outline);
-                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColor4.getBackground()).getColor();
+                FlColor4.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight4.getBackground()).getColor();
                 break;
-            case R.id.frameLayout_color_5:
+            case R.id.constraintlayout_color_5:
                 setAllColorButtonReset();
-                TvColor5.setBackgroundResource(R.drawable.test_color_outline);
-                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColor5.getBackground()).getColor();
+                FlColor5.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight5.getBackground()).getColor();
                 break;
-            case R.id.frameLayout_color_6:
+            case R.id.constraintlayout_color_6:
                 setAllColorButtonReset();
-                TvColor6.setBackgroundResource(R.drawable.test_color_outline);
-                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColor6.getBackground()).getColor();
+                FlColor6.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight6.getBackground()).getColor();
                 break;
 
         }

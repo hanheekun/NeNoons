@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
     private TextView TvResult;
     private int mDistance;
 
+    private Button BtnReturn;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -37,6 +40,9 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
 
         TvAge = (TextView)mView.findViewById(R.id.textView_test_09_age);
         TvResult = (TextView)mView.findViewById(R.id.textView_test_09_result);
+
+        BtnReturn = (Button)view.findViewById(R.id.button_test_07_return);
+        BtnReturn.setOnClickListener(this);
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
@@ -80,6 +86,11 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        getActivity().finish();
+        switch (view.getId()){
+            case R.id.button_test_07_return:
+                getActivity().finish();
+                break;
+        }
+
     }
 }
