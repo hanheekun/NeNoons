@@ -19,6 +19,7 @@ import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 
 import com.pixelro.eyelab.MainActivity;
+import com.pixelro.eyelab.Profile;
 import com.pixelro.eyelab.R;
 
 import java.io.IOException;
@@ -137,6 +138,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         sharedPreferences = getActivity().getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
+        // test
+        String a =  Profile.AppData.EMAIL;
+
     }
 
     @Override
@@ -164,6 +168,10 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
                 // 로그인 성공
 
+                //http set header
+                    //post
+
+
                 // 메인 화면 전환
                 Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(mainIntent);
@@ -183,9 +191,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         if (SwLoginSave.isChecked()){
-            editor.putBoolean("SAVE_LOGIN_DATA", SwLoginSave.isChecked());
-            editor.putString("EMAIL", EtEmail.getText().toString().trim());
-            editor.putString("PASS", EtPass.getText().toString().trim());
+            editor.putBoolean(Profile.AppData.SAVE_LOGIN_DATA, SwLoginSave.isChecked());
+            editor.putString(Profile.AppData.EMAIL, EtEmail.getText().toString().trim());
+            editor.putString(Profile.AppData.PASS, EtPass.getText().toString().trim());
         }
         else {
             // reset

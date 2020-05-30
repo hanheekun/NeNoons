@@ -107,6 +107,7 @@
         android:text="화면과의 거리 측정 값"
         android:textColor="#2e4fa2"
         android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/textView_test_03_distance"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -114,13 +115,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
-        android:id="@+id/textView_test_03_distance"
+        android:id="@+id/textView_test_01_dis_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="0cm"
         android:textColor="#b1b1b1"
         android:textSize="25sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/textView39"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

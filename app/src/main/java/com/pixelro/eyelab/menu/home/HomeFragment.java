@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        });
 
         root.findViewById(R.id.view_main_age_result_btn).setOnClickListener(this);
+        root.findViewById(R.id.imageView_app_link_test).setOnClickListener(this);
 
         return root;
     }
@@ -44,6 +45,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.view_main_age_result_btn:
                 Intent intent = new Intent(getContext(), TestActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.imageView_app_link_test:
+                Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.lilysnc.pixelro.integral"); startActivity( launchIntent );
                 break;
         }
     }

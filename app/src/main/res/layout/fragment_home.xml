@@ -144,7 +144,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imageView_app_link_test"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="7dp"
@@ -188,8 +188,8 @@
                 android:text="노안 보정 필름"
                 android:textColor="#001331"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView7"
-                app:layout_constraintTop_toTopOf="@+id/imageView7" />
+                app:layout_constraintStart_toStartOf="@+id/imageView_app_link_test"
+                app:layout_constraintTop_toTopOf="@+id/imageView_app_link_test" />
 
             <TextView
                 android:id="@+id/textView26"
@@ -257,9 +257,9 @@
                 android:layout_width="103dp"
                 android:layout_height="58dp"
                 android:layout_marginEnd="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-                app:layout_constraintEnd_toEndOf="@+id/imageView7"
-                app:layout_constraintTop_toTopOf="@+id/imageView7"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_app_link_test"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_app_link_test"
+                app:layout_constraintTop_toTopOf="@+id/imageView_app_link_test"
                 app:srcCompat="@drawable/main1" />
 
             <LinearLayout
@@ -424,12 +424,12 @@
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="110dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/main_box_age"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView7" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_app_link_test" />
 
             <TextView
                 android:id="@+id/textView27"

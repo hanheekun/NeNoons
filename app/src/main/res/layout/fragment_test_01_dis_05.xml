@@ -5,6 +5,7 @@
     android:id="@+id/layout_test_01_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#294129"
     tools:context=".test.Test01Fragment">
 
