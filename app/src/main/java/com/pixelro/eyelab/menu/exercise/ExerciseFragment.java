@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.menu.exercise.history.ExHistoryActivity;
 import com.pixelro.eyelab.test.TestActivity;
 
 public class ExerciseFragment extends Fragment implements View.OnClickListener {
@@ -31,6 +32,9 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
         root.findViewById(R.id.button_ex_02).setOnClickListener(this);
         root.findViewById(R.id.button_ex_03).setOnClickListener(this);
         root.findViewById(R.id.button_ex_04).setOnClickListener(this);
+        root.findViewById(R.id.button_ex_history).setOnClickListener(this);
+
+
 
         return root;
     }
@@ -53,6 +57,10 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_ex_04:
                 intent = new Intent(getActivity(), Ex04Activity.class);
+                startActivity(intent);
+                break;
+            case R.id.button_ex_history:
+                intent = new Intent(getActivity(), ExHistoryActivity.class);
                 startActivity(intent);
                 break;
         }

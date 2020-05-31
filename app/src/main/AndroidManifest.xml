@@ -75,6 +75,15 @@
             android:name=".menu.care.o2o.O2OActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".menu.care.AddressWebViewActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".menu.exercise.history.ExHistoryActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".distance.EyeDistanceMeasureService"
             android:enabled="true"

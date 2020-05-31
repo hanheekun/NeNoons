@@ -69,4 +69,14 @@
         app:layout_constraintStart_toEndOf="@+id/button_ex_01"
         app:layout_constraintTop_toTopOf="@+id/button_ex_01" />
 
+    <Button
+        android:id="@+id/button_ex_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="294dp"
+        android:layout_marginTop="151dp"
+        android:text="history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
