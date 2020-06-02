@@ -18,9 +18,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 
+import com.pixelro.eyelab.FirstDialog;
 import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.Profile;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.test.TestActivity;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -64,6 +66,10 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.imageButton_account_login_naver).setOnClickListener(this);
         view.findViewById(R.id.imageButton_account_login_wechat).setOnClickListener(this);
         view.findViewById(R.id.button_account_login_login).setOnClickListener(this);
+
+        // test
+        view.findViewById(R.id.button_login_test_1).setOnClickListener(this);
+        view.findViewById(R.id.button_login_test_2).setOnClickListener(this);
 
         SwLoginSave = (Switch)(view.findViewById(R.id.switch_account_login_save));
 
@@ -180,6 +186,23 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 // 로그인 저장
                 save();
 
+                break;
+            case R.id.button_login_test_1:
+
+                FirstDialog dlg = new FirstDialog(getActivity());
+                dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
+                    @Override
+                    public void ResultEvent(boolean result) {
+                        if (result){
+                            Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+                dlg.showDialog();
+
+                break;
+            case R.id.button_login_test_2:
                 break;
 
         }
