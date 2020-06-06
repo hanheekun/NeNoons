@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
+        android:enabled="false"
         android:text="완료"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -59,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="폰트 선택"
+        android:text="글씨체 선택"
         android:textColor="#131340"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,9 +78,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="문자가 가장 잘 보이는\n폰트를 선택해주세요."
         android:textColor="#000000"
         android:textSize="20sp"

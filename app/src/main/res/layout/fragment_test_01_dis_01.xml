@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="거리측정 테스트"
+        android:text="노안측정 거리 테스트"
         android:textColor="#131340"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,9 +70,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/test_01_dis_01"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
@@ -80,16 +81,18 @@
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="카메라가 눈 사이를 인식하여\n사용자와의 거리를 측정합니다."
         android:textColor="#000000"
         android:textSize="20sp"
@@ -98,35 +101,5 @@
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/imageView10"
         app:layout_constraintVertical_bias="0.35" />
-
-    <TextView
-        android:id="@+id/textView39"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="화면과의 거리 측정 값"
-        android:textColor="#2e4fa2"
-        android:textSize="15sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/textView_test_03_distance"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <TextView
-        android:id="@+id/textView_test_01_dis_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="0cm"
-        android:textColor="#b1b1b1"
-        android:textSize="25sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/textView39"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView39"
-        app:layout_constraintTop_toTopOf="@+id/textView39" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

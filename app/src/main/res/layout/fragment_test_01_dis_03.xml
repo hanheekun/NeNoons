@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
-        android:text="다음"
+        android:text="시작하기"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,28 +70,30 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/test_01_dis_03_mono"
         app:layout_constraintEnd_toStartOf="@+id/imageView32"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37"
+        tools:visibility="gone" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="시표가 흐리게 보일 때까지 스마트폰과의\n거리를 가깝게 당겨 3초간 멈춰주세요. "
         android:textColor="#000000"
         android:textSize="18sp"
@@ -101,36 +103,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView10"
         app:layout_constraintVertical_bias="0.35" />
 
-    <TextView
-        android:id="@+id/textView39"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="화면과의 거리 측정 값"
-        android:textColor="#2e4fa2"
-        android:textSize="15sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/textView_test_03_distance"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <TextView
-        android:id="@+id/textView_test_01_dis_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="0cm"
-        android:textColor="#b1b1b1"
-        android:textSize="25sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/textView39"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView39"
-        app:layout_constraintTop_toTopOf="@+id/textView39" />
-
     <ImageView
         android:id="@+id/imageView32"
         android:layout_width="wrap_content"
@@ -139,7 +111,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/textView40"
@@ -151,7 +124,8 @@
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/textView41"
@@ -163,6 +137,17 @@
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView32"
         app:layout_constraintEnd_toEndOf="@+id/imageView32"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        tools:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/test_01_dis_03_sample"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

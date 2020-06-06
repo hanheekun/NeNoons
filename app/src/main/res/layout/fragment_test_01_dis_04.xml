@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="시작하기를 눌러주세요.."

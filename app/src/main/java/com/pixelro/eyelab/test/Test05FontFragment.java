@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -106,5 +107,8 @@ public class Test05FontFragment extends Fragment  implements View.OnClickListene
                 FlFont4.setBackgroundResource(R.drawable.test_color_outline);
                 break;
         }
+
+        //((TextView)mView.findViewById(R.id.textView_test_02_command)).setText("완료를 눌러주세요.");
+        ((Button)mView.findViewById(R.id.button_test_next)).setEnabled(true);
     }
 }

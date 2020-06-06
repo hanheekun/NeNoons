@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
+        android:enabled="false"
         android:text="다음"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -59,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="명암 테스트"
+        android:text="명암대비 테스트"
         android:textColor="#131340"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="보이는 문자를 모두 선택해주세요."
@@ -134,6 +135,34 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView22"
         app:layout_constraintStart_toStartOf="@+id/imageView22"
         app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="화면과의 실시간 거리"
+        android:textColor="#2e4fa2"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView_test_03_distance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+
+    <TextView
+        android:id="@+id/textView_test_03_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="- cm"
+        android:textColor="#b1b1b1"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="@+id/textView38" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

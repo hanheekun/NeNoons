@@ -67,9 +67,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.imageButton_account_login_wechat).setOnClickListener(this);
         view.findViewById(R.id.button_account_login_login).setOnClickListener(this);
 
-        // test
-        view.findViewById(R.id.button_login_test_1).setOnClickListener(this);
-        view.findViewById(R.id.button_login_test_2).setOnClickListener(this);
 
         SwLoginSave = (Switch)(view.findViewById(R.id.switch_account_login_save));
 
@@ -187,23 +184,23 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 save();
 
                 break;
-            case R.id.button_login_test_1:
-
-                FirstDialog dlg = new FirstDialog(getActivity());
-                dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
-                    @Override
-                    public void ResultEvent(boolean result) {
-                        if (result){
-                            Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
-                dlg.showDialog();
-
-                break;
-            case R.id.button_login_test_2:
-                break;
+//            case R.id.button_login_test_1:
+//
+////                FirstDialog dlg = new FirstDialog(getActivity());
+////                dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
+////                    @Override
+////                    public void ResultEvent(boolean result) {
+////                        if (result){
+////                            Intent intent = new Intent(MainActivity.this, TestActivity.class);
+////                            startActivity(intent);
+////                        }
+////                    }
+////                });
+////                dlg.showDialog();
+//
+//                break;
+//            case R.id.button_login_test_2:
+//                break;
 
         }
     }

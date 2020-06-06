@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
+        android:enabled="false"
         android:text="다음"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -77,9 +78,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="문자가 가장 잘 보이는\n배경색을 선택해주세요."
         android:textColor="#000000"
         android:textSize="20sp"

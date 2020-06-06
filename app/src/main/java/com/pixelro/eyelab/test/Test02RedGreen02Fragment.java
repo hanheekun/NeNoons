@@ -1,9 +1,16 @@
 package com.pixelro.eyelab.test;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -11,11 +18,13 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
+import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 
 public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
+    RadioGroup rg;
 
     @Override
     public View onCreateView(
@@ -34,6 +43,43 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
+        rg = (RadioGroup)mView.findViewById(R.id.radioGroup_test_02);
+        rg.setOnClickListener(this);
+        
+        view.findViewById(R.id.radioButton).setOnClickListener(this);
+        view.findViewById(R.id.radioButton2).setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mGattUpdateReceiver);
+    }
+
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
+                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
+
+                ((TextView)mView.findViewById(R.id.textView_test_02_distance)).setText(distance + "cm");
+                ((TestActivity)getActivity()).mCurrentDistance = distance;
+            }
+        }
+    };
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(EyeDistanceMeasureService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
     }
 
     @Override
@@ -49,5 +95,11 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
                 getActivity().onBackPressed();
                 break;
         }
+
+        if ( rg.getCheckedRadioButtonId() != -1){
+            //((TextView)mView.findViewById(R.id.textView_test_02_command)).setText("다음을 눌러주세요.");
+            ((Button)mView.findViewById(R.id.button_test_next)).setEnabled(true);
+        }
+
     }
 }

@@ -30,6 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
+        android:clickable="true"
+        android:enabled="false"
         android:text="다음"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -77,10 +79,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/textView_test_02_command"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문자가 잘 보이는 쪽을 선택해주세요."
+        android:gravity="center"
+        android:text="글씨가 더 진하고 선명하게\n보이는 쪽을 선택해주세요."
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView10"
@@ -90,6 +93,7 @@
         app:layout_constraintVertical_bias="0.35" />
 
     <RadioGroup
+        android:id="@+id/radioGroup_test_02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -110,5 +114,33 @@
             android:layout_height="wrap_content"
             android:button="@drawable/test_02_green" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="화면과의 실시간 거리"
+        android:textColor="#2e4fa2"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView_test_02_distance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_test_02" />
+
+    <TextView
+        android:id="@+id/textView_test_02_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="- cm"
+        android:textColor="#b1b1b1"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView66"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView66"
+        app:layout_constraintTop_toTopOf="@+id/textView66" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

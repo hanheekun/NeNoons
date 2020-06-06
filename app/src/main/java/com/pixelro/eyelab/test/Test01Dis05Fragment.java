@@ -143,7 +143,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
             if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
 
-                ((TextView)mView.findViewById(R.id.textView_test_02_distance)).setText(distance + "cm");
+                ((TextView)mView.findViewById(R.id.textView_test_01_distance)).setText(distance + "cm");
                 ((TestActivity)getActivity()).mCurrentDistance = distance;
             }
         }

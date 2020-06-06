@@ -242,34 +242,5 @@
             app:layout_constraintTop_toTopOf="@+id/imageButton_account_login_naver" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/button_login_test_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="161dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_login_test_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/button_login_test_1"
-        app:layout_constraintTop_toTopOf="@+id/button_login_test_1" />
-
-    <TextView
-        android:id="@+id/textView64"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/button_login_test_1"
-        app:layout_constraintTop_toBottomOf="@+id/button_login_test_1" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

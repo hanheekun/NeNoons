@@ -42,7 +42,8 @@ public class Test01Dis03Fragment extends Fragment  implements View.OnClickListen
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test01Dis03Fragment.this).navigate(R.id.action_navigation_test_01_dis_03_to_navigation_test_01_dis_04);
+                //NavHostFragment.findNavController(Test01Dis03Fragment.this).navigate(R.id.action_navigation_test_01_dis_03_to_navigation_test_01_dis_04);
+                NavHostFragment.findNavController(Test01Dis03Fragment.this).navigate(R.id.action_navigation_test_01_dis_03_to_navigation_test_01_dis_05);
                 break;
         }
     }
