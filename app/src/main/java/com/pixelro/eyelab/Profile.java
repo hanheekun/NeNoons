@@ -16,6 +16,7 @@ public class Profile {
         public static final String PASS = "PASS";
         public static final String SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA";
         public static final String LOGINNING = "LOGINNING";
+        public static final String TOKEN = "";
     }
 
     public class Gender {        public static final String MALE = "male";
