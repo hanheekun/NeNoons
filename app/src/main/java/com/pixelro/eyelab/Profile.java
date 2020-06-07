@@ -10,14 +10,7 @@ public class Profile {
     public String job = Job.OTHER;
     public String phone = "01000000000";
 
-    // sharedPreferences
-    public class AppData {
-        public static final String EMAIL = "EMAIL";
-        public static final String PASS = "PASS";
-        public static final String SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA";
-        public static final String LOGINNING = "LOGINNING";
-        public static final String TOKEN = "";
-    }
+
 
     public class Gender {        public static final String MALE = "male";
         public static final String FEMALE = "female";

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.apollographql.android'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -20,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
@@ -53,4 +58,18 @@ dependencies {
     implementation 'androidx.security:security-crypto:1.0.0-beta01'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+
+    implementation 'com.apollographql.apollo:apollo-android-support:1.2.2'
+    implementation 'com.apollographql.apollo:apollo-runtime:1.2.2'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.1',
+            // Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+            //'org.bouncycastle:bcprov-jdk15on:1.60',
+            'io.jsonwebtoken:jjwt-jackson:0.11.1' // or 'io.jsonwebtoken:jjwt-gson:0.11.1' for gson
+
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
+    implementation 'org.jetbrains:annotations:15.0'
+
 }
