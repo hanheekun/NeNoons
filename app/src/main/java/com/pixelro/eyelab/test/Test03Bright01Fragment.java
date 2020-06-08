@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,12 +12,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test01Dis06Fragment extends Fragment  implements View.OnClickListener{
+public class Test03Bright01Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
-
-    Adapter adapter;
 
     @Override
     public View onCreateView(
@@ -26,7 +23,7 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_01_dis_06, container, false);
+        return inflater.inflate(R.layout.fragment_test_03_bright_01, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -35,9 +32,6 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
-
-        ((TextView)view.findViewById(R.id.textView_test_03_distance)).setText(""+((TestActivity)getActivity()).mCurrentDistance+"cm");
 
     }
 
@@ -48,10 +42,7 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test01Dis06Fragment.this).navigate(R.id.action_navigation_test_01_dis_06_to_navigation_test_01_dis_05_2);
-                break;
-            case R.id.button_test_prev:
-                getActivity().onBackPressed();
+                NavHostFragment.findNavController(Test03Bright01Fragment.this).navigate(R.id.action_navigation_test_03_bright_01_to_navigation_test_03_bright_02);
                 break;
         }
     }

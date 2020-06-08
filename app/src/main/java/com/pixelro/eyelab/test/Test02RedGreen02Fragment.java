@@ -71,7 +71,7 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
 
                 ((TextView)mView.findViewById(R.id.textView_test_02_distance)).setText(distance + "cm");
-                ((TestActivity)getActivity()).mCurrentDistance = distance;
+                //((TestActivity)getActivity()).mCurrentDistance = distance;
             }
         }
     };
@@ -89,7 +89,7 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test02RedGreen02Fragment.this).navigate(R.id.action_navigation_test_02_gr_02_to_navigation_test_03_diff);
+                NavHostFragment.findNavController(Test02RedGreen02Fragment.this).navigate(R.id.action_navigation_test_02_gr_02_to_navigation_test_03_bright_01);
                 break;
             case R.id.button_test_prev:
                 getActivity().onBackPressed();

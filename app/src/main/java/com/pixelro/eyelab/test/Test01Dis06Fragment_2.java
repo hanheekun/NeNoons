@@ -13,7 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 
-public class Test01Dis06Fragment extends Fragment  implements View.OnClickListener{
+public class Test01Dis06Fragment_2 extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -37,7 +37,7 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
-        ((TextView)view.findViewById(R.id.textView_test_03_distance)).setText(""+((TestActivity)getActivity()).mCurrentDistance+"cm");
+        ((TextView)view.findViewById(R.id.textView_test_03_distance)).setText(""+((TestActivity)getActivity()).mCurrentDistance_2+"cm");
 
     }
 
@@ -48,7 +48,7 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test01Dis06Fragment.this).navigate(R.id.action_navigation_test_01_dis_06_to_navigation_test_01_dis_05_2);
+                NavHostFragment.findNavController(Test01Dis06Fragment_2.this).navigate(R.id.action_navigation_test_01_dis_06_2_to_navigation_test_02_gr_012);
                 break;
             case R.id.button_test_prev:
                 getActivity().onBackPressed();

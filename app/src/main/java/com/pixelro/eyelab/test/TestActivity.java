@@ -45,6 +45,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
     private TestActivity mThis = null;
 
     public int mCurrentDistance = 0;
+    public int mCurrentDistance_2 = 0;
     public int mCurrentSelectedColor = 0;
 
     @Override

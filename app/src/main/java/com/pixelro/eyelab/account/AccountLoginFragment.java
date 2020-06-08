@@ -230,16 +230,20 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
             case R.id.button_account_login_login:
 
                 // 로그인 시도
-                setApollo();
-                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
+                //setApollo();
+                //signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
 
 
 
 
                 // 로그인 성공
 
-                //http set header
-                    //post
+                // 로그인 저장
+                save();
+                // 메인 화면 전환
+                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                getActivity().startActivity(mainIntent);
+                getActivity().finish();
 
                 break;
 //            case R.id.button_login_test_1:

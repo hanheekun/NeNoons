@@ -47,21 +47,42 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
         // 거리에 따른 나이
-        if (mDistance <= 23){
-            TvAge.setText("노안나이 40대 이하");
+        if (mDistance <= 22){
+            TvAge.setText("노안나이 44세 이하");
         }
-        else if(mDistance >= 24 && mDistance <= 28){
+        else if(mDistance >= 23 && mDistance <= 30){
             TvAge.setText("노안나이 40대 중반");
         }
-        else if(mDistance >= 29 && mDistance <= 34){
+        else if(mDistance >= 31 && mDistance <= 37){
+            TvAge.setText("노안나이 40대 후반");
+        }
+        else if(mDistance >= 38 && mDistance <= 47){
+            TvAge.setText("노안나이 50세");
+        }
+        else if(mDistance >= 48 && mDistance <= 57){
             TvAge.setText("노안나이 50대 초반");
         }
-        else if(mDistance >= 35 && mDistance <= 45){
+        else if(mDistance >= 58 && mDistance <= 67){
             TvAge.setText("노안나이 50대 중반");
         }
-        else if(mDistance >= 46){
-            TvAge.setText("노안나이 60대 이상");
+        else if(mDistance >= 68){
+            TvAge.setText("노안나이 56세 이상");
         }
+//        if (mDistance <= 23){
+//            TvAge.setText("노안나이 40대 이하");
+//        }
+//        else if(mDistance >= 24 && mDistance <= 28){
+//            TvAge.setText("노안나이 40대 중반");
+//        }
+//        else if(mDistance >= 29 && mDistance <= 34){
+//            TvAge.setText("노안나이 50대 초반");
+//        }
+//        else if(mDistance >= 35 && mDistance <= 45){
+//            TvAge.setText("노안나이 50대 중반");
+//        }
+//        else if(mDistance >= 46){
+//            TvAge.setText("노안나이 60대 이상");
+//        }
 
         // 거리에 따른 설명
         if (mDistance <= 20){

@@ -51,11 +51,29 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_test_01_dis_05_2"
+        android:name="com.pixelro.eyelab.test.Test01Dis05Fragment_2"
+        tools:layout="@layout/fragment_test_01_dis_05_2">
+        <action
+            android:id="@+id/action_navigation_test_01_dis_05_2_to_navigation_test_01_dis_06_2"
+            app:destination="@id/navigation_test_01_dis_06_2" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_test_01_dis_06"
         android:name="com.pixelro.eyelab.test.Test01Dis06Fragment"
         tools:layout="@layout/fragment_test_01_dis_06">
         <action
-            android:id="@+id/action_navigation_test_01_dis_06_to_navigation_test_02_gr_01"
+            android:id="@+id/action_navigation_test_01_dis_06_to_navigation_test_01_dis_05_2"
+            app:destination="@id/navigation_test_01_dis_05_2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_01_dis_06_2"
+        android:name="com.pixelro.eyelab.test.Test01Dis06Fragment_2"
+        tools:layout="@layout/fragment_test_01_dis_06_2">
+        <action
+            android:id="@+id/action_navigation_test_01_dis_06_2_to_navigation_test_02_gr_012"
             app:destination="@id/navigation_test_02_gr_01" />
     </fragment>
 
@@ -72,16 +90,25 @@
         android:id="@+id/navigation_test_02_gr_02"
         android:name="com.pixelro.eyelab.test.Test02RedGreen02Fragment"
         tools:layout="@layout/fragment_test_02_rg_02">
-
         <action
-            android:id="@+id/action_navigation_test_02_gr_02_to_navigation_test_03_diff"
-            app:destination="@id/navigation_test_03_diff" />
+            android:id="@+id/action_navigation_test_02_gr_02_to_navigation_test_03_bright_01"
+            app:destination="@id/navigation_test_03_bright_01" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_test_03_diff"
-        android:name="com.pixelro.eyelab.test.Test03BrightFragment"
+        android:id="@+id/navigation_test_03_bright_01"
+        android:name="com.pixelro.eyelab.test.Test03Bright01Fragment"
         tools:layout="@layout/fragment_test_03_bright_01">
+
+        <action
+            android:id="@+id/action_navigation_test_03_bright_01_to_navigation_test_03_bright_02"
+            app:destination="@id/navigation_test_03_bright_02" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_test_03_bright_02"
+        android:name="com.pixelro.eyelab.test.Test03Bright02Fragment"
+        tools:layout="@layout/fragment_test_03_bright_02">
         <action
             android:id="@+id/action_navigation_test_03_diff_to_navigation_test_04_color"
             app:destination="@id/navigation_test_04_color" />

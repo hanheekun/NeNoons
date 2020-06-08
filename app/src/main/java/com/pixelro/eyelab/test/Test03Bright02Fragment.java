@@ -19,7 +19,7 @@ import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 
-public class Test03BrightFragment extends Fragment  implements View.OnClickListener{
+public class Test03Bright02Fragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
@@ -30,7 +30,7 @@ public class Test03BrightFragment extends Fragment  implements View.OnClickListe
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test_03_bright_01, container, false);
+        return inflater.inflate(R.layout.fragment_test_03_bright_02, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class Test03BrightFragment extends Fragment  implements View.OnClickListe
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
 
                 ((TextView)mView.findViewById(R.id.textView_test_03_distance)).setText(distance + "cm");
-                ((TestActivity)getActivity()).mCurrentDistance = distance;
+                //((TestActivity)getActivity()).mCurrentDistance = distance;
             }
         }
     };
@@ -86,7 +86,7 @@ public class Test03BrightFragment extends Fragment  implements View.OnClickListe
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
-                NavHostFragment.findNavController(Test03BrightFragment.this).navigate(R.id.action_navigation_test_03_diff_to_navigation_test_04_color);
+                NavHostFragment.findNavController(Test03Bright02Fragment.this).navigate(R.id.action_navigation_test_03_diff_to_navigation_test_04_color);
                 break;
             case R.id.button_test_prev:
                 getActivity().onBackPressed();
