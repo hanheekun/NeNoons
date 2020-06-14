@@ -53,6 +53,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        // 카메라 사용 권한 얻기
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
             //Log.d(TAG, "Camera Permission is already allowed");

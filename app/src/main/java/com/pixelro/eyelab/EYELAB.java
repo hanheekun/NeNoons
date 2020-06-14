@@ -2,7 +2,6 @@ package com.pixelro.eyelab;
 
 public class EYELAB {
 
-    // sharedPreferences
     public class LOGIN {
         public static final int SUCCESS = 1;
         public static final int ERROR = -1;
@@ -12,11 +11,18 @@ public class EYELAB {
 
     // sharedPreferences
     public class APPDATA {
-        public static final String EMAIL = "EMAIL";
-        public static final String PASS = "PASS";
-        public static final String SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA";
-        public static final String LOGINNING = "LOGINNING";
-        public static final String TOKEN = "";
+        public static final String NAME_LOGIN = "LOGIN";
+        public static final String NAME_TOKEN = "TOKEN";
+
+        public class LOGIN {
+            public static final String EMAIL = "EMAIL";
+            public static final String PASS = "PASS";
+            public static final String SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA";
+            public static final String LOGINNING = "LOGINNING";
+            public static final String FIRST_LOGIN = "FIRST_LOGIN";
+        }
+
+
     }
 
 

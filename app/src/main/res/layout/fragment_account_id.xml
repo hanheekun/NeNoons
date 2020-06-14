@@ -229,7 +229,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:gravity="right"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/editText_account_login_email_conf"
         app:layout_constraintEnd_toEndOf="@+id/editText_account_login_email_conf"
         app:layout_constraintTop_toTopOf="@+id/editText_account_login_email_conf" />
