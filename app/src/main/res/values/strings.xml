@@ -30,7 +30,7 @@
     <string name="account_login_other">또는</string>
     <string name="account_login_forget">아이디/비밀번호를 잊으셨나요?</string>
     <!--    account-tos-->
-    <string name="account_join_tos_title">이용약관</string>
+    <string name="account_join_tos_title">앱 사용을 위해\n아래 항목에 동의바랍니다.</string>
     <string name="account_join_tos"></string>
     <string name="account_join_tos_agree">동의</string>
     <!--    account-id-->

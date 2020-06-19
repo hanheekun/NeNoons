@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="안경을 쓰시나요?"
                 android:textColor="#939393"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -81,30 +81,35 @@
                     android:id="@+id/radioButton3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="미착용"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="안경착용"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="돋보기(다초점) 착용"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="컨택트랜즈 착용"
+                    android:textSize="20sp" />
             </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20sp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -118,12 +123,13 @@
                         android:id="@+id/textView70"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="좌 시력"
+                        android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/spinner"
+                        android:id="@+id/spinner_survey_left"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="40sp" />
 
                 </LinearLayout>
 
@@ -137,12 +143,13 @@
                         android:id="@+id/textView71"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="우 시력"
+                        android:textSize="18sp" />
 
                     <Spinner
-                        android:id="@+id/spinner8"
+                        android:id="@+id/spinner_survey_right"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="40sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -150,67 +157,81 @@
                 android:id="@+id/textView72"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="20sp"
+                android:text="당신의 눈의 상태는"
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="근시"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="정시"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="난시"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="원시"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="모름"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView73"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="20sp"
+                android:text="눈 관련 수술을 하신적이 있나요?"
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkBox6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="시력교정 시술 (라식/라색 등)"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="노안수술"
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkBox8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:text="백내장 수술"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView74"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="20sp"
+                android:text="평소에 눈운동을 하시나요?"
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -220,26 +241,31 @@
                     android:id="@+id/radioButton7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="네"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="아니요"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="가끔"
+                    android:textSize="20sp" />
             </RadioGroup>
 
             <TextView
                 android:id="@+id/textView75"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="20sp"
+                android:text="눈 건강 보조식품을 드시나요?"
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -249,25 +275,30 @@
                     android:id="@+id/radioButton10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="네"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="아니요"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:text="가끔"
+                    android:textSize="20sp" />
             </RadioGroup>
 
             <Button
                 android:id="@+id/button_account_survey_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20sp"
                 android:background="@drawable/btn_xs_b"
                 android:text="가입하기"
                 android:textColor="#ffffff"
