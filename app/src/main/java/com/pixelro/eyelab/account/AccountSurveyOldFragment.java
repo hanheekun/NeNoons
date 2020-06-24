@@ -18,14 +18,19 @@ import androidx.fragment.app.Fragment;
 import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
 
-public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
+public class AccountSurveyOldFragment extends Fragment implements View.OnClickListener {
 
-    private final static String TAG = AccountSurveyFragment.class.getSimpleName();
+    private final static String TAG = AccountSurveyOldFragment.class.getSimpleName();
     private View mView;
 
     // Get reference of widgets from XML layout
+    Spinner SpGlasses;
     Spinner SpLeft;
     Spinner SpRight;
+    Spinner SpStatus;
+    Spinner SpSurgery;
+    Spinner SpExcercise;
+    Spinner SpFood;
 
     @Override
     public View onCreateView(
@@ -44,13 +49,28 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
 
 
-        SpLeft = (Spinner)( view.findViewById(R.id.spinner_survey_left));
-        SpRight = (Spinner)( view.findViewById(R.id.spinner_survey_right));
+        SpGlasses = (Spinner)( view.findViewById(R.id.spinner1));
+        SpLeft = (Spinner)( view.findViewById(R.id.spinner2));
+        SpRight = (Spinner)( view.findViewById(R.id.spinner3));
+        SpStatus = (Spinner)( view.findViewById(R.id.spinner4));
+        SpSurgery = (Spinner)( view.findViewById(R.id.spinner5));
+        SpExcercise = (Spinner)( view.findViewById(R.id.spinner6));
+        SpFood = (Spinner)( view.findViewById(R.id.spinner7));
 
-        SurveyAdapter adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_left));
+        SurveyAdapter adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_glasses));
+        SpGlasses.setAdapter(adapter);
+        adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_left));
         SpLeft.setAdapter(adapter);
         adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_right));
         SpRight.setAdapter(adapter);
+        adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_status));
+        SpStatus.setAdapter(adapter);
+        adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_surgery));
+        SpSurgery.setAdapter(adapter);
+        adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_exercise));
+        SpExcercise.setAdapter(adapter);
+        adapter = new SurveyAdapter(getContext(),R.layout.spinner_item,(String[])getResources().getStringArray(R.array.survey_food));
+        SpFood.setAdapter(adapter);
 
     }
 

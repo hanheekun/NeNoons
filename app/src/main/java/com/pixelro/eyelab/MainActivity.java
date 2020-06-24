@@ -1,6 +1,7 @@
 package com.pixelro.eyelab;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends BaseActivity {
 
     private long mBackKeyPressedTime = 0;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +35,24 @@ public class MainActivity extends BaseActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        FirstDialog dlg = new FirstDialog(this);
-        dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
-            @Override
-            public void ResultEvent(boolean result) {
-                if (result){
-                    Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                    startActivity(intent);
+        sharedPreferences = getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN,MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(EYELAB.APPDATA.LOGIN.FIRST_LOGIN,true)){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(EYELAB.APPDATA.LOGIN.FIRST_LOGIN, false);
+            editor.commit();
+
+            FirstDialog dlg = new FirstDialog(this);
+            dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
+                @Override
+                public void ResultEvent(boolean result) {
+                    if (result){
+                        Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(intent);
+                    }
                 }
-            }
-        });
-        dlg.showDialog();
+            });
+            dlg.showDialog();
+        }
 
     }
 

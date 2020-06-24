@@ -3,7 +3,6 @@ package com.pixelro.eyelab.account;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.VolumeShaper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,12 +40,9 @@ import com.auth0.android.jwt.JWT;
 import com.com.pixelro.eyelab.AllMembersQuery;
 import com.com.pixelro.eyelab.SignInMutation;
 import com.pixelro.eyelab.EYELAB;
-import com.pixelro.eyelab.FirstDialog;
 import com.pixelro.eyelab.MainActivity;
-import com.pixelro.eyelab.Profile;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.server.JWTUtils;
-import com.pixelro.eyelab.test.TestActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -73,6 +68,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private EditText EtPass;
     private Switch SwLoginSave;
     private Context mContext;
+    AccountDialog mDlg;
 
     //private SharedPreferences appData;
 
@@ -83,7 +79,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private ApolloClient apolloClient;
 
     private static SharedPreferences getPreferences(Context context) {
-        return context.getSharedPreferences(EYELAB.APPDATA.TOKEN, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(EYELAB.APPDATA.NAME_TOKEN, Context.MODE_PRIVATE);
     }
 
     public static String getString(Context context, String key) {
@@ -201,8 +197,12 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
             e.printStackTrace();
         }
 
-        sharedPreferences = getActivity().getSharedPreferences("appData", MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
         load();
+
+        // 로그인 실패 메세지
+        mDlg = new AccountDialog(getActivity());
+        //dlg.showDialog();
 
     }
 
@@ -240,6 +240,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
                 // 로그인 저장
                 save();
+
                 // 메인 화면 전환
                 Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(mainIntent);
@@ -299,18 +300,21 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 } catch (Exception e) {
                     e.printStackTrace();
                     //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
-                    Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
+                    mDlg.showDialog();
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
                 //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
-                Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
+                mDlg.showDialog();
             }
         }
         else {
             // 로그인 실패
-            Toast.makeText(mContext,"로그인 정보를 확인하세요",Toast.LENGTH_LONG).show();
+            //Toast.makeText(mContext,"로그인 정보를 확인하세요",Toast.LENGTH_LONG).show();
+            mDlg.showDialog();
         }
     }
 
@@ -320,16 +324,19 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         if (SwLoginSave.isChecked()){
-            editor.putBoolean(EYELAB.APPDATA.SAVE_LOGIN_DATA, SwLoginSave.isChecked());
-            editor.putString(EYELAB.APPDATA.EMAIL, EtEmail.getText().toString().trim());
-            editor.putString(EYELAB.APPDATA.PASS, EtPass.getText().toString().trim());
+            editor.putBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, SwLoginSave.isChecked());
+            editor.putString(EYELAB.APPDATA.LOGIN.EMAIL, EtEmail.getText().toString().trim());
+            editor.putString(EYELAB.APPDATA.LOGIN.PASS, EtPass.getText().toString().trim());
+            editor.putBoolean(EYELAB.APPDATA.LOGIN.LOGINNING, true);
         }
         else {
             // reset
-            editor.remove("SAVE_LOGIN_DATA");
-            editor.remove("EMAIL");
-            editor.remove("PASS");
+            editor.remove(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA);
+            editor.remove(EYELAB.APPDATA.LOGIN.EMAIL);
+            editor.remove(EYELAB.APPDATA.LOGIN.PASS);
         }
+
+
 
         editor.commit();
     }
@@ -337,9 +344,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     // load login data
     private void load() {
 
-        SwLoginSave.setChecked(sharedPreferences.getBoolean("SAVE_LOGIN_DATA", false));
-        EtEmail.setText(sharedPreferences.getString("EMAIL", ""));
-        EtPass.setText(sharedPreferences.getString("PASS", ""));
+        SwLoginSave.setChecked(sharedPreferences.getBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, false));
+        EtEmail.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.EMAIL, ""));
+        EtPass.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.PASS, ""));
 
     }
 

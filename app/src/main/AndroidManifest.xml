@@ -44,10 +44,16 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".FirstActivity"
+            android:screenOrientation="portrait" >
+
+        </activity>
+
         <activity
             android:name=".account.AccountActivity"
             android:screenOrientation="portrait" />
@@ -71,6 +77,7 @@
             android:screenOrientation="portrait">
 
         </activity>
+
         <activity
             android:name=".menu.care.o2o.O2OActivity"
             android:screenOrientation="portrait" />
@@ -83,6 +90,12 @@
         <activity
             android:name=".menu.exercise.history.ExHistoryActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".menu.exercise.history.ExHistoryActivity_graph"
+            android:screenOrientation="portrait" />
+
+
 
         <service
             android:name=".distance.EyeDistanceMeasureService"
