@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pixelro.eyelab">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -15,8 +14,7 @@
     <uses-feature android:name="android.hardware.camera.front.autofocus" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".menu.exercise.ex01.Ex01Activity"
+            android:screenOrientation="portrait"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,57 +43,46 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".FirstActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".account.AccountActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".test.TestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.exercise.Ex01Activity"
+            android:name=".menu.exercise.Ex01Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.exercise.Ex02Activity"
+            android:name=".menu.exercise.Ex02Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.exercise.Ex03Activity"
+            android:name=".menu.exercise.Ex03Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".menu.exercise.Ex04Activity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
+            android:name=".menu.exercise.Ex04Activity2"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".menu.care.o2o.O2OActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".menu.care.AddressWebViewActivity"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".menu.exercise.history.ExHistoryActivity"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name=".menu.exercise.history.ExHistoryActivity_graph"
+            android:name=".menu.exercise.history.ExHistoryActivity_calendar"
             android:screenOrientation="portrait" />
-
 
 
         <service

@@ -12,14 +12,9 @@ import com.pixelro.eyelab.BaseActivity;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
 
-import java.util.Timer;
-import java.util.TimerTask;
+public class Ex04Activity2 extends BaseActivity  implements IEyeDistanceMeasureServiceCallback, SeekBar.OnSeekBarChangeListener {
 
-import static androidx.constraintlayout.widget.ConstraintSet.BOTTOM;
-
-public class Ex04Activity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback, SeekBar.OnSeekBarChangeListener {
-
-    private final static String TAG = Ex04Activity.class.getSimpleName();
+    private final static String TAG = Ex04Activity2.class.getSimpleName();
 
     private SeekBar SbRingSeek;
     private ConstraintSet applyConstraintSet = new ConstraintSet();
@@ -29,7 +24,7 @@ public class Ex04Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ex_04);
+        setContentView(R.layout.activity_ex_042);
 
         SbRingSeek = (SeekBar)findViewById(R.id.seekBar_ex4);
         SbRingSeek.setOnSeekBarChangeListener(this);

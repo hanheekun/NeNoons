@@ -54,7 +54,7 @@ public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
         //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
-        mWebView.loadUrl("https://nenoonssamsung.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

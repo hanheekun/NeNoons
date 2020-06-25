@@ -33,9 +33,9 @@ import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
+public class Ex01Activity2 extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
 
-    private final static String TAG = Ex01Activity.class.getSimpleName();
+    private final static String TAG = Ex01Activity2.class.getSimpleName();
     private TextView mTvData;
 
     private static final int REQUEST_CAMERA = 1;
@@ -45,7 +45,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     private EyeDistanceMeasureService mEyeDistanceMeasureService = null;
     private boolean mBindStatus = false;
     private SendMassgeHandler mMainHandler = null;
-    private Ex01Activity mThis = null;
+    private Ex01Activity2 mThis = null;
 
     public int mCurrentDistance = 0;
 
@@ -54,7 +54,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ex_01);
+        setContentView(R.layout.activity_ex_012);
 
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
@@ -69,13 +69,13 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
         mThis = this;
 
         mTimer = new Timer();
-        mTimer.schedule(new Ex01Activity.setinstruction(0),5000);
-        mTimer.schedule(new Ex01Activity.setinstruction(1),10000);
-        mTimer.schedule(new Ex01Activity.setinstruction(0),15000);
-        mTimer.schedule(new Ex01Activity.setinstruction(1),20000);
-        mTimer.schedule(new Ex01Activity.setinstruction(0),25000);
-        mTimer.schedule(new Ex01Activity.setinstruction(1),30000);
-        mTimer.schedule(new Ex01Activity.goNext(),35000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(0),5000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(1),10000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(0),15000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(1),20000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(0),25000);
+        mTimer.schedule(new Ex01Activity2.setinstruction(1),30000);
+        mTimer.schedule(new Ex01Activity2.goNext(),35000);
         //mTimer.schedule(new Ex01Activity.setinstruction(0),2000);
         //mTimer.schedule(new Ex01Activity.setinstruction(1),2000);
 
@@ -137,7 +137,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ExDialog dlg = new ExDialog(Ex01Activity.this);
+                    ExDialog dlg = new ExDialog(Ex01Activity2.this);
                     dlg.setOnResultEventListener(new ExDialog.OnResultEventListener() {
                         @Override
                         public void ResultEvent(boolean result) {
@@ -384,7 +384,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Ex01Activity.this, "확인 했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Ex01Activity2.this, "확인 했습니다.", Toast.LENGTH_SHORT).show();
 
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
@@ -393,7 +393,7 @@ public class Ex01Activity extends BaseActivity  implements IEyeDistanceMeasureSe
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Ex01Activity.this, "취소 했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Ex01Activity2.this, "취소 했습니다.", Toast.LENGTH_SHORT).show();
                 finish();
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();

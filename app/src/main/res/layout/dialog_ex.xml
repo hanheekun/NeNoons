@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="취소"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/button_test_ok"
         app:layout_constraintStart_toStartOf="@+id/button_test_ok"
         app:layout_constraintTop_toTopOf="@+id/button_test_ok" />

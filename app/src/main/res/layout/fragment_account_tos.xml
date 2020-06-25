@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.90999997" />
 
     <CheckBox
-        android:id="@+id/checkBox9"
+        android:id="@+id/checkBox_tos_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
@@ -74,82 +74,322 @@
         android:background="#dcdcdc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_tos_all" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="405dp"
+        android:layout_height="340dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/home_white_box"
-        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button_account_tos_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4">
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/common_20_dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBox10"
-                android:layout_width="94dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="서비스 이용약관 동의" />
-
-            <TextView
-                android:id="@+id/textView68"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="(필수)"
-                android:textColor="#0143be" />
-
-            <ImageView
-                android:id="@+id/imageView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/tos_arrow_down" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView77"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:text="광고성 정보 수신동의 포함" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="visible">
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linearLayout_tos_1_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_tos_1"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:id="@+id/textView68"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_1_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/textView78"
+                    android:id="@+id/textView77"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
-                    android:visibility="visible" />
-            </LinearLayout>
-        </ScrollView>
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone">
+
+
+
+                        <TextView
+                            android:id="@+id/textView78"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                            android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_2_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_tos_2"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_2_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                            android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_3_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_tos_3"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(선택)" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_3_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                            android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_4_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_tos_4"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_4_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                            android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

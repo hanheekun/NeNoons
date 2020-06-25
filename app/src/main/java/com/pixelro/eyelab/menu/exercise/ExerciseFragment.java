@@ -5,19 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.eyelab.menu.exercise.history.ExHistoryActivity;
-import com.pixelro.eyelab.menu.exercise.history.ExHistoryActivity_graph;
-import com.pixelro.eyelab.test.TestActivity;
 
 public class ExerciseFragment extends Fragment implements View.OnClickListener {
 
@@ -49,19 +44,19 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button_ex_02:
-                intent = new Intent(getActivity(), Ex02Activity.class);
+                intent = new Intent(getActivity(), Ex02Activity2.class);
                 startActivity(intent);
                 break;
             case R.id.button_ex_03:
-                intent = new Intent(getActivity(), Ex03Activity.class);
+                intent = new Intent(getActivity(), Ex03Activity2.class);
                 startActivity(intent);
                 break;
             case R.id.button_ex_04:
-                intent = new Intent(getActivity(), Ex04Activity.class);
+                intent = new Intent(getActivity(), Ex04Activity2.class);
                 startActivity(intent);
                 break;
             case R.id.button_ex_history:
-                intent = new Intent(getActivity(), ExHistoryActivity_graph.class);
+                intent = new Intent(getActivity(), ExHistoryActivity.class);
                 startActivity(intent);
                 break;
         }

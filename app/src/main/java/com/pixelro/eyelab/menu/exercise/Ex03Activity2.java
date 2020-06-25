@@ -1,10 +1,7 @@
 package com.pixelro.eyelab.menu.exercise;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.pixelro.eyelab.BaseActivity;
 import com.pixelro.eyelab.R;
@@ -13,9 +10,9 @@ import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ex03Activity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
+public class Ex03Activity2 extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
 
-    private final static String TAG = Ex03Activity.class.getSimpleName();
+    private final static String TAG = Ex03Activity2.class.getSimpleName();
 
     public Timer mTimer;
     // arrow animation
@@ -25,10 +22,10 @@ public class Ex03Activity extends BaseActivity  implements IEyeDistanceMeasureSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ex_03);
+        setContentView(R.layout.activity_ex_032);
 
         mTimer = new Timer();
-        mTimer.schedule(new Ex03Activity.goNext(),10000);
+        mTimer.schedule(new Ex03Activity2.goNext(),10000);
 
         // arrow image animation
         final ImageView iv = (ImageView) findViewById(R.id.imageView_ex_03);
@@ -71,7 +68,7 @@ public class Ex03Activity extends BaseActivity  implements IEyeDistanceMeasureSe
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ExDialog dlg = new ExDialog(Ex03Activity.this);
+                    ExDialog dlg = new ExDialog(Ex03Activity2.this);
                     dlg.setOnResultEventListener(new ExDialog.OnResultEventListener() {
                         @Override
                         public void ResultEvent(boolean result) {
