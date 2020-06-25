@@ -59,16 +59,29 @@
         app:layout_constraintTop_toBottomOf="@+id/textView46"
         app:layout_constraintVertical_bias="0.359" />
 
-    <ImageView
-        android:id="@+id/imageView29"
+    <TextView
+        android:id="@+id/textView_test01_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ex_face_1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="80dp"
+        android:text="-cm"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView27"
+        app:layout_constraintEnd_toEndOf="@+id/imageView27"
+        app:layout_constraintStart_toStartOf="@+id/imageView27" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="붉은점에 초점 맞추기"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+        app:layout_constraintTop_toTopOf="@+id/imageView27" />
 
     <ImageView
         android:id="@+id/imageView30"
@@ -83,18 +96,6 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView_test01_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="-cm"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView27"
-        app:layout_constraintEnd_toEndOf="@+id/imageView27"
-        app:layout_constraintStart_toStartOf="@+id/imageView27" />
-
-    <TextView
         android:id="@+id/textView_ex_1_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,16 +108,15 @@
         app:layout_constraintTop_toTopOf="@+id/imageView30"
         app:layout_constraintVertical_bias="0.41000003" />
 
-    <TextView
-        android:id="@+id/textView49"
+    <ImageView
+        android:id="@+id/imageView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="붉은점에 초점 맞추기"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:src="@drawable/ex_face_1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView27" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

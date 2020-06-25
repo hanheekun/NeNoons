@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.menu.exercise;
+package com.pixelro.eyelab.menu.exercise.history;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,13 +9,13 @@ import android.widget.Button;
 
 import com.pixelro.eyelab.R;
 
-public class ExDialog {
+public class ExCancelDialog {
 
     private Context context;
     // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
     final Dialog dlg;
 
-    public ExDialog(Context context) {
+    public ExCancelDialog(Context context) {
         this.context = context;
         // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
         dlg = new Dialog(context);
@@ -46,7 +46,7 @@ public class ExDialog {
         dlg.getWindow().setDimAmount(0.7f);
 
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlg.setContentView(R.layout.dialog_ex);
+        dlg.setContentView(R.layout.dialog_ex_complete);
 
         // 커스텀 다이얼로그를 노출한다.
         dlg.show();

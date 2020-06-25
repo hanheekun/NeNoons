@@ -81,8 +81,8 @@ public class Ex02Activity2 extends BaseActivity  implements IEyeDistanceMeasureS
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ExDialog dlg = new ExDialog(Ex02Activity2.this);
-                    dlg.setOnResultEventListener(new ExDialog.OnResultEventListener() {
+                    ExCompleteDialog dlg = new ExCompleteDialog(Ex02Activity2.this);
+                    dlg.setOnResultEventListener(new ExCompleteDialog.OnResultEventListener() {
                         @Override
                         public void ResultEvent(boolean result) {
                             if (result){

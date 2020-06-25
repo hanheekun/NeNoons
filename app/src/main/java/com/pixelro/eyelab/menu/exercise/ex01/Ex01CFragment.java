@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.R;
 
-public class Ex01CFragment extends Fragment {
+public class Ex01CFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(
@@ -26,21 +26,22 @@ public class Ex01CFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_ex_01_c_exit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
+    }
 
-        view.findViewById(R.id.button_ex_01_c_re).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.button_arrow_back_background:
+                getActivity().onBackPressed();
+                break;
+            case R.id.button_test_prev:
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01AFragment()).commit();
-            }
-        });
-
+                break;
+            case R.id.button_test_next:
+                getActivity().finish();
+                break;
+        }
     }
 }
