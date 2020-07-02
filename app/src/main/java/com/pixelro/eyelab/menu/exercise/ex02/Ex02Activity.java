@@ -1,16 +1,16 @@
-package com.pixelro.eyelab.menu.exercise.ex01;
+package com.pixelro.eyelab.menu.exercise.ex02;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.widget.Button;
-
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.menu.exercise.ExCancelDialog;
+import com.pixelro.eyelab.menu.exercise.ex01.Ex01AFragment;
 
-public class Ex01Activity extends AppCompatActivity {
+public class Ex02Activity extends AppCompatActivity {
 
     public final static int EX_LEVEL_L = 0;
     public final static int EX_LEVEL_M = 1;
@@ -21,11 +21,11 @@ public class Ex01Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ex_01);
+        setContentView(R.layout.activity_ex_02);
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_ex_01, new Ex01AFragment());
+        fragmentTransaction.add(R.id.fragment_ex_02, new Ex02AFragment());
         fragmentTransaction.commit();
 
     }
@@ -34,7 +34,7 @@ public class Ex01Activity extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
 
-        ExCancelDialog dlg = new ExCancelDialog(Ex01Activity.this);
+        ExCancelDialog dlg = new ExCancelDialog(Ex02Activity.this);
         dlg.setOnResultEventListener(new ExCancelDialog.OnResultEventListener() {
             @Override
             public void ResultEvent(boolean result) {

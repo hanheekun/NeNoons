@@ -476,7 +476,19 @@
                 app:layout_constraintStart_toEndOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="@+id/textView21" />
 
+            <kr.co.prnd.YouTubePlayerView
+                android:id="@+id/you_tube_player_view"
+                android:layout_width="363dp"
+                android:layout_height="192dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

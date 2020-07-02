@@ -16,6 +16,8 @@ import com.pixelro.eyelab.account.AccountActivity;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -26,6 +28,8 @@ public class SplashActivity extends BaseActivity{
     private String masterKeyAlias;
     private SharedPreferences sharedPreferences;
     private static final int AUTO_HIDE_DELAY_MILLIS = 2000;
+
+    private Date currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +120,9 @@ public class SplashActivity extends BaseActivity{
         }
 
 
+        currentTime = Calendar.getInstance().getTime();
 
-
+        int a = 0;
 
     }
 

@@ -13,8 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.test.TestActivity;
+
+import org.jetbrains.annotations.NotNull;
+
+import kr.co.prnd.YouTubePlayerView;
+
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -35,6 +42,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         root.findViewById(R.id.view_main_age_result_btn).setOnClickListener(this);
         root.findViewById(R.id.imageView_app_link_test).setOnClickListener(this);
+
+        YouTubePlayerView youtube = root.findViewById(R.id.you_tube_player_view);
+        youtube.play("YMG68aZehNU", new YouTubePlayerView.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(@NotNull YouTubePlayer.Provider provider, @NotNull YouTubePlayer youTubePlayer, boolean b) {
+
+            }
+
+            @Override
+            public void onInitializationFailure(@NotNull YouTubePlayer.Provider provider, @NotNull YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
 
         return root;
     }

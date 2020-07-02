@@ -3,6 +3,7 @@ package com.pixelro.eyelab.menu.exercise.history;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -12,12 +13,33 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.pixelro.eyelab.BaseActivity;
 import com.pixelro.eyelab.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ExHistoryActivity extends BaseActivity implements View.OnClickListener {
+class MyValueFormatter implements IValueFormatter {
+
+    private DecimalFormat mFormat;
+
+    public MyValueFormatter() {
+        mFormat = new DecimalFormat("###,###,##0"); // use one decimal
+    }
+
+    @Override
+    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+        // write your logic here
+        return mFormat.format(value) + ""; // e.g. append a dollar-sign
+    }
+}
+
+public class ExHistoryActivity extends BaseActivity implements View.OnClickListener, OnChartValueSelectedListener {
 
     private final static String TAG = ExHistoryActivity_calendar.class.getSimpleName();
 
@@ -82,12 +104,17 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         chart.invalidate(); // refresh
         chart.setScaleEnabled(false);
         chart.setDoubleTapToZoomEnabled(false);
-        chart.setBackgroundColor(Color.rgb(255, 255, 255));
+        //chart.setBackgroundColor(Color.parseColor("#ffd613"));
+        chart.setBackgroundColor(Color.WHITE);
         chart.animateXY(2000, 2000);
         chart.setDrawBorders(false);
         chart.setDescription(desc);
         chart.setDrawValueAboveBar(true);
 
+        chart.setOnChartValueSelectedListener(this);
+
+        // usage on whole data object
+        data.setValueFormatter(new MyValueFormatter());
 
     }
 
@@ -129,7 +156,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         entries.add(new BarEntry(31, 80));
 
         BarDataSet set = new BarDataSet(entries, "");
-        set.setColor(Color.GREEN);
+        set.setColor(Color.parseColor("#ffd613"));
         set.setValueTextColor(Color.rgb(155,155,155));
         //set.setDrawValues(false);
 
@@ -144,6 +171,19 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+        final String x = chart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), chart.getXAxis());
+
+        Toast.makeText(this,""+e.getX(),Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
     }
 }
 

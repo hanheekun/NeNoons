@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.menu.exercise.ex01;
+package com.pixelro.eyelab.menu.exercise.ex03;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.pixelro.eyelab.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Ex01CFragment extends Fragment implements View.OnClickListener{
+public class Ex03CFragment extends Fragment implements View.OnClickListener{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -27,7 +27,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_c, container, false);
+        return inflater.inflate(R.layout.fragment_ex_03_c, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,true);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,true);
         editor.commit();
 
     }
@@ -49,7 +49,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
             case R.id.button_test_prev:
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01AFragment()).commit();
+                fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03AFragment()).commit();
                 break;
             case R.id.button_test_next:
                 getActivity().finish();

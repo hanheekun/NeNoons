@@ -13,6 +13,7 @@ public class EYELAB {
     public class APPDATA {
         public static final String NAME_LOGIN = "LOGIN";
         public static final String NAME_TOKEN = "TOKEN";
+        public static final String NAME_EXERCISE = "EXERCISE";
 
         public class LOGIN {
             public static final String EMAIL = "EMAIL";
@@ -22,8 +23,43 @@ public class EYELAB {
             public static final String FIRST_LOGIN = "FIRST_LOGIN";
         }
 
+        public class EXERCISE {
+
+            public static final int EX_LEVEL_LOW = 0;
+            public static final int EX_LEVEL_MID = 1;
+            public static final int EX_LEVEL_HIGH = 2;
+
+            public static final String EX_1_LEVEL = "EX_1_LEVEL";
+            public static final String EX_2_LEVEL = "EX_2_LEVEL";
+            public static final String EX_3_LEVEL = "EX_3_LEVEL";
+            public static final String EX_4_LEVEL = "EX_4_LEVEL";
+            public static final String EX_5_LEVEL = "EX_5_LEVEL";
+            public static final String EX_6_LEVEL = "EX_6_LEVEL";
+            public static final String EX_7_LEVEL = "EX_7_LEVEL";
+            public static final String EX_8_LEVEL = "EX_8_LEVEL";
+            public static final String EX_9_LEVEL = "EX_9_LEVEL";
+            public static final String EX_10_LEVEL = "EX_10_LEVEL";
+
+            public static final String EX_1_COMPLETE = "EX_1_COMPLETE";
+            public static final String EX_2_COMPLETE = "EX_2_COMPLETE";
+            public static final String EX_3_COMPLETE = "EX_3_COMPLETE";
+            public static final String EX_4_COMPLETE = "EX_4_COMPLETE";
+            public static final String EX_5_COMPLETE = "EX_5_COMPLETE";
+            public static final String EX_6_COMPLETE = "EX_6_COMPLETE";
+            public static final String EX_7_COMPLETE = "EX_7_COMPLETE";
+            public static final String EX_8_COMPLETE = "EX_8_COMPLETE";
+            public static final String EX_9_COMPLETE = "EX_9_COMPLETE";
+            public static final String EX_10_COMPLETE = "EX_10_COMPLETE";
+
+            public static final String EX_DAY = "EX_DAY";
+        }
+
+
+
 
     }
+
+
 
 
 

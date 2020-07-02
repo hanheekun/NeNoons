@@ -1,9 +1,8 @@
-package com.pixelro.eyelab.test;
+package com.pixelro.eyelab.menu.exercise.ex03;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,24 +15,27 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.pixelro.eyelab.BaseActivity;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import com.pixelro.eyelab.distance.IEyeDistanceMeasureServiceCallback;
+import com.pixelro.eyelab.menu.exercise.ExCancelDialog;
 
-public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureServiceCallback {
+public class Ex03Activity extends AppCompatActivity  implements IEyeDistanceMeasureServiceCallback {
 
-    private final static String TAG = TestActivity.class.getSimpleName();
-    private TextView mTvData;
+    private final static String TAG = Ex03Activity.class.getSimpleName();
+
+    public final static int EX_LEVEL_L = 0;
+    public final static int EX_LEVEL_M = 1;
+    public final static int EX_LEVEL_H = 2;
+
+    public int curLevel = EX_LEVEL_L;
 
     private static final int REQUEST_CAMERA = 1;
     private static final int SEND_THREAD_DISTANCE_MEASURE_COMPLETE = 0;
@@ -42,18 +44,15 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
     private EyeDistanceMeasureService mEyeDistanceMeasureService = null;
     private boolean mBindStatus = false;
     private SendMassgeHandler mMainHandler = null;
-    private TestActivity mThis = null;
+    private Ex03Activity mThis = null;
 
     public int mCurrentDistance = 0;
-    public int mCurrentDistance_2 = 0;
-    public int mCurrentSelectedColor = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_ex_03);
 
-        // 카메라 사용 권한 얻기
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
             //Log.d(TAG, "Camera Permission is already allowed");
@@ -62,19 +61,31 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
         }
 
-        // 화면 꺼짐 방지
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        mTvData = (TextView) findViewById(R.id.textView_test01_distance);
-
         mThis = this;
 
-        TestDialog dlg = new TestDialog(this);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_ex_03, new Ex03AFragment());
+        fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        ExCancelDialog dlg = new ExCancelDialog(Ex03Activity.this);
+        dlg.setOnResultEventListener(new ExCancelDialog.OnResultEventListener() {
+            @Override
+            public void ResultEvent(boolean result) {
+                if (result){
+                    finish();
+                }
+                else {
+                }
+            }
+        });
         dlg.showDialog();
-
-        //showDialog();
-
     }
 
     @Override
@@ -108,7 +119,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
     }
 
     private void initService() {    // added by Alex, 2018.08.20
-        mMainHandler = new SendMassgeHandler();
+        mMainHandler = new Ex03Activity.SendMassgeHandler();
         if (isServiceRunningCheck() == false) {
             Log.d(TAG, "mBaseBleCommServiceForActivity.isServiceRunningCheck() is false");
             initEyeDistanceMeasureServiceConnect();
@@ -145,7 +156,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
                         @Override
                         public void run() {
 
-                            mTvData.setText(distance + "  C2M");
+                            mCurrentDistance = distance;
 
                         }
                     });
@@ -282,7 +293,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
             final String action = intent.getAction();
             if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
                 int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
-                mTvData.setText(distance + "cm");
+                mCurrentDistance = distance;
                 Log.d(TAG, "????????????????????????????????");
             }
 
@@ -296,44 +307,4 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
         return intentFilter;
     }
 
-    // 호출할 다이얼로그 함수를 정의한다.
-    public void showDialog() {
-
-        // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
-        final Dialog dlg = new Dialog(this);
-
-        // 액티비티의 타이틀바를 숨긴다.
-        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlg.setContentView(R.layout.dialog_test);
-
-        dlg.setCancelable(false);
-
-        // 커스텀 다이얼로그를 노출한다.
-        dlg.show();
-
-        // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
-
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TestActivity.this, "확인 했습니다.", Toast.LENGTH_SHORT).show();
-
-                // 커스텀 다이얼로그를 종료한다.
-                dlg.dismiss();
-            }
-        });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TestActivity.this, "취소 했습니다.", Toast.LENGTH_SHORT).show();
-                finish();
-                // 커스텀 다이얼로그를 종료한다.
-                dlg.dismiss();
-            }
-        });
-    }
 }
