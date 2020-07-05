@@ -33,6 +33,10 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".menu.exercise.ex01.Ex01Activity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".menu.exercise.ex02.Ex02Activity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".menu.exercise.ex03.Ex03Activity"
+            android:screenOrientation="portrait"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

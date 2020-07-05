@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.menu.exercise.ex01;
+package com.pixelro.eyelab.menu.exercise.ex03;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.pixelro.eyelab.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Ex01AFragment extends Fragment implements View.OnClickListener{
+public class Ex03AFragment extends Fragment implements View.OnClickListener{
 
     public final static int EX_LEVEL_L = 0;
     public final static int EX_LEVEL_M = 1;
@@ -40,7 +40,7 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_a, container, false);
+        return inflater.inflate(R.layout.fragment_ex_03_a, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
         editor = sharedPreferences.edit();
 
         resetLevelButton();
-        int preLevel = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_1_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW);
+        int preLevel = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW);
         if (preLevel == EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW){
             BtnLevelL.setEnabled(false);
         }
@@ -93,25 +93,25 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
 
                 // set time, level
                 if (!BtnLevelL.isEnabled()){
-                    ((Ex01Activity)getActivity()).curLevel = EX_LEVEL_L;
-                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_1_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW);
+                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_L;
+                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW);
                     editor.commit();
                 }
 
                 if (!BtnLevelM.isEnabled()){
-                    ((Ex01Activity)getActivity()).curLevel = EX_LEVEL_M;
-                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_1_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_MID);
+                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_M;
+                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_MID);
                     editor.commit();
                 }
                 if (!BtnLevelH.isEnabled()){
-                    ((Ex01Activity)getActivity()).curLevel = EX_LEVEL_H;
-                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_1_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_HIGH);
+                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_H;
+                    editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_HIGH);
                     editor.commit();
                 }
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01BFragment()).commit();
+                fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03BFragment()).commit();
 
                 break;
              case R.id.btn_ex_a_l:
