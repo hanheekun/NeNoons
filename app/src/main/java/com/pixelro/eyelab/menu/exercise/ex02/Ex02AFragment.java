@@ -14,8 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.EYELAB;
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01Activity;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01BFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 

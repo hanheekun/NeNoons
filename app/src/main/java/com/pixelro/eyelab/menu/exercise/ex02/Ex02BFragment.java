@@ -17,8 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01Activity;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01CFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,8 +31,6 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
     private View mView;
     public Timer mTimer;
 
-    private boolean isClosed = false;
-
     // arrow animation
     public static Integer[] mArrorwImage = {
             R.drawable.eye_ex_1_close, R.drawable.eye_ex_1_open
@@ -45,11 +41,7 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
     private TextView TvCount;
 
     private int mCount = 0;
-    private static final int mCountMax = 3;
-    private int mCloseTime;
-    private int mSecTick = 0;
-    private int[] mScheduleStartSec = new int[7];
-    private ImageView IvEye;
+    private static final int mCountMax = 30;
 
     @Override
     public View onCreateView(
@@ -57,7 +49,7 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_b, container, false);
+        return inflater.inflate(R.layout.fragment_ex_02_b, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -68,43 +60,22 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
         //CbSound.setOnCheckedChangeListener(this);
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
-        TvCount = (TextView)view.findViewById(R.id.textView_ex_1_count);
+        TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
         TvCount.setText(""+ mCountMax);
 
         mTimer = new Timer();
-        mTimer.schedule(TimaerTaskMaker(),0,100);
 
         if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_L){
-            mScheduleStartSec[0] = 10;
-            mScheduleStartSec[1] = 60;
-            mScheduleStartSec[2] = 110;
-            mScheduleStartSec[3] = 160;
-            mScheduleStartSec[4] = 210;
-            mScheduleStartSec[5] = 260;
-            mScheduleStartSec[6] = 270;
+            mTimer.schedule(TimaerTaskMaker(),1000,1000);
         }
         else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_M){
-            mScheduleStartSec[0] = 10;
-            mScheduleStartSec[1] = 110;
-            mScheduleStartSec[2] = 160;
-            mScheduleStartSec[3] = 260;
-            mScheduleStartSec[4] = 310;
-            mScheduleStartSec[5] = 410;
-            mScheduleStartSec[6] = 420;
+            mTimer.schedule(TimaerTaskMaker(),1000,766);
         }
         else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_H){
-            mScheduleStartSec[0] = 10;
-            mScheduleStartSec[1] = 160;
-            mScheduleStartSec[2] = 210;
-            mScheduleStartSec[3] = 360;
-            mScheduleStartSec[4] = 410;
-            mScheduleStartSec[5] = 560;
-            mScheduleStartSec[6] = 570;
+            mTimer.schedule(TimaerTaskMaker(),1000,400);
         }
 
         Toast.makeText(getActivity(),"level = " + ((Ex02Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
-
-        IvEye = (ImageView) mView.findViewById(R.id.imageView36);
 
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
@@ -126,62 +97,57 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
 
-                        if (mSecTick == mScheduleStartSec[0]){
-                            isClosed = true;
-
-//                            if (CbVibrator.isChecked()){
-//                                mVibrator.vibrate(200);
-//                            }
-
-                            IvEye.setImageResource(mArrorwImage[0]);
-                        }
-                        else if (mSecTick == mScheduleStartSec[1]){
-                            isClosed = false;
-
-                            IvEye.setImageResource(mArrorwImage[1]);
-
-                            TvCount.setText("2");
-
-                        }
-                        else if (mSecTick == mScheduleStartSec[2]){
-                            isClosed = true;
-
-                            IvEye.setImageResource(mArrorwImage[0]);
-                        }
-                        else if (mSecTick == mScheduleStartSec[3]){
-                            isClosed = false;
-                            IvEye.setImageResource(mArrorwImage[1]);
-
-                            TvCount.setText("1");
-                        }
-                        else if (mSecTick == mScheduleStartSec[4]){
-                            isClosed = true;
 
 
-                            IvEye.setImageResource(mArrorwImage[0]);
-                        }
-                        else if (mSecTick == mScheduleStartSec[5]){
-                            isClosed = false;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
+                                TvCount.setText(""+ (mCountMax - mCount));
 
-                            IvEye.setImageResource(mArrorwImage[1]);
+                                if (CbSound.isChecked()){
+                                    MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                    //float speed = 0.5f;
+                                    //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                    player.start();
+                                }
 
-                            TvCount.setText("0");
-                        }
-                        else if (mSecTick == mScheduleStartSec[6]){
-                            isClosed = false;
+                                if (CbVibrator.isChecked()){
+                                    mVibrator.vibrate(200);
+                                }
+
+                                // arrow image animation
+                                final ImageView iv = (ImageView) mView.findViewById(R.id.imageView_ex_2_eye);
+                                final Runnable r = new Runnable() {
+                                    int i = 0;
+
+                                    @Override
+                                    public void run() {
+
+                                        if (i == 0) {
+                                            iv.setImageResource(mArrorwImage[i]);
+                                            iv.postDelayed(this, 200);
+                                            i++;
+                                        }
+                                        else
+                                        {
+                                            iv.setImageResource(mArrorwImage[i]);
+                                        }
+
+                                    }
+                                };
+                                iv.post(r);
+
+                            }
+                        });
+
+                        mCount++;
+
+                        if (mCount == mCountMax){
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment_ex_02, new Ex02CFragment()).commit();
                         }
-
-                        if (isClosed){
-                            if (CbVibrator.isChecked()){
-                                mVibrator.vibrate(70);
-                            }
-                        }
-
-                        mSecTick++;
 
                     }
                 });

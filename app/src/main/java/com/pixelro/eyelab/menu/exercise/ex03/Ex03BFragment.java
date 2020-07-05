@@ -1,9 +1,5 @@
 package com.pixelro.eyelab.menu.exercise.ex03;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -20,9 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
-import com.pixelro.eyelab.menu.exercise.ex02.Ex02Activity;
-import com.pixelro.eyelab.menu.exercise.ex02.Ex02CFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,15 +48,13 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
     private int[] mScheduleStartSec = new int[7];
     private ImageView IvEye;
 
-    private TextView TvDistance;
-
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_b, container, false);
+        return inflater.inflate(R.layout.fragment_ex_03_b, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -74,13 +65,13 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
         //CbSound.setOnCheckedChangeListener(this);
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
-        TvCount = (TextView)view.findViewById(R.id.textView_ex_1_count);
-        TvCount.setText(""+ mCountMax);
+        TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
+        TvCount.setText("3/3");
 
         mTimer = new Timer();
         mTimer.schedule(TimaerTaskMaker(),0,100);
 
-        if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_L){
+        if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_L){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 60;
             mScheduleStartSec[2] = 110;
@@ -89,7 +80,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[5] = 260;
             mScheduleStartSec[6] = 270;
         }
-        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_M){
+        else if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_M){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 110;
             mScheduleStartSec[2] = 160;
@@ -98,7 +89,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[5] = 410;
             mScheduleStartSec[6] = 420;
         }
-        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_H){
+        else if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_H){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 160;
             mScheduleStartSec[2] = 210;
@@ -108,46 +99,20 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[6] = 570;
         }
 
-        Toast.makeText(getActivity(),"level = " + ((Ex02Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"level = " + ((Ex03Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
-        IvEye = (ImageView) mView.findViewById(R.id.imageView36);
-
-        TvDistance = (TextView)  mView.findViewById(R.id.textView_ex_03_distance);
+        IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_3_eye);
 
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-    }
 
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mGattUpdateReceiver);
         mTimer.cancel();
-    }
-
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
-                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
-
-                TvDistance.setText(distance + "cm");
-            }
-        }
-    };
-
-    private static IntentFilter makeGattUpdateIntentFilter() {
-        final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(EyeDistanceMeasureService.ACTION_DATA_AVAILABLE);
-        return intentFilter;
     }
 
     private TimerTask TimaerTaskMaker (){
@@ -172,7 +137,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
 
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("2");
+                            TvCount.setText("2/3");
 
                         }
                         else if (mSecTick == mScheduleStartSec[2]){
@@ -184,7 +149,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
                             isClosed = false;
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("1");
+                            TvCount.setText("1/3");
                         }
                         else if (mSecTick == mScheduleStartSec[4]){
                             isClosed = true;
@@ -198,13 +163,13 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
 
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("0");
+                            TvCount.setText("0/3");
                         }
                         else if (mSecTick == mScheduleStartSec[6]){
                             isClosed = false;
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment_ex_02, new Ex02CFragment()).commit();
+                            fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03CFragment()).commit();
                         }
 
                         if (isClosed){

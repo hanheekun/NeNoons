@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,8 +33,6 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-
-
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -58,6 +57,8 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
         BtnLevelL.setOnClickListener(this);
         BtnLevelM.setOnClickListener(this);
         BtnLevelH.setOnClickListener(this);
+
+
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();

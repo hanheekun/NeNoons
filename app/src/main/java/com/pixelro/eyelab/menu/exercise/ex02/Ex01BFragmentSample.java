@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.menu.exercise.ex01;
+package com.pixelro.eyelab.menu.exercise.ex02;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -28,8 +28,8 @@ import java.util.TimerTask;
 
 import static android.speech.tts.TextToSpeech.ERROR;
 
-public class Ex01BFragmentSample extends Fragment implements View.OnClickListener {
-
+public class Ex01BFragmentSample extends Fragment{
+/*
     public final static int EX_LEVEL_L = 0;
     public final static int EX_LEVEL_M = 1;
     public final static int EX_LEVEL_H = 2;
@@ -67,7 +67,7 @@ public class Ex01BFragmentSample extends Fragment implements View.OnClickListene
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_b, container, false);
+        return inflater.inflate(R.layout.fragment_ex_02_b, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -105,19 +105,19 @@ public class Ex01BFragmentSample extends Fragment implements View.OnClickListene
 
         mTimer = new Timer();
 
-        if (((Ex01Activity)getActivity()).curLevel == EX_LEVEL_L){
+        if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_L){
             mTimer.schedule(TimaerTaskMaker(),1000,1000);
         }
-        else if (((Ex01Activity)getActivity()).curLevel == EX_LEVEL_M){
+        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_M){
             mTimer.schedule(TimaerTaskMaker(),1000,766);
         }
-        else if (((Ex01Activity)getActivity()).curLevel == EX_LEVEL_H){
+        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_H){
             mTimer.schedule(TimaerTaskMaker(),1000,400);
         }
 
 
 
-        Toast.makeText(getActivity(),"level = " + ((Ex01Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"level = " + ((Ex02Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
         view.findViewById(R.id.button_ex_1_1).setOnClickListener(this);
         view.findViewById(R.id.button_ex_1_2).setOnClickListener(this);
@@ -235,7 +235,7 @@ public class Ex01BFragmentSample extends Fragment implements View.OnClickListene
                         if (mCount == mCountMax){
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01CFragment()).commit();
+                            fragmentTransaction.replace(R.id.fragment_ex_02, new Ex02CFragment()).commit();
                         }
 
                     }
@@ -325,4 +325,7 @@ public class Ex01BFragmentSample extends Fragment implements View.OnClickListene
                 break;
         }
     }
+
+
+ */
 }

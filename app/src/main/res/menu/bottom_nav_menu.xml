@@ -11,10 +11,10 @@
         android:icon="@drawable/but_2"
         android:title="@string/title_exercise" />
 
-    <item
-        android:id="@+id/navigation_care"
-        android:icon="@drawable/but_3"
-        android:title="@string/title_care" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_care"-->
+<!--        android:icon="@drawable/but_3"-->
+<!--        android:title="@string/title_care" />-->
 
     <item
         android:id="@+id/navigation_my"

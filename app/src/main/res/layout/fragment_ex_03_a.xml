@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="빠른 눈 깜빡이기"
+        android:text="눈의 휴식"
         android:textColor="#153dc9"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/textView69"

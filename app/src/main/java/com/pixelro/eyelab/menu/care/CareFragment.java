@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.menu.care.o2o.O2OActivity;
+import com.pixelro.eyelab.menu.home.AddressWebViewActivity;
 
 import java.io.IOException;
 import java.util.List;

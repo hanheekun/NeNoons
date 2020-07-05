@@ -1,4 +1,4 @@
-package com.pixelro.eyelab.menu.care;
+package com.pixelro.eyelab.menu.home;
 
 import android.content.Intent;
 import android.os.Bundle;

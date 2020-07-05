@@ -10,12 +10,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pixelro.eyelab.test.TestActivity;
 import com.pixelro.eyelab.test.TestDialog;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     private long mBackKeyPressedTime = 0;
     private SharedPreferences sharedPreferences;
@@ -29,7 +30,8 @@ public class MainActivity extends BaseActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_care, R.id.navigation_my)
+                //R.id.navigation_home, R.id.navigation_care, R.id.navigation_my)
+                R.id.navigation_home, R.id.navigation_my)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_test_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

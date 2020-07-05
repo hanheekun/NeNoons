@@ -38,9 +38,12 @@ public class Ex03CFragment extends Fragment implements View.OnClickListener{
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
+
         editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,true);
         editor.commit();
-
     }
 
     @Override

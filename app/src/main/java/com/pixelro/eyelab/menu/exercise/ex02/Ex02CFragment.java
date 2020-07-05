@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.EYELAB;
 import com.pixelro.eyelab.R;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01AFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -38,8 +37,13 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+
         editor = sharedPreferences.edit();
         editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,true);
+
+        int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
+
         editor.commit();
 
     }

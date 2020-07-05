@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.exercise.ex01.Ex01Activity">
+    tools:context=".menu.exercise.ex02.Ex02Activity">
 
     <fragment
         android:id="@+id/fragment_ex_02"

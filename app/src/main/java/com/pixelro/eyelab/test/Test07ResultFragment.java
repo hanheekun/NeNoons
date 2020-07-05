@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.test;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.pixelro.eyelab.EYELAB;
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.account.AccountHelloFragment;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Test07ResultFragment extends Fragment  implements View.OnClickListener{
 
@@ -23,6 +27,9 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
     private int mDistance;
 
     private Button BtnReturn;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(
@@ -45,6 +52,11 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         BtnReturn.setOnClickListener(this);
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,mDistance);
+        editor.commit();
 
         // 거리에 따른 나이
         if (mDistance <= 22){

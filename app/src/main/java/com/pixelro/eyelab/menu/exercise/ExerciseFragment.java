@@ -19,7 +19,6 @@ import com.pixelro.eyelab.menu.exercise.ex02.Ex02Activity;
 import com.pixelro.eyelab.menu.exercise.ex03.Ex03Activity;
 import com.pixelro.eyelab.menu.exercise.history.ExHistoryActivity;
 import java.util.Calendar;
-import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -52,23 +51,26 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
         editor = sharedPreferences.edit();
         int preDayOfMonth = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY,0);
 
-        if (dayOfMonth == preDayOfMonth){
-
-        }
-        else {
-            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY,dayOfMonth);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_5_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_6_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_7_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_8_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_9_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_10_COMPLETE,false);
-            editor.commit();
-        }
+//        if (dayOfMonth == preDayOfMonth){
+//
+//        }
+//        else {
+//            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY,dayOfMonth);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_5_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_6_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_7_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_8_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_9_COMPLETE,false);
+//            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_10_COMPLETE,false);
+//
+//            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+//
+//            editor.commit();
+//        }
 
         return root;
     }

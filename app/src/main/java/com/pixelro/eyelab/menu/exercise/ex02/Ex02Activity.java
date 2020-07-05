@@ -1,14 +1,13 @@
 package com.pixelro.eyelab.menu.exercise.ex02;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Bundle;
+
 import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.menu.exercise.ExCancelDialog;
-import com.pixelro.eyelab.menu.exercise.ex01.Ex01AFragment;
 
 public class Ex02Activity extends AppCompatActivity {
 

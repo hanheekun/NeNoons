@@ -27,7 +27,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_01_c, container, false);
+        return inflater.inflate(R.layout.fragment_ex_03_c, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -38,7 +38,11 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,true);
+
+        int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
+
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,true);
         editor.commit();
 
     }
