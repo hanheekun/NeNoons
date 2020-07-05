@@ -1,12 +1,18 @@
 package com.pixelro.eyelab;
 
+import android.app.AppOpsManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.security.crypto.EncryptedSharedPreferences;
@@ -115,10 +121,27 @@ public class SplashActivity extends BaseActivity{
             }, AUTO_HIDE_DELAY_MILLIS);
         }
 
+        if (!SplashActivity.this.checkForPermission()) {
+            Log.i("MainActivity", "The user may not allow the access to apps usage. ");
+            //Toast.makeText((Context)SplashActivity.this, (CharSequence)"Failed to retrieve app usage statistics. You may need to enable access for this app through Settings > Security > Apps with usage access", 1).show();
+            SplashActivity.this.startActivity(new Intent("android.settings.USAGE_ACCESS_SETTINGS"));
+        }
 
 
 
+    }
 
+    boolean checkForPermission(){
+        try {
+            PackageManager packageManager = getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
+            int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
+            return (mode == AppOpsManager.MODE_ALLOWED);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     @Override
