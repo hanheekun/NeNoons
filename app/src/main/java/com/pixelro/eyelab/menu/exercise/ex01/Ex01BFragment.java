@@ -228,7 +228,6 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                                 TvCount.setText(""+ (mCountMax - mCount));
 
                                 if (mCount == mCountMax ){
-                                    // 2초간 멈추게 하고싶다 면
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         public void run() {

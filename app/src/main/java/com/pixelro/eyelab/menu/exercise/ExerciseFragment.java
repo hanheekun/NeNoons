@@ -17,6 +17,7 @@ import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.eyelab.menu.exercise.ex02.Ex02Activity;
 import com.pixelro.eyelab.menu.exercise.ex03.Ex03Activity;
+import com.pixelro.eyelab.menu.exercise.ex04.Ex04Activity;
 import com.pixelro.eyelab.menu.exercise.history.ExHistoryActivity;
 import java.util.Calendar;
 
@@ -126,7 +127,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button_ex_04:
-                intent = new Intent(getActivity(), Ex04Activity2.class);
+                intent = new Intent(getActivity(), Ex04Activity.class);
                 startActivity(intent);
                 break;
             case R.id.button_ex_history:
