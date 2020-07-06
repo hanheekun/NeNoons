@@ -14,9 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.menu.exercise.ex01.Ex01AFragment;
 
 public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
 
@@ -62,10 +65,14 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.button_account_survey_next:
 
-                // 가입 성공 페이지 전환
-                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                getActivity().startActivity(mainIntent);
-                getActivity().finish();
+//                // 가입 성공 페이지 전환
+//                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+//                getActivity().startActivity(mainIntent);
+//                getActivity().finish();
+                // 로그인 페이지 전환
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_login_fragment, new AccountLoginFragment()).commit();
 
                 break;
 

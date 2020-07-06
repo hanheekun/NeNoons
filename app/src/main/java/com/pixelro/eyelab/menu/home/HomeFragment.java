@@ -80,6 +80,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        root.findViewById(R.id.view_main_age_result_btn).setOnClickListener(this);
 //        root.findViewById(R.id.imageView_app_link_test).setOnClickListener(this);
 
+
+
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
@@ -100,7 +102,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
-        mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        //mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
@@ -128,52 +130,52 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        mWebView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
-
-                if (mTest){
-
-
-
-                    Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
-
-                    //if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
-
-                        Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
-                        intent.putExtra("url",view.getUrl());
-                        startActivity(intent);
-
-                    //}
-                }
-                else
-                {
-                    mTest = true;
-                }
-
-
-
-                super.doUpdateVisitedHistory(view, url, isReload);
-            }
-
+//        mWebView.setWebViewClient(new WebViewClient() {
+//
 //            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//            public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
 //
-//                Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
+//                if (mTest){
 //
-//                if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
 //
-//                    Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
-//                    intent.putExtra("url",view.getUrl());
-//                    startActivity(intent);
 //
-//                    return true;
+//                    Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
+//
+//                    //if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
+//
+//                        Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
+//                        intent.putExtra("url",view.getUrl());
+//                        startActivity(intent);
+//
+//                    //}
+//                }
+//                else
+//                {
+//                    mTest = true;
 //                }
 //
-//                return super.shouldOverrideUrlLoading(view, request);
+//
+//
+//                super.doUpdateVisitedHistory(view, url, isReload);
 //            }
-        });
+//
+////            @Override
+////            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+////
+////                Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
+////
+////                if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
+////
+////                    Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
+////                    intent.putExtra("url",view.getUrl());
+////                    startActivity(intent);
+////
+////                    return true;
+////                }
+////
+////                return super.shouldOverrideUrlLoading(view, request);
+////            }
+//        });
 
 //        mWebView.setWebViewClient(new WebViewClient() {
 //
@@ -198,7 +200,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         TvExNumber = (TextView)root.findViewById(R.id.textView_home_ex_number);
         TvScreenTime = (TextView)root.findViewById(R.id.textView_home_screen_time);
 
+        if (savedInstanceState == null) {
+            mWebView.setWebViewClient(new WebViewClient());
+            mWebView.getSettings().setJavaScriptEnabled(true);
+            mWebView.loadUrl("https://nenoons.com/app-main");
+        } else {
+            mWebView.restoreState(savedInstanceState);
+        }
+
         return root;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        mWebView.saveState(outState);
     }
 
     @Override

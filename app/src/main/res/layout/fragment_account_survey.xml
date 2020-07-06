@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="안경을 쓰시나요?"
-                android:textColor="#939393"
+                android:textColor="#0143BE"
                 android:textSize="18sp" />
 
             <RadioGroup
@@ -124,6 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="좌 시력"
+                        android:textColor="#0143BE"
                         android:textSize="18sp" />
 
                     <Spinner
@@ -144,6 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="우 시력"
+                        android:textColor="#0143BE"
                         android:textSize="18sp" />
 
                     <Spinner
@@ -159,6 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="당신의 눈의 상태는"
+                android:textColor="#0143BE"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -202,6 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="눈 관련 수술을 하신적이 있나요?"
+                android:textColor="#0143BE"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -231,6 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="평소에 눈운동을 하시나요?"
+                android:textColor="#0143BE"
                 android:textSize="18sp" />
 
             <RadioGroup
@@ -265,6 +270,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="눈 건강 보조식품을 드시나요?"
+                android:textColor="#0143BE"
                 android:textSize="18sp" />
 
             <RadioGroup
@@ -298,7 +304,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/btn_xs_b"
                 android:text="가입하기"
                 android:textColor="#ffffff"

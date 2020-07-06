@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
-public class AccountTosFragment extends Fragment implements View.OnClickListener {
+public class AccountTosFragment extends Fragment implements View.OnClickListener{
 
     private final static String TAG = AccountTosFragment.class.getSimpleName();
     private View mView;
@@ -28,8 +30,12 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
     private LinearLayout SvTos2;
     private LinearLayout SvTos3;
     private LinearLayout SvTos4;
-    private LinearLayout LlTos1;
     private CheckBox CbTos1;
+    private CheckBox CbTos2;
+    private CheckBox CbTos3;
+    private CheckBox CbTos4;
+    private CheckBox CbTosAll;
+
 
     @Override
     public View onCreateView(
@@ -59,9 +65,12 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
         SvTos2 = view.findViewById(R.id.scrollView_tos_2);
         SvTos3 = view.findViewById(R.id.scrollView_tos_3);
         SvTos4 = view.findViewById(R.id.scrollView_tos_4);
-        LlTos1 = view.findViewById(R.id.linearLayout_tos_1_bg);
         CbTos1 = view.findViewById(R.id.checkBox_tos_1);
-
+        CbTos2 = view.findViewById(R.id.checkBox_tos_2);
+        CbTos3 = view.findViewById(R.id.checkBox_tos_3);
+        CbTos4 = view.findViewById(R.id.checkBox_tos_4);
+        CbTosAll = view.findViewById(R.id.checkBox_tos_all);
+        CbTosAll.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +114,21 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
                     SvTos4.setVisibility(View.GONE);
                 }
                 break;
+            case R.id.checkBox_tos_all:
+                if (CbTosAll.isChecked()){
+                    CbTos1.setChecked(true);
+                    CbTos2.setChecked(true);
+                    CbTos3.setChecked(true);
+                    CbTos4.setChecked(true);
+                }
+                else {
+                    CbTos1.setChecked(false);
+                    CbTos2.setChecked(false);
+                    CbTos3.setChecked(false);
+                    CbTos4.setChecked(false);
+                }
+                break;
         }
     }
+
 }
