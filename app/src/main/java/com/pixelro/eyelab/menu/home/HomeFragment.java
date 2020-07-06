@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,6 +38,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -54,6 +57,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     Geocoder geocoder;
+
+    private TextView TvAge;
+    private TextView TvExNumber;
+    private TextView TvScreenTime;
+
+    public boolean mTest = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,6 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+        mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
@@ -117,6 +127,76 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+
+        mWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
+
+                if (mTest){
+
+
+
+                    Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
+
+                    //if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
+
+                        Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
+                        intent.putExtra("url",view.getUrl());
+                        startActivity(intent);
+
+                    //}
+                }
+                else
+                {
+                    mTest = true;
+                }
+
+
+
+                super.doUpdateVisitedHistory(view, url, isReload);
+            }
+
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//
+//                Uri uri = Uri.parse(view.getUrl()); //url을 uri로 변경
+//
+//                if(uri.getPath().contains("/test/page")){  // 현재 uri의 path에 컨테인만 읽기
+//
+//                    Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
+//                    intent.putExtra("url",view.getUrl());
+//                    startActivity(intent);
+//
+//                    return true;
+//                }
+//
+//                return super.shouldOverrideUrlLoading(view, request);
+//            }
+        });
+
+//        mWebView.setWebViewClient(new WebViewClient() {
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//
+//                try {
+//
+//                    // do whatever you want to do on a web link click
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                return false;
+//            }
+//
+//        });
+
+        //mWebView.setWebViewClient(new MyWebViewClient());
+
+        TvAge = (TextView)root.findViewById(R.id.textView_home_age);
+        TvExNumber = (TextView)root.findViewById(R.id.textView_home_ex_number);
+        TvScreenTime = (TextView)root.findViewById(R.id.textView_home_screen_time);
 
         return root;
     }
@@ -159,6 +239,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final UsageStatsManager mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(getActivity().USAGE_STATS_SERVICE);
         final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now - 1000 * 10, now);
 
+        long totalMin;
+        int min;
+        int hour;
+
         if (stats == null || stats.isEmpty()) {
             // Usage access is not enabled
         }
@@ -170,14 +254,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 tatalTimeMS += stat.getTotalTimeInForeground();
             }
             //Toast.makeText(getActivity(),"total time" + (tatalTimeMS/1000)/3600,Toast.LENGTH_SHORT).show();
-            long totalMin = (tatalTimeMS/1000)/60;
-            int min = (int)(totalMin % 60);
-            int hour = (int)(totalMin / 60);
+            totalMin = (tatalTimeMS/1000)/60;
+            min = (int)(totalMin % 60);
+            hour = (int)(totalMin / 60);
 
             Toast.makeText(getActivity(),"Hour : " + hour + ", Min : " + min + " Total EX : " + curTotalEXNumber,Toast.LENGTH_SHORT).show();
         }
 
-        // 나이
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+        int distance = sharedPreferences.getInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,20);
+
+
 
 
     }

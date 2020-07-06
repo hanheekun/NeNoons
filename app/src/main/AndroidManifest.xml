@@ -39,6 +39,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".menu.exercise.ex04.Ex04Activity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".menu.home.WebActivity"
+            android:screenOrientation="portrait"></activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
