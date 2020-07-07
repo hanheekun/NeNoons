@@ -247,6 +247,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         root.findViewById(R.id.button_home_test).setOnClickListener(this);
 
+        root.findViewById(R.id.button_link_1).setOnClickListener(this);
+
         return root;
     }
 
@@ -365,7 +367,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ss1=  new SpannableString(s);
             ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
             TvScreenTime.append(ss1);
-            s= " "+min;
+            s= ""+min;
             ss1=  new SpannableString(s);
             ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
             TvScreenTime.append(ss1);
@@ -442,6 +444,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 i = new Intent(getContext(), TestActivity.class);
                 startActivity(i);
                 break;
+            case R.id.button_link_1:
+                Intent intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://nenoons.com/app-main");
+                startActivity(intent);
+                break;
+
 
         }
     }

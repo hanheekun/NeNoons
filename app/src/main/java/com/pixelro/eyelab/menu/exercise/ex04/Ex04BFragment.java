@@ -2,6 +2,7 @@ package com.pixelro.eyelab.menu.exercise.ex04;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
     private static final int mPathNumberMax = 13;
     private int mPathMoveTimeMS = 0;
 
+    ProgressBar mProgressBar;
+
     ImageView image;
 
     @Override
@@ -70,7 +74,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
         TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
-        TvCount.setText("1/3");
+        TvCount.setText("0/3");
 
         mTimer = new Timer();
 
@@ -94,6 +98,9 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
 
         image = (ImageView)mView.findViewById(R.id.imageView_test_02_red);
 
+        mProgressBar = (ProgressBar)mView.findViewById(R.id.progressBar_count);
+        mProgressBar.setProgress(0);
+
     }
 
 
@@ -115,10 +122,28 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                         {
 
                             mCount++;
-                            if (mCount == 1) TvCount.setText("2/3");
-                            if (mCount == 2) TvCount.setText("3/3");
+                            if (mCount == 1) {
+                                TvCount.setText("1/3");
+                                mProgressBar.setProgress(33);
+                            }
+                            if (mCount == 2) {
+                                TvCount.setText("2/3");
+                                mProgressBar.setProgress(66);
+                            }
 
                             mPathNumber = 0;
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
+
+                            if (CbVibrator.isChecked()){
+                                mVibrator.vibrate(500);
+                            }
+
                         }
 
                         if (mCount == mCountMax){
@@ -139,7 +164,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -275);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -440);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -151,7 +176,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -163,7 +188,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -199,7 +224,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 275);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 440);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -211,7 +236,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -223,7 +248,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -259,7 +284,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -271,7 +296,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -200);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -500);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();

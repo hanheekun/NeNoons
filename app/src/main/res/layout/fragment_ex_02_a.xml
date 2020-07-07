@@ -102,7 +102,7 @@
         android:layout_height="165dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
-        android:text="#아주 빠르게 깜빡이는 눈운동\n 일을 하다가 잠시 휴식 시간을 가질 때 눈을 매우 빠르게 감았다 뜨는 빠른 눈 깜빡이기 운동을 한다면 자연스럽게 눈이 부드러워 질거에요. 이 운동을 꾸준히 한면 인공눈물의 사용횟수를 줄일 수 있어요."
+        android:text=" #운동방법\n눈을 매우 빠르게 감았다 뜨는 동작을 반반복합니다.\n\n #효과\n빠른 눈 깜빡이기 운동을 한다면 자연스럽게 눈이 부드러워 질거에요. 이 운동을 꾸준히 하면 각막에 눈물을 칠해주어 인공눈물의 사용횟수를 줄일 수 있어요."
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.pixelro.eyelab.R;
 import com.pixelro.eyelab.distance.EyeDistanceMeasureService;
 import com.pixelro.eyelab.menu.exercise.ex02.Ex02Activity;
 import com.pixelro.eyelab.menu.exercise.ex02.Ex02CFragment;
+import com.pixelro.eyelab.menu.exercise.ex04.Ex04CFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,8 +49,8 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
     private boolean isClosed = false;
 
     // arrow animation
-    public static Integer[] mArrorwImage = {
-            R.drawable.eye_ex_1_close, R.drawable.eye_ex_1_open
+    public static Integer[] mBalloonImage = {
+            R.drawable.balloon_1, R.drawable.balloon_2, R.drawable.balloon_3, R.drawable.balloon_4, R.drawable.balloon_5
     };
 
     private CheckBox CbSound;
@@ -66,8 +69,13 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
     private TextView TvCntShort;
     private TextView TvCntLong;
 
+    private TextView TvGuide;
+
     private int mTimerCount = 0;
     private static final int mTimerCountMAX = 10;
+
+    ProgressBar mProgressBar;
+    private ImageView IvBalloon;
 
     @Override
     public View onCreateView(
@@ -109,6 +117,13 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
 
+        TvGuide = (TextView)view.findViewById(R.id.textView_ex_1_guide_balloon);
+        TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 55cm보다 멀리하세요");
+
+        mProgressBar = (ProgressBar)mView.findViewById(R.id.progressBar_count);
+        mProgressBar.setProgress(0);
+
+        IvBalloon = (ImageView)view.findViewById(R.id.imageView_ex_1_balloon);
     }
 
     @Override
@@ -139,7 +154,10 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
 
                 // 거리 확인
                 if (mMode == LONG){
-                    if (distance < 50){
+
+                    TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 55cm보다 멀리하세요");
+
+                    if (distance < 53){
                         if (mTimer == null){
 
                         }
@@ -148,6 +166,8 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                             mTimerCount = 0;
                             mTimer.cancel();
                             mTimer = null;
+
+                            IvBalloon.setImageResource(mBalloonImage[0]);
                         }
                     }
                     else {
@@ -161,7 +181,10 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                     }
                 }
                 else if (mMode == SHORT){
-                    if (distance > 25){
+
+                    TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 20cm로 유지하세요");
+
+                    if (distance > 22){
                         if (mTimer == null){
 
                         }
@@ -170,6 +193,8 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                             mTimerCount = 0;
                             mTimer.cancel();
                             mTimer = null;
+
+                            IvBalloon.setImageResource(mBalloonImage[0]);
                         }
                     }
                     else {
@@ -204,17 +229,62 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                         if (mMode == LONG){
                             TvCntLong.setText("" + (mTimerCountMAX - (mTimerCount++)));
 
+                            if (mTimerCount == 2){
+                                IvBalloon.setImageResource(mBalloonImage[1]);
+                            }
+                            else if (mTimerCount == 5){
+                                IvBalloon.setImageResource(mBalloonImage[2]);
+                            }
+                            else if (mTimerCount == 8){
+                                IvBalloon.setImageResource(mBalloonImage[3]);
+                            }
+                            else if (mTimerCount == 11){
+                                IvBalloon.setImageResource(mBalloonImage[4]);
+                            }
+
                             if (mTimerCount > mTimerCountMAX){
                                 mTimerCount = 0;
                                 mMode = SHORT;
                                 mTimer.cancel();
                                 mTimer = null;
                                 TvCntLong.setText("" + mTimerCountMAX);
+
+                                if (CbSound.isChecked()){
+                                    MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                    //float speed = 0.5f;
+                                    //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                    player.start();
+                                }
+
+                                if (CbVibrator.isChecked()){
+                                    mVibrator.vibrate(1000);
+                                }
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        IvBalloon.setImageResource(mBalloonImage[0]);
+                                    }
+                                }, 500);  // 2000은 2초를 의미합니다.
+
                             }
 
                         }
                         else if (mMode == SHORT){
                             TvCntShort.setText("" + (mTimerCountMAX - (mTimerCount++)));
+
+                            if (mTimerCount == 2){
+                                IvBalloon.setImageResource(mBalloonImage[1]);
+                            }
+                            else if (mTimerCount == 5){
+                                IvBalloon.setImageResource(mBalloonImage[2]);
+                            }
+                            else if (mTimerCount == 8){
+                                IvBalloon.setImageResource(mBalloonImage[3]);
+                            }
+                            else if (mTimerCount == 11){
+                                IvBalloon.setImageResource(mBalloonImage[4]);
+                            }
 
                             if (mTimerCount > mTimerCountMAX){
                                 mTimerCount = 0;
@@ -226,6 +296,70 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                                 mCount++;
 
                                 TvCount.setText(""+ (mCountMax - mCount));
+
+
+                                if (mCountMax == 3){
+
+                                    if (mCount == 1){
+                                        mProgressBar.setProgress(33);
+                                    }
+                                    else if (mCount == 2){
+                                        mProgressBar.setProgress(66);
+                                    }
+                                    else if (mCount == 3){
+                                        mProgressBar.setProgress(100);
+                                    }
+                                }
+                                else if (mCountMax == 4){
+                                    if (mCount == 1){
+                                        mProgressBar.setProgress(25);
+                                    }
+                                    else if (mCount == 2){
+                                        mProgressBar.setProgress(50);
+                                    }
+                                    else if (mCount == 3){
+                                        mProgressBar.setProgress(75);
+                                    }
+                                    else if (mCount == 4){
+                                        mProgressBar.setProgress(100);
+                                    }
+                                }
+                                else if (mCountMax == 5){
+                                    if (mCount == 1){
+                                        mProgressBar.setProgress(20);
+                                    }
+                                    else if (mCount == 2){
+                                        mProgressBar.setProgress(40);
+                                    }
+                                    else if (mCount == 3){
+                                        mProgressBar.setProgress(60);
+                                    }
+                                    else if (mCount == 4){
+                                        mProgressBar.setProgress(80);
+                                    }
+                                    else if (mCount == 5){
+                                        mProgressBar.setProgress(100);
+                                    }
+                                }
+
+
+                                if (CbSound.isChecked()){
+                                    MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                    //float speed = 0.5f;
+                                    //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                    player.start();
+                                }
+
+                                if (CbVibrator.isChecked()){
+                                    mVibrator.vibrate(1000);
+                                }
+
+                                Handler handler2 = new Handler();
+                                handler2.postDelayed(new Runnable() {
+                                    public void run() {
+                                        IvBalloon.setImageResource(mBalloonImage[0]);
+                                    }
+                                }, 500);  // 2000은 2초를 의미합니다.
 
                                 if (mCount == mCountMax ){
                                     Handler handler = new Handler();

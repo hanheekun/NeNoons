@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.menu.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,6 +25,13 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
+        Intent intent = getIntent();
+        // MainActivity 의 putExtra로 지정했던 key 값
+        String key = intent.getExtras().getString("url");
+
+
+        출처: https://link2me.tistory.com/1018 [소소한 일상 및 업무TIP 다루기]
+
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
         // 웹뷰 시작
@@ -42,8 +50,8 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
-        mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl(key); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        //mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

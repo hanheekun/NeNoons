@@ -25,89 +25,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ex_face_1" />
-
-    <ImageView
-        android:id="@+id/imageView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView34"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/combined_shape_line1" />
-
-    <TextView
-        android:id="@+id/textView_ex_1_b_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="박자에 맞춰 눈을 깜빡이세요."
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView35"
-        app:layout_constraintEnd_toEndOf="@+id/imageView35"
-        app:layout_constraintStart_toStartOf="@+id/imageView35"
-        app:layout_constraintTop_toTopOf="@+id/imageView35"
-        app:layout_constraintVertical_bias="0.39" />
-
-    <TextView
-        android:id="@+id/textView_ex_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="266dp"
-        android:layout_marginTop="71dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBox_ex_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:checked="true"
-        android:text="sound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBox_ex_vibrator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:checked="true"
-        android:text="vibrator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_ex_sound" />
-
-    <TextView
-        android:id="@+id/textView_ex_01_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="283dp"
-        android:layout_marginTop="257dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView_ex_01_count_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="366dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="732dp"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,10 +40,133 @@
         android:id="@+id/textView_ex_01_count_long"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="266dp"
-        android:layout_marginTop="366dp"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="732dp"
         android:text="TextView"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_ex_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:button="@drawable/switch_sound"
+        android:checked="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_ex_vibrator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:button="@drawable/switch_vibrator"
+        android:checked="true"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_ex_sound"
+        app:layout_constraintTop_toTopOf="@+id/checkBox_ex_sound" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ex_face_2"
+        app:layout_constraintBottom_toTopOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        android:src="@drawable/combined_shape_2line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_ex_1_guide_balloon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="눈운동 잘 하고 있나 \n지켜보고있음."
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="@+id/imageView30"
+        app:layout_constraintStart_toStartOf="@+id/imageView30"
+        app:layout_constraintTop_toTopOf="@+id/imageView30"
+        app:layout_constraintVertical_bias="0.37" />
+
+    <TextView
+        android:id="@+id/textView_ex_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="60sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="533dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_count"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="230dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="8dp"
+        android:progressDrawable="@drawable/seekbar_ex_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ex_01_distance" />
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="화면과의 실시간 거리"
+        android:textColor="#2e4fa2"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView_ex_01_distance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+
+    <TextView
+        android:id="@+id/textView_ex_01_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="- cm"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView66"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView66"
+        app:layout_constraintTop_toTopOf="@+id/textView66" />
+
+    <ImageView
+        android:id="@+id/imageView_ex_1_balloon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView66"
+        app:layout_constraintVertical_bias="0.479"
+        app:srcCompat="@drawable/balloon_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

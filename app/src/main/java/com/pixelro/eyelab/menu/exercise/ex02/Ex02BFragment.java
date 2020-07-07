@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
     private Vibrator mVibrator;
     private View mView;
     public Timer mTimer;
+
+    ProgressBar mProgressBar;
 
     // arrow animation
     public static Integer[] mArrorwImage = {
@@ -61,7 +64,7 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
         TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
-        TvCount.setText(""+ mCountMax);
+        //TvCount.setText(""+ mCountMax);
 
         mTimer = new Timer();
 
@@ -80,6 +83,8 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
 
+        mProgressBar = (ProgressBar)mView.findViewById(R.id.progressBar_count);
+        mProgressBar.setProgress(0);
     }
 
 
@@ -103,7 +108,9 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
                             @Override
                             public void run() {
 
-                                TvCount.setText(""+ (mCountMax - mCount));
+                                //TvCount.setText(""+ (mCountMax - mCount));
+                                TvCount.setText(mCount+1 + "회");
+                                mProgressBar.setProgress((int) (mCount*3.3));
 
                                 if (CbSound.isChecked()){
                                     MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);

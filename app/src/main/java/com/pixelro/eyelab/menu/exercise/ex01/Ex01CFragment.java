@@ -42,7 +42,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
         int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
         editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
 
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,true);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,true);
         editor.commit();
 
     }

@@ -32,7 +32,7 @@ import java.util.Date;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class ExerciseFragment extends Fragment implements View.OnClickListener {
+public class ExerciseFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
     private ExerciseViewModel exerciseViewModel;
     private SharedPreferences sharedPreferences;
@@ -93,6 +93,8 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
         TvDate.setText(fourteen_format.format(date_now));
 
         Tvnumber = (TextView)root.findViewById(R.id.textView_ex_number);
+
+        root.findViewById(R.id.textView_ex_number).setOnLongClickListener(this);
 
 
         return root;
@@ -175,5 +177,30 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+
+        switch(v.getId()){
+            case R.id.textView_ex_number:
+                resetExNumber();
+                onResume();
+                break;
+        }
+
+        return false;
+    }
+
+    public void resetExNumber(){
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
+
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.commit();
     }
 }

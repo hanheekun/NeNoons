@@ -25,68 +25,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ex_face_1" />
-
-    <ImageView
-        android:id="@+id/imageView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView34"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/combined_shape_line1" />
-
-    <TextView
-        android:id="@+id/textView_ex_1_b_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="박자에 맞춰 눈을 깜빡이세요."
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView35"
-        app:layout_constraintEnd_toEndOf="@+id/imageView35"
-        app:layout_constraintStart_toStartOf="@+id/imageView35"
-        app:layout_constraintTop_toTopOf="@+id/imageView35"
-        app:layout_constraintVertical_bias="0.39" />
-
-    <ImageView
-        android:id="@+id/imageView_ex_2_eye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/eye_ex_1_open" />
-
-    <TextView
-        android:id="@+id/textView_ex_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="266dp"
-        android:layout_marginTop="71dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <CheckBox
         android:id="@+id/checkBox_ex_sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="143dp"
+        android:layout_marginTop="40dp"
+        android:button="@drawable/switch_sound"
         android:checked="true"
-        android:text="sound"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,12 +41,83 @@
         android:id="@+id/checkBox_ex_vibrator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:button="@drawable/switch_vibrator"
         android:checked="true"
-        android:text="vibrator"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_ex_sound"
+        app:layout_constraintTop_toTopOf="@+id/checkBox_ex_sound" />
+
+    <ImageView
+        android:id="@+id/imageView_ex_2_eye"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="172dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_ex_sound" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/eye_ex_1_open" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ex_face_2"
+        app:layout_constraintBottom_toTopOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/combined_shape_line1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <TextView
+        android:id="@+id/textView_ex_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="60sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_ex_2_eye" />
+
+    <TextView
+        android:id="@+id/textView_ex_1_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="눈운동 잘 하고 있나 지켜보고있음."
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="@+id/imageView30"
+        app:layout_constraintStart_toStartOf="@+id/imageView30"
+        app:layout_constraintTop_toTopOf="@+id/imageView30"
+        app:layout_constraintVertical_bias="0.37" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_count"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="230dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="16dp"
+        android:progressDrawable="@drawable/seekbar_ex_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ex_count" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

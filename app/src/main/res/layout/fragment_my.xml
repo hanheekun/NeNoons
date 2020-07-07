@@ -6,16 +6,427 @@
     android:layout_height="match_parent"
     tools:context=".menu.my.MyFragment">
 
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="설정"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="#dcdcdc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="알림설정"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Push 알림"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="로그아웃"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="#dcdcdc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:checked="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="약관정보"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="409dp"
+        android:layout_height="222dp"
+
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_1_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/checkBox_tos_1"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:id="@+id/textView68"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_1_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView77"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:id="@+id/textView78"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_2_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/checkBox_tos_2"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="개인정보 수집 및 이용 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_2_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="예약 및 서비스 이용을 위한 필수 개인정보 수집" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_3_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/checkBox_tos_3"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="위치 정보 이용약관 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(선택)" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_3_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="위치정보를 통한 내 주변 숙소정보 제공" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_tos_4_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/home_white_box"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/common_20_dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/checkBox_tos_4"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="7"
+                        android:text="서비스 이용약관 동의" />
+
+                    <TextView
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="(필수)"
+                        android:textColor="#0143be" />
+
+                    <ImageView
+                        android:id="@+id/imageView_tos_4_expand"
+                        android:layout_width="@dimen/common_0_dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/tos_arrow_down" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="광고성 정보 수신동의 포함" />
+
+                <LinearLayout
+                    android:id="@+id/scrollView_tos_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="visible">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="#dcdcdc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
         android:id="@+id/button_my_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="173dp"
-        android:layout_marginEnd="157dp"
-        android:text="logout"
+        android:layout_width="101dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="550dp"
+        android:background="@drawable/test_color_transparent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.pixelro.eyelab.menu.exercise.ex03;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
     private int[] mScheduleStartSec = new int[7];
     private ImageView IvEye;
 
+    ProgressBar mProgressBar;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -66,7 +70,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
         TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
-        TvCount.setText("3/3");
+        TvCount.setText("0 회");
 
         mTimer = new Timer();
         mTimer.schedule(TimaerTaskMaker(),0,100);
@@ -101,11 +105,13 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
 
         Toast.makeText(getActivity(),"level = " + ((Ex03Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
-        IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_3_eye);
+        IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_2_eye);
 
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
 
+        mProgressBar = (ProgressBar)mView.findViewById(R.id.progressBar_count);
+        mProgressBar.setProgress(0);
     }
 
 
@@ -131,31 +137,72 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
 //                            }
 
                             IvEye.setImageResource(mArrorwImage[0]);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
                         }
                         else if (mSecTick == mScheduleStartSec[1]){
                             isClosed = false;
 
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("2/3");
+                            TvCount.setText("1 회");
+                            mProgressBar.setProgress(33);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
+
+                            //TvCount.setText("2/3");
 
                         }
                         else if (mSecTick == mScheduleStartSec[2]){
                             isClosed = true;
 
                             IvEye.setImageResource(mArrorwImage[0]);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
                         }
                         else if (mSecTick == mScheduleStartSec[3]){
                             isClosed = false;
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("1/3");
+                            TvCount.setText("2 회");
+                            mProgressBar.setProgress(66);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
+
+                            //TvCount.setText("1/3");
                         }
                         else if (mSecTick == mScheduleStartSec[4]){
                             isClosed = true;
 
 
                             IvEye.setImageResource(mArrorwImage[0]);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
                         }
                         else if (mSecTick == mScheduleStartSec[5]){
                             isClosed = false;
@@ -163,7 +210,17 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
 
                             IvEye.setImageResource(mArrorwImage[1]);
 
-                            TvCount.setText("0/3");
+                            TvCount.setText("3 회");
+                            mProgressBar.setProgress(100);
+
+                            if (CbSound.isChecked()){
+                                MediaPlayer player = MediaPlayer.create(getActivity(),R.raw.ddiring);
+                                //float speed = 0.5f;
+                                //player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
+                                player.start();
+                            }
+
+                            //TvCount.setText("0/3");
                         }
                         else if (mSecTick == mScheduleStartSec[6]){
                             isClosed = false;
@@ -176,6 +233,8 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
                             if (CbVibrator.isChecked()){
                                 mVibrator.vibrate(70);
                             }
+
+
                         }
 
                         mSecTick++;
