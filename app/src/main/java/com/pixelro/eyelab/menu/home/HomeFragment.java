@@ -55,6 +55,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
 
+    private WebView mAdWebView; // 웹뷰 선언
+    private WebSettings mAdWebSettings; //웹뷰세팅
+    private Bundle webViewBundle;
+
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     Geocoder geocoder;
 
@@ -129,6 +133,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+
+        // 웹뷰 시작
+        mAdWebView = (WebView) root.findViewById(R.id.webView_home_ad);
+
+        mAdWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
+        mAdWebSettings = mAdWebView.getSettings(); //세부 세팅 등록
+        mAdWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
+        mAdWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
+        mAdWebSettings.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
+        mAdWebSettings.setLoadWithOverviewMode(true); // 메타태그 허용 여부
+        mAdWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
+        mAdWebSettings.setSupportZoom(false); // 화면 줌 허용 여부
+        mAdWebSettings.setBuiltInZoomControls(false); // 화면 확대 축소 허용 여부
+        mAdWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); // 컨텐츠 사이즈 맞추기
+        mAdWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
+        mAdWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
+        //mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+        //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        //mAdWebView.loadUrl("https://www.nenoons.com/app-banner"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
 //        mWebView.setWebViewClient(new WebViewClient() {
 //
@@ -208,6 +232,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             mWebView.restoreState(savedInstanceState);
         }
 
+        if (webViewBundle == null) {
+            mAdWebView.loadUrl("https://www.nenoons.com/app-banner");
+        } else {
+            mAdWebView.restoreState(webViewBundle);
+        }
+
         return root;
     }
 
@@ -216,6 +246,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onSaveInstanceState(outState);
 
         mWebView.saveState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        webViewBundle = new Bundle();
+        mAdWebView.saveState(webViewBundle);
     }
 
     @Override

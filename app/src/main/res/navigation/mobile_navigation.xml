@@ -9,13 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="com.pixelro.eyelab.menu.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_exercise"
+            app:destination="@id/navigation_exercise" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_exercise"
         android:name="com.pixelro.eyelab.menu.exercise.ExerciseFragment"
         android:label="@string/title_exercise"
-        tools:layout="@layout/fragment_exercise" />
+        tools:layout="@layout/fragment_exercise" >
+        <action
+            android:id="@+id/action_navigation_exercise_to_navigation_home2"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_care"

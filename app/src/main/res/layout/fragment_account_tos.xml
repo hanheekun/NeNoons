@@ -193,7 +193,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
-                        android:text="서비스 이용약관 동의" />
+                        android:text="개인정보 수집 및 이용 동의" />
 
                     <TextView
                         android:layout_width="@dimen/common_0_dp"
@@ -218,7 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:text="광고성 정보 수신동의 포함" />
+                    android:text="예약 및 서비스 이용을 위한 필수 개인정보 수집" />
 
                 <LinearLayout
                     android:id="@+id/scrollView_tos_2"
@@ -266,7 +266,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
-                        android:text="서비스 이용약관 동의" />
+                        android:text="위치 정보 이용약관 동의" />
 
                     <TextView
                         android:layout_width="@dimen/common_0_dp"
@@ -290,7 +290,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:text="광고성 정보 수신동의 포함" />
+                    android:text="위치정보를 통한 내 주변 숙소정보 제공" />
 
                 <LinearLayout
                     android:id="@+id/scrollView_tos_3"
@@ -301,15 +301,15 @@
                     android:visibility="gone">
 
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
-                            android:visibility="visible" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
