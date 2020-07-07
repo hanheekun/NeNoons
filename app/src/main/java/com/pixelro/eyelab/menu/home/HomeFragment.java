@@ -5,10 +5,14 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -35,7 +39,9 @@ import com.pixelro.eyelab.menu.exercise.ExerciseViewModel;
 import com.pixelro.eyelab.test.TestActivity;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -238,6 +244,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             mAdWebView.restoreState(webViewBundle);
         }
 
+
+        root.findViewById(R.id.button_home_test).setOnClickListener(this);
+
         return root;
     }
 
@@ -260,6 +269,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 
+        refrashBoard();
+
+    }
+
+    public void refrashBoard(){
         Calendar cal = Calendar.getInstance();
         int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 
@@ -291,8 +305,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
 
         final long now = System.currentTimeMillis();
+
+        Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
+        // 년월일시분초 14자리 포멧
+        SimpleDateFormat fourteen_format = new SimpleDateFormat("HH");
+        int HH = Integer.parseInt(fourteen_format.format(date_now));
+
+        cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR, -HH);   // 1
+
         final UsageStatsManager mUsageStatsManager = (UsageStatsManager) getActivity().getSystemService(getActivity().USAGE_STATS_SERVICE);
+        //final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now-500, now);
         final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, now - 1000 * 10, now);
+        //final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, cal.getTimeInMillis(), now);
 
         long totalMin;
         int min;
@@ -300,6 +325,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (stats == null || stats.isEmpty()) {
             // Usage access is not enabled
+            long tatalTimeMS = 0;
         }
         else {
 
@@ -310,17 +336,91 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
             //Toast.makeText(getActivity(),"total time" + (tatalTimeMS/1000)/3600,Toast.LENGTH_SHORT).show();
             totalMin = (tatalTimeMS/1000)/60;
+
+            //totalMin = totalMin / 2;
+
             min = (int)(totalMin % 60);
             hour = (int)(totalMin / 60);
 
             Toast.makeText(getActivity(),"Hour : " + hour + ", Min : " + min + " Total EX : " + curTotalEXNumber,Toast.LENGTH_SHORT).show();
+
+            TvExNumber.setText("");
+            String s= "" + curTotalEXNumber;
+            SpannableString ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            TvExNumber.append(ss1);
+            s= "번";
+            ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            TvExNumber.append(ss1);
+
+            //TvExNumber.setText(curTotalEXNumber + " 번");
+
+            TvScreenTime.setText("");
+            s= "" + hour;
+            ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            TvScreenTime.append(ss1);
+            s= "시간";
+            ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            TvScreenTime.append(ss1);
+            s= " "+min;
+            ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            TvScreenTime.append(ss1);
+            s= "분";
+            ss1=  new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            TvScreenTime.append(ss1);
+
+            //TvScreenTime.setText(hour+"시 "+min+" 분");
         }
 
+        //
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
         int distance = sharedPreferences.getInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,20);
 
+        String ageNumber = "";
+        String ageText = "";
 
+        // 거리에 따른 나이
+        if (distance <= 22){
+            ageNumber = "44";
+            ageText = "세 이하";
+        }
+        else if(distance >= 23 && distance <= 30){
+            ageNumber = "44";
+            ageText = "세 이하";
+        }
+        else if(distance >= 31 && distance <= 37){
+            ageNumber = "40";
+            ageText = "대 후반";
+        }
+        else if(distance >= 38 && distance <= 47){
+            ageNumber = "50";
+            ageText = "세";
+        }
+        else if(distance >= 48 && distance <= 57){
+            ageNumber = "50";
+            ageText = "대 초반";
+        }
+        else if(distance >= 58 && distance <= 67){
+            ageNumber = "50";
+            ageText = "대 중반";
+        }
+        else if(distance >= 68){
+            ageNumber = "56";
+            ageText = "세 이상";
+        }
 
+        TvAge.setText("");
+        SpannableString ss1=  new SpannableString(ageNumber);
+        ss1.setSpan(new RelativeSizeSpan(2f), 0,ageNumber.length(), 0); // set size
+        TvAge.append(ss1);
+        ss1=  new SpannableString(ageText);
+        ss1.setSpan(new RelativeSizeSpan(1f), 0,ageText.length(), 0); // set size
+        TvAge.append(ss1);
 
     }
 
@@ -338,6 +438,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Intent i = new Intent(getContext(), AddressWebViewActivity.class);
                 startActivityForResult(i, SEARCH_ADDRESS_ACTIVITY);
                 break;
+            case R.id.button_home_test:
+                i = new Intent(getContext(), TestActivity.class);
+                startActivity(i);
+                break;
+
         }
     }
 

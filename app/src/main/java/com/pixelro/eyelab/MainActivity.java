@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +17,7 @@ import com.pixelro.eyelab.menu.my.MyFragment;
 import com.pixelro.eyelab.test.TestActivity;
 import com.pixelro.eyelab.test.TestDialog;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,7 +26,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private long mBackKeyPressedTime = 0;
     private SharedPreferences sharedPreferences;
@@ -46,6 +50,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 //        NavigationUI.setupWithNavController(navView, navController);
 
+        BottomNavigationView bottomNavigationView;
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        //bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        //bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        //bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+
         sharedPreferences = getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN,MODE_PRIVATE);
         if (sharedPreferences.getBoolean(EYELAB.APPDATA.LOGIN.FIRST_LOGIN,true)){
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -65,14 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dlg.showDialog();
         }
 
-        findViewById(R.id.button3).setOnClickListener(this);
-        findViewById(R.id.button4).setOnClickListener(this);
-        findViewById(R.id.button5).setOnClickListener(this);
-
         fa = new HomeFragment();
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.nav_test_fragment, new HomeFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.nav_test_fragment, fa).commit();
 
     }
 
@@ -100,8 +107,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button3:
 
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_home:
                 if(fa == null) {
                     fa = new HomeFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fa).commit();
@@ -111,8 +125,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(fb != null) fragmentManager.beginTransaction().hide(fb).commit();
                 if(fc != null) fragmentManager.beginTransaction().hide(fc).commit();
 
-                break;
-            case R.id.button4:
+                ((HomeFragment)fa).refrashBoard();
+
+                return true;
+            case R.id.navigation_exercise:
                 if(fb == null) {
                     fb = new ExerciseFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fb).commit();
@@ -121,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(fa != null) fragmentManager.beginTransaction().hide(fa).commit();
                 if(fb != null) fragmentManager.beginTransaction().show(fb).commit();
                 if(fc != null) fragmentManager.beginTransaction().hide(fc).commit();
-                break;
-            case R.id.button5:
+                return true;
+            case R.id.navigation_my:
                 if(fc == null) {
                     fc = new MyFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fc).commit();
@@ -131,7 +147,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(fa != null) fragmentManager.beginTransaction().hide(fa).commit();
                 if(fb != null) fragmentManager.beginTransaction().hide(fb).commit();
                 if(fc != null) fragmentManager.beginTransaction().show(fc).commit();
-                break;
+                return true;
         }
+
+        return false;
     }
 }
