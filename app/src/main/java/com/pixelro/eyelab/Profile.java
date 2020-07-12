@@ -17,7 +17,8 @@ public class Profile {
     public String exercise = Excercise.NO;
     public String food = Food.NO;
 
-    public class Gender {        public static final String MALE = "male";
+    public class Gender {
+        public static final String MALE = "male";
         public static final String FEMALE = "female";
         public static final String OTHER = "other";
     }

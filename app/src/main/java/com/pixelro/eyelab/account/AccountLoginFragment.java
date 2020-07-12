@@ -21,8 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.security.crypto.EncryptedSharedPreferences;
-import androidx.security.crypto.MasterKeys;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloCallback;
@@ -48,7 +46,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.Map;
 
 import okhttp3.Interceptor;
@@ -73,7 +70,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     //private SharedPreferences appData;
 
     private String masterKeyAlias;
-    private SharedPreferences sharedPreferences;
+    //private SharedPreferences sharedPreferences;
 
     // 서버 로그인
     private ApolloClient apolloClient;
@@ -86,7 +83,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         SharedPreferences prefs = getPreferences(context);
         String value = prefs.getString(key,"");
         return value;
-    }
+}
 
     public static void setString(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
@@ -176,33 +173,34 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         });
 
         // 로그인 정보 저장
-        try {
-            masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            sharedPreferences = EncryptedSharedPreferences.create(
-                    "secret_shared_prefs",
-                    masterKeyAlias,
-                    getContext(),
-                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            );
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+//        } catch (GeneralSecurityException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            sharedPreferences = EncryptedSharedPreferences.create(
+//                    "secret_shared_prefs",
+//                    masterKeyAlias,
+//                    getContext(),
+//                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//            );
+//        } catch (GeneralSecurityException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
-        load();
+        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
+
+        // 기종 login 정보 load
+        loadEmailLoginInfo();
 
         // 로그인 실패 메세지
         mDlg = new AccountDialog(getActivity());
-        //dlg.showDialog();
 
     }
 
@@ -229,22 +227,19 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.button_account_login_login:
 
-                // 로그인 시도
-                //setApollo();
-                //signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
-
-
-
+                // email 로그인 시도
+                setApollo();
+                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
 
                 // 로그인 성공
 
                 // 로그인 저장
-                save();
+                //save();
 
                 // 메인 화면 전환
-                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                getActivity().startActivity(mainIntent);
-                getActivity().finish();
+                //Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                //getActivity().startActivity(mainIntent);
+                //getActivity().finish();
 
                 break;
 //            case R.id.button_login_test_1:
@@ -269,21 +264,15 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     }
 
     private void LoginResultAction(){
-        String token = getString(mContext, "token");
+        String token = getString(mContext, EYELAB.APPDATA.TOKEN.TOKEN);
 
         // 토큰이 있는 경우 디코드 하기
         if (token!=null && !"".equals(token)) {
             try {
-                // 로그인 저장
-                save();
-                // 메인 화면 전환
-                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                getActivity().startActivity(mainIntent);
-                getActivity().finish();
 
                 String decodeStr = null;
                 JWT jwt = new JWT(token);
-                boolean isExpired = jwt.isExpired(10); // 10 초 전까지 토큰 종료 여부 판단
+                //boolean isExpired = jwt.isExpired(10); // 10 초 전까지 토큰 종료 여부 판단 // 새로 받는 것은 충분한 시간이 있다는 전재
                 decodeStr = JWTUtils.decoded(token); // 디코드 값
                 try {
                     JSONObject jsonObj = JWTUtils.getJson(token,"user");
@@ -297,57 +286,83 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     //((TextView)view.findViewById(R.id.textview_decode)).setText(decodeStr );
                     Toast.makeText(mContext,"로그인 성공",Toast.LENGTH_SHORT).show();
 
+                    //////////////////////////////////////////////////////////////
+                    // email 로그인 성공 화면 전환
+                    //////////////////////////////////////////////////////////////
+                    LoginSuccessProcessEmail();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
                     //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                    mDlg.showDialog();
+                    mDlg.showDialog("로그인 정보를\r\n확인해 주세요.");
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
                 //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
                 //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                mDlg.showDialog();
+                mDlg.showDialog("로그인 정보를\r\n확인해 주세요.");
             }
         }
         else {
             // 로그인 실패
             //Toast.makeText(mContext,"로그인 정보를 확인하세요",Toast.LENGTH_LONG).show();
-            mDlg.showDialog();
+            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.");
         }
     }
 
     // save login data
-    private void save() {
+    private void saveEmailLoginInfo() {
+
         // save or delete login data
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         if (SwLoginSave.isChecked()){
-            editor.putBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, SwLoginSave.isChecked());
+            editor.putBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, true);
             editor.putString(EYELAB.APPDATA.LOGIN.EMAIL, EtEmail.getText().toString().trim());
             editor.putString(EYELAB.APPDATA.LOGIN.PASS, EtPass.getText().toString().trim());
-            editor.putBoolean(EYELAB.APPDATA.LOGIN.LOGINNING, true);
         }
         else {
-            // reset
+            // login but email,pass delete
             editor.remove(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA);
             editor.remove(EYELAB.APPDATA.LOGIN.EMAIL);
             editor.remove(EYELAB.APPDATA.LOGIN.PASS);
         }
-
-
-
         editor.commit();
     }
 
     // load login data
-    private void load() {
+    private void loadEmailLoginInfo() {
 
-        SwLoginSave.setChecked(sharedPreferences.getBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, false));
-        EtEmail.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.EMAIL, ""));
-        EtPass.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.PASS, ""));
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
 
+        if (sharedPreferences.getBoolean(EYELAB.APPDATA.LOGIN.SAVE_LOGIN_DATA, false)){
+            SwLoginSave.setChecked(true);
+            EtEmail.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.EMAIL, ""));
+            EtPass.setText(sharedPreferences.getString(EYELAB.APPDATA.LOGIN.PASS, ""));
+        }
+        else {
+            EtEmail.setText("");
+            EtPass.setText("");
+        }
+    }
+
+    private void LoginSuccessProcessEmail(){
+
+        // email 로그인 정보 저장
+        saveEmailLoginInfo();
+
+        // 로그인 성공 저장
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_LOGIN, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(EYELAB.APPDATA.LOGIN.LOGINNING, true);
+
+        // 메인 화면 전환
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        getActivity().startActivity(mainIntent);
+        getActivity().finish();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,7 +403,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 //        final String authHeader = "";
 
         String authHeader = "";
-        String token = getString(mContext, "token");
+        String token = getString(mContext, EYELAB.APPDATA.TOKEN.TOKEN);
         if (token != null && !"".equals(token)) {
             authHeader = "Bearer " + token;
         }
@@ -422,7 +437,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private void signIn(String email, String password) {
 
         // 로그인 결과 return
-        int result = EYELAB.LOGIN.ERROR;
+        // int result = EYELAB.LOGIN.ERROR;
 
 //        SignInMutation signInMutation = SignInMutation.builder().email("er@enkino.com").password("1234").build();
 
@@ -454,7 +469,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                                 Log.i(TAG, token);
                                 // 로그인 성공
                                 // 토큰 저장
-                                setString(mContext,"token",token);
+                                setString(mContext,EYELAB.APPDATA.TOKEN.TOKEN,token);
                                 //showToken(layout);
                                 LoginResultAction();
                             }
@@ -462,7 +477,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                             Log.i(TAG, error);
                             // 로그인 실패
                             // 토큰 삭제
-                            removeKey(mContext,"token");
+                            removeKey(mContext,EYELAB.APPDATA.TOKEN.TOKEN);
                             LoginResultAction();
                         }
                     }
@@ -472,7 +487,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         Log.e(TAG, e.getMessage(), e);
                         // 로그인 실패
                         // 토큰 삭제
-                        removeKey(mContext,"token");
+                        removeKey(mContext,EYELAB.APPDATA.TOKEN.TOKEN);
                         LoginResultAction();
                     }
                 },uiHandler)

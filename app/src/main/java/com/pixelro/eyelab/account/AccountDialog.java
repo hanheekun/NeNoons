@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.pixelro.eyelab.R;
 
@@ -18,7 +19,7 @@ public class AccountDialog {
     }
 
     // 호출할 다이얼로그 함수를 정의한다.
-    public void showDialog() {
+    public void showDialog(String message) {
 
         // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
         final Dialog dlg = new Dialog(context);
@@ -37,11 +38,10 @@ public class AccountDialog {
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
+        TextView TvMessage =  (TextView)dlg.findViewById(R.id.textView_account_dialog);
+        TvMessage.setText(message); // 로그인 정보를\n확인해 주세요.
         final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
-
-
         final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
-
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +51,6 @@ public class AccountDialog {
                 dlg.dismiss();
             }
         });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,6 +22,12 @@ public class EYELAB {
             public static final String SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA";
             public static final String LOGINNING = "LOGINNING";
             public static final String FIRST_LOGIN = "FIRST_LOGIN";
+            public static final String EMAIL_TEMP = "EMAIL_TEMP";
+            public static final String PASS_TEMP = "PASS_TEMP";
+        }
+
+        public class TOKEN {
+            public static final String TOKEN = "TOKEN";
         }
 
         public class EXERCISE {

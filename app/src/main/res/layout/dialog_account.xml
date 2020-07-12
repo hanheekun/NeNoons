@@ -54,7 +54,7 @@
         android:id="@+id/textView_account_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인 정보를\n확인해 주세요."
+        android:gravity="center"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"

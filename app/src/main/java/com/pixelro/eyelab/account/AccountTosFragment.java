@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -17,7 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.eyelab.R;
 
-public class AccountTosFragment extends Fragment implements View.OnClickListener{
+public class AccountTosFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private final static String TAG = AccountTosFragment.class.getSimpleName();
     private View mView;
@@ -35,6 +36,7 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
     private CheckBox CbTos3;
     private CheckBox CbTos4;
     private CheckBox CbTosAll;
+    private Button BtnNext;
 
 
     @Override
@@ -71,6 +73,13 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
         CbTos4 = view.findViewById(R.id.checkBox_tos_4);
         CbTosAll = view.findViewById(R.id.checkBox_tos_all);
         CbTosAll.setOnClickListener(this);
+        CbTos1.setOnCheckedChangeListener(this);
+        CbTos2.setOnCheckedChangeListener(this);
+        CbTos3.setOnCheckedChangeListener(this);
+        CbTos4.setOnCheckedChangeListener(this);
+        CbTosAll.setOnCheckedChangeListener(this);
+        BtnNext = (Button)view.findViewById(R.id.button_account_tos_next);
+        BtnNext.setEnabled(false);
     }
 
     @Override
@@ -131,4 +140,13 @@ public class AccountTosFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (CbTos1.isChecked() && CbTos2.isChecked()){
+            BtnNext.setEnabled(true);
+        }
+        else {
+            BtnNext.setEnabled(false);
+        }
+    }
 }
