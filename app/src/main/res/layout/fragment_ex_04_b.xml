@@ -42,7 +42,7 @@
         android:src="@drawable/combined_shape_line1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96" />
@@ -75,8 +75,8 @@
 
     <ImageView
         android:id="@+id/imageView31"
-        android:layout_width="368dp"
-        android:layout_height="402dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:src="@drawable/ex_02_h"
         app:layout_constraintEnd_toEndOf="parent"

@@ -100,7 +100,7 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
         TvCntLong = (TextView)view.findViewById(R.id.textView_ex_01_count_long);
         TvCntShort = (TextView)view.findViewById(R.id.textView_ex_01_count_short);
 
-        Toast.makeText(getActivity(),"level = " + ((Ex01Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"level = " + ((Ex01Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
         if (((Ex01Activity)getActivity()).curLevel == EX_LEVEL_L){
             mCountMax = 3;

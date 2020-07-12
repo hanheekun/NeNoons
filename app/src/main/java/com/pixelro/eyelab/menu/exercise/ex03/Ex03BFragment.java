@@ -103,7 +103,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[6] = 570;
         }
 
-        Toast.makeText(getActivity(),"level = " + ((Ex03Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"level = " + ((Ex03Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
         IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_2_eye);
 

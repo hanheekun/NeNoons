@@ -5,6 +5,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -22,6 +23,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.pixelro.eyelab.EYELAB;
 import com.pixelro.eyelab.MainActivity;
 import com.pixelro.eyelab.R;
+import com.pixelro.eyelab.account.AccountLoginFragment;
 import com.pixelro.eyelab.menu.care.o2o.O2OActivity;
 import com.pixelro.eyelab.menu.exercise.ExerciseViewModel;
 import com.pixelro.eyelab.test.TestActivity;
@@ -50,6 +53,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
+    private final static String TAG = HomeFragment.class.getSimpleName();
 
     private HomeViewModel homeViewModel;
     private ExerciseViewModel exerciseViewModel;
@@ -74,6 +78,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public boolean mTest = false;
 
+    public Button BtnTest;
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -90,7 +98,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        root.findViewById(R.id.view_main_age_result_btn).setOnClickListener(this);
 //        root.findViewById(R.id.imageView_app_link_test).setOnClickListener(this);
 
-
+        BtnTest = root.findViewById(R.id.button_home_webview_overlap_test);
+        BtnTest.setOnClickListener(this);
 
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
@@ -143,11 +152,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // 웹뷰 시작
         mAdWebView = (WebView) root.findViewById(R.id.webView_home_ad);
 
-        mAdWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
+        //mAdWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
         mAdWebSettings = mAdWebView.getSettings(); //세부 세팅 등록
         mAdWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
+
         mAdWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
         mAdWebSettings.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
+
         mAdWebSettings.setLoadWithOverviewMode(true); // 메타태그 허용 여부
         mAdWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
         mAdWebSettings.setSupportZoom(false); // 화면 줌 허용 여부
@@ -156,6 +167,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mAdWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mAdWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
         //mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        mAdWebView.setWebViewClient(new MyWebViewClient(getContext(), getActivity()));
+        //mAdWebView.loadUrl("https://www.nenoons.com/app-banner"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+
+        if (webViewBundle == null) {
+            mAdWebView.loadUrl("https://www.nenoons.com/app-banner");
+            Log.v(TAG, "webViewBundle == null");
+        } else {
+            mAdWebView.restoreState(webViewBundle);
+            Log.v(TAG, "webViewBundle != null;");
+        }
+
+//        mAdWebView.setWebViewClient(new WebViewClient() {
+//            //Notify the host application that the WebView will load
+//            //the resource specified by the given url.
+////            @Override
+////            public void onLoadResource(WebView view, String url) {
+////                super.onLoadResource(view, url);
+////                Log.v(TAG, "onLoadResource(" + url + ");");
+////            }
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//                Log.v(TAG, "shouldOverrideUrlLoading(" + request.getUrl().toString() + ");");
+//                Intent intent = new Intent(getActivity(), WebActivity.class); // 새창을 여는 액티비티나, 팝업일때 이용하면 용이합니다.
+//                intent.putExtra("url", view.getUrl());
+//                startActivity(intent);
+//                return super.shouldOverrideUrlLoading(view, request);
+//            }
+//
+//            @Override
+//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//                Log.v(TAG, "onPageStarted(" + url + ");");
+//                super.onPageStarted(view, url, favicon);
+//            }
+//        });
+
 
         //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         //mAdWebView.loadUrl("https://www.nenoons.com/app-banner"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
@@ -238,33 +285,48 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             mWebView.restoreState(savedInstanceState);
         }
 
-        if (webViewBundle == null) {
-            mAdWebView.loadUrl("https://www.nenoons.com/app-banner");
-        } else {
-            mAdWebView.restoreState(webViewBundle);
-        }
+
 
 
         root.findViewById(R.id.button_home_test).setOnClickListener(this);
 
         root.findViewById(R.id.button_link_1).setOnClickListener(this);
+        root.findViewById(R.id.button_link_2).setOnClickListener(this);
+        root.findViewById(R.id.button_link_3).setOnClickListener(this);
+        root.findViewById(R.id.button_link_4).setOnClickListener(this);
+        root.findViewById(R.id.button_link_5).setOnClickListener(this);
+        root.findViewById(R.id.button_link_6).setOnClickListener(this);
+        root.findViewById(R.id.button_link_7).setOnClickListener(this);
+        root.findViewById(R.id.button_link_8).setOnClickListener(this);
+        root.findViewById(R.id.button_link_9).setOnClickListener(this);
+        root.findViewById(R.id.button_link_10).setOnClickListener(this);
+        root.findViewById(R.id.button_link_11).setOnClickListener(this);
+        root.findViewById(R.id.button_link_12).setOnClickListener(this);
+        root.findViewById(R.id.button_link_13).setOnClickListener(this);
+        root.findViewById(R.id.button_link_14).setOnClickListener(this);
+        root.findViewById(R.id.button_link_15).setOnClickListener(this);
+        root.findViewById(R.id.button_link_16).setOnClickListener(this);
+        root.findViewById(R.id.button_link_17).setOnClickListener(this);
+        root.findViewById(R.id.button_link_18).setOnClickListener(this);
+        root.findViewById(R.id.button_link_19).setOnClickListener(this);
+        root.findViewById(R.id.button_link_20).setOnClickListener(this);
 
         return root;
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        //super.onSaveInstanceState(outState);
 
-        mWebView.saveState(outState);
+        mAdWebView.saveState(outState);
     }
 
     @Override
     public void onPause() {
         super.onPause();
 
-        webViewBundle = new Bundle();
-        mAdWebView.saveState(webViewBundle);
+        //webViewBundle = new Bundle();
+        //mAdWebView.saveState(webViewBundle);
     }
 
     @Override
@@ -272,6 +334,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 
         refrashBoard();
+        if (mAdWebView!=null) {
+            //mAdWebView.restoreState(webViewBundle);
+        }
+
 
     }
 
@@ -344,7 +410,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             min = (int)(totalMin % 60);
             hour = (int)(totalMin / 60);
 
-            Toast.makeText(getActivity(),"Hour : " + hour + ", Min : " + min + " Total EX : " + curTotalEXNumber,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(),"Hour : " + hour + ", Min : " + min + " Total EX : " + curTotalEXNumber,Toast.LENGTH_SHORT).show();
 
             TvExNumber.setText("");
             String s= "" + curTotalEXNumber;
@@ -446,8 +512,106 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_link_1:
                 Intent intent = new Intent(getActivity(),WebActivity.class);
-                intent.putExtra("url","https://nenoons.com/app-main");
+                intent.putExtra("url","https://www.nenoons.com/app-place/place5");
                 startActivity(intent);
+                break;
+            case R.id.button_link_2:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-place/place2");
+                startActivity(intent);
+                break;
+            case R.id.button_link_3:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-place/place4");
+                startActivity(intent);
+                break;
+            case R.id.button_link_4:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-place/place3");
+                startActivity(intent);
+                break;
+            case R.id.button_link_5:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/sunGlasses");
+                startActivity(intent);
+                break;
+            case R.id.button_link_6:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/glasses");
+                startActivity(intent);
+                break;
+            case R.id.button_link_7:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/contactLens\n");
+                startActivity(intent);
+                break;
+            case R.id.button_link_8:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/colorLens");
+                startActivity(intent);
+                break;
+            case R.id.button_link_9:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/glassesLens");
+                startActivity(intent);
+                break;
+            case R.id.button_link_10:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/accessory");
+                startActivity(intent);
+                break;
+            case R.id.button_link_11:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/food");
+                startActivity(intent);
+                break;
+            case R.id.button_link_12:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-main/etc ");
+                startActivity(intent);
+                break;
+            case R.id.button_link_13:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-magazine-detail/ckc7uxvvq0004tg4u0or78ksm");
+                startActivity(intent);
+                break;
+            case R.id.button_link_14:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-magazine-detail/ckccng5vy00041apayn1u3gza");
+                startActivity(intent);
+                break;
+            case R.id.button_link_15:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-magazine-detail/ckccni71m00051apao3sjy09g");
+                startActivity(intent);
+                break;
+            case R.id.button_link_16:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-event-detail/ckc7uwz5w0003tg4uuhbr4ov1");
+                startActivity(intent);
+                break;
+            case R.id.button_link_17:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-event-detail/ckc8fz2rc0005tg4u4rpk3uv3");
+                startActivity(intent);
+                break;
+            case R.id.button_link_18:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-event-detail/ckccnjmnw00061apaskta7z9g");
+                startActivity(intent);
+                break;
+            case R.id.button_link_19:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-magazine");
+                startActivity(intent);
+                break;
+            case R.id.button_link_20:
+                intent = new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url","https://www.nenoons.com/app-event");
+                startActivity(intent);
+                break;
+            case R.id.button_home_webview_overlap_test:
+                Toast.makeText(getActivity(),"버튼이 먼저 알았어!!",Toast.LENGTH_SHORT).show();
                 break;
 
 

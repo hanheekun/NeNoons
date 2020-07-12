@@ -1,13 +1,26 @@
 package com.pixelro.eyelab.menu.home;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.webkit.HttpAuthHandler;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import java.io.Console;
 
 public class MyWebViewClient extends WebViewClient {
+    Activity activity;
+    Context context;
+
+    public MyWebViewClient(Context context, Activity activity) {
+        this.context = context;
+        this.activity = activity;
+    }
 
     // 로딩이 시작될 때
     @Override
@@ -100,6 +113,15 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        return super.shouldOverrideUrlLoading(view, request);
+        String urlPath = request.getUrl().toString();
+        System.out.println(">>>>>>>>>>>>>>    " + urlPath);
+        if (activity!=null && context!=null) {
+            Intent intent = new Intent(activity, WebActivity.class);
+            intent.putExtra("url", urlPath);
+            context.startActivity(intent);
+        }
+        return true;
     }
+
+
 }

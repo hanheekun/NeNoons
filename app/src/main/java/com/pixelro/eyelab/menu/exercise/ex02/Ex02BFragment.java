@@ -78,7 +78,7 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
             mTimer.schedule(TimaerTaskMaker(),1000,400);
         }
 
-        Toast.makeText(getActivity(),"level = " + ((Ex02Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"level = " + ((Ex02Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
