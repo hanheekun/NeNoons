@@ -70,7 +70,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 // 정보 저장
 
 
-                mProfile
+                //mProfile
 
 //              // 가입 성공 페이지 전환
 //              Intent mainIntent = new Intent(getActivity(), MainActivity.class);
