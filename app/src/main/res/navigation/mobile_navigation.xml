@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.pixelro.eyelab.menu.home.HomeFragment"
+        android:name="com.pixelro.nenoons.menu.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_exercise"
-        android:name="com.pixelro.eyelab.menu.exercise.ExerciseFragment"
+        android:name="com.pixelro.nenoons.menu.exercise.ExerciseFragment"
         android:label="@string/title_exercise"
         tools:layout="@layout/fragment_exercise" >
         <action
@@ -27,19 +27,19 @@
 
     <fragment
         android:id="@+id/navigation_care"
-        android:name="com.pixelro.eyelab.menu.care.CareFragment"
+        android:name="com.pixelro.nenoons.menu.care.CareFragment"
         android:label="@string/title_care"
         tools:layout="@layout/fragment_care" />
 
     <fragment
         android:id="@+id/navigation_my"
-        android:name="com.pixelro.eyelab.menu.my.MyFragment"
+        android:name="com.pixelro.nenoons.menu.my.MyFragment"
         android:label="@string/title_my"
         tools:layout="@layout/fragment_my" />
 
     <fragment
         android:id="@+id/navigation_care_map"
-        android:name="com.pixelro.eyelab.menu.map.MapsFragment"
+        android:name="com.pixelro.nenoons.menu.map.MapsFragment"
         tools:layout="@layout/fragment_maps" />
 
 </navigation>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_o2o_home"
-        android:name="com.pixelro.eyelab.menu.care.o2o.O2OHomeFragment"
+        android:name="com.pixelro.nenoons.menu.care.o2o.O2OHomeFragment"
         tools:layout="@layout/fragment_care" >
 
     </fragment>

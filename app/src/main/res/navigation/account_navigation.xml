@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_account_hello"
-        android:name="com.pixelro.eyelab.account.AccountHelloFragment"
+        android:name="com.pixelro.nenoons.account.AccountHelloFragment"
         tools:layout="@layout/fragment_account_hello">
         <action
             android:id="@+id/action_navigation_account_hello_to_navigation_account_login"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_account_login"
-        android:name="com.pixelro.eyelab.account.AccountLoginFragment"
+        android:name="com.pixelro.nenoons.account.AccountLoginFragment"
         tools:layout="@layout/fragment_account_login">
         <action
             android:id="@+id/action_navigation_account_login_to_navigation_account_find"
@@ -28,13 +28,13 @@
 
     <fragment
         android:id="@+id/navigation_account_find"
-        android:name="com.pixelro.eyelab.account.AccountFindFragment"
+        android:name="com.pixelro.nenoons.account.AccountFindFragment"
         tools:layout="@layout/fragment_account_find">
     </fragment>
 
     <fragment
         android:id="@+id/navigation_account_tos"
-        android:name="com.pixelro.eyelab.account.AccountTosFragment"
+        android:name="com.pixelro.nenoons.account.AccountTosFragment"
         tools:layout="@layout/fragment_account_tos">
         <action
             android:id="@+id/action_navigation_account_tos_to_navigation_account_id"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navigation_account_id"
-        android:name="com.pixelro.eyelab.account.AccountIDFragment"
+        android:name="com.pixelro.nenoons.account.AccountIDFragment"
         tools:layout="@layout/fragment_account_id">
         <action
             android:id="@+id/action_navigation_account_id_to_navigation_account_profile"
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navigation_account_profile"
-        android:name="com.pixelro.eyelab.account.AccountProfileFragment"
+        android:name="com.pixelro.nenoons.account.AccountProfileFragment"
         tools:layout="@layout/fragment_account_profile">
         <action
             android:id="@+id/action_navigation_account_profile_to_navigation_account_survey"
@@ -61,7 +61,7 @@
 
     <fragment
         android:id="@+id/navigation_account_survey"
-        android:name="com.pixelro.eyelab.account.AccountSurveyFragment"
+        android:name="com.pixelro.nenoons.account.AccountSurveyFragment"
         tools:layout="@layout/fragment_account_survey">
     </fragment>
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_01"
-        android:name="com.pixelro.eyelab.test.Test01Dis01Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis01Fragment"
         tools:layout="@layout/fragment_test_01_dis_01">
         <action
             android:id="@+id/action_navigation_test_01_dis_01_to_navigation_test_01_dis_02"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_02"
-        android:name="com.pixelro.eyelab.test.Test01Dis02Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis02Fragment"
         tools:layout="@layout/fragment_test_01_dis_02">
         <action
             android:id="@+id/action_navigation_test_01_dis_02_to_navigation_test_01_dis_03"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_03"
-        android:name="com.pixelro.eyelab.test.Test01Dis03Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis03Fragment"
         tools:layout="@layout/fragment_test_01_dis_03">
         <action
             android:id="@+id/action_navigation_test_01_dis_03_to_navigation_test_01_dis_05"
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_04"
-        android:name="com.pixelro.eyelab.test.Test01Dis04Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis04Fragment"
         tools:layout="@layout/fragment_test_01_dis_04">
         <action
             android:id="@+id/action_navigation_test_01_dis_04_to_navigation_test_01_dis_05"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_05"
-        android:name="com.pixelro.eyelab.test.Test01Dis05Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis05Fragment"
         tools:layout="@layout/fragment_test_01_dis_05">
         <action
             android:id="@+id/action_navigation_test_01_dis_05_to_navigation_test_01_dis_06"
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_05_2"
-        android:name="com.pixelro.eyelab.test.Test01Dis05Fragment_2"
+        android:name="com.pixelro.nenoons.test.Test01Dis05Fragment_2"
         tools:layout="@layout/fragment_test_01_dis_05_2">
         <action
             android:id="@+id/action_navigation_test_01_dis_05_2_to_navigation_test_01_dis_06_2"
@@ -61,7 +61,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_06"
-        android:name="com.pixelro.eyelab.test.Test01Dis06Fragment"
+        android:name="com.pixelro.nenoons.test.Test01Dis06Fragment"
         tools:layout="@layout/fragment_test_01_dis_06">
         <action
             android:id="@+id/action_navigation_test_01_dis_06_to_navigation_test_01_dis_05_2"
@@ -73,7 +73,7 @@
 
     <fragment
         android:id="@+id/navigation_test_01_dis_06_2"
-        android:name="com.pixelro.eyelab.test.Test01Dis06Fragment_2"
+        android:name="com.pixelro.nenoons.test.Test01Dis06Fragment_2"
         tools:layout="@layout/fragment_test_01_dis_06_2">
         <action
             android:id="@+id/action_navigation_test_01_dis_06_2_to_navigation_test_02_gr_012"
@@ -82,7 +82,7 @@
 
     <fragment
         android:id="@+id/navigation_test_02_gr_01"
-        android:name="com.pixelro.eyelab.test.Test02RedGreen01Fragment"
+        android:name="com.pixelro.nenoons.test.Test02RedGreen01Fragment"
         tools:layout="@layout/fragment_test_02_rg_01">
         <action
             android:id="@+id/action_navigation_test_02_gr_01_to_navigation_test_02_gr_02"
@@ -91,7 +91,7 @@
 
     <fragment
         android:id="@+id/navigation_test_02_gr_02"
-        android:name="com.pixelro.eyelab.test.Test02RedGreen02Fragment"
+        android:name="com.pixelro.nenoons.test.Test02RedGreen02Fragment"
         tools:layout="@layout/fragment_test_02_rg_02">
         <action
             android:id="@+id/action_navigation_test_02_gr_02_to_navigation_test_03_bright_01"
@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/navigation_test_03_bright_01"
-        android:name="com.pixelro.eyelab.test.Test03Bright01Fragment"
+        android:name="com.pixelro.nenoons.test.Test03Bright01Fragment"
         tools:layout="@layout/fragment_test_03_bright_01">
 
         <action
@@ -110,7 +110,7 @@
 
     <fragment
         android:id="@+id/navigation_test_03_bright_02"
-        android:name="com.pixelro.eyelab.test.Test03Bright02Fragment"
+        android:name="com.pixelro.nenoons.test.Test03Bright02Fragment"
         tools:layout="@layout/fragment_test_03_bright_02">
         <action
             android:id="@+id/action_navigation_test_03_diff_to_navigation_test_04_color"
@@ -119,7 +119,7 @@
 
     <fragment
         android:id="@+id/navigation_test_04_color"
-        android:name="com.pixelro.eyelab.test.Test04ColorFragment"
+        android:name="com.pixelro.nenoons.test.Test04ColorFragment"
         tools:layout="@layout/fragment_test_04_color">
         <action
             android:id="@+id/action_navigation_test_04_color_to_navigation_test_05_font"
@@ -128,7 +128,7 @@
 
     <fragment
         android:id="@+id/navigation_test_05_font"
-        android:name="com.pixelro.eyelab.test.Test05FontFragment"
+        android:name="com.pixelro.nenoons.test.Test05FontFragment"
         tools:layout="@layout/fragment_test_05_font">
         <action
             android:id="@+id/action_navigation_test_05_font_to_navigation_test_06_complete"
@@ -137,7 +137,7 @@
 
     <fragment
         android:id="@+id/navigation_test_06_complete"
-        android:name="com.pixelro.eyelab.test.Test06CompleteFragment"
+        android:name="com.pixelro.nenoons.test.Test06CompleteFragment"
         tools:layout="@layout/fragment_test_06_complete">
         <action
             android:id="@+id/action_navigation_test_06_complete_to_navigation_test_07_result"
@@ -146,7 +146,7 @@
 
     <fragment
         android:id="@+id/navigation_test_07_result"
-        android:name="com.pixelro.eyelab.test.Test07ResultFragment"
+        android:name="com.pixelro.nenoons.test.Test07ResultFragment"
         tools:layout="@layout/fragment_test_07_result">
     </fragment>
 
