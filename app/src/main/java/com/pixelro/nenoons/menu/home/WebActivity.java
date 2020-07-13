@@ -28,9 +28,6 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         // MainActivity 의 putExtra로 지정했던 key 값
         String key = intent.getExtras().getString("url");
 
-
-        출처: https://link2me.tistory.com/1018 [소소한 일상 및 업무TIP 다루기]
-
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
         // 웹뷰 시작

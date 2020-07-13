@@ -115,6 +115,13 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         else if(mDistance >= 51){
             TvResult.setText("노안이 심하므로,\n안경원, 안과를 추천드립니다.");
         }
+
+        /////////////////////////////////////////////////////////////////////////
+        // 운동 기록 전송
+        /////////////////////////////////////////////////////////////////////////
+
+
+
     }
 
     @Override
