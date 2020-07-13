@@ -18,50 +18,50 @@ public class Profile {
     public String food = Food.NO;
 
     public class Gender {
-        public static final String MALE = "male";
-        public static final String FEMALE = "female";
-        public static final String OTHER = "other";
+        public static final String MALE = "MALE";
+        public static final String FEMALE = "FEMALE";
+        public static final String OTHER = "OTHER";
     }
 
     public class Job {
-        public static final String MANAGEMENT = "1";
-        public static final String SERVICE = "2";
-        public static final String ARTS = "3";
-        public static final String OTHER = "4";
+        public static final String MANAGEMENT = "MANAGEMENT";
+        public static final String SERVICE = "SERVICE";
+        public static final String ARTS = "ARTS";
+        public static final String OTHER = "OTHER";
     }
 
     public class Glasses {
-        public static final String NONE = "1";
-        public static final String GLASSESS = "2";
-        public static final String FAR_VISION = "3";
-        public static final String CONTACT = "4";
+        public static final String NONE = "NONE";
+        public static final String GLASSESS = "GLASSESS";
+        public static final String FAR_VISION = "FAR_VISION";
+        public static final String CONTACT = "CONTACT";
     }
 
     public class Status {
-        public static final String MYOPIA = "1"; // 근시
-        public static final String EMMETROPIA = "2"; // 정시
-        public static final String ASTIGMATISM = "3"; // 난시
-        public static final String HYPEROPIA = "4"; // 원시
-        public static final String UNKNOWN = "5";
+        public static final String MYOPIA = "MYOPIA"; // 근시
+        public static final String EMMETROPIA = "EMMETROPIA"; // 정시
+        public static final String ASTIGMATISM = "ASTIGMATISM"; // 난시
+        public static final String HYPEROPIA = "HYPEROPIA"; // 원시
+        public static final String UNKNOWN = "UNKNOWN";
 
     }
 
     public class Surgery {
-        public static final String LASIKLASEK = "1"; // 시력교정 시술
-        public static final String OLD = "2"; // 노안 수술
-        public static final String CATARACT = "3"; // 백내장 수술
+        public static final String LASIKLASEK = "LASIKLASEK"; // 시력교정 시술
+        public static final String OLD = "OLD"; // 노안 수술
+        public static final String CATARACT = "CATARACT"; // 백내장 수술
     }
 
     public class Excercise {
-        public static final String YES = "1";
-        public static final String NO = "2";
-        public static final String SOMETIMES = "3";
+        public static final String YES = "YES";
+        public static final String NO = "NO";
+        public static final String SOMETIMES = "SOMETIMES";
     }
 
     public class Food {
-        public static final String YES = "1";
-        public static final String NO = "2";
-        public static final String SOMETIMES = "3";
+        public static final String YES = "YES";
+        public static final String NO = "NO";
+        public static final String SOMETIMES = "SOMETIMES";
     }
 
 

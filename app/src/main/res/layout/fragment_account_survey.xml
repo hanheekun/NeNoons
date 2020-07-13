@@ -78,28 +78,28 @@
                 android:layout_height="match_parent">
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/radioButton_glasses_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="미착용"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton4"
+                    android:id="@+id/radioButton_glasses_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="안경착용"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton5"
+                    android:id="@+id/radioButton_glasses_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="돋보기(다초점) 착용"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton6"
+                    android:id="@+id/radioButton_glasses_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="컨택트랜즈 착용"
@@ -165,35 +165,35 @@
                 android:textSize="18sp" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBox_status_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="근시"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/checkBox_status_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="정시"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkBox_status_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="난시"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkBox_status_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="원시"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox5"
+                android:id="@+id/checkBox_status_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="모름"
@@ -209,21 +209,21 @@
                 android:textSize="18sp" />
 
             <CheckBox
-                android:id="@+id/checkBox6"
+                android:id="@+id/checkBox_surgery_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시력교정 시술 (라식/라색 등)"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox7"
+                android:id="@+id/checkBox_surgery_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="노안수술"
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox8"
+                android:id="@+id/checkBox_surgery_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="백내장 수술"
@@ -243,21 +243,21 @@
                 android:layout_height="match_parent">
 
                 <RadioButton
-                    android:id="@+id/radioButton7"
+                    android:id="@+id/radioButton_exercise_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="네"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton8"
+                    android:id="@+id/radioButton_exercise_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="아니요"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton9"
+                    android:id="@+id/radioButton_exercise_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="가끔"
@@ -278,21 +278,21 @@
                 android:layout_height="match_parent">
 
                 <RadioButton
-                    android:id="@+id/radioButton10"
+                    android:id="@+id/radioButton_food_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="네"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton11"
+                    android:id="@+id/radioButton_food_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="아니요"
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton12"
+                    android:id="@+id/radioButton_food_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="가끔"

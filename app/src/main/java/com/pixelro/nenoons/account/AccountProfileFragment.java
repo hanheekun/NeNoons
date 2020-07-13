@@ -76,12 +76,12 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.button_account_profile_next:
 
-                // 정보 입력 완료 // 아직 내용 check 안함
+                // profile에 정보 입력 // 아직 내용 check 안함
                 mProfile.name = EtName.getText().toString();
                 mProfile.gender = EtGender.getText().toString();
                 mProfile.birthday = EtBirthday.getText().toString();
                 mProfile.job = Etjob.getText().toString();
-                mProfile.password = EtPhoneNumber.getText().toString();
+                mProfile.phone = EtPhoneNumber.getText().toString();
 
                 // 다음 페이지 전환
                 NavHostFragment.findNavController(AccountProfileFragment.this).navigate(R.id.action_navigation_account_profile_to_navigation_account_survey);

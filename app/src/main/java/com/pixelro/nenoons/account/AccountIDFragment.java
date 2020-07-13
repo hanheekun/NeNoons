@@ -16,11 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.Profile;
 import com.pixelro.nenoons.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AccountIDFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
@@ -33,8 +36,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
     private String mEmail;
     private String mPass;
     private Button BtnNext;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    //private SharedPreferences sharedPreferences;
+    //private SharedPreferences.Editor editor;
 
     private Profile mProfile;
 
@@ -154,24 +157,30 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 // SNS 가입 진행
                 //////////////////////////////////////////////////////////////////////////////
 
-                // SNS 가입 시작
+                // SNS 확인 시작
 
-                // SNS 가입 완료
+                // SNS 확인 완료
 
-                // token 생성 완료
+                // email, id 회원 가입
 
-                // token 저장
+                // 회원 가입 가능 할 경우 토큰 저장
+                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+                editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
+                editor.commit();
 
-                // 개인 정보 및 설문으로 진행
-                if (true){ // 가입 가능한 경우
+                // 로그인 ing 로 설정
 
-                    // 다음 페이지 전환
-                    NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
-                }
-                else {
-                    // 가입 error message
-                    mDlg.showDialog("SNS 가입이 실패 하였습니다.\r\n확인해 주세요.","돌아가기");
-                }
+
+                // 다음 페이지 전환
+                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+
+                //////////////////////////////////////////////////////////////////////////////
+                // 가입 error message
+                //////////////////////////////////////////////////////////////////////////////
+                //mDlg.showDialog("이미 가입되었습니다.\r\n확인해 주세요.","돌아가기");
 
                 break;
             case R.id.imageButton_account_id_google:
@@ -183,22 +192,30 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
             case R.id.button_account_id_next:
 
                 //////////////////////////////////////////////////////////////////////////////
-                // 이미 가입이 되었는지, 로그인 가능한지 여부 판단
+                // email 가입 진행
                 //////////////////////////////////////////////////////////////////////////////
 
-                if (true){ // 가입 가능한 경우
+                // email, pass 임시 저장
+                mProfile.email = EtEmail.getText().toString();
+                mProfile.password = EtPass.getText().toString();
 
-                    // email, pass 임시 저장
-                    mProfile.email = EtEmail.getText().toString();
-                    mProfile.password = EtPass.getText().toString();
+                // email, pass 로 회원 가입
 
-                    // 다음 페이지 전환
-                    NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
-                }
-                else {
-                    // 가입 error message
-                    mDlg.showDialog("이미 가입되었습니다.\r\n확인해 주세요.","돌아가기");
-                }
+                // 회원 가입 가능 할 경우 토큰 저장
+                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
+                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+                editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
+                editor.commit();
+
+                // 다음 페이지 전환
+                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+
+                //////////////////////////////////////////////////////////////////////////////
+                // 가입 error message
+                //////////////////////////////////////////////////////////////////////////////
+                //mDlg.showDialog("이미 가입되었습니다.\r\n확인해 주세요.","돌아가기");
 
                 break;
             case R.id.editText_account_login_email:
