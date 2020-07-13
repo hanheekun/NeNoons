@@ -138,6 +138,13 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                     mProfile.food = Profile.Food.SOMETIMES;
                 }
 
+                ////////////////////////////////////////////////////////////
+                // 회원 정보 전달
+                ////////////////////////////////////////////////////////////
+                //String name = mProfile.name;
+
+
+
                 // main 으로 이동
                 Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(mainIntent);
