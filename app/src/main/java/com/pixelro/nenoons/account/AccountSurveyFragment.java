@@ -134,6 +134,8 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                     mPersonalProfile.food = PersonalProfile.Food.SOMETIMES;
                 }
 
+                // 서버연결 20200715
+
                 ////////////////////////////////////////////////////////////
                 // 회원 정보 전달
                 ////////////////////////////////////////////////////////////

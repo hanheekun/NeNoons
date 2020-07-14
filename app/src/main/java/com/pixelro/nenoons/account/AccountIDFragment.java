@@ -191,6 +191,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.button_account_id_next:
 
+                // 서버연결 20200715
+
                 //////////////////////////////////////////////////////////////////////////////
                 // email 가입 진행
                 //////////////////////////////////////////////////////////////////////////////
