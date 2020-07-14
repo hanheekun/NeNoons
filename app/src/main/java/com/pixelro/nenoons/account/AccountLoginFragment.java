@@ -262,17 +262,30 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         System.out.println(token);
 
                         if (error=="null" && token!="null") {
+
+                            Toast.makeText(mContext,"로그인 성공",Toast.LENGTH_SHORT).show();
+
                             // 토큰 저장
+                            setString(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN,token);
                             System.out.println("메인액티비티 시작");
                             // 메인 화면 전환
-                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                            getActivity().startActivity(mainIntent);
-                            getActivity().finish();
+                            LoginSuccessProcessEmail();
+//                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+//                            getActivity().startActivity(mainIntent);
+//                            getActivity().finish();
+                        }
+                        else{
+                            // 로그인 실패
+                            removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
+                            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
                         }
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        // 로그인 실패
+                        removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
+                        mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
                     }
                     return true;
                 });

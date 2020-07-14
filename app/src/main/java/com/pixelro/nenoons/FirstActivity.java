@@ -52,7 +52,7 @@ public class FirstActivity extends BaseActivity{
 
                 if (!FirstActivity.this.hasPermission(FirstActivity.this)) {
                     Log.i("MainActivity", "The user may not allow the access to apps usage. ");
-                    Toast.makeText((Context)FirstActivity.this, (CharSequence)"Failed to retrieve app usage statistics. You may need to enable access for this app through Settings > Security > Apps with usage access", 1).show();
+                    //Toast.makeText((Context)FirstActivity.this, (CharSequence)"Failed to retrieve app usage statistics. You may need to enable access for this app through Settings > Security > Apps with usage access", 1).show();
                     FirstActivity.this.startActivity(new Intent("android.settings.USAGE_ACCESS_SETTINGS"));
                 }
 
