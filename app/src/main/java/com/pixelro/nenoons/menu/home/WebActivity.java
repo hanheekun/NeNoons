@@ -1,9 +1,11 @@
 package com.pixelro.nenoons.menu.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,6 +13,9 @@ import android.webkit.WebViewClient;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pixelro.nenoons.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebActivity extends AppCompatActivity  implements View.OnClickListener {
 
@@ -33,7 +38,22 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         // 웹뷰 시작
         mWebView = (WebView) findViewById(R.id.webView);
 
-        mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
+//        mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                String key = "token";
+                String val = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2tjY3pvY296MDAwMDg1OWh0Y3ZuN2lweCIsImVtYWlsIjoiY3NAZW5raW5vLmNvbSIsIm5hbWUiOiLrrLjtmITsoJUiLCJ0ZWwiOiIwMTAtMjczMy04MDk2In0sImlhdCI6MTU5NDY5OTg2MCwiZXhwIjoxNTk1MzA0NjYwfQ.mvJqJuhMmloQkY_ite5qW6344Cosfd58LcCJ-Qp-zC0";
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    view.evaluateJavascript("localStorage.setItem('"+ key +"','"+ val +"');", null);
+                } else {
+                    view.loadUrl("javascript:localStorage.setItem('"+ key +"','"+ val +"');");
+                }
+
+            }
+
+        });
         mWebSettings = mWebView.getSettings(); //세부 세팅 등록
         mWebSettings.setJavaScriptEnabled(true); // 웹페이지 자바스클비트 허용 여부
         mWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
@@ -46,7 +66,10 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        mWebView.loadUrl(key); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        Map<String, String> extraHeaders = new HashMap<String, String>();
+        extraHeaders.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2tjY3pvY296MDAwMDg1OWh0Y3ZuN2lweCIsImVtYWlsIjoiY3NAZW5raW5vLmNvbSIsIm5hbWUiOiLrrLjtmITsoJUiLCJ0ZWwiOiIwMTAtMjczMy04MDk2In0sImlhdCI6MTU5NDY5OTg2MCwiZXhwIjoxNTk1MzA0NjYwfQ.mvJqJuhMmloQkY_ite5qW6344Cosfd58LcCJ-Qp-zC0"  );
+
+        mWebView.loadUrl(key, extraHeaders); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         //mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
