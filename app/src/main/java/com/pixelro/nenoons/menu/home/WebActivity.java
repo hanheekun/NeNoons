@@ -66,10 +66,7 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        Map<String, String> extraHeaders = new HashMap<String, String>();
-        extraHeaders.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2tjY3pvY296MDAwMDg1OWh0Y3ZuN2lweCIsImVtYWlsIjoiY3NAZW5raW5vLmNvbSIsIm5hbWUiOiLrrLjtmITsoJUiLCJ0ZWwiOiIwMTAtMjczMy04MDk2In0sImlhdCI6MTU5NDY5OTg2MCwiZXhwIjoxNTk1MzA0NjYwfQ.mvJqJuhMmloQkY_ite5qW6344Cosfd58LcCJ-Qp-zC0"  );
-
-        mWebView.loadUrl(key, extraHeaders); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl(key); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         //mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
