@@ -3,6 +3,7 @@ package com.pixelro.nenoons.account;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -40,12 +41,23 @@ import com.com.pixelro.nenoons.SignInMutation;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.server.HttpConnectionUtil;
+import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.server.JWTUtils;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Interceptor;
@@ -228,8 +240,49 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
             case R.id.button_account_login_login:
 
                 // email 로그인 시도
-                setApollo();
-                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
+//                setApollo();
+//                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
+//                String url = "https://nenoonsapi.du.r.appspot.com/android/signin"; 	//URL
+
+                HashMap<String, String> param = new HashMap<String, String>();
+                // 파라메터는 넣기 예
+                param.put("email", EtEmail.getText().toString().trim());	//PARAM
+                param.put("password", EtPass.getText().toString().trim());	//PARAM
+                Handler handler = new Handler(message -> {
+
+                    Bundle bundle = message.getData();
+                    String result = bundle.getString("result");
+                    System.out.println(result);
+                    try {
+                        JSONObject j = new JSONObject(result);
+                        String error = j.getString("error");
+                        String token = j.getString("token");
+                        System.out.println(error);
+                        System.out.println(error==null);
+                        System.out.println(token);
+
+                        if (error=="null" && token!="null") {
+                            // 토큰 저장
+                            System.out.println("메인액티비티 시작");
+                            // 메인 화면 전환
+                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                            getActivity().startActivity(mainIntent);
+                            getActivity().finish();
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                });
+                // API 주소와 위 핸들러 전달 후 실행.
+                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
+
+
+
+
+
 
                 // 로그인 성공
 
