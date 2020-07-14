@@ -31,11 +31,11 @@ public class Ex01Activity extends AppCompatActivity  implements IEyeDistanceMeas
 
     private final static String TAG = Ex01Activity.class.getSimpleName();
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
-    public int curLevel = EX_LEVEL_L;
+    public int mCurLevel = EX_LEVEL_L;
 
     private static final int REQUEST_CAMERA = 1;
     private static final int SEND_THREAD_DISTANCE_MEASURE_COMPLETE = 0;

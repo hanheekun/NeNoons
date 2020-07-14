@@ -19,9 +19,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Ex03AFragment extends Fragment implements View.OnClickListener{
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
     private View mView;
 
@@ -93,18 +93,18 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
 
                 // set time, level
                 if (!BtnLevelL.isEnabled()){
-                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_L;
+                    ((Ex03Activity)getActivity()).mCurLevel = EX_LEVEL_L;
                     editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_LOW);
                     editor.commit();
                 }
 
                 if (!BtnLevelM.isEnabled()){
-                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_M;
+                    ((Ex03Activity)getActivity()).mCurLevel = EX_LEVEL_M;
                     editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_MID);
                     editor.commit();
                 }
                 if (!BtnLevelH.isEnabled()){
-                    ((Ex03Activity)getActivity()).curLevel = EX_LEVEL_H;
+                    ((Ex03Activity)getActivity()).mCurLevel = EX_LEVEL_H;
                     editor.putInt(EYELAB.APPDATA.EXERCISE.EX_3_LEVEL,EYELAB.APPDATA.EXERCISE.EX_LEVEL_HIGH);
                     editor.commit();
                 }

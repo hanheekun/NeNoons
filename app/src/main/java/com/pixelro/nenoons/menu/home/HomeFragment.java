@@ -3,6 +3,7 @@ package com.pixelro.nenoons.menu.home;
 import android.app.Activity;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -113,6 +114,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // home 에서 o2o 바로 연결
                 ////////////////////////////////////////////////////////////////////////
                 intent.putExtra("url", urlPath);
+                intent.putExtra("token", getToken(getActivity()));
                 getActivity().startActivity(intent);
 
                 return true;
@@ -146,6 +148,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // home 에서 o2o 배너 바로 연결
                 ////////////////////////////////////////////////////////////////////////
                 intent.putExtra("url", urlPath);
+                intent.putExtra("token", getToken(getActivity()));
                 getActivity().startActivity(intent);
 
                 return true;
@@ -426,5 +429,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+
+    public String getToken(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
+    }
+
+    public void setToken(Context context, String token){
+        (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit().putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
     }
 }

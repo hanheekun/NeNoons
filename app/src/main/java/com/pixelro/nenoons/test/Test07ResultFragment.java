@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.test;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.pixelro.nenoons.EYELAB;
+import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,6 +36,8 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    private TestProfile mTestProfile;
 
     @Override
     public View onCreateView(
@@ -58,6 +65,8 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         editor = sharedPreferences.edit();
         editor.putInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,mDistance);
         editor.commit();
+
+        mTestProfile = ((TestActivity)getActivity()).mTestProfile;
 
         // 거리에 따른 나이
         if (mDistance <= 22){
@@ -120,9 +129,14 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         /////////////////////////////////////////////////////////////////////////
         // 측정 기록 전송
         /////////////////////////////////////////////////////////////////////////
-        //
+        Date nowDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatNowDate = new SimpleDateFormat("yyyyMMddHHmmss");
+        mTestProfile.date = formatNowDate.format(nowDate);
 
-        //((TestActivity)getActivity()).mTestProfile.distance
+        String token = getToken(getActivity());
+
+        // 전송
+
 
 
     }
@@ -135,5 +149,9 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
                 break;
         }
 
+    }
+
+    public String getToken(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
     }
 }

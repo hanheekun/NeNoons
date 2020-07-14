@@ -23,9 +23,9 @@ import java.util.TimerTask;
 
 public class Ex03BFragment extends Fragment implements View.OnClickListener {
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
     private Vibrator mVibrator;
     private View mView;
@@ -74,7 +74,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
         mTimer = new Timer();
         mTimer.schedule(TimaerTaskMaker(),0,100);
 
-        if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_L){
+        if (((Ex03Activity)getActivity()).mCurLevel == EX_LEVEL_L){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 60;
             mScheduleStartSec[2] = 110;
@@ -83,7 +83,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[5] = 260;
             mScheduleStartSec[6] = 270;
         }
-        else if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_M){
+        else if (((Ex03Activity)getActivity()).mCurLevel == EX_LEVEL_M){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 110;
             mScheduleStartSec[2] = 160;
@@ -92,7 +92,7 @@ public class Ex03BFragment extends Fragment implements View.OnClickListener {
             mScheduleStartSec[5] = 410;
             mScheduleStartSec[6] = 420;
         }
-        else if (((Ex03Activity)getActivity()).curLevel == EX_LEVEL_H){
+        else if (((Ex03Activity)getActivity()).mCurLevel == EX_LEVEL_H){
             mScheduleStartSec[0] = 10;
             mScheduleStartSec[1] = 160;
             mScheduleStartSec[2] = 210;

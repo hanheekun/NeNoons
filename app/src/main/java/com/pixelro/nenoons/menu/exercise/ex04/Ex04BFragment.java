@@ -28,9 +28,9 @@ import java.util.TimerTask;
 public class Ex04BFragment extends Fragment implements View.OnClickListener {
     private final static String TAG = Ex04BFragment.class.getSimpleName();
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
     private Vibrator mVibrator;
     private View mView;
@@ -77,15 +77,15 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
 
         mTimer = new Timer();
 
-        if (((Ex04Activity)getActivity()).curLevel == EX_LEVEL_L){
+        if (((Ex04Activity)getActivity()).mCurLevel == EX_LEVEL_L){
             mTimer.schedule(TimaerTaskMaker(),0,2100);
             mPathMoveTimeMS = 2100;
         }
-        else if (((Ex04Activity)getActivity()).curLevel == EX_LEVEL_M){
+        else if (((Ex04Activity)getActivity()).mCurLevel == EX_LEVEL_M){
             mTimer.schedule(TimaerTaskMaker(),0,1400);
             mPathMoveTimeMS = 1400;
         }
-        else if (((Ex04Activity)getActivity()).curLevel == EX_LEVEL_H){
+        else if (((Ex04Activity)getActivity()).mCurLevel == EX_LEVEL_H){
             mTimer.schedule(TimaerTaskMaker(),0,700);
             mPathMoveTimeMS = 700;
         }

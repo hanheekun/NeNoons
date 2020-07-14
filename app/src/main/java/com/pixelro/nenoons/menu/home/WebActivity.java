@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,9 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pixelro.nenoons.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class WebActivity extends AppCompatActivity  implements View.OnClickListener {
 
     private final static String TAG = WebActivity.class.getSimpleName();
@@ -24,14 +20,17 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
     private WebView mWebView; // 웹뷰 선언
     private WebSettings mWebSettings; //웹뷰세팅
 
+    private String mUrl;
+    private String mToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
 
         Intent intent = getIntent();
-        // MainActivity 의 putExtra로 지정했던 key 값
-        String key = intent.getExtras().getString("url");
+        mUrl = intent.getExtras().getString("url");
+        mToken = intent.getExtras().getString("token");
 
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
@@ -44,7 +43,7 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 String key = "token";
-                String val = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2tjY3pvY296MDAwMDg1OWh0Y3ZuN2lweCIsImVtYWlsIjoiY3NAZW5raW5vLmNvbSIsIm5hbWUiOiLrrLjtmITsoJUiLCJ0ZWwiOiIwMTAtMjczMy04MDk2In0sImlhdCI6MTU5NDY5OTg2MCwiZXhwIjoxNTk1MzA0NjYwfQ.mvJqJuhMmloQkY_ite5qW6344Cosfd58LcCJ-Qp-zC0";
+                String val = mToken;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     view.evaluateJavascript("localStorage.setItem('"+ key +"','"+ val +"');", null);
                 } else {
@@ -66,7 +65,7 @@ public class WebActivity extends AppCompatActivity  implements View.OnClickListe
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        mWebView.loadUrl(key); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl(mUrl); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         //mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {

@@ -23,9 +23,9 @@ import java.util.TimerTask;
 
 public class Ex02BFragment extends Fragment implements View.OnClickListener {
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
     private Vibrator mVibrator;
     private View mView;
@@ -67,13 +67,13 @@ public class Ex02BFragment extends Fragment implements View.OnClickListener {
 
         mTimer = new Timer();
 
-        if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_L){
+        if (((Ex02Activity)getActivity()).mCurLevel == EX_LEVEL_L){
             mTimer.schedule(TimaerTaskMaker(),1000,1000);
         }
-        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_M){
+        else if (((Ex02Activity)getActivity()).mCurLevel == EX_LEVEL_M){
             mTimer.schedule(TimaerTaskMaker(),1000,766);
         }
-        else if (((Ex02Activity)getActivity()).curLevel == EX_LEVEL_H){
+        else if (((Ex02Activity)getActivity()).mCurLevel == EX_LEVEL_H){
             mTimer.schedule(TimaerTaskMaker(),1000,400);
         }
 

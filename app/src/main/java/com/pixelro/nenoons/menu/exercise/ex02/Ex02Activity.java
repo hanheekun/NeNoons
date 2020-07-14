@@ -11,11 +11,11 @@ import com.pixelro.nenoons.menu.exercise.ExCancelDialog;
 
 public class Ex02Activity extends AppCompatActivity {
 
-    public final static int EX_LEVEL_L = 0;
-    public final static int EX_LEVEL_M = 1;
-    public final static int EX_LEVEL_H = 2;
+    public final static int EX_LEVEL_L = 1;
+    public final static int EX_LEVEL_M = 2;
+    public final static int EX_LEVEL_H = 3;
 
-    public int curLevel = EX_LEVEL_L;
+    public int mCurLevel = EX_LEVEL_L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

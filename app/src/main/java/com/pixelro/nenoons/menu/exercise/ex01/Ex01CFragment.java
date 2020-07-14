@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.menu.exercise.ex01;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +13,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.EYELAB;
+import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -45,6 +50,19 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
         editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,true);
         editor.commit();
 
+        // 운동 정보 전달
+        ExProfile exProfile = new ExProfile();
+        Date nowDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat formatNowDate = new SimpleDateFormat("yyyyMMddHHmmss");
+        exProfile.type = ExProfile.Type.TYPE_1;
+        exProfile.date = formatNowDate.format(nowDate);
+        exProfile.level = ((Ex01Activity)getActivity()).mCurLevel;
+
+        String token = getToken(getActivity());
+
+        // 전달
+
+
     }
 
     @Override
@@ -59,5 +77,9 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
                 getActivity().finish();
                 break;
         }
+    }
+
+    public String getToken(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
     }
 }
