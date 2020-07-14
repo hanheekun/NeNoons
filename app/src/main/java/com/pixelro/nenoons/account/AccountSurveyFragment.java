@@ -16,21 +16,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
-import com.pixelro.nenoons.Profile;
+import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
-import com.pixelro.nenoons.SplashActivity;
 
 public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
 
     private final static String TAG = AccountSurveyFragment.class.getSimpleName();
     private View mView;
 
-    private Profile mProfile;
+    private PersonalProfile mPersonalProfile;
 
     // Get reference of widgets from XML layout
     Spinner SpLeft;
@@ -49,7 +45,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        mProfile = ((AccountActivity)getActivity()).mProfile;
+        mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
@@ -75,67 +71,67 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
 
                 // profile에 정보 입력 // 아직 내용 check 안함
                 if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_1)).isChecked()){
-                    mProfile.glasses = Profile.Glasses.NONE;
+                    mPersonalProfile.glasses = PersonalProfile.Glasses.NONE;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_2)).isChecked()){
-                    mProfile.glasses = Profile.Glasses.GLASSESS;
+                    mPersonalProfile.glasses = PersonalProfile.Glasses.GLASSESS;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_3)).isChecked()){
-                    mProfile.glasses = Profile.Glasses.FAR_VISION;
+                    mPersonalProfile.glasses = PersonalProfile.Glasses.FAR_VISION;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_4)).isChecked()){
-                    mProfile.glasses = Profile.Glasses.CONTACT;
+                    mPersonalProfile.glasses = PersonalProfile.Glasses.CONTACT;
                 }
 
-                mProfile.left = (String)SpLeft.getSelectedItem();
-                mProfile.right = (String)SpRight.getSelectedItem();
+                mPersonalProfile.left = (String)SpLeft.getSelectedItem();
+                mPersonalProfile.right = (String)SpRight.getSelectedItem();
 
-                mProfile.status = "";
+                mPersonalProfile.status = "";
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_1)).isChecked()){
-                    mProfile.status += Profile.Status.MYOPIA + " ";
+                    mPersonalProfile.status += PersonalProfile.Status.MYOPIA + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_2)).isChecked()){
-                    mProfile.status += Profile.Status.EMMETROPIA + " ";
+                    mPersonalProfile.status += PersonalProfile.Status.EMMETROPIA + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_3)).isChecked()){
-                    mProfile.status += Profile.Status.ASTIGMATISM + " ";
+                    mPersonalProfile.status += PersonalProfile.Status.ASTIGMATISM + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_4)).isChecked()){
-                    mProfile.status += Profile.Status.HYPEROPIA + " ";
+                    mPersonalProfile.status += PersonalProfile.Status.HYPEROPIA + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_5)).isChecked()){
-                    mProfile.status += Profile.Status.UNKNOWN + " ";
+                    mPersonalProfile.status += PersonalProfile.Status.UNKNOWN + " ";
                 }
 
-                mProfile.surgery = "";
+                mPersonalProfile.surgery = "";
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_1)).isChecked()){
-                    mProfile.surgery += Profile.Surgery.LASIKLASEK + " ";
+                    mPersonalProfile.surgery += PersonalProfile.Surgery.LASIKLASEK + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_2)).isChecked()){
-                    mProfile.surgery += Profile.Surgery.OLD + " ";
+                    mPersonalProfile.surgery += PersonalProfile.Surgery.OLD + " ";
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_3)).isChecked()){
-                    mProfile.surgery += Profile.Surgery.CATARACT + " ";
+                    mPersonalProfile.surgery += PersonalProfile.Surgery.CATARACT + " ";
                 }
 
                 if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_1)).isChecked()){
-                    mProfile.exercise = Profile.Excercise.YES;
+                    mPersonalProfile.exercise = PersonalProfile.Excercise.YES;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_2)).isChecked()){
-                    mProfile.exercise = Profile.Excercise.NO;
+                    mPersonalProfile.exercise = PersonalProfile.Excercise.NO;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_3)).isChecked()){
-                    mProfile.exercise = Profile.Excercise.SOMETIMES;
+                    mPersonalProfile.exercise = PersonalProfile.Excercise.SOMETIMES;
                 }
 
                 if(((RadioButton)mView.findViewById(R.id.radioButton_food_1)).isChecked()){
-                    mProfile.food = Profile.Food.YES;
+                    mPersonalProfile.food = PersonalProfile.Food.YES;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_food_2)).isChecked()){
-                    mProfile.food = Profile.Food.NO;
+                    mPersonalProfile.food = PersonalProfile.Food.NO;
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_food_3)).isChecked()){
-                    mProfile.food = Profile.Food.SOMETIMES;
+                    mPersonalProfile.food = PersonalProfile.Food.SOMETIMES;
                 }
 
                 ////////////////////////////////////////////////////////////

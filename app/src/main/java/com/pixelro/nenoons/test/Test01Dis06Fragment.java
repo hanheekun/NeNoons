@@ -39,6 +39,9 @@ public class Test01Dis06Fragment extends Fragment  implements View.OnClickListen
 
         ((TextView)view.findViewById(R.id.textView_test_03_distance)).setText(""+((TestActivity)getActivity()).mCurrentDistance+"cm");
 
+
+
+
     }
 
     @Override

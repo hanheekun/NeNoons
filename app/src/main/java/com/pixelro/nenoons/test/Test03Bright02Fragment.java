@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 
@@ -86,6 +88,20 @@ public class Test03Bright02Fragment extends Fragment  implements View.OnClickLis
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
+                ((TestActivity)getActivity()).mTestProfile.bright = 0;
+                if (((CheckBox)mView.findViewById(R.id.imageView17)).isChecked()){
+                    ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_1;
+                }
+                if (((CheckBox)mView.findViewById(R.id.imageView21)).isChecked()){
+                    ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_2;
+                }
+                if (((CheckBox)mView.findViewById(R.id.imageView22)).isChecked()){
+                    ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_3;
+                }
+                if (((CheckBox)mView.findViewById(R.id.imageView23)).isChecked()){
+                    ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_4;
+                }
+
                 NavHostFragment.findNavController(Test03Bright02Fragment.this).navigate(R.id.action_navigation_test_03_diff_to_navigation_test_04_color);
                 break;
             case R.id.button_test_prev:

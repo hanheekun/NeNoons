@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -117,9 +118,11 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         }
 
         /////////////////////////////////////////////////////////////////////////
-        // 운동 기록 전송
+        // 측정 기록 전송
         /////////////////////////////////////////////////////////////////////////
+        //
 
+        //((TestActivity)getActivity()).mTestProfile.distance
 
 
     }

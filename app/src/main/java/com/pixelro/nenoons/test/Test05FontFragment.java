@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 
 public class Test05FontFragment extends Fragment  implements View.OnClickListener{
@@ -92,18 +93,22 @@ public class Test05FontFragment extends Fragment  implements View.OnClickListene
             case R.id.frameLayout_font_1:
                 setAllColorButtonReset();
                 FlFont1.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_1;
                 break;
             case R.id.frameLayout_font_2:
                 setAllColorButtonReset();
                 FlFont2.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_2;
                 break;
             case R.id.frameLayout_font_3:
                 setAllColorButtonReset();
                 FlFont3.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_3;
                 break;
             case R.id.frameLayout_font_4:
                 setAllColorButtonReset();
                 FlFont4.setBackgroundResource(R.drawable.test_color_outline);
+                ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_4;
                 break;
         }
 

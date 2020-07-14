@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 
 public class Test04ColorFragment extends Fragment  implements View.OnClickListener{
@@ -114,31 +115,37 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
                 setAllColorButtonReset();
                 FlColor1.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable) FlColorLight1.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_1;
                 break;
             case R.id.constraintlayout_color_2:
                 setAllColorButtonReset();
                 FlColor2.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight2.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_2;
                 break;
             case R.id.constraintlayout_color_3:
                 setAllColorButtonReset();
                 FlColor3.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight3.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_3;
                 break;
             case R.id.constraintlayout_color_4:
                 setAllColorButtonReset();
                 FlColor4.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight4.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_4;
                 break;
             case R.id.constraintlayout_color_5:
                 setAllColorButtonReset();
                 FlColor5.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight5.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_5;
                 break;
             case R.id.constraintlayout_color_6:
                 setAllColorButtonReset();
                 FlColor6.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight6.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_6;
                 break;
 
         }

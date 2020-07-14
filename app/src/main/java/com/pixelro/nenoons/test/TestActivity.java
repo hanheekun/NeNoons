@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.pixelro.nenoons.BaseActivity;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 import com.pixelro.nenoons.distance.IEyeDistanceMeasureServiceCallback;
 
@@ -47,6 +48,8 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
     public int mCurrentDistance = 0;
     public int mCurrentDistance_2 = 0;
     public int mCurrentSelectedColor = 0;
+
+    public TestProfile mTestProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
         TestDialog dlg = new TestDialog(this);
 
         dlg.showDialog();
+
+        mTestProfile = new TestProfile();
 
         //showDialog();
 

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.pixelro.nenoons.Profile;
+import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 
 public class AccountProfileFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener{
@@ -29,7 +29,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
     private EditText Etjob;
     private EditText EtPhoneNumber;
 
-    private Profile mProfile;
+    private PersonalProfile mPersonalProfile;
 
     // profile
     String mName;
@@ -52,7 +52,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        mProfile = ((AccountActivity)getActivity()).mProfile;
+        mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_profile_next).setOnClickListener(this);
@@ -77,11 +77,11 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
             case R.id.button_account_profile_next:
 
                 // profile에 정보 입력 // 아직 내용 check 안함
-                mProfile.name = EtName.getText().toString();
-                mProfile.gender = EtGender.getText().toString();
-                mProfile.birthday = EtBirthday.getText().toString();
-                mProfile.job = Etjob.getText().toString();
-                mProfile.phone = EtPhoneNumber.getText().toString();
+                mPersonalProfile.name = EtName.getText().toString();
+                mPersonalProfile.gender = EtGender.getText().toString();
+                mPersonalProfile.birthday = EtBirthday.getText().toString();
+                mPersonalProfile.job = Etjob.getText().toString();
+                mPersonalProfile.phone = EtPhoneNumber.getText().toString();
 
                 // 다음 페이지 전환
                 NavHostFragment.findNavController(AccountProfileFragment.this).navigate(R.id.action_navigation_account_profile_to_navigation_account_survey);

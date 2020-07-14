@@ -1,6 +1,6 @@
 package com.pixelro.nenoons;
 
-public class Profile {
+public class PersonalProfile {
 
     public String email = "email";
     public String password = "password";

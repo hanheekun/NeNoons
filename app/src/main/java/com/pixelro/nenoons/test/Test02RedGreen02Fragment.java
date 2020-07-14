@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 
@@ -46,8 +47,8 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
         rg = (RadioGroup)mView.findViewById(R.id.radioGroup_test_02);
         rg.setOnClickListener(this);
         
-        view.findViewById(R.id.radioButton).setOnClickListener(this);
-        view.findViewById(R.id.radioButton2).setOnClickListener(this);
+        view.findViewById(R.id.radioButton_test_02_red).setOnClickListener(this);
+        view.findViewById(R.id.radioButton_test_02_green).setOnClickListener(this);
 
     }
 
@@ -89,6 +90,12 @@ public class Test02RedGreen02Fragment extends Fragment  implements View.OnClickL
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:
+                if (rg.getCheckedRadioButtonId() == 0){
+                    ((TestActivity)getActivity()).mTestProfile.redgreen = TestProfile.Redgreen.RED;
+                }
+                else {
+                    ((TestActivity)getActivity()).mTestProfile.redgreen = TestProfile.Redgreen.GREEN;
+                }
                 NavHostFragment.findNavController(Test02RedGreen02Fragment.this).navigate(R.id.action_navigation_test_02_gr_02_to_navigation_test_03_bright_01);
                 break;
             case R.id.button_test_prev:

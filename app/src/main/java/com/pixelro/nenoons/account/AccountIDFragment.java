@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.EYELAB;
-import com.pixelro.nenoons.Profile;
+import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 
 import java.util.regex.Matcher;
@@ -39,7 +39,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
     //private SharedPreferences sharedPreferences;
     //private SharedPreferences.Editor editor;
 
-    private Profile mProfile;
+    private PersonalProfile mPersonalProfile;
 
     AccountDialog mDlg;
 
@@ -56,7 +56,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        mProfile = ((AccountActivity)getActivity()).mProfile;
+        mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
         // next button
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
@@ -196,8 +196,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 //////////////////////////////////////////////////////////////////////////////
 
                 // email, pass 임시 저장
-                mProfile.email = EtEmail.getText().toString();
-                mProfile.password = EtPass.getText().toString();
+                mPersonalProfile.email = EtEmail.getText().toString();
+                mPersonalProfile.password = EtPass.getText().toString();
 
                 // email, pass 로 회원 가입
 
