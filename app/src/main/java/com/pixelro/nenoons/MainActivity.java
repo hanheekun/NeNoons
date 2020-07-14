@@ -1,6 +1,7 @@
 package com.pixelro.nenoons;
 
 import android.app.AppOpsManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pixelro.nenoons.account.AccountActivity;
 import com.pixelro.nenoons.menu.exercise.ExerciseFragment;
 import com.pixelro.nenoons.menu.home.HomeFragment;
 import com.pixelro.nenoons.menu.my.MyFragment;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FragmentManager fragmentManager;
     private Fragment fa, fb, fc;
+
+    public ProgressDialog mLoginHomeLoadingProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Toast.makeText((Context)SplashActivity.this, (CharSequence)"Failed to retrieve app usage statistics. You may need to enable access for this app through Settings > Security > Apps with usage access", 1).show();
             MainActivity.this.startActivity(new Intent("android.settings.USAGE_ACCESS_SETTINGS"));
         }
+
+        //loading 동안 progress
+        mLoginHomeLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
+
+        //loading 동안 progress 1초뒤 종료
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+
+                mLoginHomeLoadingProgressDialog.dismiss();
+
+            }
+        }, 4000);
 
     }
 

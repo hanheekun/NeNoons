@@ -16,16 +16,13 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions"/>
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="false"
-        tools:replace="android:allowBackup"
         android:fullBackupContent="false"
         android:icon="@mipmap/logo_only"
         android:label="@string/app_name"
@@ -33,17 +30,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        >
-        <activity android:name="com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity"
+        tools:replace="android:allowBackup">
+        <activity android:name=".menu.home.TestHistoryActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name="com.pixelro.nenoons.menu.exercise.ex02.Ex02Activity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.pixelro.nenoons.menu.exercise.ex03.Ex03Activity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.pixelro.nenoons.menu.exercise.ex04.Ex04Activity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.pixelro.nenoons.menu.home.WebActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".menu.exercise.ex01.Ex01Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.exercise.ex02.Ex02Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.exercise.ex03.Ex03Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.exercise.ex04.Ex04Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.home.WebActivity"
+            android:screenOrientation="portrait" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -58,7 +62,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.pixelro.nenoons.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,45 +71,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.pixelro.nenoons.FirstActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.pixelro.nenoons.account.AccountActivity"
+            android:name=".FirstActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.MainActivity"
+            android:name=".account.AccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.test.TestActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.Ex01Activity2"
+            android:name=".test.TestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.Ex02Activity2"
+            android:name=".menu.exercise.Ex01Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.Ex03Activity2"
+            android:name=".menu.exercise.Ex02Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.Ex04Activity2"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.pixelro.nenoons.menu.care.o2o.O2OActivity"
+            android:name=".menu.exercise.Ex03Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.home.AddressWebViewActivity"
+            android:name=".menu.exercise.Ex04Activity2"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.history.ExHistoryActivity"
+            android:name=".menu.care.o2o.O2OActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.pixelro.nenoons.menu.exercise.history.ExHistoryActivity_calendar"
+            android:name=".menu.home.AddressWebViewActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".menu.exercise.history.ExHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.exercise.history.ExHistoryActivity_calendar"
+            android:screenOrientation="portrait" />
 
         <service
-            android:name="com.pixelro.nenoons.distance.EyeDistanceMeasureService"
+            android:name=".distance.EyeDistanceMeasureService"
             android:enabled="true"
             android:exported="true" />
     </application>

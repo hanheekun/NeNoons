@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.account;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -78,6 +79,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private Switch SwLoginSave;
     private Context mContext;
     AccountDialog mDlg;
+    public ProgressDialog mLoginProgressDialog;
 
     //private SharedPreferences appData;
 
@@ -93,9 +95,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
     public static String getString(Context context, String key) {
         SharedPreferences prefs = getPreferences(context);
-        String value = prefs.getString(key,"");
+        String value = prefs.getString(key, "");
         return value;
-}
+    }
 
     public static void setString(Context context, String key, String value) {
         SharedPreferences prefs = getPreferences(context);
@@ -136,13 +138,13 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.button_account_login_login).setOnClickListener(this);
 
 
-        SwLoginSave = (Switch)(view.findViewById(R.id.switch_account_login_save));
+        SwLoginSave = (Switch) (view.findViewById(R.id.switch_account_login_save));
 
-        BtnLogin = (Button)(getActivity().findViewById(R.id.button_account_login_login));
+        BtnLogin = (Button) (getActivity().findViewById(R.id.button_account_login_login));
         BtnLogin.setOnClickListener(this);
 
-        EtEmail = (EditText)(getActivity().findViewById(R.id.editText_account_login_email));
-        EtPass = (EditText)(getActivity().findViewById(R.id.editText_account_login_password));
+        EtEmail = (EditText) (getActivity().findViewById(R.id.editText_account_login_email));
+        EtPass = (EditText) (getActivity().findViewById(R.id.editText_account_login_password));
 
         //edit 창에 입력이 있어야지만 로그인 버는 활성화
         EtEmail.addTextChangedListener(new TextWatcher() {
@@ -152,10 +154,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(EtEmail.length() > 0 && EtPass.length() > 0){
+                if (EtEmail.length() > 0 && EtPass.length() > 0) {
                     BtnLogin.setEnabled(true);
-                }
-                else {
+                } else {
                     BtnLogin.setEnabled(false);
                 }
             }
@@ -171,10 +172,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(EtEmail.length() > 0 && EtPass.length() > 0 ){
+                if (EtEmail.length() > 0 && EtPass.length() > 0) {
                     BtnLogin.setEnabled(true);
-                }
-                else {
+                } else {
                     BtnLogin.setEnabled(false);
                 }
             }
@@ -218,7 +218,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
                 break;
@@ -244,10 +244,13 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 //                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
 //                String url = "https://nenoonsapi.du.r.appspot.com/android/signin"; 	//URL
 
+                // 로그인중 progress 시작
+                mLoginProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+
                 HashMap<String, String> param = new HashMap<String, String>();
                 // 파라메터는 넣기 예
-                param.put("email", EtEmail.getText().toString().trim());	//PARAM
-                param.put("password", EtPass.getText().toString().trim());	//PARAM
+                param.put("email", EtEmail.getText().toString().trim());    //PARAM
+                param.put("password", EtPass.getText().toString().trim());    //PARAM
                 Handler handler = new Handler(message -> {
 
                     Bundle bundle = message.getData();
@@ -258,44 +261,41 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         String error = j.getString("error");
                         String token = j.getString("token");
                         System.out.println(error);
-                        System.out.println(error==null);
+                        System.out.println(error == null);
                         System.out.println(token);
 
-                        if (error=="null" && token!="null") {
+                        // progress 종료
+                        if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
 
-                            Toast.makeText(mContext,"로그인 성공",Toast.LENGTH_SHORT).show();
+                        if (error == "null" && token != "null") {
+
+                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
 
                             // 토큰 저장
-                            setString(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+                            setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token);
                             System.out.println("메인액티비티 시작");
                             // 메인 화면 전환
                             LoginSuccessProcessEmail();
 //                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
 //                            getActivity().startActivity(mainIntent);
 //                            getActivity().finish();
-                        }
-                        else{
+                        } else {
                             // 로그인 실패
-                            removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
-                            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
+                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
                         }
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                         // 로그인 실패
-                        removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
+                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                        mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
                     }
                     return true;
                 });
                 // API 주소와 위 핸들러 전달 후 실행.
                 new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
-
-
-
-
-
 
                 // 로그인 성공
 
@@ -329,11 +329,11 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    private void LoginResultAction(){
+    private void LoginResultAction() {
         String token = getString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
 
         // 토큰이 있는 경우 디코드 하기
-        if (token!=null && !"".equals(token)) {
+        if (token != null && !"".equals(token)) {
             try {
 
                 String decodeStr = null;
@@ -341,16 +341,16 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 //boolean isExpired = jwt.isExpired(10); // 10 초 전까지 토큰 종료 여부 판단 // 새로 받는 것은 충분한 시간이 있다는 전재
                 decodeStr = JWTUtils.decoded(token); // 디코드 값
                 try {
-                    JSONObject jsonObj = JWTUtils.getJson(token,"user");
+                    JSONObject jsonObj = JWTUtils.getJson(token, "user");
                     String email = (String) jsonObj.get("email");
                     String name = (String) jsonObj.get("name");
-                    String id= (String) jsonObj.get("id");
+                    String id = (String) jsonObj.get("id");
                     String tel = (String) jsonObj.get("tel");
                     Log.i(">>>>>>>>>>>", email + " " + name + " " + id + " " + tel);
 
                     decodeStr += "\nJSON :\n" + email + "\n" + id + "\n" + name + "\n" + tel;
                     //((TextView)view.findViewById(R.id.textview_decode)).setText(decodeStr );
-                    Toast.makeText(mContext,"로그인 성공",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
 
                     Log.i(TAG, "token = " + token);
 
@@ -363,20 +363,19 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     e.printStackTrace();
                     //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
                     //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                    mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
+                    mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
                 //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
                 //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
+                mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
             }
-        }
-        else {
+        } else {
             // 로그인 실패
             //Toast.makeText(mContext,"로그인 정보를 확인하세요",Toast.LENGTH_LONG).show();
-            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.","돌아가기");
+            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
         }
     }
 
@@ -387,12 +386,11 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if (SwLoginSave.isChecked()){
+        if (SwLoginSave.isChecked()) {
             editor.putBoolean(EYELAB.APPDATA.ACCOUNT.SAVE_EMAIL_LOGIN_INFO, true);
             editor.putString(EYELAB.APPDATA.ACCOUNT.EMAIL, EtEmail.getText().toString().trim());
             editor.putString(EYELAB.APPDATA.ACCOUNT.PASS, EtPass.getText().toString().trim());
-        }
-        else {
+        } else {
             // login but email,pass delete
             editor.remove(EYELAB.APPDATA.ACCOUNT.SAVE_EMAIL_LOGIN_INFO);
             editor.remove(EYELAB.APPDATA.ACCOUNT.EMAIL);
@@ -406,18 +404,17 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
 
-        if (sharedPreferences.getBoolean(EYELAB.APPDATA.ACCOUNT.SAVE_EMAIL_LOGIN_INFO, false)){
+        if (sharedPreferences.getBoolean(EYELAB.APPDATA.ACCOUNT.SAVE_EMAIL_LOGIN_INFO, false)) {
             SwLoginSave.setChecked(true);
             EtEmail.setText(sharedPreferences.getString(EYELAB.APPDATA.ACCOUNT.EMAIL, ""));
             EtPass.setText(sharedPreferences.getString(EYELAB.APPDATA.ACCOUNT.PASS, ""));
-        }
-        else {
+        } else {
             EtEmail.setText("");
             EtPass.setText("");
         }
     }
 
-    private void LoginSuccessProcessEmail(){
+    private void LoginSuccessProcessEmail() {
 
         // email 로그인 정보 저장
         saveEmailLoginInfo();
@@ -516,7 +513,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         Handler uiHandler = new Handler(Looper.getMainLooper()) {  // 핸들러에 Main Looper를 인자로 전달
             @Override
             public void handleMessage(Message msg) {  // 메인 스레드에서 호출
-                Log.d(TAG,"handleMessage : " + msg.what);
+                Log.d(TAG, "handleMessage : " + msg.what);
                 //화면 수정
                 //showToken(layout);
             }
@@ -529,15 +526,15 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     public void onResponse(@NotNull Response<SignInMutation.Data> response) {
                         Log.i(TAG, response.toString());
                         String error = response.data().signIn().error();
-                        if (error==null) {
+                        if (error == null) {
                             String token = response.data().signIn().token();
-                            if (token==null)
+                            if (token == null)
                                 Log.i(TAG, "token is null");
                             else {
                                 Log.i(TAG, token);
                                 // 로그인 성공
                                 // 토큰 저장
-                                setString(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+                                setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token);
                                 //showToken(layout);
                                 LoginResultAction();
                             }
@@ -545,7 +542,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                             Log.i(TAG, error);
                             // 로그인 실패
                             // 토큰 삭제
-                            removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
+                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                             LoginResultAction();
                         }
                     }
@@ -555,10 +552,10 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         Log.e(TAG, e.getMessage(), e);
                         // 로그인 실패
                         // 토큰 삭제
-                        removeKey(mContext,EYELAB.APPDATA.ACCOUNT.TOKEN);
+                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                         LoginResultAction();
                     }
-                },uiHandler)
+                }, uiHandler)
         );
 
         // 일반 쿼리 사용예
@@ -567,13 +564,13 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onResponse(@NotNull Response<AllMembersQuery.Data> response) {
                         Log.i(TAG, response.toString());
-                        if (response.data()!=null) {
+                        if (response.data() != null) {
                             int size = response.data().allMembers().size();
                             Log.i(TAG, "size : " + size);
                             if (size > 0) {
-                                for (AllMembersQuery.AllMember member:
+                                for (AllMembersQuery.AllMember member :
                                         response.data().allMembers()) {
-                                    Log.i(TAG, "member : " + member.email() +" "+ member.id());
+                                    Log.i(TAG, "member : " + member.email() + " " + member.id());
                                 }
                             }
                         }
@@ -583,11 +580,10 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     public void onFailure(@NotNull ApolloException e) {
                         Log.e(TAG, e.getMessage(), e);
                     }
-                },uiHandler)
+                }, uiHandler)
         );
 
     }
-
 
 
 }

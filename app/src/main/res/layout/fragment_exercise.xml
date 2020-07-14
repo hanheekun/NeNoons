@@ -72,14 +72,14 @@
 
     <Button
         android:id="@+id/button_ex_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="294dp"
-        android:layout_marginTop="151dp"
-        android:text="history"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ex_history"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_ex_date"
+        app:layout_constraintStart_toEndOf="@+id/textView_ex_date"
+        app:layout_constraintTop_toTopOf="@+id/textView_ex_date" />
 
     <TextView
         android:id="@+id/textView_ex_date"

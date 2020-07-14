@@ -179,6 +179,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         root.findViewById(R.id.button_home_test).setOnClickListener(this);
+        root.findViewById(R.id.button_home_test_history).setOnClickListener(this);
 
         return root;
     }
@@ -377,6 +378,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_home_test:
                 i = new Intent(getContext(), TestActivity.class);
+                startActivity(i);
+                break;
+            case R.id.button_home_test_history:
+                i = new Intent(getContext(), TestHistoryActivity.class);
                 startActivity(i);
                 break;
 
