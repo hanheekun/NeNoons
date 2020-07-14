@@ -141,7 +141,7 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 ////////////////////////////////////////////////////////////
                 // 회원 정보 전달
                 ////////////////////////////////////////////////////////////
-                //String name = mProfile.name;
+                //String name = mProfile.name0;
 
 
 
