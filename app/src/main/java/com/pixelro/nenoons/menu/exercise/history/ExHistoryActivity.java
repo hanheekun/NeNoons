@@ -47,6 +47,8 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         chart = (BarChart)findViewById(R.id.barchart_ex_history);
 
+        // 서버연결 20200715
+
         //////////////////////////////////////////////////////////////////////////////////////////
         // 측정 기록 불러오기
         //////////////////////////////////////////////////////////////////////////////////////////

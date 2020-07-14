@@ -430,6 +430,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
 
                 }
+
+                // 서버연결 20200715
+                // 주소 변경 서버 연결
+
+
                 break;
 
         }

@@ -58,9 +58,11 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
         exProfile.date = formatNowDate.format(nowDate);
         exProfile.level = ((Ex01Activity)getActivity()).mCurLevel;
 
+        // 서버연결 20200715
+
         String token = getToken(getActivity());
 
-        // 전달
+        // ExProfile 전달
 
 
     }

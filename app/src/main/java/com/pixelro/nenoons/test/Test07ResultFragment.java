@@ -126,6 +126,8 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
             TvResult.setText("노안이 심하므로,\n안경원, 안과를 추천드립니다.");
         }
 
+        // 서버연결 20200715
+
         /////////////////////////////////////////////////////////////////////////
         // 측정 기록 전송
         /////////////////////////////////////////////////////////////////////////
@@ -135,7 +137,7 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
 
         String token = getToken(getActivity());
 
-        // 전송
+        // TestProfile 전송
 
 
 

@@ -46,6 +46,8 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
 
+        // 서버연결 20200715
+
         //////////////////////////////////////////////////////////////////////////////////////////
         // 측정 기록 불러오기
         //////////////////////////////////////////////////////////////////////////////////////////
