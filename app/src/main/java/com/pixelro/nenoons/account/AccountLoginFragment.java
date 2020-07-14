@@ -277,7 +277,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     return true;
                 });
                 // API 주소와 위 핸들러 전달 후 실행.
-                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
 
 
 
