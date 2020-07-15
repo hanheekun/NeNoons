@@ -1,8 +1,11 @@
 package com.pixelro.nenoons.account;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,19 +14,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.EYELAB;
+import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.server.HttpTask;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.pixelro.nenoons.account.AccountLoginFragment.removeKey;
+import static com.pixelro.nenoons.account.AccountLoginFragment.setString;
 
 public class AccountIDFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
@@ -147,6 +159,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
+        Context mContext =getContext();
+
         switch (view.getId()) {
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
@@ -202,17 +216,70 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 mPersonalProfile.password = EtPass.getText().toString();
 
                 // email, pass 로 회원 가입
+                HashMap<String, String> param = new HashMap<String, String>();
+                // 파라메터는 넣기 예
+                param.put("email", EtEmail.getText().toString().trim());    //PARAM
+                param.put("password", EtPass.getText().toString().trim());    //PARAM
+                Handler handler = new Handler(message -> {
 
-                // 회원 가입 가능 할 경우 토큰 저장
-                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
-                editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
-                editor.commit();
+                    Bundle bundle = message.getData();
+                    String result = bundle.getString("result");
+                    System.out.println(result);
+                    try {
+                        JSONObject j = new JSONObject(result);
+                        String error = j.getString("error");
+                        String token1 = j.getString("token");
+                        System.out.println(error);
+                        System.out.println(error == null);
+                        System.out.println(token1);
 
-                // 다음 페이지 전환
-                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+                        // progress 종료
+
+                        if (error == "null" && token1 != "null") {
+
+                            Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
+
+                            // 토큰 저장
+                            setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token1);
+                            System.out.println("메인액티비티 시작");
+
+                            //                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+//                            getActivity().startActivity(mainIntent);
+//                            getActivity().finish();
+
+                            // 회원 가입 가능 할 경우 토큰 저장
+//                            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
+                            SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+                            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                            editor1.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token1);
+                            editor1.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
+                            editor1.commit();
+
+                            // 메인 화면 전환
+                            LoginSuccessProcessEmail();
+
+                            // 다음 페이지 전환
+                            NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+
+                        } else {
+                            // 이메일 회원가입 실패
+                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                            mDlg.showDialog("이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        // 로그인 실패
+                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                        mDlg.showDialog("이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                    }
+                    return true;
+                });
+                // API 주소와 위 핸들러 전달 후 실행.
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
+//                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
+
 
                 //////////////////////////////////////////////////////////////////////////////
                 // 가입 error message
@@ -227,5 +294,22 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 break;
         }
     }
+
+    private void LoginSuccessProcessEmail() {
+
+        // email 로그인 정보 저장
+//        saveEmailLoginInfo();
+
+        // 로그인 성공 저장
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING, true);
+
+        // 메인 화면 전환
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        getActivity().startActivity(mainIntent);
+        getActivity().finish();
+    }
+
 
 }

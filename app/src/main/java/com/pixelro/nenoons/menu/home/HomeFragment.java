@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,12 +32,17 @@ import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.menu.exercise.ExerciseViewModel;
+import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.test.TestActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -104,6 +111,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mHomeWebViewSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mHomeWebViewSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
         mHomeWebView.loadUrl("https://www.nenoons.com/app-home-page"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+//        mHomeWebView.loadUrl("http://192.168.1.162:3001/app-home-page"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
         mHomeWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -119,7 +127,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 return true;
             }
-
         });
 
 
@@ -389,6 +396,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        Context mContext =getContext();
 
         super.onActivityResult(requestCode, resultCode, intent);
 
@@ -425,22 +433,57 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             //          list.get(0).getCountryName();  // 국가명
                             //          list.get(0).getLatitude();        // 위도
                             //          list.get(0).getLongitude();    // 경도
+                            // 서버연결 20200715
+                            // 주소 변경 서버 연결
+
+                            String token = getToken(getContext());
+                            HashMap<String, String> param = new HashMap<String, String>();
+                            // 파라메터는 넣기 예
+                            param.put("token", token);    //PARAM
+                            param.put("gpsAddress", data);    //PARAM
+                            param.put("gpsLatitude", String.valueOf(list.get(0).getLatitude()));    //PARAM
+                            param.put("gpsLongitude", String.valueOf(list.get(0).getLongitude()));    //PARAM
+                            Handler handler = new Handler(message -> {
+
+                                Bundle bundle = message.getData();
+                                String result = bundle.getString("result");
+                                System.out.println(result);
+                                try {
+                                    JSONObject j = new JSONObject(result);
+                                    String error = j.getString("error");
+                                    String msg = j.getString("msg");
+                                    System.out.println(error);
+                                    System.out.println(error == null);
+
+                                    if (error == "null" && msg != "null") {
+
+                                        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                return true;
+                            });
+                            // API 주소와 위 핸들러 전달 후 실행.
+                            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_gps", handler).execute(param);
+//                            new HttpTask("http://192.168.1.162:4002/android/update_user_gps", handler).execute(param);
 
                         }
                     }
 
                 }
 
-                // 서버연결 20200715
-                // 주소 변경 서버 연결
-
 
                 break;
 
         }
 
-    }
 
+    }
     public String getToken(Context context){
         return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
     }
@@ -448,4 +491,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void setToken(Context context, String token){
         (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit().putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
     }
+
 }

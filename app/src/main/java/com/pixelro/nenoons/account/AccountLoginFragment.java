@@ -87,7 +87,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     //private SharedPreferences sharedPreferences;
 
     // 서버 로그인
-    private ApolloClient apolloClient;
+//    private ApolloClient apolloClient;
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE);
@@ -296,6 +296,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 });
                 // API 주소와 위 핸들러 전달 후 실행.
                 new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
+//                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
 
                 // 로그인 성공
 
@@ -428,161 +429,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         Intent mainIntent = new Intent(getActivity(), MainActivity.class);
         getActivity().startActivity(mainIntent);
         getActivity().finish();
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // 엔키노 로그인 코드
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void setApollo() {
-
-        ApolloSqlHelper apolloSqlHelper = ApolloSqlHelper.create(this.getContext(), "db_eyelab");
-        NormalizedCacheFactory cacheFactory = new SqlNormalizedCacheFactory(apolloSqlHelper);
-
-        // Create the cache key resolver, this example works well when all types have globally unique ids.
-        CacheKeyResolver resolver = new CacheKeyResolver() {
-            @NotNull
-            @Override
-            public CacheKey fromFieldRecordSet(@NotNull ResponseField field, @NotNull Map<String, Object> recordSet) {
-                return formatCacheKey((String) recordSet.get("id"));
-            }
-
-            @NotNull
-            @Override
-            public CacheKey fromFieldArguments(@NotNull ResponseField field, @NotNull Operation.Variables variables) {
-                return formatCacheKey((String) field.resolveArgument("id", variables));
-            }
-
-            private CacheKey formatCacheKey(String id) {
-                if (id == null || id.isEmpty()) {
-                    return CacheKey.NO_KEY;
-                } else {
-                    return CacheKey.from(id);
-                }
-            }
-        };
-
-        //Build the Apollo Client , http client
-//        String authHeader = "Bearer $accessTokenId";
-//        final String authHeader = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
-//        final String authHeader = "";
-
-        String authHeader = "";
-        String token = getString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-        if (token != null && !"".equals(token)) {
-            authHeader = "Bearer " + token;
-        }
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        final String finalAuthHeader = authHeader;
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                Request request = original.newBuilder()
-                        .header("Authorization", finalAuthHeader)
-                        .method(original.method(), original.body())
-                        .build();
-
-                return chain.proceed(request);
-            }
-        });
-
-        OkHttpClient okHttpClient = httpClient.build();
-
-        apolloClient = ApolloClient.builder()
-                .serverUrl("https://pixelro-api.an.r.appspot.com/graphql")
-                .normalizedCache(cacheFactory, resolver)
-                .okHttpClient(okHttpClient)
-                .build();
-
-    }
-
-
-    private void signIn(String email, String password) {
-
-        // 로그인 결과 return
-        // int result = EYELAB.LOGIN.ERROR;
-
-//        SignInMutation signInMutation = SignInMutation.builder().email("er@enkino.com").password("1234").build();
-
-        SignInMutation signInMutation = SignInMutation.builder().email(email).password(password).build();
-        AllMembersQuery allMembersQuery = AllMembersQuery.builder().build();
-
-
-        Handler uiHandler = new Handler(Looper.getMainLooper()) {  // 핸들러에 Main Looper를 인자로 전달
-            @Override
-            public void handleMessage(Message msg) {  // 메인 스레드에서 호출
-                Log.d(TAG, "handleMessage : " + msg.what);
-                //화면 수정
-                //showToken(layout);
-            }
-        };
-
-        //
-        apolloClient.mutate(signInMutation).enqueue(
-                new ApolloCallback<SignInMutation.Data>(new ApolloCall.Callback<SignInMutation.Data>() {
-                    @Override
-                    public void onResponse(@NotNull Response<SignInMutation.Data> response) {
-                        Log.i(TAG, response.toString());
-                        String error = response.data().signIn().error();
-                        if (error == null) {
-                            String token = response.data().signIn().token();
-                            if (token == null)
-                                Log.i(TAG, "token is null");
-                            else {
-                                Log.i(TAG, token);
-                                // 로그인 성공
-                                // 토큰 저장
-                                setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token);
-                                //showToken(layout);
-                                LoginResultAction();
-                            }
-                        } else {
-                            Log.i(TAG, error);
-                            // 로그인 실패
-                            // 토큰 삭제
-                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                            LoginResultAction();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NotNull ApolloException e) {
-                        Log.e(TAG, e.getMessage(), e);
-                        // 로그인 실패
-                        // 토큰 삭제
-                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        LoginResultAction();
-                    }
-                }, uiHandler)
-        );
-
-        // 일반 쿼리 사용예
-        apolloClient.query(allMembersQuery).enqueue(
-                new ApolloCallback<AllMembersQuery.Data>(new ApolloCall.Callback<AllMembersQuery.Data>() {
-                    @Override
-                    public void onResponse(@NotNull Response<AllMembersQuery.Data> response) {
-                        Log.i(TAG, response.toString());
-                        if (response.data() != null) {
-                            int size = response.data().allMembers().size();
-                            Log.i(TAG, "size : " + size);
-                            if (size > 0) {
-                                for (AllMembersQuery.AllMember member :
-                                        response.data().allMembers()) {
-                                    Log.i(TAG, "member : " + member.email() + " " + member.id());
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NotNull ApolloException e) {
-                        Log.e(TAG, e.getMessage(), e);
-                    }
-                }, uiHandler)
-        );
-
     }
 
 

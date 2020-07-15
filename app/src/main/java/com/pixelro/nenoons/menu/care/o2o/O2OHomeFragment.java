@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.pixelro.nenoons.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
 
     private final static String TAG = O2OHomeFragment.class.getSimpleName();
@@ -54,7 +57,10 @@ public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
         //mWebView.loadUrl("http://webapp.pixelro.com"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
-        mWebView.loadUrl("https://nenoons.com/app-main"); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+
+        Map<String, String> extraHeaders = new HashMap<String, String>();
+        extraHeaders.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSIsImFkbWluIjp0cnVlLCJtZW1iZXJPcGVuIjp0cnVlLCJzdG9yZUdyb3VwSWQiOiJja2EzZ25oN2owMDAwMDg2d3ltMWtxa2plIiwic3RvcmVJZCI6ImNrYTRvMTZvZDAwMDBtOTZ3bWkxZDEzanIifSwiaWF0IjoxNTk0Njk5Mjc4LCJleHAiOjE1OTUzMDQwNzh9.PevZHA3K2nc7HmUAaYcOhjsCScWUFCWutCa1MC3EQt4" );
+        mWebView.loadUrl("http://192.168.1.162:3000/app-main", extraHeaders); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

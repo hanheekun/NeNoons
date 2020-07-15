@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,22 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.server.HttpTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
 
@@ -63,6 +72,8 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Context mContext =getContext();
+
         switch (view.getId()){
             case R.id.button_arrow_back_background:
                 getActivity().onBackPressed();
@@ -140,6 +151,54 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 // 회원 정보 전달
                 ////////////////////////////////////////////////////////////
                 //String name = mProfile.name0;
+                String token = getToken(getActivity());
+
+                HashMap<String, String> param = new HashMap<String, String>();
+                // 파라메터는 넣기 예
+                param.put("token", token);    //PARAM
+                param.put("phone", mPersonalProfile.phone);    //PARAM
+                param.put("birthday", mPersonalProfile.birthday);    //PARAM
+                param.put("gender", mPersonalProfile.gender);    //PARAM
+                param.put("job", mPersonalProfile.job);    //PARAM
+                param.put("glasses", mPersonalProfile.glasses);    //PARAM
+                param.put("left", mPersonalProfile.left);    //PARAM
+                param.put("right", mPersonalProfile.right);    //PARAM
+                param.put("status", mPersonalProfile.status);    //PARAM
+                param.put("surgery", mPersonalProfile.surgery);    //PARAM
+                param.put("exercise", mPersonalProfile.exercise);    //PARAM
+                param.put("food", mPersonalProfile.food);    //PARAM
+                Handler handler = new Handler(message -> {
+
+                    Bundle bundle = message.getData();
+                    String result = bundle.getString("result");
+                    System.out.println(result);
+                    try {
+                        JSONObject j = new JSONObject(result);
+                        String error = j.getString("error");
+                        String msg = j.getString("msg");
+                        System.out.println(error);
+                        System.out.println(msg);
+
+                        // progress 종료
+
+                        if (error != "null") {
+                            Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                            System.out.println("저장 실패");
+                        }
+                        else if (msg != "null") {
+                            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                            System.out.println("저장 성공");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        // 실패
+                        Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                });
+                // API 주소와 위 핸들러 전달 후 실행.
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_survey", handler).execute(param);
+//                new HttpTask("http://192.168.1.162:4002/android/update_user_survey", handler).execute(param);
 
 
 
@@ -209,5 +268,9 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
             }
             return view;
         }
+    }
+
+    public String getToken(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
     }
 }

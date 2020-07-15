@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -22,11 +23,18 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.pixelro.nenoons.BaseActivity;
 import com.pixelro.nenoons.EYELAB;
+import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
+import com.pixelro.nenoons.server.HttpTask;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 
 public class ExHistoryActivity extends BaseActivity implements View.OnClickListener, OnChartValueSelectedListener {
@@ -38,12 +46,13 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     public ProgressDialog mLoadingProgressDialog;
 
     private int mHistory[][] = new int[31][4];
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ex_history_graph);
-
+        mContext = getApplicationContext();
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         chart = (BarChart)findViewById(R.id.barchart_ex_history);
 
@@ -57,6 +66,55 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
         String token = getToken(this);
         // 0 현재 month, -1 지난달
+        HashMap<String, String> param = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param.put("token", token);    //PARAM
+        param.put("month", "0");    //PARAM
+        Handler handler = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                JSONArray jlist = j.getJSONArray("list");
+                if (jlist.length()==0) {
+                    // 목록이 없음
+                    return true;
+                }
+                // progress 종료
+
+                if (error != "null") {
+                    Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                    System.out.println("목록 실패");
+                }
+                ArrayList exProfileList = new ArrayList();
+
+                // 목록 변환및 저장
+                for (int i=0;i<jlist.length();i++) {
+                    JSONObject jEx = (JSONObject) jlist.get(i);
+                    ExProfile exProfile = new ExProfile();
+                    exProfile.date = jEx.getString("date"); // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
+                    exProfile.type = jEx.getInt("type");
+                    exProfile.level = jEx.getInt("level");
+                    exProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                }
+                System.out.println(error);
+                System.out.println(jlist);
+                System.out.println(exProfileList);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                // 실패
+                Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_exercise", handler).execute(param);
+//        new HttpTask("http://192.168.1.162:4002/android/list_user_exercise", handler).execute(param);
+
 
         // 불러오기 완료 test
         new Handler().postDelayed(new Runnable(){
