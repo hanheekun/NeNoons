@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.account;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.server.HttpTask;
 
 import org.json.JSONException;
@@ -45,15 +47,12 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
     private EditText EtPass;
     private EditText EtPassCfm;
     private TextView TvPassCompare;
-    private String mEmail;
-    private String mPass;
     private Button BtnNext;
-    //private SharedPreferences sharedPreferences;
-    //private SharedPreferences.Editor editor;
 
+    //private AccountDialog mDlg;
+    private ProgressDialog mLoginProgressDialog;
     private PersonalProfile mPersonalProfile;
-
-    AccountDialog mDlg;
+    private SharedPreferencesManager mSm;
 
     @Override
     public View onCreateView(
@@ -67,6 +66,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mView = view;
+        mSm = new SharedPreferencesManager(getActivity());
 
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
@@ -97,10 +97,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
         view.findViewById(R.id.imageButton_account_id_wechat).setOnClickListener(this);
 
         // 로그인 실패 메세지
-        mDlg = new AccountDialog(getActivity());
+        //mDlg = new AccountDialog(getActivity());
     }
-
-
 
     @Override
     public void onFocusChange(View view, boolean b) {
@@ -166,36 +164,6 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 getActivity().onBackPressed();
                 break;
             case R.id.imageButton_account_id_facebook:
-
-                //////////////////////////////////////////////////////////////////////////////
-                // SNS 가입 진행
-                //////////////////////////////////////////////////////////////////////////////
-
-                // SNS 확인 시작
-
-                // SNS 확인 완료
-
-                // email, id 회원 가입
-
-                // 회원 가입 가능 할 경우 토큰 저장
-                String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
-                editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
-                editor.commit();
-
-                // 로그인 ing 로 설정
-
-
-                // 다음 페이지 전환
-                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
-
-                //////////////////////////////////////////////////////////////////////////////
-                // 가입 error message
-                //////////////////////////////////////////////////////////////////////////////
-                //mDlg.showDialog("이미 가입되었습니다.\r\n확인해 주세요.","돌아가기");
-
                 break;
             case R.id.imageButton_account_id_google:
                 break;
@@ -211,6 +179,9 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 // email 가입 진행
                 //////////////////////////////////////////////////////////////////////////////
 
+                // 로그인중 progress 시작
+                mLoginProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+
                 // email, pass 임시 저장
                 mPersonalProfile.email = EtEmail.getText().toString();
                 mPersonalProfile.password = EtPass.getText().toString();
@@ -221,50 +192,39 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 param.put("email", EtEmail.getText().toString().trim());    //PARAM
                 param.put("password", EtPass.getText().toString().trim());    //PARAM
                 Handler handler = new Handler(message -> {
-
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
                     System.out.println(result);
+
+                    // progress 종료
+                    if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
+
                     try {
                         JSONObject j = new JSONObject(result);
                         String error = j.getString("error");
-                        String token1 = j.getString("token");
+                        String token = j.getString("token");
                         System.out.println(error);
                         System.out.println(error == null);
-                        System.out.println(token1);
+                        System.out.println(token);
 
-                        // progress 종료
-
-                        if (error == "null" && token1 != "null") {
+                        if (error == "null" && token != "null") {
 
                             Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
 
                             // 토큰 저장
-                            setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token1);
-                            System.out.println("메인액티비티 시작");
+                            mSm.setToken(token);
 
-                            //                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-//                            getActivity().startActivity(mainIntent);
-//                            getActivity().finish();
-
-                            // 회원 가입 가능 할 경우 토큰 저장
-//                            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiY2thM2g0ejhyMDAwMGo2NnczajVvdHMwMCIsImVtYWlsIjoiZXJAZW5raW5vLmNvbSIsIm5hbWUiOiLstZzsmIjsp4AiLCJ0ZWwiOiIwMTAyNDkwODk1NSJ9LCJpYXQiOjE1OTEwODUyMTAsImV4cCI6MTU5MTE3MTYxMH0.yZQgpDbelEwLj4sCuqC_zbf5_bzri9Ee3kcDqUZzWw4";
-                            SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
-                            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-                            editor1.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token1);
-                            editor1.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,true);
-                            editor1.commit();
-
-                            // 메인 화면 전환
-                            LoginSuccessProcessEmail();
+                            // 로그인 성공 저장
+                            mSm.setLoginning(true);
 
                             // 다음 페이지 전환
+                            System.out.println("메인액티비티 시작");
                             NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
 
                         } else {
                             // 이메일 회원가입 실패
                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                            mDlg.showDialog("이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                            AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
                         }
 
 
@@ -272,12 +232,12 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                         e.printStackTrace();
                         // 로그인 실패
                         removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        mDlg.showDialog("이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                        AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
                     }
                     return true;
                 });
                 // API 주소와 위 핸들러 전달 후 실행.
-                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signup", handler).execute(param);
 //                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
 
 
@@ -309,6 +269,26 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
         Intent mainIntent = new Intent(getActivity(), MainActivity.class);
         getActivity().startActivity(mainIntent);
         getActivity().finish();
+    }
+
+    public String getToken(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
+    }
+
+    public void setToken(Context context, String token){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+        editor.commit();
+    }
+
+    public Boolean getLoginning(Context context){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,false);
+    }
+
+    public void setLoginning(Context context, Boolean bool){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,bool);
+        editor.commit();
     }
 
 

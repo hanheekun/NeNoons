@@ -4,11 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,46 +21,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.apollographql.apollo.ApolloCall;
-import com.apollographql.apollo.ApolloCallback;
-import com.apollographql.apollo.ApolloClient;
-import com.apollographql.apollo.api.Operation;
-import com.apollographql.apollo.api.Response;
-import com.apollographql.apollo.api.ResponseField;
-import com.apollographql.apollo.cache.normalized.CacheKey;
-import com.apollographql.apollo.cache.normalized.CacheKeyResolver;
-import com.apollographql.apollo.cache.normalized.NormalizedCacheFactory;
-import com.apollographql.apollo.cache.normalized.sql.ApolloSqlHelper;
-import com.apollographql.apollo.cache.normalized.sql.SqlNormalizedCacheFactory;
-import com.apollographql.apollo.exception.ApolloException;
 import com.auth0.android.jwt.JWT;
-import com.com.pixelro.nenoons.AllMembersQuery;
-import com.com.pixelro.nenoons.SignInMutation;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
-import com.pixelro.nenoons.server.HttpConnectionUtil;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.server.JWTUtils;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
 
 import static android.content.Context.MODE_PRIVATE;
@@ -78,8 +47,8 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private EditText EtPass;
     private Switch SwLoginSave;
     private Context mContext;
-    AccountDialog mDlg;
     public ProgressDialog mLoginProgressDialog;
+    private SharedPreferencesManager mSm;
 
     //private SharedPreferences appData;
 
@@ -126,6 +95,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mContext = this.getContext();
         mView = view;
+        mSm = new SharedPreferencesManager(getActivity());
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.textView_account_login_forget).setOnClickListener(this);
@@ -211,8 +181,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
         // 기종 login 정보 load
         loadEmailLoginInfo();
 
-        // 로그인 실패 메세지
-        mDlg = new AccountDialog(getActivity());
 
     }
 
@@ -239,11 +207,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.button_account_login_login:
 
-                // email 로그인 시도
-//                setApollo();
-//                signIn(EtEmail.getText().toString().trim(),EtPass.getText().toString().trim());
-//                String url = "https://nenoonsapi.du.r.appspot.com/android/signin"; 	//URL
-
                 // 로그인중 progress 시작
                 mLoginProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
@@ -256,6 +219,10 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
                     System.out.println(result);
+
+                    // progress 종료
+                    if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
+
                     try {
                         JSONObject j = new JSONObject(result);
                         String error = j.getString("error");
@@ -264,33 +231,39 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         System.out.println(error == null);
                         System.out.println(token);
 
-                        // progress 종료
-                        if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
+
 
                         if (error == "null" && token != "null") {
 
+                            // 로그인 성공
                             Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
 
+                            // email 로그인 정보 저장
+                            saveEmailLoginInfo();
+
+                            // 로그인 성공 저장
+                            mSm.setToken(token);
+                            mSm.setLoginning(true);
+
                             // 토큰 저장
-                            setString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN, token);
                             System.out.println("메인액티비티 시작");
+
                             // 메인 화면 전환
-                            LoginSuccessProcessEmail();
-//                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-//                            getActivity().startActivity(mainIntent);
-//                            getActivity().finish();
+                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                            getActivity().startActivity(mainIntent);
+                            getActivity().finish();
+
                         } else {
                             // 로그인 실패
-                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
+                            mSm.removeToken();
+                            AccountDialog mDlg = new AccountDialog(getActivity(),"로그인 정보를\r\n확인해 주세요.", "돌아가기");
                         }
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                         // 로그인 실패
-                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
+                        mSm.removeToken();
+                        AccountDialog mDlg = new AccountDialog(getActivity(),"로그인 정보를\r\n확인해 주세요.", "돌아가기");
                     }
                     return true;
                 });
@@ -298,85 +271,8 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signin", handler).execute(param);
 //                new HttpTask("http://192.168.1.162:4002/android/signin", handler).execute(param);
 
-                // 로그인 성공
-
-                // 로그인 저장
-                //save();
-
-                // 메인 화면 전환
-                //Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                //getActivity().startActivity(mainIntent);
-                //getActivity().finish();
 
                 break;
-//            case R.id.button_login_test_1:
-//
-////                FirstDialog dlg = new FirstDialog(getActivity());
-////                dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
-////                    @Override
-////                    public void ResultEvent(boolean result) {
-////                        if (result){
-////                            Intent intent = new Intent(MainActivity.this, TestActivity.class);
-////                            startActivity(intent);
-////                        }
-////                    }
-////                });
-////                dlg.showDialog();
-//
-//                break;
-//            case R.id.button_login_test_2:
-//                break;
-
-        }
-    }
-
-    private void LoginResultAction() {
-        String token = getString(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-
-        // 토큰이 있는 경우 디코드 하기
-        if (token != null && !"".equals(token)) {
-            try {
-
-                String decodeStr = null;
-                JWT jwt = new JWT(token);
-                //boolean isExpired = jwt.isExpired(10); // 10 초 전까지 토큰 종료 여부 판단 // 새로 받는 것은 충분한 시간이 있다는 전재
-                decodeStr = JWTUtils.decoded(token); // 디코드 값
-                try {
-                    JSONObject jsonObj = JWTUtils.getJson(token, "user");
-                    String email = (String) jsonObj.get("email");
-                    String name = (String) jsonObj.get("name");
-                    String id = (String) jsonObj.get("id");
-                    String tel = (String) jsonObj.get("tel");
-                    Log.i(">>>>>>>>>>>", email + " " + name + " " + id + " " + tel);
-
-                    decodeStr += "\nJSON :\n" + email + "\n" + id + "\n" + name + "\n" + tel;
-                    //((TextView)view.findViewById(R.id.textview_decode)).setText(decodeStr );
-                    Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
-
-                    Log.i(TAG, "token = " + token);
-
-                    //////////////////////////////////////////////////////////////
-                    // email 로그인 성공 화면 전환
-                    //////////////////////////////////////////////////////////////
-                    LoginSuccessProcessEmail();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
-                    //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                    mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                //((TextView)view.findViewById(R.id.textview_decode)).setText("decode error : " + e.getLocalizedMessage());
-                //Toast.makeText(mContext,"죄송합니다. 잠시 후 다시 로그인 해주세요",Toast.LENGTH_LONG).show();
-                mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
-            }
-        } else {
-            // 로그인 실패
-            //Toast.makeText(mContext,"로그인 정보를 확인하세요",Toast.LENGTH_LONG).show();
-            mDlg.showDialog("로그인 정보를\r\n확인해 주세요.", "돌아가기");
         }
     }
 
@@ -413,22 +309,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
             EtEmail.setText("");
             EtPass.setText("");
         }
-    }
-
-    private void LoginSuccessProcessEmail() {
-
-        // email 로그인 정보 저장
-        saveEmailLoginInfo();
-
-        // 로그인 성공 저장
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING, true);
-
-        // 메인 화면 전환
-        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-        getActivity().startActivity(mainIntent);
-        getActivity().finish();
     }
 
 

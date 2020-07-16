@@ -18,6 +18,11 @@ public class AccountDialog {
         this.context = context;
     }
 
+    public AccountDialog(Context context, String message, String button) {
+        this.context = context;
+        showDialog(message, button);
+    }
+
     // 호출할 다이얼로그 함수를 정의한다.
     public void showDialog(String message, String button) {
 

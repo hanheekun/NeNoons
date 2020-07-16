@@ -78,7 +78,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
         param.put("type", String.valueOf(exProfile.type));    //PARAM
         param.put("level", String.valueOf(exProfile.level));    //PARAM
         param.put("reserved1", String.valueOf(exProfile.reserved1));    //PARAM
-        param.put("reserved2", String.valueOf(exProfile.reserved2));    //PARAM
+        param.put("reserved2", String.valueOf(exProfile.reserved2));    //PARAM무ㅈ
         Handler handler = new Handler(message -> {
 
             Bundle bundle = message.getData();

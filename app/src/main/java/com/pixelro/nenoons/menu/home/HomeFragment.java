@@ -489,7 +489,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setToken(Context context, String token){
-        (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit().putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+        editor.commit();
     }
+
+
 
 }
