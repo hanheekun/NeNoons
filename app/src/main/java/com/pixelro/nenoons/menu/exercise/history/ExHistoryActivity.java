@@ -25,6 +25,7 @@ import com.pixelro.nenoons.BaseActivity;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.nenoons.server.HttpTask;
 
@@ -45,7 +46,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
     public ProgressDialog mLoadingProgressDialog;
 
-    private int mHistory[][] = new int[31][4];
+    private int mHistory[][] = new int[32][4];
     private Context mContext;
 
     @Override
@@ -75,6 +76,10 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
             Bundle bundle = message.getData();
             String result = bundle.getString("result");
             System.out.println(result);
+
+            // progress 종료
+            if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
+
             try {
                 JSONObject j = new JSONObject(result);
                 String error = j.getString("error");
@@ -89,7 +94,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
-                ArrayList exProfileList = new ArrayList();
+                ArrayList<ExProfile> exProfileList = new ArrayList<>();
 
                 // 목록 변환및 저장
                 for (int i=0;i<jlist.length();i++) {
@@ -104,6 +109,13 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 System.out.println(jlist);
                 System.out.println(exProfileList);
 
+                for(ExProfile exProfile : exProfileList){
+                    int day = Integer.parseInt(exProfile.date.substring(6,8));
+                    mHistory[day][exProfile.type-1]++;
+                }
+                // 그래프 출력
+                setChart();
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
@@ -116,31 +128,31 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 //        new HttpTask("http://192.168.1.162:4002/android/list_user_exercise", handler).execute(param);
 
 
-        // 불러오기 완료 test
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-
-                // progress 종료
-                if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
-
-                // 불러오기 완료 test
-
-                mHistory[3][0] = 1;
-                mHistory[3][2] = 2;
-                mHistory[3][3] = 3;
-                mHistory[5][1] = 1;
-                mHistory[5][3] = 1;
-                mHistory[25][2] = 2;
-                mHistory[26][1] = 1;
-                mHistory[26][2] = 3;
-
-
-                // 그래프 출력
-                setChart();
-
-            }
-        }, 1000);
+//        // 불러오기 완료 test
+//        new Handler().postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//
+//                // progress 종료
+//                if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
+//
+//                // 불러오기 완료 test
+//
+//                mHistory[3][0] = 1;
+//                mHistory[3][2] = 2;
+//                mHistory[3][3] = 3;
+//                mHistory[5][1] = 1;
+//                mHistory[5][3] = 1;
+//                mHistory[25][2] = 2;
+//                mHistory[26][1] = 1;
+//                mHistory[26][2] = 3;
+//
+//
+//                // 그래프 출력
+//                setChart();
+//
+//            }
+//        }, 1000);
 
         Description desc ;
         Legend L;
@@ -153,7 +165,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
         YAxis leftAxis = chart.getAxisLeft();
         YAxis rightAxis = chart.getAxisRight();
-        //leftAxis.setAxisMaximum(8f); // the axis maximum is 100
+        leftAxis.setAxisMaximum(8f); // the axis maximum is 100
         //leftAxis.setLabelCount(9, true);
         XAxis xAxis = chart.getXAxis();
 
@@ -181,13 +193,17 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         chart.setDrawBorders(false);
         chart.setDescription(desc);
         chart.setDrawValueAboveBar(true);
+
+        Highlight h = new Highlight(16, 0f); // dataset index for piechart is always 0
+        chart.highlightValues(new Highlight[] { h });
+
     }
 
     void setChart(){
 
         ArrayList<BarEntry> entries = new ArrayList<>();
 
-        for (int i = 0; i < mHistory.length ; i++){
+        for (int i = 1; i < mHistory.length ; i++){
             int sum = 0;
             for (int j = 0; j < mHistory[0].length ; j++){
                 sum += mHistory[i][j];
@@ -283,7 +299,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     public void onValueSelected(Entry e, Highlight h) {
         final String x = chart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), chart.getXAxis());
 
-        //Toast.makeText(this,""+e.getX(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,""+e.getX() + " " + e.getY(),Toast.LENGTH_SHORT).show();
 
     }
 

@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.account;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,23 +18,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.server.HttpTask;
+import com.pixelro.nenoons.BaseFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class AccountSurveyFragment extends Fragment implements View.OnClickListener {
-
-    private final static String TAG = AccountSurveyFragment.class.getSimpleName();
-    private View mView;
+public class AccountSurveyFragment extends BaseFragment implements View.OnClickListener {
 
     private PersonalProfile mPersonalProfile;
 
@@ -52,13 +49,11 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mView = view;
 
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
         view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
-
 
         SpLeft = (Spinner)( view.findViewById(R.id.spinner_survey_left));
         SpRight = (Spinner)( view.findViewById(R.id.spinner_survey_right));
@@ -150,12 +145,13 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                 ////////////////////////////////////////////////////////////
                 // 회원 정보 전달
                 ////////////////////////////////////////////////////////////
-                //String name = mProfile.name0;
-                String token = getToken(getActivity());
+
+                mProgressDialog = ProgressDialog.show(getActivity(), "", "전송중...", true, true);
 
                 HashMap<String, String> param = new HashMap<String, String>();
                 // 파라메터는 넣기 예
-                param.put("token", token);    //PARAM
+                param.put("token", mSm.getToken());    //PARAM
+                //param.put("name", mPersonalProfile.name);    // 서버연결 20200716 이름 추가 필요
                 param.put("phone", mPersonalProfile.phone);    //PARAM
                 param.put("birthday", mPersonalProfile.birthday);    //PARAM
                 param.put("gender", mPersonalProfile.gender);    //PARAM
@@ -172,6 +168,10 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
                     System.out.println(result);
+
+                    // progress 종료
+                    if (mProgressDialog != null) mProgressDialog.dismiss();
+
                     try {
                         JSONObject j = new JSONObject(result);
                         String error = j.getString("error");
@@ -270,7 +270,4 @@ public class AccountSurveyFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    public String getToken(Context context){
-        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
-    }
 }

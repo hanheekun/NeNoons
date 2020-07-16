@@ -231,8 +231,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         System.out.println(error == null);
                         System.out.println(token);
 
-
-
                         if (error == "null" && token != "null") {
 
                             // 로그인 성공

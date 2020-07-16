@@ -34,7 +34,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TestHistoryActivity extends AppCompatActivity implements View.OnClickListener{
@@ -49,11 +51,11 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
         mContext = getApplicationContext();
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
-        List<String> list = new ArrayList<>();
+        Deque<String> list = new LinkedList<>();
 
         // simple list view
         ListView listview = (ListView)findViewById(R.id.listview_home_history);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, (List<String>) list);
         listview.setAdapter(adapter);
 
         // 서버연결 20200715
@@ -61,7 +63,11 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
         //////////////////////////////////////////////////////////////////////////////////////////
         // 측정 기록 불러오기
         //////////////////////////////////////////////////////////////////////////////////////////
+        // 측정 기록  progress 시작
+        mLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
+
         String token = getToken(this);
+
 
         // 0 현재 month, -1 지난달
         HashMap<String, String> param = new HashMap<String, String>();
@@ -73,6 +79,10 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
             Bundle bundle = message.getData();
             String result = bundle.getString("result");
             System.out.println(result);
+
+            //progress 종료
+            if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
+
             try {
                 JSONObject j = new JSONObject(result);
                 String error = j.getString("error");
@@ -87,7 +97,7 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
-                ArrayList testProfileList = new ArrayList();
+                ArrayList<TestProfile> testProfileList = new ArrayList<>();
 
                 // 목록 변환및 저장
                 for (int i=0;i<jList.length();i++) {
@@ -107,6 +117,12 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
                 System.out.println(jList);
                 System.out.println(testProfileList);
 
+                for(TestProfile testProfile : testProfileList){
+                    list.addFirst(testProfile.date + "          " + testProfile.distance);
+                }
+                adapter.notifyDataSetChanged();
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
@@ -120,33 +136,31 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
 
 
 
-        // 측정 기록  progress 시작
-        mLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
 
-        // 불러오기 완료 test
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
 
-                // progress 종료
-                if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
-
-                //받은 결과에서 측정 시간과 거리 사용
-                int distance_1 = 56;
-                String data_1 = "20200703140000";
-                int distance_2 = 40;
-                String data_2 = "20200704093000";
-
-                //List<TestProfile> history = new ArrayList<>();
-
-                //리스트뷰에 보여질 아이템을 추가
-                list.add(data_1 + "    " + distance_1);
-                list.add(data_2 + "    " + distance_2);
-
-                adapter.notifyDataSetChanged();
-
-            }
-        }, 1000);
+//        // 불러오기 완료 test
+//        new Handler().postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//
+//
+//
+//                //받은 결과에서 측정 시간과 거리 사용
+//                int distance_1 = 56;
+//                String data_1 = "20200703140000";
+//                int distance_2 = 40;
+//                String data_2 = "20200704093000";
+//
+//                //List<TestProfile> history = new ArrayList<>();
+//
+//                //리스트뷰에 보여질 아이템을 추가
+//                list.add(data_1 + "    " + distance_1);
+//                list.add(data_2 + "    " + distance_2);
+//
+//                adapter.notifyDataSetChanged();
+//
+//            }
+//        }, 1000);
 
 
     }
