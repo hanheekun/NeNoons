@@ -122,6 +122,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                     exProfile.type = jEx.getInt("type");
                     exProfile.level = jEx.getInt("level");
                     mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                    //mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
                 }
                 System.out.println(error);
                 System.out.println(jlist);
@@ -254,6 +255,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         Toast.makeText(this,""+e.getX() + " " + e.getY(),Toast.LENGTH_SHORT).show();
 
         // 선택한 날 운동 출력
+        ArrayList<ExProfile> mSelectedsExProfileList;
         mProtocolListAdapter.setData(mExProfileList);
 
         // list 출력
@@ -331,9 +333,29 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
             ExProfile data = mExDatalList.get(i);
 
-            viewHolder.TvDate.setText(data.date);
-            viewHolder.TvTitleSub.setText("" + data.type);
-            viewHolder.TvTitleMain.setText("" + data.type);
+            String str = "";
+            str += data.date.substring(0,4)+"-"+data.date.substring(4,6)+"-"+data.date.substring(6,8)+" "+data.date.substring(8,10)+":"+data.date.substring(10,12)+":"+data.date.substring(12,14);
+
+            viewHolder.TvDate.setText(str);
+            if (data.type == ExProfile.Type.TYPE_1){
+                viewHolder.TvTitleSub.setText("수정체 근육 탄력 운동");
+                viewHolder.TvTitleMain.setText("눈으로 풍선 터트리기");
+            }
+            else if (data.type == ExProfile.Type.TYPE_2){
+                viewHolder.TvTitleSub.setText("눈 근육 스트레칭");
+                viewHolder.TvTitleMain.setText("빠른 눈 깜빡이기");
+            }
+            else if (data.type == ExProfile.Type.TYPE_3){
+                viewHolder.TvTitleSub.setText("눈 근육 스트레칭");
+                viewHolder.TvTitleMain.setText("눈의 휴식");
+            }
+            else if (data.type == ExProfile.Type.TYPE_4){
+                viewHolder.TvTitleSub.setText("눈 근육 스트레칭");
+                viewHolder.TvTitleMain.setText("H 따라하기");
+            }
+
+
+
 
             return view;
         }

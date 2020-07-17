@@ -118,7 +118,37 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
                 System.out.println(testProfileList);
 
                 for(TestProfile testProfile : testProfileList){
-                    list.addFirst(testProfile.date + "          " + testProfile.distance);
+
+                    String str = "";
+
+                    str += testProfile.date.substring(0,4)+"-"+testProfile.date.substring(4,6)+"-"+testProfile.date.substring(6,8)+" "+testProfile.date.substring(8,10)+":"+testProfile.date.substring(10,12)+":"+testProfile.date.substring(12,14);
+
+                    str += "                            ";
+
+                    // 거리에 따른 나이
+                    if (testProfile.distance <= 22){
+                        str += "44세 이하";
+                    }
+                    else if(testProfile.distance >= 23 && testProfile.distance <= 30){
+                        str += "44세 이하";
+                    }
+                    else if(testProfile.distance >= 31 && testProfile.distance <= 37){
+                        str += "44대 후반";
+                    }
+                    else if(testProfile.distance >= 38 && testProfile.distance <= 47){
+                        str += "50세";
+                    }
+                    else if(testProfile.distance >= 48 && testProfile.distance <= 57){
+                        str += "50대 초반";
+                    }
+                    else if(testProfile.distance >= 58 &&testProfile. distance <= 67){
+                        str += "50대 중반";
+                    }
+                    else if(testProfile.distance >= 68){
+                        str += "56세 이상";
+                    }
+
+                    list.addFirst(str);
                 }
                 adapter.notifyDataSetChanged();
 
@@ -135,32 +165,6 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
 //        new HttpTask("http://192.168.1.162:4002/android/list_user_test", handler).execute(param);
 
 
-
-
-
-//        // 불러오기 완료 test
-//        new Handler().postDelayed(new Runnable(){
-//            @Override
-//            public void run() {
-//
-//
-//
-//                //받은 결과에서 측정 시간과 거리 사용
-//                int distance_1 = 56;
-//                String data_1 = "20200703140000";
-//                int distance_2 = 40;
-//                String data_2 = "20200704093000";
-//
-//                //List<TestProfile> history = new ArrayList<>();
-//
-//                //리스트뷰에 보여질 아이템을 추가
-//                list.add(data_1 + "    " + distance_1);
-//                list.add(data_2 + "    " + distance_2);
-//
-//                adapter.notifyDataSetChanged();
-//
-//            }
-//        }, 1000);
 
 
     }
