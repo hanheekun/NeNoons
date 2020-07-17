@@ -5,7 +5,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -25,8 +30,6 @@ import com.pixelro.nenoons.BaseActivity;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
-import com.pixelro.nenoons.TestProfile;
-import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.nenoons.server.HttpTask;
 
 import org.json.JSONArray;
@@ -34,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -43,11 +48,17 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     private final static String TAG = ExHistoryActivity_calendar.class.getSimpleName();
 
     private BarChart chart;
+    private TextView TvDate;
 
     public ProgressDialog mLoadingProgressDialog;
 
     private int mHistory[][] = new int[32][4];
     private Context mContext;
+
+    private ListView mLvProtocol;
+    private ProtocolListAdapter mProtocolListAdapter;
+
+    private ArrayList<ExProfile> mExProfileList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +67,13 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         mContext = getApplicationContext();
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         chart = (BarChart)findViewById(R.id.barchart_ex_history);
+
+        TvDate = (TextView)findViewById(R.id.textView_ex_history_date);
+        Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
+        // 년월일시분초 14자리 포멧
+        SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy.MM");
+        TvDate.setText(fourteen_format.format(date_now));
+
 
         // 서버연결 20200715
 
@@ -94,7 +112,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
-                ArrayList<ExProfile> exProfileList = new ArrayList<>();
+                mExProfileList = new ArrayList<>();
 
                 // 목록 변환및 저장
                 for (int i=0;i<jlist.length();i++) {
@@ -103,13 +121,13 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                     exProfile.date = jEx.getString("date"); // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
                     exProfile.type = jEx.getInt("type");
                     exProfile.level = jEx.getInt("level");
-                    exProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                    mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
                 }
                 System.out.println(error);
                 System.out.println(jlist);
-                System.out.println(exProfileList);
+                System.out.println(mExProfileList);
 
-                for(ExProfile exProfile : exProfileList){
+                for(ExProfile exProfile : mExProfileList){
                     int day = Integer.parseInt(exProfile.date.substring(6,8));
                     mHistory[day][exProfile.type-1]++;
                 }
@@ -127,33 +145,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_exercise", handler).execute(param);
 //        new HttpTask("http://192.168.1.162:4002/android/list_user_exercise", handler).execute(param);
 
-
-//        // 불러오기 완료 test
-//        new Handler().postDelayed(new Runnable(){
-//            @Override
-//            public void run() {
-//
-//                // progress 종료
-//                if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
-//
-//                // 불러오기 완료 test
-//
-//                mHistory[3][0] = 1;
-//                mHistory[3][2] = 2;
-//                mHistory[3][3] = 3;
-//                mHistory[5][1] = 1;
-//                mHistory[5][3] = 1;
-//                mHistory[25][2] = 2;
-//                mHistory[26][1] = 1;
-//                mHistory[26][2] = 3;
-//
-//
-//                // 그래프 출력
-//                setChart();
-//
-//            }
-//        }, 1000);
-
+        // 그래프 설정
         Description desc ;
         Legend L;
 
@@ -194,9 +186,14 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         chart.setDescription(desc);
         chart.setDrawValueAboveBar(true);
 
-        Highlight h = new Highlight(16, 0f); // dataset index for piechart is always 0
-        chart.highlightValues(new Highlight[] { h });
+        // 항목 리스트
+        mLvProtocol = findViewById(R.id.listview_ex_history);
+        mLvProtocol.setDivider(null); // 중간선 제거
+        mLvProtocol.setDividerHeight(0); // 중간선 제거
 
+        // 프로토콜 리스트 생성
+        mProtocolListAdapter = new ProtocolListAdapter();
+        mLvProtocol.setAdapter(mProtocolListAdapter);
     }
 
     void setChart(){
@@ -240,51 +237,6 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-//    private BarDataSet setData() {
-//
-//        ArrayList<BarEntry> entries = new ArrayList<>();
-//
-//        //entries.add(new BarEntry(0, 2));
-//        entries.add(new BarEntry(1, 8));
-//        entries.add(new BarEntry(2, 6));
-//        entries.add(new BarEntry(3, 10));
-//        entries.add(new BarEntry(4, 0));
-//        entries.add(new BarEntry(5, 6));
-//        entries.add(new BarEntry(6, 3));
-//        entries.add(new BarEntry(7, 80));
-//        entries.add(new BarEntry(8, 60));
-//        entries.add(new BarEntry(9, 50));
-//        entries.add(new BarEntry(10, 70));
-//        entries.add(new BarEntry(11, 60));
-//        entries.add(new BarEntry(12, 30));
-//        entries.add(new BarEntry(13, 80));
-//        entries.add(new BarEntry(14, 60));
-//        entries.add(new BarEntry(15, 50));
-//        entries.add(new BarEntry(16, 70));
-//        entries.add(new BarEntry(17, 60));
-//        entries.add(new BarEntry(18, 30));
-//        entries.add(new BarEntry(19, 80));
-//        entries.add(new BarEntry(20, 60));
-//        entries.add(new BarEntry(21, 50));
-//        entries.add(new BarEntry(22, 70));
-//        entries.add(new BarEntry(23, 60));
-//        entries.add(new BarEntry(24, 30));
-//        entries.add(new BarEntry(25, 80));
-//        entries.add(new BarEntry(26, 60));
-//        entries.add(new BarEntry(27, 50));
-//        entries.add(new BarEntry(28, 70));
-//        entries.add(new BarEntry(29, 60));
-//        entries.add(new BarEntry(30, 30));
-//        entries.add(new BarEntry(31, 80));
-//
-//        BarDataSet set = new BarDataSet(entries, "");
-//        set.setColor(Color.parseColor("#ffd613"));
-//        set.setValueTextColor(Color.rgb(155,155,155));
-//        //set.setDrawValues(false);
-//
-//        return set;
-//    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -301,6 +253,12 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
         Toast.makeText(this,""+e.getX() + " " + e.getY(),Toast.LENGTH_SHORT).show();
 
+        // 선택한 날 운동 출력
+        mProtocolListAdapter.setData(mExProfileList);
+
+        // list 출력
+        mProtocolListAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -310,6 +268,75 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
     public String getToken(Context context){
         return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
+    }
+
+    static class ViewHolder {
+        TextView TvDate;
+        TextView TvTitleSub;
+        TextView TvTitleMain;
+    }
+
+    // Adapter for holding devices found through scanning.
+    private class ProtocolListAdapter extends BaseAdapter {
+
+        //private ArrayList<BluetoothDevice> mLeDevices;
+        private ArrayList<ExProfile> mExDatalList;
+        private LayoutInflater mInflator;
+
+        public ProtocolListAdapter() {
+            super();
+            mExDatalList = new ArrayList<ExProfile>();
+            //mLeDevices = new ArrayList<BluetoothDevice>();
+            mInflator = getLayoutInflater();
+        }
+
+        public void setData(ArrayList<ExProfile> data) {
+            mExDatalList = data;
+        }
+
+        public void clear() {
+            mExDatalList.clear();
+        }
+
+        @Override
+        public int getCount() {
+            return mExDatalList.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return mExDatalList.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder viewHolder;
+            // General ListView optimization code.
+            if (view == null) {
+                view = mInflator.inflate(R.layout.listitem_protocol, null);
+                viewHolder = new ViewHolder();
+                viewHolder.TvDate = (TextView)  view.findViewById(R.id.textView_ex_history_date);
+                viewHolder.TvTitleSub = (TextView) view.findViewById(R.id.textView_ex_history_title_sub);
+                viewHolder.TvTitleMain = (TextView) view.findViewById(R.id.textView_ex_history_title_main);
+                view.setTag(viewHolder);
+
+            } else {
+                viewHolder = (ViewHolder) view.getTag();
+            }
+
+            ExProfile data = mExDatalList.get(i);
+
+            viewHolder.TvDate.setText(data.date);
+            viewHolder.TvTitleSub.setText("" + data.type);
+            viewHolder.TvTitleMain.setText("" + data.type);
+
+            return view;
+        }
     }
 }
 

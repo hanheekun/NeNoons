@@ -51,13 +51,12 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
-
         editor = sharedPreferences.edit();
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,true);
 
         int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
         editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
 
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,true);
         editor.commit();
 
         // 운동 정보 전달

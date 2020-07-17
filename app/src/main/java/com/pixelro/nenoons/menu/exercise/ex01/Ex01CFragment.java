@@ -39,7 +39,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex_03_c, container, false);
+        return inflater.inflate(R.layout.fragment_ex_01_c, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
