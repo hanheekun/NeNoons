@@ -128,6 +128,8 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 System.out.println(jlist);
                 System.out.println(mExProfileList);
 
+                Toast.makeText(mContext, "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
+
                 for(ExProfile exProfile : mExProfileList){
                     int day = Integer.parseInt(exProfile.date.substring(6,8));
                     mHistory[day][exProfile.type-1]++;

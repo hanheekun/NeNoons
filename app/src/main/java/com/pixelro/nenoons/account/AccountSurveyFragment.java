@@ -151,7 +151,7 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                 HashMap<String, String> param = new HashMap<String, String>();
                 // 파라메터는 넣기 예
                 param.put("token", mSm.getToken());    //PARAM
-                //param.put("name", mPersonalProfile.name);    // 서버연결 20200716 이름 추가 필요
+                param.put("name", mPersonalProfile.name);    // 서버연결 20200716 이름 추가 필요
                 param.put("phone", mPersonalProfile.phone);    //PARAM
                 param.put("birthday", mPersonalProfile.birthday);    //PARAM
                 param.put("gender", mPersonalProfile.gender);    //PARAM

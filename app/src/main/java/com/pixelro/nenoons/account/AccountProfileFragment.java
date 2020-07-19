@@ -26,6 +26,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
     private EditText EtName;
     private EditText EtGender;
     private EditText EtBirthday;
+    private String mBirthdayStrNumber = "";
     private EditText Etjob;
     private EditText EtPhoneNumber;
 
@@ -79,7 +80,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
                 // profile에 정보 입력 // 아직 내용 check 안함
                 mPersonalProfile.name = EtName.getText().toString();
                 mPersonalProfile.gender = EtGender.getText().toString();
-                mPersonalProfile.birthday = EtBirthday.getText().toString();
+                mPersonalProfile.birthday = mBirthdayStrNumber;
                 mPersonalProfile.job = Etjob.getText().toString();
                 mPersonalProfile.phone = EtPhoneNumber.getText().toString();
 
@@ -95,6 +96,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             EtBirthday.setText( year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
+            mBirthdayStrNumber = "" + year+ (monthOfYear+1) + dayOfMonth;
         }
     };
 

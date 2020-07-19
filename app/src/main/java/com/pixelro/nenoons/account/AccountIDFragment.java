@@ -191,6 +191,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 // 파라메터는 넣기 예
                 param.put("email", EtEmail.getText().toString().trim());    //PARAM
                 param.put("password", EtPass.getText().toString().trim());    //PARAM
+                //param.put("name", EtPass.getText().toString().trim());    //PARAM
                 Handler handler = new Handler(message -> {
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
@@ -224,7 +225,8 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                         } else {
                             // 이메일 회원가입 실패
                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                            AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                            //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                            AccountDialog mDlg = new AccountDialog(getActivity(),error, "돌아가기");
                         }
 
 

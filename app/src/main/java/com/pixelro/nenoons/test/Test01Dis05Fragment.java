@@ -126,7 +126,8 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
         super.onPause();
         getActivity().unregisterReceiver(mGattUpdateReceiver);
 
-        mTimer.cancel();
+        if(mTimer != null) mTimer.cancel();
+
         mSensorManager.unregisterListener(this);
 
 //        h1.removeCallbacksAndMessages(null);

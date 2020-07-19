@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "622454092611",
+    "firebase_url": "https://nenoons-cd2c2.firebaseio.com",
+    "project_id": "nenoons-cd2c2",
+    "storage_bucket": "nenoons-cd2c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622454092611:android:e934baec74faf615d7f5f6",
+        "android_client_info": {
+          "package_name": "com.pixelro.nenoons"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622454092611-8dsgt922k0vudma6h9cc684oqbolv9i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixelro.nenoons",
+            "certificate_hash": "0cbcdfba8c4a544eb7a5bb2eca531923320626c1"
+          }
+        },
+        {
+          "client_id": "622454092611-tujflo7qjari4gb8ht2dpg06urkt46l7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDoW74KVs-w1TvtHRjAM6Y9MPEc1ey-B0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622454092611-tujflo7qjari4gb8ht2dpg06urkt46l7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
