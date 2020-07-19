@@ -58,7 +58,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     private ListView mLvProtocol;
     private ProtocolListAdapter mProtocolListAdapter;
 
-    private ArrayList<ExProfile> mExProfileList;
+    private ArrayList<ExProfile> mExProfileList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,6 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
 
         // 서버연결 20200715
-
         //////////////////////////////////////////////////////////////////////////////////////////
         // 측정 기록 불러오기
         //////////////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +103,8 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 JSONArray jlist = j.getJSONArray("list");
                 if (jlist.length()==0) {
                     // 목록이 없음
+                    // 그래프 출력
+                    setChart();
                     return true;
                 }
                 // progress 종료
@@ -128,7 +129,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 System.out.println(jlist);
                 System.out.println(mExProfileList);
 
-                Toast.makeText(mContext, "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
 
                 for(ExProfile exProfile : mExProfileList){
                     int day = Integer.parseInt(exProfile.date.substring(6,8));
@@ -254,14 +255,22 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     public void onValueSelected(Entry e, Highlight h) {
         final String x = chart.getXAxis().getValueFormatter().getFormattedValue(e.getX(), chart.getXAxis());
 
-        Toast.makeText(this,""+e.getX() + " " + e.getY(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,""+e.getX() + " " + e.getY(),Toast.LENGTH_SHORT).show();
 
         // 선택한 날 운동 출력
-        ArrayList<ExProfile> mSelectedsExProfileList;
-        mProtocolListAdapter.setData(mExProfileList);
+        if (mExProfileList.size()>0){
 
-        // list 출력
-        mProtocolListAdapter.notifyDataSetChanged();
+            ArrayList<ExProfile> selectedExProfileList = new ArrayList<>();
+            for(ExProfile exProfile : mExProfileList){
+                if (Integer.parseInt(exProfile.date.substring(6,8)) == e.getX()){
+                    selectedExProfileList.add(exProfile);
+                }
+            }
+
+            mProtocolListAdapter.setData(selectedExProfileList);
+            // list 출력
+            mProtocolListAdapter.notifyDataSetChanged();
+        }
 
     }
 

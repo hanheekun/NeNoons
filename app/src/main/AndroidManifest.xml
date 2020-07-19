@@ -31,8 +31,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
-        <activity android:name=".menu.home.TestHistoryActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".test.TestAddActivity"></activity>
+        <activity
+            android:name=".menu.home.TestHistoryActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".menu.exercise.ex01.Ex01Activity"
             android:screenOrientation="portrait" />
@@ -48,7 +50,6 @@
         <activity
             android:name=".menu.home.WebActivity"
             android:screenOrientation="portrait" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -105,6 +106,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".menu.exercise.history.ExHistoryActivity_calendar"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".menu.my.MyColorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.my.MyFontActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.my.MyTosActivity"
             android:screenOrientation="portrait" />
 
         <service

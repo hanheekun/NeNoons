@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.test;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,16 +100,25 @@ public class Test05FontFragment extends Fragment  implements View.OnClickListene
                 setAllColorButtonReset();
                 FlFont2.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_2;
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    ((TestActivity)getActivity()).mTestProfile.typeface = getActivity().getResources().getFont(R.font.dall01r);
+//                }
                 break;
             case R.id.frameLayout_font_3:
                 setAllColorButtonReset();
                 FlFont3.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_3;
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    ((TestActivity)getActivity()).mTestProfile.typeface = getActivity().getResources().getFont(R.font.dall01b);
+//                }
                 break;
             case R.id.frameLayout_font_4:
                 setAllColorButtonReset();
                 FlFont4.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mTestProfile.font = TestProfile.Font.FONT_4;
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    ((TestActivity)getActivity()).mTestProfile.typeface = getActivity().getResources().getFont(R.font.dall01eb);
+//                }
                 break;
         }
 

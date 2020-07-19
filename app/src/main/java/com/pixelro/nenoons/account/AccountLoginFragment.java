@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.auth0.android.jwt.JWT;
+import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
@@ -37,7 +38,7 @@ import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class AccountLoginFragment extends Fragment implements View.OnClickListener {
+public class AccountLoginFragment extends BaseFragment implements View.OnClickListener {
 
     private final static String TAG = AccountLoginFragment.class.getSimpleName();
     private View mView;
@@ -47,7 +48,6 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
     private EditText EtPass;
     private Switch SwLoginSave;
     private Context mContext;
-    public ProgressDialog mLoginProgressDialog;
     private SharedPreferencesManager mSm;
 
     //private SharedPreferences appData;
@@ -191,15 +191,18 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                 getActivity().onBackPressed();
                 break;
             case R.id.textView_account_login_forget:    // 비밀번호 찾기
-                NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
+                //NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_login_facebook:
                 break;
             case R.id.imageButton_account_login_google:
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_login_qq:
                 break;
             case R.id.imageButton_account_login_kakao:
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_login_naver:
                 break;
@@ -208,7 +211,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
             case R.id.button_account_login_login:
 
                 // 로그인중 progress 시작
-                mLoginProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+                mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
                 HashMap<String, String> param = new HashMap<String, String>();
                 // 파라메터는 넣기 예
@@ -221,7 +224,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                     System.out.println(result);
 
                     // progress 종료
-                    if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
+                    if (mProgressDialog != null) mProgressDialog.dismiss();
 
                     try {
                         JSONObject j = new JSONObject(result);
@@ -234,7 +237,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         if (error == "null" && token != "null") {
 
                             // 로그인 성공
-                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show();
 
                             // email 로그인 정보 저장
                             saveEmailLoginInfo();
@@ -242,6 +245,9 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                             // 로그인 성공 저장
                             mSm.setToken(token);
                             mSm.setLoginning(true);
+
+                            mSm.setEmail(EtEmail.getText().toString().trim());
+                            // 이름 받아오기 필요함
 
                             // 토큰 저장
                             System.out.println("메인액티비티 시작");
@@ -254,7 +260,7 @@ public class AccountLoginFragment extends Fragment implements View.OnClickListen
                         } else {
                             // 로그인 실패
                             mSm.removeToken();
-                            AccountDialog mDlg = new AccountDialog(getActivity(),"로그인 정보를\r\n확인해 주세요.", "돌아가기");
+                            AccountDialog mDlg = new AccountDialog(getActivity(),error, "돌아가기");
                         }
 
                     } catch (JSONException e) {

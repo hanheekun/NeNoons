@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.PersonalProfile;
@@ -39,10 +40,9 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.pixelro.nenoons.account.AccountLoginFragment.removeKey;
 import static com.pixelro.nenoons.account.AccountLoginFragment.setString;
 
-public class AccountIDFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener{
+public class AccountIDFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
 
-    private View mView;
     private EditText EtEmail;
     private EditText EtPass;
     private EditText EtPassCfm;
@@ -50,9 +50,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
     private Button BtnNext;
 
     //private AccountDialog mDlg;
-    private ProgressDialog mLoginProgressDialog;
     private PersonalProfile mPersonalProfile;
-    private SharedPreferencesManager mSm;
 
     @Override
     public View onCreateView(
@@ -166,12 +164,19 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
             case R.id.imageButton_account_id_facebook:
                 break;
             case R.id.imageButton_account_id_google:
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_id_kakao:
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_id_naver:
                 break;
             case R.id.button_account_id_next:
+
+                if (EtPass.getText().toString().length() < 8){
+                    new AccountDialog(getActivity(), "비밀번호는 8자리 이상으로 해주세요.", "돌아가기");
+                    break;
+                }
 
                 // 서버연결 20200715
 
@@ -180,7 +185,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 //////////////////////////////////////////////////////////////////////////////
 
                 // 로그인중 progress 시작
-                mLoginProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+                mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
                 // email, pass 임시 저장
                 mPersonalProfile.email = EtEmail.getText().toString();
@@ -191,14 +196,14 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                 // 파라메터는 넣기 예
                 param.put("email", EtEmail.getText().toString().trim());    //PARAM
                 param.put("password", EtPass.getText().toString().trim());    //PARAM
-                //param.put("name", EtPass.getText().toString().trim());    //PARAM
+                param.put("name", EtPass.getText().toString().trim());    //PARAM
                 Handler handler = new Handler(message -> {
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
                     System.out.println(result);
 
                     // progress 종료
-                    if (mLoginProgressDialog != null) mLoginProgressDialog.dismiss();
+                    if (mProgressDialog != null) mProgressDialog.dismiss();
 
                     try {
                         JSONObject j = new JSONObject(result);
@@ -210,13 +215,15 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
 
                         if (error == "null" && token != "null") {
 
-                            Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
 
                             // 토큰 저장
                             mSm.setToken(token);
 
                             // 로그인 성공 저장
                             mSm.setLoginning(true);
+
+                            mSm.setEmail(mPersonalProfile.email);
 
                             // 다음 페이지 전환
                             System.out.println("메인액티비티 시작");
@@ -226,7 +233,7 @@ public class AccountIDFragment extends Fragment implements View.OnClickListener,
                             // 이메일 회원가입 실패
                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                             //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
-                            AccountDialog mDlg = new AccountDialog(getActivity(),error, "돌아가기");
+                            new AccountDialog(getActivity(),error, "돌아가기");
                         }
 
 

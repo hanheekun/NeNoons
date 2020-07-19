@@ -25,6 +25,7 @@ public class EYELAB {
             public static final String EMAIL_TEMP = "EMAIL_TEMP";
             public static final String PASS_TEMP = "PASS_TEMP";
             public static final String TOKEN = "TOKEN";
+            public static final String NAME = "NAME";
         }
 
         public class EXERCISE {
@@ -62,6 +63,8 @@ public class EYELAB {
 
         public class TEST {
             public static final String LAST_DISTANCE = "LAST_DISTANCE";
+            public static final String LAST_COLOR = "LAST_COLOR";
+            public static final String LAST_FONT = "LAST_FONT";
         }
 
 

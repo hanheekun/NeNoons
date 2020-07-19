@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/button_test_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_s_b"
+        android:enabled="false"
+        android:text="완료"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_test_prev"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <Button
+        android:id="@+id/button_test_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_s_w"
+        android:text="다시하기"
+        android:textColor="#0143be"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="글씨체 선택"
+        android:textColor="#131340"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/combined_shape_2line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView_test_02_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="문자가 가장 잘 보이는\n폰트를 선택해주세요."
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintVertical_bias="0.38" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout_font_1"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#fffff8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10">
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView57"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_1"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_1"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_1"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_1"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_1"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_1"
+            app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_font_box_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_1"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_1"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_1"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout_font_2"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#f6fbf6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_1">
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dall01r"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView59"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_2"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_2"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_2"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:fontFamily="@font/dall01r"
+            android:id="@+id/textView59"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_2"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_2"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_2"
+            app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_font_box_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_2"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_2"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_2"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout_font_3"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#fffcf6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_2">
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dall01b"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView61"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_3"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_3"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_3"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dall01b"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_3"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_3"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_3"
+            app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_font_box_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_3"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_3"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_3"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout_font_4"
+        android:layout_width="410dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="24dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_font_3">
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dall01eb"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView63"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_4"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_4"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_4"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView63"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dall01eb"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_4"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_4"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_4"
+            app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_font_box_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_font_4"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_font_4"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_font_4"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_font_4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

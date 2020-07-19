@@ -1,6 +1,10 @@
 package com.pixelro.nenoons;
 
-public class TestProfile {
+import android.graphics.Typeface;
+
+import java.io.Serializable;
+
+public class TestProfile implements Serializable {
 
     public String date = "20200701000000";
     public int distance = 0;
@@ -10,6 +14,11 @@ public class TestProfile {
     public int bright = Bright.BRIGHT_1;
     public int reserved1 = 0;
     public int reserved2 = 0;
+
+    // 엡에서만 사용
+    public int brightNumber = 0;
+    public int color = 0;
+    public int colorLight = 0;
 
     public class Redgreen {
         public static final int RED = 1;

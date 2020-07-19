@@ -46,7 +46,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
     private static final int mCountMax = 3;
 
     private int mPathNumber = 0;
-    private static final int mPathNumberMax = 13;
+    private static final int mPathNumberMax = 16;
     private int mPathMoveTimeMS = 0;
 
     ProgressBar mProgressBar;
@@ -163,7 +163,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -490); // -440
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -520); // -440
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -175,7 +175,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590); //500
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -590); //500
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -187,7 +187,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -590);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 0); //500
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -199,7 +199,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 0);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -211,7 +211,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 0);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 0);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -223,7 +223,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 490);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 0);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -235,7 +235,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 520);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -271,7 +271,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 0);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -283,7 +283,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 0);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -295,7 +295,7 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -590);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 0);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -303,6 +303,42 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
                             });
                         }
                         else if (mPathNumber == 12){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AnimatorSet resAniSet = new AnimatorSet();
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", -590);
+                                    resAniSet.play(red);
+                                    resAniSet.setDuration(mPathMoveTimeMS);
+                                    resAniSet.start();
+                                }
+                            });
+                        }
+                        else if (mPathNumber == 13){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AnimatorSet resAniSet = new AnimatorSet();
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 0);
+                                    resAniSet.play(red);
+                                    resAniSet.setDuration(mPathMoveTimeMS);
+                                    resAniSet.start();
+                                }
+                            });
+                        }
+                        else if (mPathNumber == 14){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AnimatorSet resAniSet = new AnimatorSet();
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationY", 590);
+                                    resAniSet.play(red);
+                                    resAniSet.setDuration(mPathMoveTimeMS);
+                                    resAniSet.start();
+                                }
+                            });
+                        }
+                        else if (mPathNumber == 15){
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

@@ -51,8 +51,8 @@
 
     <TextView
         android:id="@+id/textView_account_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="288dp"
+        android:layout_height="96dp"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -60,6 +60,6 @@
         app:layout_constraintEnd_toEndOf="@+id/button_dialog_next"
         app:layout_constraintStart_toStartOf="@+id/button_dialog_next"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.41000003" />
+        app:layout_constraintVertical_bias="0.37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

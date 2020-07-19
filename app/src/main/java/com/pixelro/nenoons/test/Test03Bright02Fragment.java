@@ -91,15 +91,19 @@ public class Test03Bright02Fragment extends Fragment  implements View.OnClickLis
                 ((TestActivity)getActivity()).mTestProfile.bright = 0;
                 if (((CheckBox)mView.findViewById(R.id.imageView17)).isChecked()){
                     ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_1;
+                    ((TestActivity)getActivity()).mTestProfile.brightNumber++;
                 }
                 if (((CheckBox)mView.findViewById(R.id.imageView21)).isChecked()){
                     ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_2;
+                    ((TestActivity)getActivity()).mTestProfile.brightNumber++;
                 }
                 if (((CheckBox)mView.findViewById(R.id.imageView22)).isChecked()){
                     ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_3;
+                    ((TestActivity)getActivity()).mTestProfile.brightNumber++;
                 }
                 if (((CheckBox)mView.findViewById(R.id.imageView23)).isChecked()){
                     ((TestActivity)getActivity()).mTestProfile.bright += TestProfile.Bright.BRIGHT_4;
+                    ((TestActivity)getActivity()).mTestProfile.brightNumber++;
                 }
 
                 NavHostFragment.findNavController(Test03Bright02Fragment.this).navigate(R.id.action_navigation_test_03_diff_to_navigation_test_04_color);

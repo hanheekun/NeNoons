@@ -29,17 +29,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.nenoons.EYELAB;
+import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.menu.exercise.ExerciseViewModel;
 import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.test.TestActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -94,7 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
-        TvAddress = (TextView)root.findViewById(R.id.textView_home_address);
+        TvAddress = (TextView) root.findViewById(R.id.textView_home_address);
 
         // home 웹뷰 시작
         mHomeWebView = (WebView) root.findViewById(R.id.webView_home);
@@ -180,13 +184,218 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        }
 
 
-        TvAge = (TextView)root.findViewById(R.id.textView_home_age);
-        TvExNumber = (TextView)root.findViewById(R.id.textView_home_ex_number);
-        TvScreenTime = (TextView)root.findViewById(R.id.textView_home_screen_time);
+        TvAge = (TextView) root.findViewById(R.id.textView_home_age);
+        TvExNumber = (TextView) root.findViewById(R.id.textView_home_ex_number);
+        TvScreenTime = (TextView) root.findViewById(R.id.textView_home_screen_time);
 
 
         root.findViewById(R.id.button_home_test).setOnClickListener(this);
         root.findViewById(R.id.button_home_test_history).setOnClickListener(this);
+
+
+        // 주소 전송 픽셀로 초기화
+        String token = getToken(getContext());
+        HashMap<String, String> param = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param.put("token", token);    //PARAM
+        param.put("gpsAddress", "경기도 의왕시 이미로 40");    //PARAM
+        param.put("gpsLatitude", String.valueOf(37.400627));    //PARAM
+        param.put("gpsLongitude", String.valueOf(126.99122899999999));    //PARAM
+        Handler handler = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                String msg = j.getString("msg");
+                System.out.println(error);
+                System.out.println(error == null);
+
+                if (error == "null" && msg != "null") {
+
+                    //Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return true;
+        });
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_gps", handler).execute(param);
+//                            new HttpTask("http://192.168.1.162:4002/android/update_user_gps", handler).execute(param);
+
+
+        // 운동 기록 오늘 날짜 업데이트 하기
+        Calendar cal = Calendar.getInstance();
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+
+        ArrayList<ExProfile> mExProfileList = new ArrayList<>();
+        // 0 현재 month, -1 지난달
+        HashMap<String, String> param2 = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param2.put("token", token);    //PARAM
+        param2.put("month", "0");    //PARAM
+        Handler handler2 = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                JSONArray jlist = j.getJSONArray("list");
+                if (jlist.length()==0) {
+                    // 목록이 없음
+                    return true;
+                }
+                // progress 종료
+
+                if (error != "null") {
+                    //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                    System.out.println("목록 실패");
+                }
+
+                // 목록 변환및 저장
+                for (int i=0;i<jlist.length();i++) {
+                    JSONObject jEx = (JSONObject) jlist.get(i);
+                    ExProfile exProfile = new ExProfile();
+                    exProfile.date = jEx.getString("date"); // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
+                    exProfile.type = jEx.getInt("type");
+                    exProfile.level = jEx.getInt("level");
+                    mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                    //mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                }
+                System.out.println(error);
+                System.out.println(jlist);
+                System.out.println(mExProfileList);
+
+                //Toast.makeText(getActivity(), "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
+
+                int exCnt = 0;
+
+                for(ExProfile exProfile : mExProfileList){
+                    int day = Integer.parseInt(exProfile.date.substring(6,8));
+                    if (day == dayOfMonth){
+                        exCnt++;
+                        if (exProfile.type == ExProfile.Type.TYPE_1){
+                            sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE, true);
+                            editor.commit();
+                        }
+                        else if (exProfile.type == ExProfile.Type.TYPE_2){
+                            sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE, true);
+                            editor.commit();
+                        }
+                        else if (exProfile.type == ExProfile.Type.TYPE_3){
+                            sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE, true);
+                            editor.commit();
+                        }
+                        else if (exProfile.type == ExProfile.Type.TYPE_4){
+                            sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE, true);
+                            editor.commit();
+                        }
+                    }
+                }
+
+                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER, exCnt);
+                editor.commit();
+
+                //게시판 업데이트
+                refrashBoard();
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                // 실패
+                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_exercise", handler2).execute(param2);
+
+
+        // 측정 기록 마지막 기록 가지고 오기
+        // 0 현재 month, -1 지난달
+        HashMap<String, String> param3 = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param3.put("token", token);    //PARAM
+        param3.put("month", "0");    //PARAM
+        Handler handler3 = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                JSONArray jList = j.getJSONArray("list");
+                if (jList.length()==0) {
+                    // 목록이 없음
+                    return true;
+                }
+                // progress 종료
+
+                if (error != "null") {
+                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                    System.out.println("목록 실패");
+                }
+                ArrayList<TestProfile> testProfileList = new ArrayList<>();
+
+                // 목록 변환및 저장
+                for (int i=0;i<jList.length();i++) {
+                    JSONObject jTest = (JSONObject) jList.get(i);
+                    TestProfile testProfile = new TestProfile();
+                    testProfile.date = jTest.getString("date");  // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
+                    testProfile.distance = jTest.getInt("distance");
+                    testProfile.redgreen = jTest.getInt("redgreen");
+                    testProfile.background = jTest.getInt("background");
+                    testProfile.font = jTest.getInt("font");
+                    testProfile.bright = jTest.getInt("bright");
+                    testProfile.reserved1 = jTest.getInt("reserved1");
+                    testProfile.reserved2 = jTest.getInt("reserved2");
+                    testProfileList.add(testProfile); // 이 어레이를 전달해서 사용하세요
+                }
+                System.out.println(error);
+                System.out.println(jList);
+                System.out.println(testProfileList);
+
+                for(TestProfile testProfile : testProfileList){
+                    sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,testProfile.distance);
+                    editor.commit();
+                }
+
+                refrashBoard();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                // 실패
+                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_test", handler3).execute(param3);
+
 
         return root;
     }
@@ -218,36 +427,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        }
     }
 
-    public void refrashBoard(){
+    public void refrashBoard() {
         Calendar cal = Calendar.getInstance();
         int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
 
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        int preDayOfMonth = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY,0);
+        int preDayOfMonth = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY, 0);
 
-        if (dayOfMonth == preDayOfMonth){
+        if (dayOfMonth == preDayOfMonth) {
 
-        }
-        else {
-            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY,dayOfMonth);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_5_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_6_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_7_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_8_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_9_COMPLETE,false);
-            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_10_COMPLETE,false);
+        } else {
+            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY, dayOfMonth);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_5_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_6_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_7_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_8_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_9_COMPLETE, false);
+            editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_10_COMPLETE, false);
 
-            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+            editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER, 0);
 
             editor.commit();
         }
 
-        int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER, 0);
 
         final long now = System.currentTimeMillis();
 
@@ -271,107 +479,108 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (stats == null || stats.isEmpty()) {
             // Usage access is not enabled
             long tatalTimeMS = 0;
-        }
-        else {
+        } else {
 
             long tatalTimeMS = 0;
 
-            for (UsageStats stat:stats) {
+            for (UsageStats stat : stats) {
                 tatalTimeMS += stat.getTotalTimeInForeground();
             }
             //Toast.makeText(getActivity(),"total time" + (tatalTimeMS/1000)/3600,Toast.LENGTH_SHORT).show();
-            totalMin = (tatalTimeMS/1000)/60;
+            totalMin = (tatalTimeMS / 1000) / 60;
 
             //totalMin = totalMin / 2;
 
-            min = (int)(totalMin % 60);
-            hour = (int)(totalMin / 60);
+            min = (int) (totalMin % 60);
+            hour = (int) (totalMin / 60);
 
             //Toast.makeText(getActivity(),"Hour : " + hour + ", Min : " + min + " Total EX : " + curTotalEXNumber,Toast.LENGTH_SHORT).show();
 
             TvExNumber.setText("");
-            String s= "" + curTotalEXNumber;
-            SpannableString ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            String s = "" + curTotalEXNumber;
+            SpannableString ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
             TvExNumber.append(ss1);
-            s= "번";
-            ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            s = "번";
+            ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0, s.length(), 0); // set size
             TvExNumber.append(ss1);
 
             //TvExNumber.setText(curTotalEXNumber + " 번");
 
             TvScreenTime.setText("");
-            s= "" + hour;
-            ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            s = "" + hour;
+            ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
             TvScreenTime.append(ss1);
-            s= "시간";
-            ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            s = "시간";
+            ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0, s.length(), 0); // set size
             TvScreenTime.append(ss1);
-            s= ""+min;
-            ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(2f), 0,s.length(), 0); // set size
+            s = "" + min;
+            ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
             TvScreenTime.append(ss1);
-            s= "분";
-            ss1=  new SpannableString(s);
-            ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
+            s = "분";
+            ss1 = new SpannableString(s);
+            ss1.setSpan(new RelativeSizeSpan(1f), 0, s.length(), 0); // set size
             TvScreenTime.append(ss1);
 
             //TvScreenTime.setText(hour+"시 "+min+" 분");
         }
 
         //
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
-        int distance = sharedPreferences.getInt(EYELAB.APPDATA.TEST.LAST_DISTANCE,20);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST, MODE_PRIVATE);
+        int distance = sharedPreferences.getInt(EYELAB.APPDATA.TEST.LAST_DISTANCE, -1);
 
         String ageNumber = "";
         String ageText = "";
 
-        // 거리에 따른 나이
-        if (distance <= 22){
-            ageNumber = "44";
-            ageText = "세 이하";
+        if(distance > 0){
+            // 거리에 따른 나이
+            if (distance <= 22) {
+                ageNumber = "44";
+                ageText = "세 이하";
+            } else if (distance >= 23 && distance <= 30) {
+                ageNumber = "44";
+                ageText = "세 이하";
+            } else if (distance >= 31 && distance <= 37) {
+                ageNumber = "40";
+                ageText = "대 후반";
+            } else if (distance >= 38 && distance <= 47) {
+                ageNumber = "50";
+                ageText = "세";
+            } else if (distance >= 48 && distance <= 57) {
+                ageNumber = "50";
+                ageText = "대 초반";
+            } else if (distance >= 58 && distance <= 67) {
+                ageNumber = "50";
+                ageText = "대 중반";
+            } else if (distance >= 68) {
+                ageNumber = "56";
+                ageText = "세 이상";
+            }
         }
-        else if(distance >= 23 && distance <= 30){
-            ageNumber = "44";
-            ageText = "세 이하";
-        }
-        else if(distance >= 31 && distance <= 37){
-            ageNumber = "40";
-            ageText = "대 후반";
-        }
-        else if(distance >= 38 && distance <= 47){
-            ageNumber = "50";
-            ageText = "세";
-        }
-        else if(distance >= 48 && distance <= 57){
-            ageNumber = "50";
-            ageText = "대 초반";
-        }
-        else if(distance >= 58 && distance <= 67){
-            ageNumber = "50";
-            ageText = "대 중반";
-        }
-        else if(distance >= 68){
-            ageNumber = "56";
-            ageText = "세 이상";
+        else {
+            ageNumber = "미측정";
+            ageText = "";
         }
 
+
         TvAge.setText("");
-        SpannableString ss1=  new SpannableString(ageNumber);
-        ss1.setSpan(new RelativeSizeSpan(2f), 0,ageNumber.length(), 0); // set size
+        SpannableString ss1 = new SpannableString(ageNumber);
+        ss1.setSpan(new RelativeSizeSpan(2f), 0, ageNumber.length(), 0); // set size
         TvAge.append(ss1);
-        ss1=  new SpannableString(ageText);
-        ss1.setSpan(new RelativeSizeSpan(1f), 0,ageText.length(), 0); // set size
+        ss1 = new SpannableString(ageText);
+        ss1.setSpan(new RelativeSizeSpan(1f), 0, ageText.length(), 0); // set size
         TvAge.append(ss1);
+
 
     }
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
 //            case R.id.view_main_age_result_btn:
 //                Intent intent = new Intent(getContext(), TestActivity.class);
 //                startActivity(intent);
@@ -395,23 +604,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        Context mContext =getContext();
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Context mContext = getContext();
 
         super.onActivityResult(requestCode, resultCode, intent);
 
-        switch(requestCode){
+        switch (requestCode) {
 
             case SEARCH_ADDRESS_ACTIVITY:
 
-                if(resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
 
                     String data = intent.getExtras().getString("data");
                     if (data != null)
 
-                        data = data.substring(data.indexOf(',')+2,data.lastIndexOf('(')-1);
-
-
+                        data = data.substring(data.indexOf(',') + 2, data.lastIndexOf('(') - 1);
 
                     List<Address> list = null;
 
@@ -421,7 +628,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 10); // 읽을 개수
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+                        Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
                     }
 
                     if (list != null) {
@@ -457,7 +664,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                                     if (error == "null" && msg != "null") {
 
-                                        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                                     }
@@ -484,16 +691,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     }
-    public String getToken(Context context){
-        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");
+
+    public String getToken(Context context) {
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN, "");
     }
 
-    public void setToken(Context context, String token){
+    public void setToken(Context context, String token) {
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
-        editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN,token);
+        editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN, token);
         editor.commit();
     }
-
 
 
 }

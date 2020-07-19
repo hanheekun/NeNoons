@@ -91,7 +91,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
                 System.out.println(error);
                 System.out.println(msg);
 
-                Toast.makeText(mContext, "error = " + error + " msg = " + msg, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "error = " + error + " msg = " + msg, Toast.LENGTH_SHORT).show();
 
                 // progress 종료
 

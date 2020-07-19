@@ -35,6 +35,13 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
     private FrameLayout FlColor5;
     private FrameLayout FlColor6;
 
+    private FrameLayout FlColorDark1;
+    private FrameLayout FlColorDark2;
+    private FrameLayout FlColorDark3;
+    private FrameLayout FlColorDark4;
+    private FrameLayout FlColorDark5;
+    private FrameLayout FlColorDark6;
+
     private FrameLayout FlColorLight1;
     private FrameLayout FlColorLight2;
     private FrameLayout FlColorLight3;
@@ -73,6 +80,13 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         FlColor4 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_4);
         FlColor5 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_5);
         FlColor6 = (FrameLayout)view.findViewById(R.id.frameLayout_color_box_6);
+
+        FlColorDark1 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_1);
+        FlColorDark2 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_2);
+        FlColorDark3 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_3);
+        FlColorDark4 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_4);
+        FlColorDark5 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_5);
+        FlColorDark6 = (FrameLayout)view.findViewById(R.id.frameLayout_color_dark_6);
 
         FlColorLight1 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_1);
         FlColorLight2 = (FrameLayout)view.findViewById(R.id.frameLayout_color_light_2);
@@ -116,36 +130,48 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
                 FlColor1.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable) FlColorLight1.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_1;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark1.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight1.getBackground()).getColor();
                 break;
             case R.id.constraintlayout_color_2:
                 setAllColorButtonReset();
                 FlColor2.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight2.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_2;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark2.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight2.getBackground()).getColor();
                 break;
             case R.id.constraintlayout_color_3:
                 setAllColorButtonReset();
                 FlColor3.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight3.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_3;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark3.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight3.getBackground()).getColor();
                 break;
             case R.id.constraintlayout_color_4:
                 setAllColorButtonReset();
                 FlColor4.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight4.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_4;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark4.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight4.getBackground()).getColor();
                 break;
             case R.id.constraintlayout_color_5:
                 setAllColorButtonReset();
                 FlColor5.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight5.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_5;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark5.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight5.getBackground()).getColor();
                 break;
             case R.id.constraintlayout_color_6:
                 setAllColorButtonReset();
                 FlColor6.setBackgroundResource(R.drawable.test_color_outline);
                 ((TestActivity)getActivity()).mCurrentSelectedColor = ((ColorDrawable)FlColorLight6.getBackground()).getColor();
                 ((TestActivity)getActivity()).mTestProfile.background = TestProfile.Background.BACKGROUND_6;
+                ((TestActivity)getActivity()).mTestProfile.color = ((ColorDrawable) FlColorDark6.getBackground()).getColor();
+                ((TestActivity)getActivity()).mTestProfile.colorLight = ((ColorDrawable) FlColorLight6.getBackground()).getColor();
                 break;
 
         }

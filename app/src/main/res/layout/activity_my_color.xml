@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/button_test_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_s_b"
+        android:enabled="false"
+        android:text="확인"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_test_prev"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <Button
+        android:id="@+id/button_test_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_s_w"
+        android:text="다시하기"
+        android:textColor="#0143be"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="컬러 오버레이 선택"
+        android:textColor="#131340"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/combined_shape_2line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView_test_02_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="문자가 가장 잘 보이는\n배경색을 선택해주세요."
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="205dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background=" #ff9d9d"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/frameLayout_color_1"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/frameLayout_color_1">-->
+    <!--    </FrameLayout>-->
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/frameLayout"-->
+    <!--        android:layout_width="205dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background=" #fbf6f6"-->
+    <!--        tools:layout_editor_absoluteX="1dp"></FrameLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_1"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_color_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_1"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #ff9d9d"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_1"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #fbf6f6"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1" />
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView42"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_1"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_1"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_1"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_2"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_color_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_1"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_2"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #ffff53"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_2"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_2"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_2">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_2"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background=" #fffff8"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_2"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_2"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_2" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView47"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_2"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_2"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_2"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_2"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_2"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_2"
+            app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_2"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_2"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_2"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_3"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_color_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_2"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_3"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#b9ff7d"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_3"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_3"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_3">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_3"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#f6fbf6"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_3"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_3"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_3" />
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView49"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_3"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_3"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_3"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_3"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_3"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_3"
+            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_3"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_3"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_3"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_4"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_color_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_3"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_4"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#ffd165"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_4"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_4"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_4">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_4"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#fffcf6"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_4"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_4"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_4" />
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView51"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_4"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_4"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_4"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_4"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_4"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_4"
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_4"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_4"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_4"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_5"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_color_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_4"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_5"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#e7e7e7"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_5"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_5"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_5">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_5"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_5"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_5"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_5" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView53"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_5"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_5"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_5"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_5"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_5"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_5"
+            app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_5"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_5"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_5"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_color_6"
+        android:layout_width="410dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_test_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_color_5"
+        app:layout_constraintVertical_chainStyle="spread">
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_dark_6"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#7bcaff"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_6"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_6"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_6">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_light_6"
+            android:layout_width="205dp"
+            android:layout_height="0dp"
+            android:background="#fafdff"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_6"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_6"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_6" />
+
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView55"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_6"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_6"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_6"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다람쥐헌쳇바퀴에타고파 3689"
+            android:textColor="#000000"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_6"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_6"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_6"
+            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_color_box_6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background=" #00000000"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintlayout_color_6"
+            app:layout_constraintEnd_toEndOf="@+id/constraintlayout_color_6"
+            app:layout_constraintStart_toStartOf="@+id/constraintlayout_color_6"
+            app:layout_constraintTop_toTopOf="@+id/constraintlayout_color_6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

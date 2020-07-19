@@ -134,7 +134,7 @@
                 <LinearLayout
                     android:id="@+id/scrollView_tos_1"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="5dp"
                     android:visibility="gone">
@@ -148,7 +148,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:text="@string/account_tos_1"
                         android:visibility="visible" />
 
                 </LinearLayout>
@@ -211,7 +211,7 @@
                 <LinearLayout
                     android:id="@+id/scrollView_tos_2"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="5dp"
                     android:visibility="gone">
@@ -224,7 +224,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용.서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용 서비스 이용약관 동의 내용."
+                        android:text="@string/account_tos_2"
                         android:visibility="visible" />
 
                 </LinearLayout>
@@ -285,7 +285,7 @@
                 <LinearLayout
                     android:id="@+id/scrollView_tos_3"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="5dp"
                     android:visibility="gone">
@@ -359,7 +359,7 @@
                 <LinearLayout
                     android:id="@+id/scrollView_tos_4"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="5dp"
                     android:visibility="gone">

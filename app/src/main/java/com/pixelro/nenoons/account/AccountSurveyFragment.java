@@ -182,17 +182,20 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                         // progress 종료
 
                         if (error != "null") {
-                            Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                             System.out.println("저장 실패");
                         }
                         else if (msg != "null") {
-                            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
                             System.out.println("저장 성공");
+
+                            mSm.setName(mPersonalProfile.name);
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         // 실패
-                        Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 });
