@@ -196,7 +196,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                 // 파라메터는 넣기 예
                 param.put("email", EtEmail.getText().toString().trim());    //PARAM
                 param.put("password", EtPass.getText().toString().trim());    //PARAM
-                //param.put("name", EtPass.getText().toString().trim());    //PARAM
+//                param.put("name", EtPass.getText().toString().trim());    //PARAM
                 Handler handler = new Handler(message -> {
                     Bundle bundle = message.getData();
                     String result = bundle.getString("result");
