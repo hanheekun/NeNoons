@@ -111,7 +111,7 @@ public class SplashActivity extends BaseActivity{
             }, AUTO_HIDE_DELAY_MILLIS);
         }
 
-
+        //
 
     }
 

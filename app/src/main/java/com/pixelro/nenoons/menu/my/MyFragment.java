@@ -125,7 +125,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.button_my_qna:
                 intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", "https://www.nenoons.com/app-qua");
+                intent.putExtra("url", "https://www.nenoons.com/app-qna");
                 intent.putExtra("token", mSm.getToken());
                 getActivity().startActivity(intent);
                 break;

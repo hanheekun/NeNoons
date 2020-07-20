@@ -14,8 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pixelro.nenoons.account.AccountActivity;
+import com.pixelro.nenoons.account.AccountIDFragment;
 import com.pixelro.nenoons.menu.exercise.ExerciseFragment;
 import com.pixelro.nenoons.menu.home.HomeFragment;
 import com.pixelro.nenoons.menu.my.MyFragment;
@@ -27,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+    private final static String TAG = MainActivity.class.getSimpleName();
 
     private long mBackKeyPressedTime = 0;
     private SharedPreferences sharedPreferences;
@@ -60,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         // 처음 메인 페이지 오면 노안 측정 dialog 출력
-        sharedPreferences = getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN,true)){
+        sharedPreferences = getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN, true)) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN, false);
             editor.commit();
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dlg.setOnResultEventListener(new FirstDialog.OnResultEventListener() {
                 @Override
                 public void ResultEvent(boolean result) {
-                    if (result){
+                    if (result) {
                         Intent intent = new Intent(MainActivity.this, TestActivity.class);
                         startActivity(intent);
                     }
@@ -94,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLoginHomeLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
 
         //loading 동안 progress 1초뒤 종료
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
@@ -103,9 +110,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }, 4000);
 
+
+        /////////////////////////////////////////////////////
+        // FCM 설정
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // 서버연결 20200720
+
+                        // FCM 토큰 가지고 옴
+                        // Get new Instance ID token
+                        String tokenFCM = task.getResult().getToken();
+                        String token = getToken(MainActivity.this);
+                        //FCM 토큰 전송
+
+
+                        // Log and toast
+                        //String msg = getString(R.string.msg_token_fmt, token);
+                        //Log.d(TAG, msg);
+                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
+        MyFirebaseMessagingService myFirebaseMessagingService = new MyFirebaseMessagingService();
+
+
+
     }
 
-    boolean checkForPermission(){
+    boolean checkForPermission() {
         try {
             PackageManager packageManager = getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(), 0);
@@ -141,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
         }
     }
@@ -151,40 +192,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                if(fa == null) {
+                if (fa == null) {
                     fa = new HomeFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fa).commit();
                 }
 
-                if(fa != null) fragmentManager.beginTransaction().show(fa).commit();
-                if(fb != null) fragmentManager.beginTransaction().hide(fb).commit();
-                if(fc != null) fragmentManager.beginTransaction().hide(fc).commit();
+                if (fa != null) fragmentManager.beginTransaction().show(fa).commit();
+                if (fb != null) fragmentManager.beginTransaction().hide(fb).commit();
+                if (fc != null) fragmentManager.beginTransaction().hide(fc).commit();
 
-                ((HomeFragment)fa).refrashBoard();
+                ((HomeFragment) fa).refrashBoard();
 
                 return true;
             case R.id.navigation_exercise:
-                if(fb == null) {
+                if (fb == null) {
                     fb = new ExerciseFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fb).commit();
                 }
 
-                if(fa != null) fragmentManager.beginTransaction().hide(fa).commit();
-                if(fb != null) fragmentManager.beginTransaction().show(fb).commit();
-                if(fc != null) fragmentManager.beginTransaction().hide(fc).commit();
+                if (fa != null) fragmentManager.beginTransaction().hide(fa).commit();
+                if (fb != null) fragmentManager.beginTransaction().show(fb).commit();
+                if (fc != null) fragmentManager.beginTransaction().hide(fc).commit();
                 return true;
             case R.id.navigation_my:
-                if(fc == null) {
+                if (fc == null) {
                     fc = new MyFragment();
                     fragmentManager.beginTransaction().add(R.id.nav_test_fragment, fc).commit();
                 }
 
-                if(fa != null) fragmentManager.beginTransaction().hide(fa).commit();
-                if(fb != null) fragmentManager.beginTransaction().hide(fb).commit();
-                if(fc != null) fragmentManager.beginTransaction().show(fc).commit();
+                if (fa != null) fragmentManager.beginTransaction().hide(fa).commit();
+                if (fb != null) fragmentManager.beginTransaction().hide(fb).commit();
+                if (fc != null) fragmentManager.beginTransaction().show(fc).commit();
                 return true;
         }
 
         return false;
+    }
+
+    public String getToken(Context context) {
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN, "");
     }
 }
