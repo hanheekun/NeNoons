@@ -132,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                         // Log and toast
-                        //String msg = getString(R.string.msg_token_fmt, token);
-                        //Log.d(TAG, msg);
-                        //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        Log.d(TAG, ">>>> fcm token : " + tokenFCM);
+                        Toast.makeText(MainActivity.this, tokenFCM, Toast.LENGTH_SHORT).show();
                     }
                 });
 
