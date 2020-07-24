@@ -25,12 +25,19 @@ import com.pixelro.nenoons.account.AccountIDFragment;
 import com.pixelro.nenoons.menu.exercise.ExerciseFragment;
 import com.pixelro.nenoons.menu.home.HomeFragment;
 import com.pixelro.nenoons.menu.my.MyFragment;
+import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.test.TestActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.zip.CheckedInputStream;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private final static String TAG = MainActivity.class.getSimpleName();
@@ -126,15 +133,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         // FCM 토큰 가지고 옴
                         // Get new Instance ID token
-                        String tokenFCM = task.getResult().getToken();
+                        String fcmToken = task.getResult().getToken();
                         String token = getToken(MainActivity.this);
+                        String fcmTokenLocal = getFcmToken(MainActivity.this);
                         //FCM 토큰 전송
+                        if (fcmToken!=null && !fcmToken.equals("")  && token!=null && token.equals("")) {
+                            if (fcmTokenLocal == "" || !fcmToken.equals(fcmTokenLocal)) {
+                                // 신규 fcmToken 서버에 저장
+                                HashMap<String, String> param = new HashMap<String, String>();
+                                // 파라메터는 넣기 예
+                                param.put("token", token);    //PARAM
+                                param.put("fcmToken", fcmToken);    // 서버연결 20200716 이름 추가 필요
+                                Handler handler = new Handler(message -> {
+                                    Bundle bundle = message.getData();
+                                    String result = bundle.getString("result");
+                                    System.out.println(result);
+                                    try {
+                                        JSONObject j = new JSONObject(result);
+                                        String error = j.getString("error");
+                                        String msg = j.getString("msg");
+                                        System.out.println(error);
+                                        System.out.println(msg);
+                                        if (error != "null") {
+                                            //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                                            System.out.println("저장 실패");
+                                        }
+                                        else if (msg != "null") {
+                                            //Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                                            System.out.println("저장 성공");
+                                            setFcmToken(MainActivity.this,fcmToken);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        // 실패
+                                        //Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                    return true;
+                                });
+                                // API 주소와 위 핸들러 전달 후 실행.
+//                                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_fcm", handler).execute(param);
+                new HttpTask("http://192.168.1.162:4002/android/update_user_fcm", handler).execute(param);
+
+                            }
+                        }
 
 
                         // Log and toast
 
-                        Log.d(TAG, ">>>> fcm token : " + tokenFCM);
-                        Toast.makeText(MainActivity.this, tokenFCM, Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, ">>>> fcm token : " + fcmToken);
+//                        Toast.makeText(MainActivity.this, tokenFCM, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -142,7 +189,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         MyFirebaseMessagingService myFirebaseMessagingService = new MyFirebaseMessagingService();
 
+        // TODO 노티피케이션으로부터 들어온 경우 향후 동작 체크 , 아직 작동 안함.
+        // 서버에서 title, message, link, action, value 항목으로 노티가 날아옴
+        // 아래 내용에 따라 띄우는 화면 분기할 예정
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("link")) {
+            String link = intent.getStringExtra("link");
+            String action = intent.getStringExtra("action");
+            String value = intent.getStringExtra("value");
+            System.out.println(" link=" + link + ",action=" + action + " , value="+ value);
+            Toast.makeText(this, "노티에서 호출 : " + link + " " + action + " " + value,Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -231,5 +289,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public String getToken(Context context) {
         return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN, "");
+    }
+    public String getFcmToken(Context context) {
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.FCM_TOKEN, "");
+    }
+    public void setFcmToken(Context context, String fcmToken) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.FCM_TOKEN, fcmToken);
+        editor.commit();
     }
 }

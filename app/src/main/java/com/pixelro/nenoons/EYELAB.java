@@ -26,6 +26,7 @@ public class EYELAB {
             public static final String PASS_TEMP = "PASS_TEMP";
             public static final String TOKEN = "TOKEN";
             public static final String NAME = "NAME";
+            public static final String FCM_TOKEN = "FCM_TOKEN";
         }
 
         public class EXERCISE {
