@@ -103,6 +103,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
                 Intent mainIntent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(mainIntent);
+                getActivity().finish();
 
                 break;
             case R.id.button_my_my:

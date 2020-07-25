@@ -54,7 +54,7 @@ public class TestAddActivity extends AppCompatActivity{
             TvResultAge.setText("노안나이\n50대 초반");
         }
         else if(mTestProfile.distance >= 58 && mTestProfile.distance <= 67){
-            TvResultAge.setText("노안나이v50대 중반");
+            TvResultAge.setText("노안나이\n50대 중반");
         }
         else if(mTestProfile.distance >= 68){
             TvResultAge.setText("노안나이\n56세 이상");

@@ -235,4 +235,23 @@
         app:layout_constraintEnd_toEndOf="@+id/editText_account_login_email_conf"
         app:layout_constraintTop_toTopOf="@+id/editText_account_login_email_conf" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/button_google_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="548dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_google_logout_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/button_google_test"
+        app:layout_constraintTop_toTopOf="@+id/button_google_test" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

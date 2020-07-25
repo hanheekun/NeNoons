@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Bundle mHomeWebViewBundle;
 
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
-    Geocoder geocoder;
+        Geocoder geocoder;
 
     private TextView TvAge;
     private TextView TvExNumber;

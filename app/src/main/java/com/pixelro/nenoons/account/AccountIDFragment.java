@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
@@ -33,12 +48,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.pixelro.nenoons.account.AccountLoginFragment.removeKey;
 import static com.pixelro.nenoons.account.AccountLoginFragment.setString;
+
+// google
+// Client ID : 622454092611-df5frr6t2jffrdr4o9t2d1kmof2ia844.apps.googleusercontent.com
+// Client Secret : c-J35XbjSdXtNuzBL61x8B7M
 
 public class AccountIDFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
@@ -51,6 +71,11 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
     //private AccountDialog mDlg;
     private PersonalProfile mPersonalProfile;
+
+    // google
+    private FirebaseAuth mAuth = null;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     public View onCreateView(
@@ -96,6 +121,182 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
         // 로그인 실패 메세지
         //mDlg = new AccountDialog(getActivity());
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+        view.findViewById(R.id.button_google_test).setOnClickListener(this);
+
+        view.findViewById(R.id.button_google_logout_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                //mAuth.signOut();
+                mAuth.getCurrentUser().delete();
+
+                //FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getActivity(),"로그아웃",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Successed.", Snackbar.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+//        try {
+//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+//
+//            // Signed in successfully, show authenticated UI.
+//            updateUI(account);
+//        } catch (ApiException e) {
+//            // The ApiException status code indicates the detailed failure reason.
+//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+//            updateUI(null);
+//        }
+//    }
+
+//    private void updateUI(FirebaseUser account) {
+//
+//        Toast.makeText(getActivity(),"email = "+account.getEmail()+" ID : "+account.getUid(),Toast.LENGTH_LONG).show();
+//        //FirebaseAuth.getInstance().signOut();
+//    }
+
+    private void updateUI(FirebaseUser user) { //update ui code here
+        if (user != null) {
+
+            //Toast.makeText(getActivity(),"email = "+user.getEmail()+" ID : "+user.getUid(),Toast.LENGTH_LONG).show();
+
+            //////////////////////////////////////////////////////////////////////////////
+            // google 가입 진행
+            //////////////////////////////////////////////////////////////////////////////
+
+            // 로그인중 progress 시작
+            mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+
+            // email, pass 임시 저장
+            mPersonalProfile.email = user.getEmail();
+            mPersonalProfile.password = "12345678";
+
+            // email, pass 로 회원 가입
+            HashMap<String, String> param = new HashMap<String, String>();
+            // 파라메터는 넣기 예
+            param.put("email", mPersonalProfile.email);    //PARAM
+            param.put("password", mPersonalProfile.password);    //PARAM
+            //param.put("name", EtPass.getText().toString().trim());    //PARAM
+            Handler handler = new Handler(message -> {
+                Bundle bundle = message.getData();
+                String result = bundle.getString("result");
+                System.out.println(result);
+
+                // progress 종료
+                if (mProgressDialog != null) mProgressDialog.dismiss();
+
+                try {
+                    JSONObject j = new JSONObject(result);
+                    String error = j.getString("error");
+                    String token = j.getString("token");
+                    System.out.println(error);
+                    System.out.println(error == null);
+                    System.out.println(token);
+
+                    if (error == "null" && token != "null") {
+
+                        //Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
+
+                        // 토큰 저장
+                        mSm.setToken(token);
+
+                        // 로그인 성공 저장
+                        mSm.setLoginning(true);
+
+                        mSm.setEmail(mPersonalProfile.email);
+
+                        // 다음 페이지 전환
+                        System.out.println("메인액티비티 시작");
+                        NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+
+                    } else {
+                        // 이메일 회원가입 실패
+                        removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                        //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                        new AccountDialog(getActivity(),error, "돌아가기");
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // 로그인 실패
+                    removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                    AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                }
+                return true;
+            });
+            // API 주소와 위 핸들러 전달 후 실행.
+            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signup", handler).execute(param);
+
+
+//            Intent intent = new Intent(this, AfterActivity.class);
+//            startActivity(intent);
+//            finish();
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -164,7 +365,8 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
             case R.id.imageButton_account_id_facebook:
                 break;
             case R.id.imageButton_account_id_google:
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                signIn();
                 break;
             case R.id.imageButton_account_id_kakao:
                 Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
@@ -260,6 +462,9 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
             case R.id.editText_account_login_pass:
             case R.id.editText_account_login_email_conf:
                 setButton();
+                break;
+            case R.id.button_google_test:
+                signIn();
                 break;
         }
     }

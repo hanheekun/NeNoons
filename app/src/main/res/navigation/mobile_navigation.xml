@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_exercise"
             app:destination="@id/navigation_exercise" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_my"
+            app:destination="@id/navigation_my" />
     </fragment>
 
     <fragment
@@ -23,6 +26,9 @@
         <action
             android:id="@+id/action_navigation_exercise_to_navigation_home2"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_exercise_to_navigation_my"
+            app:destination="@id/navigation_my" />
     </fragment>
 
     <fragment
@@ -35,7 +41,14 @@
         android:id="@+id/navigation_my"
         android:name="com.pixelro.nenoons.menu.my.MyFragment"
         android:label="@string/title_my"
-        tools:layout="@layout/fragment_my" />
+        tools:layout="@layout/fragment_my" >
+        <action
+            android:id="@+id/action_navigation_my_to_navigation_exercise"
+            app:destination="@id/navigation_exercise" />
+        <action
+            android:id="@+id/action_navigation_my_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 <!--    <fragment-->
 <!--        android:id="@+id/navigation_care_map"-->
