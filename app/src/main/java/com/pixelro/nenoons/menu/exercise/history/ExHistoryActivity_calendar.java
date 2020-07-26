@@ -55,7 +55,7 @@ public class ExHistoryActivity_calendar extends BaseActivity implements View.OnC
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                Toast.makeText(ExHistoryActivity_calendar.this,date.getDate().toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ExHistoryActivity_calendar.this,date.getDate().toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,7 +102,7 @@ public class ExHistoryActivity_calendar extends BaseActivity implements View.OnC
 
     @Override
     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        Toast.makeText(this,"가나다",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"가나다",Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -36,6 +36,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.kakao.auth.ErrorCode;
+import com.kakao.auth.IApplicationConfig;
+import com.kakao.auth.KakaoAdapter;
+import com.kakao.auth.KakaoSDK;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.LoginButton;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeResponseCallback;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.usermgmt.response.model.Profile;
+import com.kakao.usermgmt.response.model.UserAccount;
+import com.kakao.usermgmt.response.model.UserProfile;
+import com.kakao.util.OptionalBoolean;
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.MainActivity;
@@ -55,6 +69,11 @@ import java.util.regex.Pattern;
 import static android.content.Context.MODE_PRIVATE;
 import static com.pixelro.nenoons.account.AccountLoginFragment.removeKey;
 import static com.pixelro.nenoons.account.AccountLoginFragment.setString;
+
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.util.exception.KakaoException;
+import com.kakao.util.helper.log.Logger;
 
 // google
 // Client ID : 622454092611-df5frr6t2jffrdr4o9t2d1kmof2ia844.apps.googleusercontent.com
@@ -76,6 +95,10 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
     private FirebaseAuth mAuth = null;
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
+
+    //kakao
+    private SessionCallback callback;
+    private LoginButton loginButton;
 
     @Override
     public View onCreateView(
@@ -142,9 +165,31 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                 mAuth.getCurrentUser().delete();
 
                 //FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getActivity(),"로그아웃",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"로그아웃",Toast.LENGTH_SHORT).show();
             }
         });
+
+//        // SDK 초기화
+//        KakaoSDK.init(new KakaoAdapter() {
+//
+//            @Override
+//            public IApplicationConfig getApplicationConfig() {
+//                return new IApplicationConfig() {
+//                    @Override
+//                    public Context getApplicationContext() {
+//                        return GlobalApplication::getGlobalApplicationContext();
+//                    }
+//                };
+//            }
+//        });
+
+        // kakao
+        loginButton = view.findViewById(R.id.login_button_activity);
+        loginButton.setSuportFragment(this); // set fragment for LoginButton
+
+        String keyHash = com.kakao.util.helper.Utility.getKeyHash(getActivity());
+        callback = new SessionCallback();
+        Session.getCurrentSession().addCallback(callback);
 
     }
 
@@ -158,8 +203,178 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
+
+    private class SessionCallback implements ISessionCallback {
+
+        @Override
+            public void onSessionOpened() {
+            //redirectSignupActivity();
+            //Toast.makeText(getActivity(), "onSessionOpened()", Toast.LENGTH_SHORT).show();
+            requestMe();
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            if (exception != null) {
+                Logger.e(exception);
+                //Toast.makeText(getActivity(), exception.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // 사용자 정보 요청
+        public void requestMe() {
+            UserManagement.getInstance()
+                    .me(new MeV2ResponseCallback() {
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                        }
+
+                        @Override
+                        public void onFailure(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "사용자 정보 요청 실패: " + errorResult);
+                        }
+
+                        @Override
+                        public void onSuccess(MeV2Response resultKakao) {
+                            Log.i("KAKAO_API", "사용자 아이디: " + resultKakao.getId());
+
+                            UserAccount kakaoAccount = resultKakao.getKakaoAccount();
+                            if (kakaoAccount != null) {
+
+                                // 이메일
+                                String email = kakaoAccount.getEmail();
+
+                                if (email != null) {
+                                    Log.i("KAKAO_API", "email: " + email);
+
+                                } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
+                                    // 동의 요청 후 이메일 획득 가능
+                                    // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+
+                                } else {
+                                    // 이메일 획득 불가
+                                }
+
+                                // 프로필
+                                Profile profile = kakaoAccount.getProfile();
+
+                                if (profile != null) {
+                                    Log.d("KAKAO_API", "nickname: " + profile.getNickname());
+                                    Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
+                                    Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
+
+
+
+
+
+
+                                } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
+                                    // 동의 요청 후 프로필 정보 획득 가능
+
+                                } else {
+                                    // 프로필 획득 불가
+                                }
+
+
+                                // 정보 전달 완료
+                                // 로그인 시작
+                                if(email != null){
+
+                                    //////////////////////////////////////////////////////////////////////////////
+                                    // 카카오 가입 진행
+                                    //////////////////////////////////////////////////////////////////////////////
+
+                                    // 로그인중 progress 시작
+                                    mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
+
+                                    // email, pass 임시 저장
+                                    mPersonalProfile.email = email;
+                                    mPersonalProfile.password = "12345678"; // 임시로 사용
+                                    mPersonalProfile.sns_ID = ""+resultKakao.getId();
+
+                                    // email, pass 로 회원 가입
+                                    HashMap<String, String> param = new HashMap<String, String>();
+                                    // 파라메터는 넣기 예
+                                    param.put("email", mPersonalProfile.email);    //PARAM
+                                    param.put("password", mPersonalProfile.password);    //PARAM
+                                    //param.put("name", EtPass.getText().toString().trim());    //PARAM
+                                    Handler handler = new Handler(message -> {
+                                        Bundle bundle = message.getData();
+                                        String result = bundle.getString("result");
+                                        System.out.println(result);
+
+                                        // progress 종료
+                                        if (mProgressDialog != null) mProgressDialog.dismiss();
+
+                                        try {
+                                            JSONObject j = new JSONObject(result);
+                                            String error = j.getString("error");
+                                            String token = j.getString("token");
+                                            System.out.println(error);
+                                            System.out.println(error == null);
+                                            System.out.println(token);
+
+                                            if (error == "null" && token != "null") {
+
+                                                //Toast.makeText(mContext, "이메일 가입 성공", Toast.LENGTH_SHORT).show();
+
+                                                // 토큰 저장
+                                                mSm.setToken(token);
+
+                                                // 로그인 성공 저장
+                                                mSm.setLoginning(true);
+
+                                                mSm.setEmail(mPersonalProfile.email);
+
+                                                // 다음 페이지 전환
+                                                System.out.println("메인액티비티 시작");
+                                                NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+
+                                            } else {
+                                                // 이메일 회원가입 실패
+                                                removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                                                //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                                                new AccountDialog(getActivity(),error, "돌아가기");
+                                            }
+
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            // 로그인 실패
+                                            removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
+                                            AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+                                        }
+                                        return true;
+                                    });
+                                    // API 주소와 위 핸들러 전달 후 실행.
+                                    new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signup", handler).execute(param);
+                                }
+
+                            }
+                        }
+                    });
+        }
+    }
+
+
+
+     //Toast.makeText(getActivity(), exception.toString(), Toast.LENGTH_SHORT).show();
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
+
+        //Toast.makeText(getActivity(), "onSessionOpened()", Toast.LENGTH_SHORT).show();
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -228,7 +443,8 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
             // email, pass 임시 저장
             mPersonalProfile.email = user.getEmail();
-            mPersonalProfile.password = "12345678";
+            mPersonalProfile.password = "12345678"; // 임시로 사용
+            mPersonalProfile.sns_ID = user.getUid();
 
             // email, pass 로 회원 가입
             HashMap<String, String> param = new HashMap<String, String>();
@@ -365,11 +581,13 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
             case R.id.imageButton_account_id_facebook:
                 break;
             case R.id.imageButton_account_id_google:
-                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
-                signIn();
+                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                //signIn();
                 break;
             case R.id.imageButton_account_id_kakao:
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                loginButton.performClick();
+
                 break;
             case R.id.imageButton_account_id_naver:
                 break;

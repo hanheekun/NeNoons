@@ -39,6 +39,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -60,6 +61,8 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
     private ArrayList<ExProfile> mExProfileList = new ArrayList<>();
 
+    private int mShowMonth = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,86 +71,12 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
         chart = (BarChart)findViewById(R.id.barchart_ex_history);
 
+        findViewById(R.id.button_ex_history_pre).setOnClickListener(this);
+        findViewById(R.id.button_ex_history_next).setOnClickListener(this);
+
         TvDate = (TextView)findViewById(R.id.textView_ex_history_date);
-        Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
-        // 년월일시분초 14자리 포멧
-        SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy.MM");
-        TvDate.setText(fourteen_format.format(date_now));
 
-
-        // 서버연결 20200715
-        //////////////////////////////////////////////////////////////////////////////////////////
-        // 측정 기록 불러오기
-        //////////////////////////////////////////////////////////////////////////////////////////
-        // 측정 기록  progress 시작
-        mLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
-
-        String token = getToken(this);
-        // 0 현재 month, -1 지난달
-        HashMap<String, String> param = new HashMap<String, String>();
-        // 파라메터는 넣기 예
-        param.put("token", token);    //PARAM
-        param.put("month", "0");    //PARAM
-        Handler handler = new Handler(message -> {
-
-            Bundle bundle = message.getData();
-            String result = bundle.getString("result");
-            System.out.println(result);
-
-            // progress 종료
-            if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
-
-            try {
-                JSONObject j = new JSONObject(result);
-                String error = j.getString("error");
-                JSONArray jlist = j.getJSONArray("list");
-                if (jlist.length()==0) {
-                    // 목록이 없음
-                    // 그래프 출력
-                    setChart();
-                    return true;
-                }
-                // progress 종료
-
-                if (error != "null") {
-                    Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
-                    System.out.println("목록 실패");
-                }
-                mExProfileList = new ArrayList<>();
-
-                // 목록 변환및 저장
-                for (int i=0;i<jlist.length();i++) {
-                    JSONObject jEx = (JSONObject) jlist.get(i);
-                    ExProfile exProfile = new ExProfile();
-                    exProfile.date = jEx.getString("date"); // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
-                    exProfile.type = jEx.getInt("type");
-                    exProfile.level = jEx.getInt("level");
-                    mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
-                    //mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
-                }
-                System.out.println(error);
-                System.out.println(jlist);
-                System.out.println(mExProfileList);
-
-                //Toast.makeText(mContext, "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
-
-                for(ExProfile exProfile : mExProfileList){
-                    int day = Integer.parseInt(exProfile.date.substring(6,8));
-                    mHistory[day][exProfile.type-1]++;
-                }
-                // 그래프 출력
-                setChart();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                // 실패
-                Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        });
-        // API 주소와 위 핸들러 전달 후 실행.
-        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_exercise", handler).execute(param);
-//        new HttpTask("http://192.168.1.162:4002/android/list_user_exercise", handler).execute(param);
+        requestData(mShowMonth);
 
         // 그래프 설정
         Description desc ;
@@ -200,6 +129,123 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         mLvProtocol.setAdapter(mProtocolListAdapter);
     }
 
+    void requestData(int month){
+        if (month > 0){
+            return;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH,month);
+        //Date date_now = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
+        // 년월일시분초 14자리 포멧
+        SimpleDateFormat fourteen_format = new SimpleDateFormat("yyyy.MM");
+        TvDate.setText(fourteen_format.format(cal.getTime()));
+
+
+        // 서버연결 20200715
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // 측정 기록 불러오기
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // 측정 기록  progress 시작
+        mLoadingProgressDialog = ProgressDialog.show(this, "", "불러오는 중...", true, true);
+
+        String token = getToken(this);
+        // 0 현재 month, -1 지난달
+        HashMap<String, String> param = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param.put("token", token);    //PARAM
+        param.put("month", ""+month);    //PARAM
+        Handler handler = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+
+            // progress 종료
+            if (mLoadingProgressDialog != null) mLoadingProgressDialog.dismiss();
+
+            // 그래프 초기화
+            for (int i = 0 ;  i < mHistory.length ; i++){
+                for (int k = 0 ; k < mHistory[i].length ; k++){
+                    mHistory[i][k] = 0;
+                }
+            }
+
+            // 그래프 출력
+            setChart();
+
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                JSONArray jlist = j.getJSONArray("list");
+                if (jlist.length()==0) {
+                    // 목록이 없음
+                    // 그래프 출력
+                    setChart();
+                    return true;
+                }
+                // progress 종료
+
+                if (error != "null") {
+                    //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                    System.out.println("목록 실패");
+                }
+                mExProfileList = new ArrayList<>();
+
+                // 목록 변환및 저장
+                for (int i=0;i<jlist.length();i++) {
+                    JSONObject jEx = (JSONObject) jlist.get(i);
+                    ExProfile exProfile = new ExProfile();
+                    exProfile.date = jEx.getString("date"); // 이 날짜를 파싱해서 어레이에 집어넣으면 됩니다.
+                    exProfile.type = jEx.getInt("type");
+                    exProfile.level = jEx.getInt("level");
+                    mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                    //mExProfileList.add(exProfile); // 이 어레이를 전달해서 사용하세요
+                }
+                System.out.println(error);
+                System.out.println(jlist);
+                System.out.println(mExProfileList);
+
+                //Toast.makeText(mContext, "mExProfileList length = " + mExProfileList.size() , Toast.LENGTH_SHORT).show();
+
+                for (int i = 0 ;  i < mHistory.length ; i++){
+                    for (int k = 0 ; k < mHistory[i].length ; k++){
+                        mHistory[i][k] = 0;
+                    }
+                }
+
+                for(ExProfile exProfile : mExProfileList){
+                    int day = Integer.parseInt(exProfile.date.substring(6,8));
+                    mHistory[day][exProfile.type-1]++;
+                }
+                // 그래프 출력
+                setChart();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                // 실패
+                //Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                // 그래프 초기화
+                for (int i = 0 ;  i < mHistory.length ; i++){
+                    for (int k = 0 ; k < mHistory[i].length ; k++){
+                        mHistory[i][k] = 0;
+                    }
+                }
+
+                // 그래프 출력
+                setChart();
+
+            }
+            return true;
+        });
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_exercise", handler).execute(param);
+//        new HttpTask("http://192.168.1.162:4002/android/list_user_exercise", handler).execute(param);
+
+
+    }
+
     void setChart(){
 
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -224,6 +270,10 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
 
         // usage on whole data object
         data.setValueFormatter(new MyValueFormatter());
+
+        chart.notifyDataSetChanged();
+        chart.invalidate();
+
     }
 
     class MyValueFormatter implements IValueFormatter {
@@ -246,6 +296,16 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.button_arrow_back_background:
                 onBackPressed();
+                break;
+            case R.id.button_ex_history_pre:
+                --mShowMonth;
+                //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
+                requestData(mShowMonth);
+                break;
+            case R.id.button_ex_history_next:
+                ++mShowMonth;
+                //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
+                requestData(mShowMonth);
                 break;
 
         }

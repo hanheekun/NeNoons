@@ -22,6 +22,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/logo_only"
@@ -139,19 +140,12 @@
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
 
-
-
-<!--        <service-->
-
-<!--            android:name=".MyFirebaseInstanceIDService">-->
-
-<!--            <intent-filter>-->
-
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
-
-<!--            </intent-filter>-->
-
-<!--        </service>-->
+        <meta-data
+            android:name="com.kakao.sdk.Phase"
+            android:value="@string/kakao_phase" />
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
 
     </application>
 

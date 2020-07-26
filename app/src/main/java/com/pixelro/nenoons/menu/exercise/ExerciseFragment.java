@@ -136,7 +136,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
                 // progress 종료
 
                 if (error != "null") {
-                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
 
@@ -201,7 +201,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
-                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
             return true;
         });

@@ -16,6 +16,7 @@ public class PersonalProfile {
     public String surgery = "";
     public String exercise = Excercise.NO;
     public String food = Food.NO;
+    public String sns_ID = "";
 
     public class Gender {
         public static final String MALE = "MALE";

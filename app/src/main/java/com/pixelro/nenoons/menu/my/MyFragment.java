@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.account.AccountActivity;
 import com.pixelro.nenoons.menu.home.WebActivity;
 
@@ -71,6 +73,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_notice).setOnClickListener(this);
         mView.findViewById(R.id.button_my_qna).setOnClickListener(this);
         mView.findViewById(R.id.button_my_tos).setOnClickListener(this);
+        mView.findViewById(R.id.button_my_push).setOnClickListener(this);
+
+        TextView tvName = (TextView)mView.findViewById(R.id.textView_my_name);
+
+        tvName.setText(mSm.getName());
 
     }
 
@@ -100,6 +107,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 editor = sharedPreferences.edit();
                 editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
                 editor.commit();
+
+                SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
+                sfm.removeName();
 
                 Intent mainIntent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(mainIntent);
@@ -147,6 +157,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             case R.id.button_my_tos:
                 intent = new Intent(getActivity(), MyTosActivity.class);
                 getActivity().startActivity(intent);
+                break;
+            case R.id.button_my_push:
+                intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(Settings.EXTRA_APP_PACKAGE, getActivity().getPackageName());
+                //.putExtra(Settings.EXTRA_CHANNEL_ID, MY_CHANNEL_ID);
+                startActivity(intent);
                 break;
 
         }

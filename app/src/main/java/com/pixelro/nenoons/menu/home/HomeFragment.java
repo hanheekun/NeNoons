@@ -32,6 +32,7 @@ import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.menu.exercise.ExerciseViewModel;
 import com.pixelro.nenoons.server.HttpTask;
@@ -323,7 +324,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
-                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
             return true;
         });
@@ -354,7 +355,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // progress 종료
 
                 if (error != "null") {
-                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
                 ArrayList<TestProfile> testProfileList = new ArrayList<>();
@@ -389,13 +390,49 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
-                Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
             return true;
         });
         // API 주소와 위 핸들러 전달 후 실행.
         new HttpTask("https://nenoonsapi.du.r.appspot.com/android/list_user_test", handler3).execute(param3);
 
+
+        // name 가지고 오기
+        HashMap<String, String> param4 = new HashMap<String, String>();
+        // 파라메터는 넣기 예
+        param4.put("token", token);    //PARAM
+        Handler handler4 = new Handler(message -> {
+
+            Bundle bundle = message.getData();
+            String result = bundle.getString("result");
+            System.out.println(result);
+            try {
+                JSONObject j = new JSONObject(result);
+                String error = j.getString("error");
+                String name = j.getString("name");
+                System.out.println(error);
+                System.out.println(error == null);
+
+                if (error == "null" && name != "null") {
+
+                    //Toast.makeText(getActivity(), "name = " + name , Toast.LENGTH_SHORT).show();
+                    SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
+                    sfm.setName(name);
+
+                } else {
+                    //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return true;
+        });
+
+        // API 주소와 위 핸들러 전달 후 실행.
+        new HttpTask("https://nenoonsapi.du.r.appspot.com/android/myname", handler4).execute(param4 );
 
         return root;
     }
@@ -666,7 +703,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                                         //Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                                     }
 
 

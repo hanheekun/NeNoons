@@ -94,7 +94,7 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
                 // progress 종료
 
                 if (error != "null") {
-                    Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                     System.out.println("목록 실패");
                 }
                 ArrayList<TestProfile> testProfileList = new ArrayList<>();
@@ -156,7 +156,7 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
             } catch (JSONException e) {
                 e.printStackTrace();
                 // 실패
-                Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
             return true;
         });
