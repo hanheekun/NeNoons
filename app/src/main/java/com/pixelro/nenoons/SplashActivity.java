@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ import androidx.annotation.Nullable;
 import com.auth0.android.jwt.JWT;
 import com.pixelro.nenoons.account.AccountActivity;
 import com.pixelro.nenoons.account.AccountLoginFragment;
+
+import java.security.MessageDigest;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -111,8 +115,6 @@ public class SplashActivity extends BaseActivity{
             }, AUTO_HIDE_DELAY_MILLIS);
         }
 
-        //
-
     }
 
     boolean checkForPermission(){
@@ -151,6 +153,7 @@ public class SplashActivity extends BaseActivity{
             }
         }, AUTO_HIDE_DELAY_MILLIS);
     }
+
 
 
 }
