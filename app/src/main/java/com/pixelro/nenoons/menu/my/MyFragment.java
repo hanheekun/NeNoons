@@ -94,30 +94,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.button_my_logout:
 
-                // logout, reset first login
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
-                editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
-                editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
-                editor.commit();
-
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
-                editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
-                editor.commit();
-
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
-                editor.commit();
-
-                SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
-                sfm.removeName();
+                resetLoginInfo();
 
                 Intent mainIntent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(mainIntent);
@@ -129,12 +106,14 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 // 회원 탈퇴
 
                 // 회원 탈퇴 요청하기
-                sfm = new SharedPreferencesManager(getActivity());
+                SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
                 String token = sfm.getToken();
+                String email = sfm.getEmail();
                 HashMap<String, String> param = new HashMap<String, String>();
                 // 파라메터는 넣기 예
                 param.put("token", token);    //PARAM
-                Handler handler4 = new Handler(message -> {
+                param.put("email", email);    //PARAM
+                Handler handler = new Handler(message -> {
 
 
                     Bundle bundle = message.getData();
@@ -150,8 +129,14 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                         if (error == "null" && name != "null") {
 
                             //Toast.makeText(getActivity(), "name = " + name , Toast.LENGTH_SHORT).show();
-                            SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
-                            sfm.setName(name);
+                            // 회원 탈퇴 완료
+
+                            resetLoginInfo();
+
+                            Intent intent = new Intent(getActivity(), AccountActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+
 
                         } else {
                             //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
@@ -165,36 +150,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 });
 
                 // API 주소와 위 핸들러 전달 후 실행.
-                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/myname", handler4).execute(param4 );
-
-                // 정보 초기화
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
-                editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
-                editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
-                editor.commit();
-
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
-                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
-                editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
-                editor.commit();
-
-                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
-                editor.commit();
-
-                sfm = new SharedPreferencesManager(getActivity());
-                sfm.removeName();
-
-                mainIntent = new Intent(getActivity(), AccountActivity.class);
-                startActivity(mainIntent);
-                getActivity().finish();
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/with_draw", handler).execute(param);
 
                 break;
             case R.id.button_my_my:
@@ -248,5 +204,33 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 break;
 
         }
+    }
+
+    void resetLoginInfo(){
+        // logout, reset first login
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
+        editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
+        editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
+        editor.commit();
+
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.commit();
+
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
+        editor.commit();
+
+        SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
+        sfm.removeName();
+
     }
 }

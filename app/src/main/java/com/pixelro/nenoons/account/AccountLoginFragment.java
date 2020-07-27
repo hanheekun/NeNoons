@@ -392,7 +392,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                         return true;
                                     });
                                     // API 주소와 위 핸들러 전달 후 실행.
-                                    new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signup", handler).execute(param);
+                                    new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
                                 }
 
                             }
@@ -524,7 +524,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                 return true;
             });
             // API 주소와 위 핸들러 전달 후 실행.
-            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signup", handler).execute(param);
+            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
 
 
 //            Intent intent = new Intent(this, AfterActivity.class);
@@ -551,14 +551,14 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
             case R.id.imageButton_account_login_facebook:
                 break;
             case R.id.imageButton_account_login_google:
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
-                //signIn();
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                signIn();
                 break;
             case R.id.imageButton_account_login_qq:
                 break;
             case R.id.imageButton_account_login_kakao:
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
-                //loginButton.performClick();
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                loginButton.performClick();
                 break;
             case R.id.imageButton_account_login_naver:
                 break;

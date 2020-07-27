@@ -303,9 +303,15 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 requestData(mShowMonth);
                 break;
             case R.id.button_ex_history_next:
-                ++mShowMonth;
-                //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
-                requestData(mShowMonth);
+                if (mShowMonth < 0){
+                    ++mShowMonth;
+                    //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
+                    requestData(mShowMonth);
+                }
+                else {
+                    Toast.makeText(this, "마지막 달 입니다." , Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
         }

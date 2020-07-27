@@ -590,8 +590,8 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
             case R.id.imageButton_account_id_facebook:
                 break;
             case R.id.imageButton_account_id_google:
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
-                //signIn();
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                signIn();
                 break;
             case R.id.imageButton_account_id_kakao:
                 //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
