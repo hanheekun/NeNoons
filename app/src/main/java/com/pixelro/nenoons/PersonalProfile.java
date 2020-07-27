@@ -17,6 +17,7 @@ public class PersonalProfile {
     public String exercise = Excercise.NO;
     public String food = Food.NO;
     public String sns_ID = "";
+    public String sns_name = "";
 
     public class Gender {
         public static final String MALE = "MALE";

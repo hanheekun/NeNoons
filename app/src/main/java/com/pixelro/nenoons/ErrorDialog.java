@@ -39,20 +39,10 @@ public class ErrorDialog {
         TextView TvMessage =  (TextView)dlg.findViewById(R.id.textView_account_dialog);
         TvMessage.setText(message); // 로그인 정보를\n확인해 주세요.
         final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(context, "확인 했습니다.", Toast.LENGTH_SHORT).show();
-
-                // 커스텀 다이얼로그를 종료한다.
-                dlg.dismiss();
-            }
-        });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(context, "취소 했습니다.", Toast.LENGTH_SHORT).show();
 
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();

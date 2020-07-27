@@ -268,11 +268,6 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                     Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
                                     Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
 
-
-
-
-
-
                                 } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
                                     // 동의 요청 후 프로필 정보 획득 가능
 
@@ -294,14 +289,15 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
                                     // email, pass 임시 저장
                                     mPersonalProfile.email = email;
-                                    mPersonalProfile.password = "12345678"; // 임시로 사용
+                                    mPersonalProfile.sns_name = "kakao";
                                     mPersonalProfile.sns_ID = ""+resultKakao.getId();
 
                                     // email, pass 로 회원 가입
                                     HashMap<String, String> param = new HashMap<String, String>();
                                     // 파라메터는 넣기 예
                                     param.put("email", mPersonalProfile.email);    //PARAM
-                                    param.put("password", mPersonalProfile.password);    //PARAM
+                                    param.put("sns", mPersonalProfile.sns_name);    //PARAM
+                                    param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
                                     //param.put("name", EtPass.getText().toString().trim());    //PARAM
                                     Handler handler = new Handler(message -> {
                                         Bundle bundle = message.getData();
@@ -331,6 +327,12 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
                                                 mSm.setEmail(mPersonalProfile.email);
 
+                                                mSm.setSNSID(mPersonalProfile.sns_ID);
+
+                                                mSm.setSNSName(mPersonalProfile.sns_name);
+
+                                                mSm.setSNSLogin(true);
+
                                                 // 다음 페이지 전환
                                                 System.out.println("메인액티비티 시작");
                                                 NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
@@ -352,7 +354,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                         return true;
                                     });
                                     // API 주소와 위 핸들러 전달 후 실행.
-                                    new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signup", handler).execute(param);
+                                    new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signup", handler).execute(param);
                                 }
 
                             }
@@ -443,14 +445,15 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
             // email, pass 임시 저장
             mPersonalProfile.email = user.getEmail();
-            mPersonalProfile.password = "12345678"; // 임시로 사용
+            mPersonalProfile.sns_name = "google"; // 임시로 사용
             mPersonalProfile.sns_ID = user.getUid();
 
             // email, pass 로 회원 가입
             HashMap<String, String> param = new HashMap<String, String>();
             // 파라메터는 넣기 예
             param.put("email", mPersonalProfile.email);    //PARAM
-            param.put("password", mPersonalProfile.password);    //PARAM
+            param.put("sns", mPersonalProfile.sns_name);    //PARAM
+            param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
             //param.put("name", EtPass.getText().toString().trim());    //PARAM
             Handler handler = new Handler(message -> {
                 Bundle bundle = message.getData();
@@ -480,6 +483,12 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
 
                         mSm.setEmail(mPersonalProfile.email);
 
+                        mSm.setSNSID(mPersonalProfile.sns_ID);
+
+                        mSm.setSNSName(mPersonalProfile.sns_name);
+
+                        mSm.setSNSLogin(true);
+
                         // 다음 페이지 전환
                         System.out.println("메인액티비티 시작");
                         NavHostFragment.findNavController(AccountIDFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
@@ -501,7 +510,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                 return true;
             });
             // API 주소와 위 핸들러 전달 후 실행.
-            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/signup", handler).execute(param);
+            new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signup", handler).execute(param);
 
 
 //            Intent intent = new Intent(this, AfterActivity.class);

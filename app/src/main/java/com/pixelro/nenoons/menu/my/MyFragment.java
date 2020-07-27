@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,12 @@ import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.account.AccountActivity;
 import com.pixelro.nenoons.menu.home.WebActivity;
+import com.pixelro.nenoons.server.HttpTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -74,6 +81,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_qna).setOnClickListener(this);
         mView.findViewById(R.id.button_my_tos).setOnClickListener(this);
         mView.findViewById(R.id.button_my_push).setOnClickListener(this);
+        mView.findViewById(R.id.button_my_unregister).setOnClickListener(this);
 
         TextView tvName = (TextView)mView.findViewById(R.id.textView_my_name);
 
@@ -112,6 +120,79 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 sfm.removeName();
 
                 Intent mainIntent = new Intent(getActivity(), AccountActivity.class);
+                startActivity(mainIntent);
+                getActivity().finish();
+
+                break;
+            case R.id.button_my_unregister:
+
+                // 회원 탈퇴
+
+                // 회원 탈퇴 요청하기
+                sfm = new SharedPreferencesManager(getActivity());
+                String token = sfm.getToken();
+                HashMap<String, String> param = new HashMap<String, String>();
+                // 파라메터는 넣기 예
+                param.put("token", token);    //PARAM
+                Handler handler4 = new Handler(message -> {
+
+
+                    Bundle bundle = message.getData();
+                    String result = bundle.getString("result");
+                    System.out.println(result);
+                    try {
+                        JSONObject j = new JSONObject(result);
+                        String error = j.getString("error");
+                        String name = j.getString("name");
+                        System.out.println(error);
+                        System.out.println(error == null);
+
+                        if (error == "null" && name != "null") {
+
+                            //Toast.makeText(getActivity(), "name = " + name , Toast.LENGTH_SHORT).show();
+                            SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
+                            sfm.setName(name);
+
+                        } else {
+                            //Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                });
+
+                // API 주소와 위 핸들러 전달 후 실행.
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/myname", handler4).execute(param4 );
+
+                // 정보 초기화
+                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
+                editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
+                editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
+                editor.commit();
+
+                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
+                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
+                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
+                editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
+                editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+                editor.commit();
+
+                sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
+                editor.commit();
+
+                sfm = new SharedPreferencesManager(getActivity());
+                sfm.removeName();
+
+                mainIntent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(mainIntent);
                 getActivity().finish();
 

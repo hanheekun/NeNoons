@@ -47,6 +47,54 @@ public class SharedPreferencesManager {
         editor.commit();
     }
 
+    public void setPass(String name){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.PASS,name);
+        editor.commit();
+    }
+
+    public String getPass(){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.PASS,"");
+    }
+
+    public void removePass(){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.PASS);
+        editor.commit();
+    }
+
+    public void setSNSID(String name){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.SNS_ID,name);
+        editor.commit();
+    }
+
+    public String getSNSID(){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.SNS_ID,"");
+    }
+
+    public void removeSNSID(){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.SNS_ID);
+        editor.commit();
+    }
+
+    public void setSNSName(String name){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.SNS_NAME,name);
+        editor.commit();
+    }
+
+    public String getSNSName(){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.SNS_NAME,"");
+    }
+
+    public void removeSNSName(){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.SNS_NAME);
+        editor.commit();
+    }
+
     public void setEmail(String email){
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
         editor.putString(EYELAB.APPDATA.ACCOUNT.EMAIL,email);
@@ -60,6 +108,22 @@ public class SharedPreferencesManager {
     public void removeEmail(){
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
         editor.remove(EYELAB.APPDATA.ACCOUNT.EMAIL);
+        editor.commit();
+    }
+
+    public void setSNSLogin(Boolean bool){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGIN_SNS,bool);
+        editor.commit();
+    }
+
+    public Boolean getSNSLogin(){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getBoolean(EYELAB.APPDATA.ACCOUNT.LOGIN_SNS,false);
+    }
+
+    public void removeSNSLogin(){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.LOGIN_SNS);
         editor.commit();
     }
 

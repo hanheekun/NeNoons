@@ -49,7 +49,6 @@ public class AccountDialog {
         BtnButton.setText(button);
 
         final Button okButton = (Button) dlg.findViewById(R.id.button_dialog_next);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,14 +58,6 @@ public class AccountDialog {
                 dlg.dismiss();
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(context, "취소 했습니다.", Toast.LENGTH_SHORT).show();
 
-                // 커스텀 다이얼로그를 종료한다.
-                dlg.dismiss();
-            }
-        });
     }
 }
