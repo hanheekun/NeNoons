@@ -319,24 +319,23 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                 if(email != null){
 
                                     //////////////////////////////////////////////////////////////////////////////
-                                    // 카카오 가입 진행
+                                    // kakao 가입 진행
                                     //////////////////////////////////////////////////////////////////////////////
 
-                                    // 로그인중 progress 시작
+                                    // progress 시작
                                     mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-                                    // email, pass 임시 저장
+                                    // email, sns_name, sns_ID 저장
                                     mPersonalProfile.email = email;
                                     mPersonalProfile.sns_name = "kakao";
                                     mPersonalProfile.sns_ID = ""+resultKakao.getId();
 
-                                    // email, pass 로 회원 가입
+                                    // email, sns_name, sns_ID 로 회원 가입
                                     HashMap<String, String> param = new HashMap<String, String>();
                                     // 파라메터는 넣기 예
                                     param.put("email", mPersonalProfile.email);    //PARAM
                                     param.put("sns", mPersonalProfile.sns_name);    //PARAM
                                     param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-                                    //param.put("name", EtPass.getText().toString().trim());    //PARAM
                                     Handler handler = new Handler(message -> {
                                         Bundle bundle = message.getData();
                                         String result = bundle.getString("result");
@@ -363,12 +362,10 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                                 // 로그인 성공 저장
                                                 mSm.setLoginning(true);
 
+                                                // 가입 정보 저장
                                                 mSm.setEmail(mPersonalProfile.email);
-
                                                 mSm.setSNSID(mPersonalProfile.sns_ID);
-
                                                 mSm.setSNSName(mPersonalProfile.sns_name);
-
                                                 mSm.setSNSLogin(true);
 
                                                 // 다음 페이지 전환
@@ -378,7 +375,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                             } else {
                                                 // 이메일 회원가입 실패
                                                 removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                                                //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                                                 new AccountDialog(getActivity(),error, "돌아가기");
                                             }
 
@@ -393,6 +390,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                     });
                                     // API 주소와 위 핸들러 전달 후 실행.
                                     new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
+                                    // 서버연결 20200728 로그인 주소 확인
                                 }
 
                             }
@@ -454,21 +452,20 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
             // google 가입 진행
             //////////////////////////////////////////////////////////////////////////////
 
-            // 로그인중 progress 시작
+            // progress 시작
             mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-            // email, pass 임시 저장
+            // email, sns_name, sns_ID 저장
             mPersonalProfile.email = user.getEmail();
             mPersonalProfile.sns_name = "google"; // 임시로 사용
             mPersonalProfile.sns_ID = user.getUid();
 
-            // email, pass 로 회원 가입
+            // email, sns_name, sns_ID 로 회원 가입
             HashMap<String, String> param = new HashMap<String, String>();
             // 파라메터는 넣기 예
             param.put("email", mPersonalProfile.email);    //PARAM
             param.put("sns", mPersonalProfile.sns_name);    //PARAM
             param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-            //param.put("name", EtPass.getText().toString().trim());    //PARAM
             Handler handler = new Handler(message -> {
                 Bundle bundle = message.getData();
                 String result = bundle.getString("result");
@@ -495,12 +492,10 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                         // 로그인 성공 저장
                         mSm.setLoginning(true);
 
+                        // 가입 정보 저장
                         mSm.setEmail(mPersonalProfile.email);
-
                         mSm.setSNSID(mPersonalProfile.sns_ID);
-
                         mSm.setSNSName(mPersonalProfile.sns_name);
-
                         mSm.setSNSLogin(true);
 
                         // 다음 페이지 전환
@@ -508,9 +503,9 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                         NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
 
                     } else {
-                        // 이메일 회원가입 실패
+                        // 회원가입 실패
                         removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                         new AccountDialog(getActivity(),error, "돌아가기");
                     }
 
@@ -525,6 +520,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
             });
             // API 주소와 위 핸들러 전달 후 실행.
             new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
+            // 서버연결 20200728 로그인 주소 확인
 
 
 //            Intent intent = new Intent(this, AfterActivity.class);

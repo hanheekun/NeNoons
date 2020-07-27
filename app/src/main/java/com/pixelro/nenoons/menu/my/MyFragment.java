@@ -151,6 +151,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
                 // API 주소와 위 핸들러 전달 후 실행.
                 new HttpTask("https://nenoonsapi.du.r.appspot.com/android/with_draw", handler).execute(param);
+                // 서버연결 20200728 token과 email 전송 후 handler로 들어오지 않습니다.
+                // 서버연결 20200728 회원 탈퇴를 한번 요청하고나면 운동기록, 테스트 기록 불러오기도 작동하지 않습니다.
 
                 break;
             case R.id.button_my_my:

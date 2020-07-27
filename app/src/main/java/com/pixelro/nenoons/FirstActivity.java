@@ -44,10 +44,10 @@ public class FirstActivity extends BaseActivity{
                 }
 
                 // PACKAGE_USAGE_STATS 사용 권한 얻기
-                rc = ActivityCompat.checkSelfPermission(FirstActivity.this, Manifest.permission.PACKAGE_USAGE_STATS);
-                if (rc != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(FirstActivity.this, new String[]{Manifest.permission.PACKAGE_USAGE_STATS}, REQUEST_CAMERA);
-                }
+                //rc = ActivityCompat.checkSelfPermission(FirstActivity.this, Manifest.permission.PACKAGE_USAGE_STATS);
+                //if (rc != PackageManager.PERMISSION_GRANTED) {
+                //    ActivityCompat.requestPermissions(FirstActivity.this, new String[]{Manifest.permission.PACKAGE_USAGE_STATS}, REQUEST_CAMERA);
+                //}
 
 
                 if (!FirstActivity.this.hasPermission(FirstActivity.this)) {
