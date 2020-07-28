@@ -122,11 +122,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                     try {
                         JSONObject j = new JSONObject(result);
                         String error = j.getString("error");
-                        String name = j.getString("name");
+                        String msg = j.getString("msg");
                         System.out.println(error);
                         System.out.println(error == null);
 
-                        if (error == "null" && name != "null") {
+                        if (error == "null" && msg != "null") {
 
                             //Toast.makeText(getActivity(), "name = " + name , Toast.LENGTH_SHORT).show();
                             // 회원 탈퇴 완료
