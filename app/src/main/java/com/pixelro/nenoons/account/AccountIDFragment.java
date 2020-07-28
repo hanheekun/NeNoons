@@ -255,6 +255,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                 } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
                                     // 동의 요청 후 이메일 획득 가능
                                     // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+                                    Log.i("KAKAO_API", "동의 요청 후 이메일 획득 가능 " );
 
                                 } else {
                                     // 이메일 획득 불가

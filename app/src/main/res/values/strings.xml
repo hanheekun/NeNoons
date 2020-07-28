@@ -506,7 +506,7 @@ Google Play 스토어 계정을 이용한 경우: Google Play 스토어 주문 �
 
     <string name="default_notification_channel_name" translatable="true">Test</string>
 
-    <string name="kakao_app_key" translatable="false">bd6905d968c4eea38482f4f000dab943</string>
+    <string name="kakao_app_key" translatable="false">289c32b36a9599ef0f092d3ee08fa3ff</string>
     <string name="kakao_phase" translatable="false">cbt</string>
 
 </resources>
