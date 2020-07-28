@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -370,7 +371,9 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
 
                                                 // 다음 페이지 전환
                                                 System.out.println("메인액티비티 시작");
-                                                NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+                                                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                                                getActivity().startActivity(mainIntent);
+                                                getActivity().finish();
 
                                             } else {
                                                 // 이메일 회원가입 실패
@@ -431,12 +434,12 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Successed.", Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Authentication Successed.", Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Authentication error.", Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
                     }
@@ -466,6 +469,9 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
             param.put("email", mPersonalProfile.email);    //PARAM
             param.put("sns", mPersonalProfile.sns_name);    //PARAM
             param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
+
+            System.out.println(param);
+
             Handler handler = new Handler(message -> {
                 Bundle bundle = message.getData();
                 String result = bundle.getString("result");
@@ -500,7 +506,9 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
 
                         // 다음 페이지 전환
                         System.out.println("메인액티비티 시작");
-                        NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                        getActivity().startActivity(mainIntent);
+                        getActivity().finish();
 
                     } else {
                         // 회원가입 실패

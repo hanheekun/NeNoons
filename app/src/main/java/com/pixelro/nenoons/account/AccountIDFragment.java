@@ -383,6 +383,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
+                e.printStackTrace();
             }
         }
     }
