@@ -8,11 +8,16 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.front" />
-    <uses-feature android:name="android.hardware.camera.front.autofocus" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front"
+        android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front.autofocus"
+        android:required="false"/>
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />

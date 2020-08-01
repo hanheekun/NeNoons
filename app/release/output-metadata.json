@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.pixelro.nenoons",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 5,
+      "versionName": "2020-07-30-2",
+      "enabled": true,
+      "outputFile": "app-release.apk"
+    }
+  ]
+}

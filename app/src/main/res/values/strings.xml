@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NeNoons</string>
+    <string name="app_name">내눈</string>
     <string name="title_home">홈</string>
     <string name="title_care">케어</string>
     <string name="title_my">더보기</string>
@@ -20,7 +20,7 @@
     <string name="account_hello_btn_login">로그인</string>
     <string name="account_hello_btn_join">가입하기</string>
     <!--    account-login-->
-    <string name="account_login_title">Log In</string>
+    <string name="account_login_title">로그인</string>
     <string name="account_login_email">e-mail</string>
     <string name="account_login_email_hint">Your e-mail</string>
     <string name="account_login_pass">Password</string>
@@ -34,7 +34,7 @@
     <string name="account_join_tos"></string>
     <string name="account_join_tos_agree">동의</string>
     <!--    account-id-->
-    <string name="account_join_id_title">Sign Up</string>
+    <string name="account_join_id_title">회원가입</string>
     <string name="account_join_id_email">e-mail</string>
     <string name="account_join_id_email_hint">Your e-mail</string>
     <string name="account_join_id_pass">Password</string>

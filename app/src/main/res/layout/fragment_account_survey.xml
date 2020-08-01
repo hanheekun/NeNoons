@@ -232,6 +232,13 @@
                 android:text="백내장 수술"
                 android:textSize="20sp" />
 
+            <CheckBox
+                android:id="@+id/checkBox_surgery_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기타, 없음"
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/textView74"
                 android:layout_width="match_parent"

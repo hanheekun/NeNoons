@@ -119,6 +119,9 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_3)).isChecked()){
                     mPersonalProfile.surgery += PersonalProfile.Surgery.CATARACT + " ";
                 }
+                if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_4)).isChecked()){
+                    mPersonalProfile.surgery += PersonalProfile.Surgery.NONE + " ";
+                }
 
                 if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_1)).isChecked()){
                     mPersonalProfile.exercise = PersonalProfile.Excercise.YES;

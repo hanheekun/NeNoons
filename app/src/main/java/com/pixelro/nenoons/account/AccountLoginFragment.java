@@ -221,6 +221,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
         // 기종 login 정보 load
         loadEmailLoginInfo();
 
+        // google
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -549,8 +550,8 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                 getActivity().onBackPressed();
                 break;
             case R.id.textView_account_login_forget:    // 비밀번호 찾기
-                //NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_login_facebook:
                 break;

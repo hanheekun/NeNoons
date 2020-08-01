@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:checked="false"
+        android:checked="true"
         android:text="@string/account_login_save_login"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/editText_account_login_password"
@@ -146,10 +146,11 @@
 
     <TextView
         android:id="@+id/textView_account_login_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="223dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="80dp"
         android:clickable="true"
+        android:gravity="center"
         android:text="@string/account_login_forget"
         android:textColor="#9b9b9b"
         android:textSize="14sp"

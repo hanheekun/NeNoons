@@ -52,6 +52,8 @@ public class PersonalProfile {
         public static final String LASIKLASEK = "LASIKLASEK"; // 시력교정 시술
         public static final String OLD = "OLD"; // 노안 수술
         public static final String CATARACT = "CATARACT"; // 백내장 수술
+        public static final String NONE = "NONE"; // 기타, 없음
+
     }
 
     public class Excercise {

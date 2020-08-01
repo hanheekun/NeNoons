@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.menu.home;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -80,6 +81,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public boolean mTest = false;
 
+    private SharedPreferencesManager mSm;
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -98,8 +103,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
+        mSm = new SharedPreferencesManager(getActivity());
+
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
         TvAddress = (TextView) root.findViewById(R.id.textView_home_address);
+        TvAddress.setText(mSm.getAddress());
 
         // home 웹뷰 시작
         mHomeWebView = (WebView) root.findViewById(R.id.webView_home);
@@ -679,6 +687,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             //          list.get(0).getLongitude();    // 경도
                             // 서버연결 20200715
                             // 주소 변경 서버 연결
+
+                            // 주소 저장
+
+                            mSm.setAddress(data);
 
                             String token = getToken(getContext());
                             HashMap<String, String> param = new HashMap<String, String>();

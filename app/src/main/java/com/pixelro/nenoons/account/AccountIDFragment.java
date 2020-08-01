@@ -79,6 +79,9 @@ import com.kakao.util.helper.log.Logger;
 // Client ID : 622454092611-df5frr6t2jffrdr4o9t2d1kmof2ia844.apps.googleusercontent.com
 // Client Secret : c-J35XbjSdXtNuzBL61x8B7M
 
+// play stor app key
+// pass 123456
+
 public class AccountIDFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
 

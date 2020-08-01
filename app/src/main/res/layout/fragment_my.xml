@@ -20,21 +20,10 @@
 
             <ImageView
                 android:id="@+id/imageView35"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
                 android:src="@drawable/page_my"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button_my_logout"
-                android:layout_width="104dp"
-                android:layout_height="54dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="596dp"
-                android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +33,16 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="260dp"
+                android:background="@drawable/test_color_transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_my_logout"
+                android:layout_width="125dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="548dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -82,8 +81,8 @@
                 android:id="@+id/button_my_tos"
                 android:layout_width="358dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="540dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="480dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,8 +91,8 @@
                 android:id="@+id/button_my_push"
                 android:layout_width="358dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="480dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="436dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -102,8 +101,8 @@
                 android:id="@+id/button_my_faq"
                 android:layout_width="107dp"
                 android:layout_height="97dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="752dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="696dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -112,8 +111,8 @@
                 android:id="@+id/button_my_qna"
                 android:layout_width="107dp"
                 android:layout_height="97dp"
-                android:layout_marginStart="152dp"
-                android:layout_marginTop="752dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="696dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -122,8 +121,8 @@
                 android:id="@+id/button_my_notice"
                 android:layout_width="107dp"
                 android:layout_height="97dp"
-                android:layout_marginStart="280dp"
-                android:layout_marginTop="752dp"
+                android:layout_marginStart="292dp"
+                android:layout_marginTop="696dp"
                 android:background="@drawable/test_color_transparent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -142,8 +141,8 @@
                 android:id="@+id/textView_my_ver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="647dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginTop="590dp"
+                android:layout_marginEnd="32dp"
                 android:gravity="right"
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -174,13 +173,23 @@
 
             <Button
                 android:id="@+id/button_my_unregister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="220dp"
-                android:layout_marginTop="596dp"
-                android:text="회원 탈퇴"
+                android:layout_width="70dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="344dp"
+                android:layout_marginTop="856dp"
+                android:background="?attr/actionBarItemBackground"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_my_version"
+                android:layout_width="123dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/test_color_transparent"
+                app:layout_constraintEnd_toEndOf="@+id/button_my_logout"
+                app:layout_constraintStart_toStartOf="@+id/button_my_logout"
+                app:layout_constraintTop_toBottomOf="@+id/button_my_logout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
