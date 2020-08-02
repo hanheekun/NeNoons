@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -16,8 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pixelro.nenoons.GpsTracker;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
+import com.pixelro.nenoons.server.HttpTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -80,12 +86,50 @@ public class AddressWebViewActivity extends AppCompatActivity {
 
                 String address = getCurrentAddress(latitude, longitude);
 
-                Toast.makeText(AddressWebViewActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude + ", " + address, Toast.LENGTH_LONG).show();
+                //Toast.makeText(AddressWebViewActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude + ", " + address, Toast.LENGTH_LONG).show();
 
                 // 주소 저장
-                mSm.setAddress(address);
+                mSm.setAddress(makeShortAddress(address));
 
                 //  위도 경도 엔키노 전달
+                String token = mSm.getToken();
+                HashMap<String, String> param = new HashMap<String, String>();
+                // 파라메터는 넣기 예
+                param.put("token", token);    //PARAM
+                param.put("gpsAddress", address);    //PARAM
+                param.put("gpsLatitude", String.valueOf(latitude));    //PARAM
+                param.put("gpsLongitude", String.valueOf(longitude));    //PARAM
+                Handler handler = new Handler(message -> {
+
+                    Bundle bundle = message.getData();
+                    String result = bundle.getString("result");
+                    System.out.println(result);
+                    try {
+                        JSONObject j = new JSONObject(result);
+                        String error = j.getString("error");
+                        String msg = j.getString("msg");
+                        System.out.println(error);
+                        System.out.println(error == null);
+
+                        if (error == "null" && msg != "null") {
+
+                            //Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
+                        }
+
+
+
+                        finish();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                });
+                // API 주소와 위 핸들러 전달 후 실행.
+                new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_gps", handler).execute(param);
+//                            new HttpTask("http://192.168.1.162:4002/android/update_user_gps", handler).execute(param);
 
 
             }
@@ -129,5 +173,15 @@ public class AddressWebViewActivity extends AppCompatActivity {
         Address address = addresses.get(0);
         return address.getAddressLine(0).toString()+"\n";
 
+    }
+
+    public String makeShortAddress(String address){
+        if (address.length() > 20){
+            return address.substring(0,20) + "...";
+        }
+        else
+        {
+            return address;
+        }
     }
 }

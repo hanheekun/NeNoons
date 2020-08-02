@@ -93,9 +93,9 @@ public class Ex01Activity extends AppCompatActivity  implements IEyeDistanceMeas
         super.onStart();
         bindService();
 
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.screenBrightness = 1f;
-        getWindow().setAttributes(params);
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.screenBrightness = 1f;
+//        getWindow().setAttributes(params);
 
     }
 

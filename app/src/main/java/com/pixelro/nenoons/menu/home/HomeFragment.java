@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
         TvAddress = (TextView) root.findViewById(R.id.textView_home_address);
-        TvAddress.setText(mSm.getAddress());
+
 
         // home 웹뷰 시작
         mHomeWebView = (WebView) root.findViewById(R.id.webView_home);
@@ -466,6 +466,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         refrashBoard();
 
+        TvAddress.setText(mSm.getAddress());
+
         mBannerWebView.loadUrl("https://www.nenoons.com/app-banner");
 //        if (mBannerWebView !=null) {
 //            mAdWebView.restoreState(webViewBundle);
@@ -681,6 +683,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             TvAddress.setText("해당되는 주소 정보는 없습니다");
                         } else {
                             //TvAddress.setText(list.get(0).getLatitude() + ", " + list.get(0).getLongitude());
+
+                            data = makeShortAddress(data);
+
                             TvAddress.setText(data);
                             //          list.get(0).getCountryName();  // 국가명
                             //          list.get(0).getLatitude();        // 위도
@@ -749,6 +754,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
         editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN, token);
         editor.commit();
+    }
+
+    public String makeShortAddress(String address){
+        if (address.length() > 20){
+            return address.substring(0,20) + "...";
+        }
+        else
+        {
+            return address;
+        }
     }
 
 

@@ -1,4 +1,4 @@
-﻿package com.pixelro.nenoons;
+package com.pixelro.nenoons;
 
 
 import android.Manifest;

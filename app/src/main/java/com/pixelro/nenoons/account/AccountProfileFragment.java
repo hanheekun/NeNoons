@@ -67,6 +67,8 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
         EtPhoneNumber = (EditText)(view.findViewById(R.id.editText_account_profile_phone));
 
         mDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, DatePickerListener, 1970, 1, 1);
+
+        AccountDialog mDlg = new AccountDialog(getActivity(),"축하합니다.\r\n회원 가입되었습니다.", "설문 진행하기");
     }
 
     @Override
