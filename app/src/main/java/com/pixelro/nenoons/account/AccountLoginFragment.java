@@ -41,6 +41,7 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
@@ -296,6 +297,23 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                     // 동의 요청 후 이메일 획득 가능
                                     // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
 
+                                    // 이메일 동의 요청 후 탈퇴
+                                    Toast.makeText(getActivity(), "이메일정보 동의를 해주세요.", Toast.LENGTH_SHORT).show();
+                                    UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                        @Override
+                                        public void onSessionClosed(ErrorResult errorResult) {
+
+                                        }
+
+                                        @Override
+                                        public void onSuccess(Long result) {
+
+                                        }
+                                    });
+
+                                    return;
+
+
                                 } else {
                                     // 이메일 획득 불가
                                 }
@@ -381,6 +399,19 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                                 removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
 
                                                 new AccountDialog(getActivity(),error, "돌아가기");
+
+                                                // 가입 취소
+                                                UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                    @Override
+                                                    public void onSessionClosed(ErrorResult errorResult) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onSuccess(Long result) {
+
+                                                    }
+                                                });
                                             }
 
 
@@ -389,6 +420,19 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                             // 로그인 실패
                                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                                             AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                                            // 가입 취소
+                                            UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                @Override
+                                                public void onSessionClosed(ErrorResult errorResult) {
+
+                                                }
+
+                                                @Override
+                                                public void onSuccess(Long result) {
+
+                                                }
+                                            });
                                         }
                                         return true;
                                     });
@@ -516,6 +560,18 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                         removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
 
                         new AccountDialog(getActivity(),error, "돌아가기");
+
+                        // 가입 취소
+                        FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
+
+                        user2.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
                     }
 
 
@@ -524,6 +580,18 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                     // 로그인 실패
                     removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                     AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                    // 가입 취소
+                    FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
+
+                    user2.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }
                 return true;
             });

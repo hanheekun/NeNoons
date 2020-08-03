@@ -176,8 +176,11 @@ public class AddressWebViewActivity extends AppCompatActivity {
     }
 
     public String makeShortAddress(String address){
-        if (address.length() > 20){
-            return address.substring(0,20) + "...";
+
+        address = address.substring(5);
+
+        if (address.length() > 18){
+            return address.substring(0,18) + "...";
         }
         else
         {

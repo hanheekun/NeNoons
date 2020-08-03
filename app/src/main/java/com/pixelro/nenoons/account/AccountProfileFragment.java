@@ -3,12 +3,14 @@ package com.pixelro.nenoons.account;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +33,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
     private EditText EtPhoneNumber;
 
     private PersonalProfile mPersonalProfile;
+    private ImageView IvDobExample;
 
     // profile
     String mName;
@@ -68,6 +71,9 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
 
         mDialog = new DatePickerDialog(getContext(), android.R.style.Theme_DeviceDefault_Dialog, DatePickerListener, 1970, 1, 1);
 
+        IvDobExample = (ImageView)mView.findViewById(R.id.imageView_account_dob_example);
+        IvDobExample.setOnClickListener(this);
+
         AccountDialog mDlg = new AccountDialog(getActivity(),"축하합니다.\r\n회원 가입되었습니다.", "설문 진행하기");
     }
 
@@ -75,7 +81,11 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_arrow_back_background:
-                getActivity().onBackPressed();
+                //getActivity().onBackPressed();
+                break;
+            case R.id.imageView_account_dob_example:
+                IvDobExample.setVisibility(View.INVISIBLE);
+                mDialog.show();
                 break;
             case R.id.button_account_profile_next:
 
@@ -129,7 +139,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.editText_account_profile_birthday:
                 if (b){
-                    mDialog.show();
+                    IvDobExample.setVisibility(View.VISIBLE);
                 }
                 break;
         }

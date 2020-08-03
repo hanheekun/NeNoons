@@ -1,6 +1,5 @@
 package com.pixelro.nenoons.menu.my;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -13,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -33,22 +32,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
-import com.pixelro.nenoons.FirstDialog;
-import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.account.AccountActivity;
-import com.pixelro.nenoons.account.AccountDialog;
-import com.pixelro.nenoons.account.AccountLoginFragment;
 import com.pixelro.nenoons.menu.home.WebActivity;
 import com.pixelro.nenoons.server.HttpTask;
 import com.pixelro.nenoons.test.OkCancelDialog;
-import com.pixelro.nenoons.test.TestActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,10 +89,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
         String versionName = pi.versionName;
 
-        TextView version = (TextView)mView.findViewById(R.id.textView_my_ver);
-        version.setText(""+versionName);
+        TextView version = (TextView) mView.findViewById(R.id.textView_my_ver);
+        version.setText("" + versionName);
 
-        TextView email = (TextView)mView.findViewById(R.id.textView_my_email);
+        TextView email = (TextView) mView.findViewById(R.id.textView_my_email);
         email.setText(mSm.getEmail());
 
         mView.findViewById(R.id.button_my_logout).setOnClickListener(this);
@@ -114,7 +108,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_unregister).setOnClickListener(this);
         mView.findViewById(R.id.button_my_version).setOnClickListener(this);
 
-        TextView tvName = (TextView)mView.findViewById(R.id.textView_my_name);
+        TextView tvName = (TextView) mView.findViewById(R.id.textView_my_name);
 
         tvName.setText(mSm.getName());
 
@@ -133,15 +127,15 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_my_logout:
 
-                OkCancelDialog dlg = new OkCancelDialog(getActivity(),"로그아웃 할까요?");
+                OkCancelDialog dlg = new OkCancelDialog(getActivity(), "로그아웃 할까요?");
                 dlg.setOnResultEventListener(new OkCancelDialog.OnResultEventListener() {
                     @Override
                     public void ResultEvent(boolean result) {
                         if (result) {
-                            resetLoginInfo();
+                            Logout();
 
                             Intent mainIntent = new Intent(getActivity(), AccountActivity.class);
                             startActivity(mainIntent);
@@ -156,7 +150,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
                 // 회원 탈퇴
 
-                dlg = new OkCancelDialog(getActivity(),"회원 탈퇴 할까요?");
+                dlg = new OkCancelDialog(getActivity(), "회원 탈퇴 할까요?");
                 dlg.setOnResultEventListener(new OkCancelDialog.OnResultEventListener() {
                     @Override
                     public void ResultEvent(boolean result) {
@@ -186,7 +180,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                                         //Toast.makeText(getActivity(), "name = " + name , Toast.LENGTH_SHORT).show();
                                         // 회원 탈퇴 완료
 
-                                        resetLoginInfo();
+                                        deleteAccount();
 
                                         Intent intent = new Intent(getActivity(), AccountActivity.class);
                                         startActivity(intent);
@@ -212,7 +206,6 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                     }
                 });
                 dlg.showDialog();
-
 
 
                 break;
@@ -276,26 +269,92 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    void resetLoginInfo(){
+    void Logout() {
 
         // 이름 삭제
         SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
         sfm.removeName();
 
+        // 주소 삭제
+        mSm.removeAddress();
+
         // logout, reset first login
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT,MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
         editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
         editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
         editor.commit();
 
-        if (sfm.getSNSLogin()){
-            if (sfm.getSNSName() == "google"){
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_SIGN_IN);
+        if (sfm.getSNSLogin()) {
+            if (sfm.getSNSName() == "google") {
+
+                FirebaseAuth.getInstance().signOut();
+
+            } else if (sfm.getSNSName() == "kakao") {
+                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                    @Override
+                    public void onCompleteLogout() {
+
+                    }
+                });
             }
-            else if (sfm.getSNSName() == "kakao"){
+            sfm.removeSNSLogin();
+            sfm.removeSNSID();
+            sfm.removeSNSName();
+        }
+
+        // 운동정보 초기화
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE, false);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER, 0);
+        editor.commit();
+
+        // 테스트 정보 초기화
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
+        editor.commit();
+    }
+
+    void deleteAccount() {
+
+        // 이름 삭제
+        SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
+        sfm.removeName();
+
+        // 주소 삭제
+        mSm.removeAddress();
+
+        // logout, reset first login
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.FIRST_LOGIN);
+        editor.remove(EYELAB.APPDATA.ACCOUNT.LOGINNING);
+        editor.remove(EYELAB.APPDATA.ACCOUNT.TOKEN);
+        editor.commit();
+
+        if (sfm.getSNSLogin()) {
+            if (sfm.getSNSName() == "google") {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                //Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                //startActivityForResult(signInIntent, RC_SIGN_IN);
+            } else if (sfm.getSNSName() == "kakao") {
                 UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
                     @Override
                     public void onSessionClosed(ErrorResult errorResult) {
@@ -314,24 +373,23 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         }
 
         // 운동정보 초기화
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE, MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE,false);
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE,false);
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE,false);
-        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE,false);
-        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_1_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_2_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_3_COMPLETE, false);
+        editor.putBoolean(EYELAB.APPDATA.EXERCISE.EX_4_COMPLETE, false);
+        editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER, 0);
         editor.commit();
 
         // 테스트 정보 초기화
-        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST,MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_TEST, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.remove(EYELAB.APPDATA.TEST.LAST_DISTANCE);
         editor.commit();
-
-
-
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -379,7 +437,22 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     private void updateUI(FirebaseUser user) { //update ui code here
         if (user != null) {
-            mAuth.getCurrentUser().delete();
+
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(getActivity(), "google sign out.", Toast.LENGTH_LONG).show();
+
+//            FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
+//
+//            user2.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//                    if (task.isSuccessful()) {
+//                        Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
+
+            //mAuth.getCurrentUser().delete();
         }
     }
 }
