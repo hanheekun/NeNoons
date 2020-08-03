@@ -201,6 +201,15 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
     public void onStart() {
         super.onStart();
 
+        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                }
+            }
+        });
+
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
@@ -544,13 +553,11 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                         new AccountDialog(getActivity(),error, "돌아가기");
 
                         // 가입 취소
-                        FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
-
-                        user2.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+                                if (task.isSuccessful()){
+                                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
                                 }
                             }
                         });
@@ -564,13 +571,11 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                     AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
 
                     // 가입 취소
-                    FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
-
-                    user2.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
+                            if (task.isSuccessful()){
+                                FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
                             }
                         }
                     });

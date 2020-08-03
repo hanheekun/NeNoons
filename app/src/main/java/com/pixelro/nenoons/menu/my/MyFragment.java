@@ -155,6 +155,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void ResultEvent(boolean result) {
                         if (result) {
+
+
+
                             // 회원 탈퇴 요청하기
                             SharedPreferencesManager sfm = new SharedPreferencesManager(getActivity());
                             String token = sfm.getToken();
@@ -289,7 +292,16 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         if (sfm.getSNSLogin()) {
             if (sfm.getSNSName() == "google") {
 
-                FirebaseAuth.getInstance().signOut();
+                mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                        }
+                    }
+                });
+
+                //FirebaseAuth.getInstance().signOut();
 
             } else if (sfm.getSNSName() == "kakao") {
                 UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
@@ -341,16 +353,25 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         if (sfm.getSNSLogin()) {
             if (sfm.getSNSName() == "google") {
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()){
+//                            FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+//                        }
+//                    }
+//                });
 
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //Toast.makeText(getActivity(), "google account deleted.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
+
 
                 //Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 //startActivityForResult(signInIntent, RC_SIGN_IN);
