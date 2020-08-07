@@ -166,6 +166,7 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                 param.put("surgery", mPersonalProfile.surgery);    //PARAM
                 param.put("exercise", mPersonalProfile.exercise);    //PARAM
                 param.put("food", mPersonalProfile.food);    //PARAM
+                param.put("save", "1234");    //PARAM
                 Handler handler = new Handler(message -> {
 
                     Bundle bundle = message.getData();

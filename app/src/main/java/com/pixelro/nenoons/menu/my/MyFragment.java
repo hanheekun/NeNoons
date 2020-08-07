@@ -107,6 +107,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_push).setOnClickListener(this);
         mView.findViewById(R.id.button_my_unregister).setOnClickListener(this);
         mView.findViewById(R.id.button_my_version).setOnClickListener(this);
+        mView.findViewById(R.id.button_my_survey).setOnClickListener(this);
 
         TextView tvName = (TextView) mView.findViewById(R.id.textView_my_name);
 
@@ -267,6 +268,10 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                         "https://play.google.com/store/apps/details?id=com.pixelro.nenoons"));
                 intent.setPackage("com.android.vending");
                 startActivity(intent);
+                break;
+            case R.id.button_my_survey:
+                intent = new Intent(getActivity(), MySurveyActivity.class);
+                getActivity().startActivity(intent);
                 break;
 
         }

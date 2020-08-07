@@ -108,7 +108,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             EtBirthday.setText( year+"년 "+(monthOfYear+1)+"월 "+dayOfMonth+"일");
-            mBirthdayStrNumber = "" + year+ (monthOfYear+1) + dayOfMonth;
+            mBirthdayStrNumber = String.format("%d%02d%02d",year,(monthOfYear+1),dayOfMonth);;
         }
     };
 

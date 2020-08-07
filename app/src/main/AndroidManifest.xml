@@ -123,6 +123,9 @@
         <activity
             android:name=".menu.my.MyTosActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".menu.my.MySurveyActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".distance.EyeDistanceMeasureService"

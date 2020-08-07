@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 8,
-      "versionName": "2020-08-03-2",
+      "versionCode": 10,
+      "versionName": "2020-08-07-1",
       "enabled": true,
       "outputFile": "app-release.apk"
     }

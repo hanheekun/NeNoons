@@ -34,7 +34,7 @@
     <string name="account_join_tos"></string>
     <string name="account_join_tos_agree">동의</string>
     <!--    account-id-->
-    <string name="account_join_id_title">회원가입</string>
+    <string name="account_join_id_title">눈 정보</string>
     <string name="account_join_id_email">e-mail</string>
     <string name="account_join_id_email_hint">Your e-mail</string>
     <string name="account_join_id_pass">Password</string>
