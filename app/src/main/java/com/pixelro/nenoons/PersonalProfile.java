@@ -18,6 +18,7 @@ public class PersonalProfile {
     public String food = Food.NO;
     public String sns_ID = "";
     public String sns_name = "";
+    public String survey_save = "";
 
     public class Gender {
         public static final String MALE = "MALE";

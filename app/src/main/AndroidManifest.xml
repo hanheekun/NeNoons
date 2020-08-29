@@ -125,7 +125,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".menu.my.MySurveyActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
 
         <service
             android:name=".distance.EyeDistanceMeasureService"
