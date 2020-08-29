@@ -45,6 +45,7 @@ import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
@@ -78,6 +79,9 @@ import com.kakao.util.helper.log.Logger;
 // google
 // Client ID : 622454092611-df5frr6t2jffrdr4o9t2d1kmof2ia844.apps.googleusercontent.com
 // Client Secret : c-J35XbjSdXtNuzBL61x8B7M
+
+// play stor app key
+// pass 123456
 
 public class AccountIDFragment extends BaseFragment implements View.OnClickListener, View.OnFocusChangeListener{
     private final static String TAG = AccountIDFragment.class.getSimpleName();
@@ -197,6 +201,15 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
     public void onStart() {
         super.onStart();
 
+        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                }
+            }
+        });
+
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
@@ -255,6 +268,25 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                 } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
                                     // 동의 요청 후 이메일 획득 가능
                                     // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+                                    Log.i("KAKAO_API", "동의 요청 후 이메일 획득 가능 " );
+
+                                    // 이메일 동의 요청 후 탈퇴
+                                    Toast.makeText(getActivity(), "이메일정보 동의를 해주세요.", Toast.LENGTH_SHORT).show();
+
+                                    // 가입 취소
+                                    UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                        @Override
+                                        public void onSessionClosed(ErrorResult errorResult) {
+
+                                        }
+
+                                        @Override
+                                        public void onSuccess(Long result) {
+
+                                        }
+                                    });
+
+                                    return;
 
                                 } else {
                                     // 이메일 획득 불가
@@ -281,24 +313,23 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                 if(email != null){
 
                                     //////////////////////////////////////////////////////////////////////////////
-                                    // 카카오 가입 진행
+                                    // kakao 가입 진행
                                     //////////////////////////////////////////////////////////////////////////////
 
-                                    // 로그인중 progress 시작
+                                    // progress 시작
                                     mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-                                    // email, pass 임시 저장
+                                    // email, sns_name, sns_ID 저장
                                     mPersonalProfile.email = email;
                                     mPersonalProfile.sns_name = "kakao";
                                     mPersonalProfile.sns_ID = ""+resultKakao.getId();
 
-                                    // email, pass 로 회원 가입
+                                    // email, sns_name, sns_ID 로 회원 가입
                                     HashMap<String, String> param = new HashMap<String, String>();
                                     // 파라메터는 넣기 예
                                     param.put("email", mPersonalProfile.email);    //PARAM
                                     param.put("sns", mPersonalProfile.sns_name);    //PARAM
                                     param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-                                    //param.put("name", EtPass.getText().toString().trim());    //PARAM
                                     Handler handler = new Handler(message -> {
                                         Bundle bundle = message.getData();
                                         String result = bundle.getString("result");
@@ -325,12 +356,10 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                                 // 로그인 성공 저장
                                                 mSm.setLoginning(true);
 
+                                                // 가입 정보 저장
                                                 mSm.setEmail(mPersonalProfile.email);
-
                                                 mSm.setSNSID(mPersonalProfile.sns_ID);
-
                                                 mSm.setSNSName(mPersonalProfile.sns_name);
-
                                                 mSm.setSNSLogin(true);
 
                                                 // 다음 페이지 전환
@@ -340,8 +369,21 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                             } else {
                                                 // 이메일 회원가입 실패
                                                 removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                                                //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                                                 new AccountDialog(getActivity(),error, "돌아가기");
+
+                                                // 가입 취소
+                                                UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                    @Override
+                                                    public void onSessionClosed(ErrorResult errorResult) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onSuccess(Long result) {
+
+                                                    }
+                                                });
                                             }
 
 
@@ -350,6 +392,19 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                                             // 로그인 실패
                                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                                             AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                                            // 가입 취소
+                                            UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                @Override
+                                                public void onSessionClosed(ErrorResult errorResult) {
+
+                                                }
+
+                                                @Override
+                                                public void onSuccess(Long result) {
+
+                                                }
+                                            });
                                         }
                                         return true;
                                     });
@@ -386,6 +441,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -440,21 +496,20 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
             // google 가입 진행
             //////////////////////////////////////////////////////////////////////////////
 
-            // 로그인중 progress 시작
+            // progress 시작
             mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-            // email, pass 임시 저장
+            // email, sns_name, sns_ID 저장
             mPersonalProfile.email = user.getEmail();
             mPersonalProfile.sns_name = "google"; // 임시로 사용
             mPersonalProfile.sns_ID = user.getUid();
 
-            // email, pass 로 회원 가입
+            // email, sns_name, sns_ID 로 회원 가입
             HashMap<String, String> param = new HashMap<String, String>();
             // 파라메터는 넣기 예
             param.put("email", mPersonalProfile.email);    //PARAM
             param.put("sns", mPersonalProfile.sns_name);    //PARAM
             param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-            //param.put("name", EtPass.getText().toString().trim());    //PARAM
             Handler handler = new Handler(message -> {
                 Bundle bundle = message.getData();
                 String result = bundle.getString("result");
@@ -481,12 +536,10 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                         // 로그인 성공 저장
                         mSm.setLoginning(true);
 
+                        // 가입 정보 저장
                         mSm.setEmail(mPersonalProfile.email);
-
                         mSm.setSNSID(mPersonalProfile.sns_ID);
-
                         mSm.setSNSName(mPersonalProfile.sns_name);
-
                         mSm.setSNSLogin(true);
 
                         // 다음 페이지 전환
@@ -496,8 +549,18 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                     } else {
                         // 이메일 회원가입 실패
                         removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                         new AccountDialog(getActivity(),error, "돌아가기");
+
+                        // 가입 취소
+                        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                                }
+                            }
+                        });
                     }
 
 
@@ -506,6 +569,17 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
                     // 로그인 실패
                     removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                     AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                    // 가입 취소
+                    mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                            }
+                        }
+                    });
+
                 }
                 return true;
             });

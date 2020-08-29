@@ -301,12 +301,20 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
                 --mShowMonth;
                 //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
                 requestData(mShowMonth);
+                mProtocolListAdapter.clear();
+                mProtocolListAdapter.notifyDataSetChanged();
+                chart.highlightValue(null);
+                chart.invalidate();
                 break;
             case R.id.button_ex_history_next:
                 if (mShowMonth < 0){
                     ++mShowMonth;
                     //Toast.makeText(this, "mShowMonth = " + mShowMonth , Toast.LENGTH_SHORT).show();
                     requestData(mShowMonth);
+                    mProtocolListAdapter.clear();
+                    mProtocolListAdapter.notifyDataSetChanged();
+                    chart.highlightValue(null);
+                    chart.invalidate();
                 }
                 else {
                     Toast.makeText(this, "마지막 달 입니다." , Toast.LENGTH_SHORT).show();

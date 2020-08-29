@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,6 +77,7 @@ public class MyFontActivity extends AppCompatActivity   implements View.OnClickL
         switch(v.getId()){
 
             case R.id.button_test_next:
+                Toast.makeText(this,"적용예정입니다.", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.frameLayout_font_1:

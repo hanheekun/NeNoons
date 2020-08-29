@@ -15,11 +15,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "622454092611-2qrl732dki7unaub38a4nuk8t1gfonqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixelro.nenoons",
+            "certificate_hash": "4017e53c8cb8effcc484690218998dc71d8790ab"
+          }
+        },
+        {
+          "client_id": "622454092611-9256kfbdvpos94d94ha8o8np8i6jqu7b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixelro.nenoons",
+            "certificate_hash": "cf8c78488725deb397b1afed14715b7f4ce34877"
+          }
+        },
+        {
+          "client_id": "622454092611-nkekofrlqfc8h3rp4j0attja8udeak0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixelro.nenoons",
+            "certificate_hash": "5a7920d23c12c9a98f7aa3bb5f31c89921c663a5"
+          }
+        },
+        {
           "client_id": "622454092611-mgr2sbacitm8nl3n5js0mnmafgdud8fh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pixelro.nenoons",
             "certificate_hash": "71638a846db2bff599405b2317a6b34cd2a0e578"
+          }
+        },
+        {
+          "client_id": "622454092611-8dsgt922k0vudma6h9cc684oqbolv9i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pixelro.nenoons",
+            "certificate_hash": "0cbcdfba8c4a544eb7a5bb2eca531923320626c1"
           }
         },
         {
@@ -36,7 +68,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "622454092611-tujflo7qjari4gb8ht2dpg06urkt46l7.apps.googleusercontent.com",
+              "client_id": "622454092611-df5frr6t2jffrdr4o9t2d1kmof2ia844.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

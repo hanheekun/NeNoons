@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NeNoons</string>
+    <string name="app_name">내눈</string>
     <string name="title_home">홈</string>
     <string name="title_care">케어</string>
     <string name="title_my">더보기</string>
@@ -20,7 +20,7 @@
     <string name="account_hello_btn_login">로그인</string>
     <string name="account_hello_btn_join">가입하기</string>
     <!--    account-login-->
-    <string name="account_login_title">Log In</string>
+    <string name="account_login_title">로그인</string>
     <string name="account_login_email">e-mail</string>
     <string name="account_login_email_hint">Your e-mail</string>
     <string name="account_login_pass">Password</string>
@@ -34,7 +34,7 @@
     <string name="account_join_tos"></string>
     <string name="account_join_tos_agree">동의</string>
     <!--    account-id-->
-    <string name="account_join_id_title">Sign Up</string>
+    <string name="account_join_id_title">회원가입</string>
     <string name="account_join_id_email">e-mail</string>
     <string name="account_join_id_email_hint">Your e-mail</string>
     <string name="account_join_id_pass">Password</string>
@@ -506,7 +506,7 @@ Google Play 스토어 계정을 이용한 경우: Google Play 스토어 주문 �
 
     <string name="default_notification_channel_name" translatable="true">Test</string>
 
-    <string name="kakao_app_key" translatable="false">bd6905d968c4eea38482f4f000dab943</string>
+    <string name="kakao_app_key" translatable="false">289c32b36a9599ef0f092d3ee08fa3ff</string>
     <string name="kakao_phase" translatable="false">cbt</string>
 
 </resources>

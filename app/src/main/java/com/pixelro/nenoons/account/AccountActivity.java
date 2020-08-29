@@ -2,6 +2,8 @@ package com.pixelro.nenoons.account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -18,6 +20,7 @@ public class AccountActivity extends BaseActivity{
     private final static String TAG = AccountActivity.class.getSimpleName();
 
     public PersonalProfile mPersonalProfile = new PersonalProfile();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

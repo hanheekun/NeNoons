@@ -30,6 +30,8 @@ public class EYELAB {
             public static final String LOGIN_SNS = "LOGIN_SNS";
             public static final String SNS_NAME = "SNS_NAME";
             public static final String SNS_ID = "SNS_ID";
+            public static final String ADDRESS = "ADDRESS";
+
         }
 
         public class EXERCISE {

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -68,6 +69,10 @@ public class Ex04BFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG,"onViewCreated in");
 
         mView = view;
+
+        // 화면 꺼짐 방지
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         CbSound = (CheckBox)view.findViewById(R.id.checkBox_ex_sound);
         //CbSound.setOnCheckedChangeListener(this);
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);

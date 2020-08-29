@@ -127,6 +127,22 @@ public class SharedPreferencesManager {
         editor.commit();
     }
 
+    public void setAddress(String name){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.putString(EYELAB.APPDATA.ACCOUNT.ADDRESS,name);
+        editor.commit();
+    }
+
+    public String getAddress(){
+        return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.ADDRESS,"주소를 설정해 주세요");
+    }
+
+    public void removeAddress(){
+        SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
+        editor.remove(EYELAB.APPDATA.ACCOUNT.ADDRESS);
+        editor.commit();
+    }
+
     public void setLoginning(Boolean bool){
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
         editor.putBoolean(EYELAB.APPDATA.ACCOUNT.LOGINNING,bool);

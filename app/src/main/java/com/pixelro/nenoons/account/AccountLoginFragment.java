@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +41,7 @@ import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
@@ -220,6 +222,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
         // 기종 login 정보 load
         loadEmailLoginInfo();
 
+        // google
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -238,6 +241,20 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
         callback = new AccountLoginFragment.SessionCallback();
         Session.getCurrentSession().addCallback(callback);
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                }
+            }
+        });
     }
 
     @Override
@@ -294,6 +311,23 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                     // 동의 요청 후 이메일 획득 가능
                                     // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
 
+                                    // 이메일 동의 요청 후 탈퇴
+                                    Toast.makeText(getActivity(), "이메일정보 동의를 해주세요.", Toast.LENGTH_SHORT).show();
+                                    UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                        @Override
+                                        public void onSessionClosed(ErrorResult errorResult) {
+
+                                        }
+
+                                        @Override
+                                        public void onSuccess(Long result) {
+
+                                        }
+                                    });
+
+                                    return;
+
+
                                 } else {
                                     // 이메일 획득 불가
                                 }
@@ -319,24 +353,23 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                 if(email != null){
 
                                     //////////////////////////////////////////////////////////////////////////////
-                                    // 카카오 가입 진행
+                                    // kakao 가입 진행
                                     //////////////////////////////////////////////////////////////////////////////
 
-                                    // 로그인중 progress 시작
+                                    // progress 시작
                                     mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-                                    // email, pass 임시 저장
+                                    // email, sns_name, sns_ID 저장
                                     mPersonalProfile.email = email;
                                     mPersonalProfile.sns_name = "kakao";
                                     mPersonalProfile.sns_ID = ""+resultKakao.getId();
 
-                                    // email, pass 로 회원 가입
+                                    // email, sns_name, sns_ID 로 회원 가입
                                     HashMap<String, String> param = new HashMap<String, String>();
                                     // 파라메터는 넣기 예
                                     param.put("email", mPersonalProfile.email);    //PARAM
                                     param.put("sns", mPersonalProfile.sns_name);    //PARAM
                                     param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-                                    //param.put("name", EtPass.getText().toString().trim());    //PARAM
                                     Handler handler = new Handler(message -> {
                                         Bundle bundle = message.getData();
                                         String result = bundle.getString("result");
@@ -363,23 +396,36 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                                 // 로그인 성공 저장
                                                 mSm.setLoginning(true);
 
+                                                // 가입 정보 저장
                                                 mSm.setEmail(mPersonalProfile.email);
-
                                                 mSm.setSNSID(mPersonalProfile.sns_ID);
-
                                                 mSm.setSNSName(mPersonalProfile.sns_name);
-
                                                 mSm.setSNSLogin(true);
 
                                                 // 다음 페이지 전환
                                                 System.out.println("메인액티비티 시작");
-                                                NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+                                                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                                                getActivity().startActivity(mainIntent);
+                                                getActivity().finish();
 
                                             } else {
                                                 // 이메일 회원가입 실패
                                                 removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                                                //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                                                 new AccountDialog(getActivity(),error, "돌아가기");
+
+                                                // 가입 취소
+                                                UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                    @Override
+                                                    public void onSessionClosed(ErrorResult errorResult) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onSuccess(Long result) {
+
+                                                    }
+                                                });
                                             }
 
 
@@ -388,11 +434,25 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                                             // 로그인 실패
                                             removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                                             AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                                            // 가입 취소
+                                            UserManagement.getInstance().requestUnlink(new UnLinkResponseCallback() {
+                                                @Override
+                                                public void onSessionClosed(ErrorResult errorResult) {
+
+                                                }
+
+                                                @Override
+                                                public void onSuccess(Long result) {
+
+                                                }
+                                            });
                                         }
                                         return true;
                                     });
                                     // API 주소와 위 핸들러 전달 후 실행.
                                     new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
+                                    // 서버연결 20200728 로그인 주소 확인
                                 }
 
                             }
@@ -433,12 +493,12 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Successed.", Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Authentication Successed.", Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            //Snackbar.make(mView.findViewById(R.id.fragment_account_id), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Authentication error.", Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
                     }
@@ -454,21 +514,23 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
             // google 가입 진행
             //////////////////////////////////////////////////////////////////////////////
 
-            // 로그인중 progress 시작
+            // progress 시작
             mProgressDialog = ProgressDialog.show(getActivity(), "", "로그인중...", true, true);
 
-            // email, pass 임시 저장
+            // email, sns_name, sns_ID 저장
             mPersonalProfile.email = user.getEmail();
             mPersonalProfile.sns_name = "google"; // 임시로 사용
             mPersonalProfile.sns_ID = user.getUid();
 
-            // email, pass 로 회원 가입
+            // email, sns_name, sns_ID 로 회원 가입
             HashMap<String, String> param = new HashMap<String, String>();
             // 파라메터는 넣기 예
             param.put("email", mPersonalProfile.email);    //PARAM
             param.put("sns", mPersonalProfile.sns_name);    //PARAM
             param.put("snsId", mPersonalProfile.sns_ID);    //PARAM
-            //param.put("name", EtPass.getText().toString().trim());    //PARAM
+
+            System.out.println(param);
+
             Handler handler = new Handler(message -> {
                 Bundle bundle = message.getData();
                 String result = bundle.getString("result");
@@ -495,23 +557,33 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                         // 로그인 성공 저장
                         mSm.setLoginning(true);
 
+                        // 가입 정보 저장
                         mSm.setEmail(mPersonalProfile.email);
-
                         mSm.setSNSID(mPersonalProfile.sns_ID);
-
                         mSm.setSNSName(mPersonalProfile.sns_name);
-
                         mSm.setSNSLogin(true);
 
                         // 다음 페이지 전환
                         System.out.println("메인액티비티 시작");
-                        NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_id_to_navigation_account_profile);
+                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                        getActivity().startActivity(mainIntent);
+                        getActivity().finish();
 
                     } else {
-                        // 이메일 회원가입 실패
+                        // 회원가입 실패
                         removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
-                        //AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
                         new AccountDialog(getActivity(),error, "돌아가기");
+
+                        // 가입 취소
+                        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                                }
+                            }
+                        });
                     }
 
 
@@ -520,11 +592,22 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                     // 로그인 실패
                     removeKey(mContext, EYELAB.APPDATA.ACCOUNT.TOKEN);
                     AccountDialog mDlg = new AccountDialog(getActivity(),"이메일 정보를\r\n확인해 주세요.", "돌아가기");
+
+                    // 가입 취소
+                    mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                FirebaseAuth.getInstance().signOut(); // very important if you are using firebase.
+                            }
+                        }
+                    });
                 }
                 return true;
             });
             // API 주소와 위 핸들러 전달 후 실행.
             new HttpTask("https://nenoonsapi.du.r.appspot.com/android/sns_signin", handler).execute(param);
+            // 서버연결 20200728 로그인 주소 확인
 
 
 //            Intent intent = new Intent(this, AfterActivity.class);
@@ -545,8 +628,8 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
                 getActivity().onBackPressed();
                 break;
             case R.id.textView_account_login_forget:    // 비밀번호 찾기
-                //NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
-                Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(AccountLoginFragment.this).navigate(R.id.action_navigation_account_login_to_navigation_account_find);
+                //Toast.makeText(getActivity(),"준비중 입니다.",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.imageButton_account_login_facebook:
                 break;

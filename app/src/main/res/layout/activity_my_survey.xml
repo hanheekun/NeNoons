@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <Button
+        android:id="@+id/button_arrow_back"
+        android:layout_width="8dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_arrow_back_background"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="눈 정보"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/account_join_survey_title"
+        android:textColor="#6b6c6f"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView67"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="안경을 쓰시나요?"
+                android:textColor="#0143BE"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioButton_glasses_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="미착용"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_glasses_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="안경착용"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_glasses_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="돋보기(다초점) 착용"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_glasses_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="컨택트랜즈 착용"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView70"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="좌 시력"
+                        android:textColor="#0143BE"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_survey_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView71"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="우 시력"
+                        android:textColor="#0143BE"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_survey_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="당신의 눈의 상태는"
+                android:textColor="#0143BE"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_status_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="근시"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_status_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="정시"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_status_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="난시"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_status_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="원시"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_status_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="모름"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="눈 관련 수술을 하신적이 있나요?"
+                android:textColor="#0143BE"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_surgery_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="시력교정 시술 (라식/라색 등)"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_surgery_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="노안수술"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_surgery_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="백내장 수술"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox_surgery_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기타, 없음"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="평소에 눈운동을 하시나요?"
+                android:textColor="#0143BE"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioButton_exercise_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="네"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_exercise_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="아니요"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_exercise_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="가끔"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="눈 건강 보조식품을 드시나요?"
+                android:textColor="#0143BE"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioButton_food_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="네"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_food_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="아니요"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_food_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="가끔"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/button_account_survey_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_xs_b"
+                android:text="확인"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

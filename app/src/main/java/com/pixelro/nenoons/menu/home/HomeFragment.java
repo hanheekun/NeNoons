@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.menu.home;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -80,6 +81,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public boolean mTest = false;
 
+    private SharedPreferencesManager mSm;
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -98,8 +103,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
+        mSm = new SharedPreferencesManager(getActivity());
+
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
         TvAddress = (TextView) root.findViewById(R.id.textView_home_address);
+
 
         // home 웹뷰 시작
         mHomeWebView = (WebView) root.findViewById(R.id.webView_home);
@@ -458,6 +466,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         refrashBoard();
 
+        TvAddress.setText(mSm.getAddress());
+
         mBannerWebView.loadUrl("https://www.nenoons.com/app-banner");
 //        if (mBannerWebView !=null) {
 //            mAdWebView.restoreState(webViewBundle);
@@ -673,12 +683,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             TvAddress.setText("해당되는 주소 정보는 없습니다");
                         } else {
                             //TvAddress.setText(list.get(0).getLatitude() + ", " + list.get(0).getLongitude());
+
+                            data = makeShortAddress(data);
+
                             TvAddress.setText(data);
                             //          list.get(0).getCountryName();  // 국가명
                             //          list.get(0).getLatitude();        // 위도
                             //          list.get(0).getLongitude();    // 경도
                             // 서버연결 20200715
                             // 주소 변경 서버 연결
+
+                            // 주소 저장
+
+                            mSm.setAddress(data);
 
                             String token = getToken(getContext());
                             HashMap<String, String> param = new HashMap<String, String>();
@@ -737,6 +754,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SharedPreferences.Editor editor = (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).edit();
         editor.putString(EYELAB.APPDATA.ACCOUNT.TOKEN, token);
         editor.commit();
+    }
+
+    public String makeShortAddress(String address){
+        if (address.length() > 20){
+            return address.substring(0,20) + "...";
+        }
+        else
+        {
+            return address;
+        }
     }
 
 

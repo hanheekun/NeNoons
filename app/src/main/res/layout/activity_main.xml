@@ -39,4 +39,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#d9d9d9"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_test_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nav_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

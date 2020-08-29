@@ -144,4 +144,16 @@
         app:layout_constraintStart_toStartOf="@+id/editText_account_profile_phone"
         app:layout_constraintTop_toBottomOf="@+id/editText_account_profile_phone" />
 
+    <ImageView
+        android:id="@+id/imageView_account_dob_example"
+        android:layout_width="372dp"
+        android:layout_height="419dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dob_example" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

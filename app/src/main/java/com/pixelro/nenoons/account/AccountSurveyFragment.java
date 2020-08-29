@@ -75,70 +75,114 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                 break;
             case R.id.button_account_survey_next:
 
+                // 정보 저장
+                byte saveTemp = 0x0;
+
                 // profile에 정보 입력 // 아직 내용 check 안함
                 if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_1)).isChecked()){
                     mPersonalProfile.glasses = PersonalProfile.Glasses.NONE;
+                    mPersonalProfile.survey_save += "1,";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_2)).isChecked()){
                     mPersonalProfile.glasses = PersonalProfile.Glasses.GLASSESS;
+                    mPersonalProfile.survey_save += "2,";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_3)).isChecked()){
                     mPersonalProfile.glasses = PersonalProfile.Glasses.FAR_VISION;
+                    mPersonalProfile.survey_save += "3,";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_glasses_4)).isChecked()){
                     mPersonalProfile.glasses = PersonalProfile.Glasses.CONTACT;
+                    mPersonalProfile.survey_save += "4,";
+                }
+                else{
+                    mPersonalProfile.survey_save += "0,";
                 }
 
                 mPersonalProfile.left = (String)SpLeft.getSelectedItem();
+                mPersonalProfile.survey_save += SpLeft.getSelectedItemPosition() + ",";
                 mPersonalProfile.right = (String)SpRight.getSelectedItem();
+                mPersonalProfile.survey_save += SpRight.getSelectedItemPosition() + ",";
 
                 mPersonalProfile.status = "";
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_1)).isChecked()){
                     mPersonalProfile.status += PersonalProfile.Status.MYOPIA + " ";
+                    saveTemp |= 0x1;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_2)).isChecked()){
                     mPersonalProfile.status += PersonalProfile.Status.EMMETROPIA + " ";
+                    saveTemp |= 0x2;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_3)).isChecked()){
                     mPersonalProfile.status += PersonalProfile.Status.ASTIGMATISM + " ";
+                    saveTemp |= 0x4;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_4)).isChecked()){
                     mPersonalProfile.status += PersonalProfile.Status.HYPEROPIA + " ";
+                    saveTemp |= 0x8;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_status_5)).isChecked()){
                     mPersonalProfile.status += PersonalProfile.Status.UNKNOWN + " ";
+                    saveTemp |= 0x10;
                 }
+
+                mPersonalProfile.survey_save += (int)saveTemp + ",";
+
+                saveTemp = 0x0;
 
                 mPersonalProfile.surgery = "";
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_1)).isChecked()){
                     mPersonalProfile.surgery += PersonalProfile.Surgery.LASIKLASEK + " ";
+                    saveTemp |= 0x1;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_2)).isChecked()){
                     mPersonalProfile.surgery += PersonalProfile.Surgery.OLD + " ";
+                    saveTemp |= 0x2;
                 }
                 if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_3)).isChecked()){
                     mPersonalProfile.surgery += PersonalProfile.Surgery.CATARACT + " ";
+                    saveTemp |= 0x4;
                 }
+                if(((CheckBox)mView.findViewById(R.id.checkBox_surgery_4)).isChecked()){
+                    mPersonalProfile.surgery += PersonalProfile.Surgery.NONE + " ";
+                    saveTemp |= 0x8;
+                }
+
+                mPersonalProfile.survey_save += (int)saveTemp + ",";
 
                 if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_1)).isChecked()){
                     mPersonalProfile.exercise = PersonalProfile.Excercise.YES;
+                    mPersonalProfile.survey_save += "1,";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_2)).isChecked()){
                     mPersonalProfile.exercise = PersonalProfile.Excercise.NO;
+                    mPersonalProfile.survey_save += "2,";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_exercise_3)).isChecked()){
                     mPersonalProfile.exercise = PersonalProfile.Excercise.SOMETIMES;
+                    mPersonalProfile.survey_save += "3,";
+                }
+                else {
+                    mPersonalProfile.survey_save += "0,";
                 }
 
                 if(((RadioButton)mView.findViewById(R.id.radioButton_food_1)).isChecked()){
                     mPersonalProfile.food = PersonalProfile.Food.YES;
+                    mPersonalProfile.survey_save += "1";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_food_2)).isChecked()){
                     mPersonalProfile.food = PersonalProfile.Food.NO;
+                    mPersonalProfile.survey_save += "2";
                 }
                 else if(((RadioButton)mView.findViewById(R.id.radioButton_food_3)).isChecked()){
                     mPersonalProfile.food = PersonalProfile.Food.SOMETIMES;
+                    mPersonalProfile.survey_save += "3";
                 }
+                else {
+                    mPersonalProfile.survey_save += "0";
+                }
+
+
 
                 // 서버연결 20200715
 
@@ -163,6 +207,7 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
                 param.put("surgery", mPersonalProfile.surgery);    //PARAM
                 param.put("exercise", mPersonalProfile.exercise);    //PARAM
                 param.put("food", mPersonalProfile.food);    //PARAM
+                param.put("save", mPersonalProfile.survey_save);    //PARAM
                 Handler handler = new Handler(message -> {
 
                     Bundle bundle = message.getData();

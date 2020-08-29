@@ -20,7 +20,7 @@
         android:layout_height="93dp"
         android:layout_marginTop="60dp"
         android:gravity="center"
-        android:text="아이랩에 처음 오셨나요?\n 먼저, 나의 눈 상태를 알아보세요."
+        android:text="내눈 앱에 처음 오셨나요?\n먼저, 나의 눈 상태를 알아보세요."
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
