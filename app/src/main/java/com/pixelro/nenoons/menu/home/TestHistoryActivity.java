@@ -1,32 +1,18 @@
 package com.pixelro.nenoons.menu.home;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.auth0.android.jwt.JWT;
 import com.pixelro.nenoons.EYELAB;
-import com.pixelro.nenoons.ExProfile;
-import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
-import com.pixelro.nenoons.SplashActivity;
 import com.pixelro.nenoons.TestProfile;
-import com.pixelro.nenoons.account.AccountActivity;
-import com.pixelro.nenoons.account.AccountDialog;
-import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
-import com.pixelro.nenoons.menu.exercise.ex01.Ex01BFragment;
 import com.pixelro.nenoons.server.HttpTask;
 
 import org.json.JSONArray;
@@ -49,7 +35,7 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_history);
         mContext = getApplicationContext();
-        findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
 
         Deque<String> list = new LinkedList<>();
 
@@ -172,7 +158,7 @@ public class TestHistoryActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 onBackPressed();
                 break;
         }

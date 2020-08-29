@@ -65,7 +65,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         mTvMoving = (TextView)view.findViewById(R.id.textView_test_02_moving);
         mTvCount = (TextView)mView.findViewById(R.id.textView_test_02_count);
         Cl = (ConstraintLayout)view.findViewById(R.id.layout_test_01_bg);
@@ -160,7 +160,7 @@ public class Test01Dis05Fragment extends Fragment  implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 //NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment);
                 break;

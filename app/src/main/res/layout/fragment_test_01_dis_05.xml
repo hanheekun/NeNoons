@@ -15,10 +15,10 @@
         android:src="@drawable/test_indication"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_arrow_back" />
+        app:layout_constraintTop_toTopOf="@+id/button_arrow_close" />
 
     <Button
-        android:id="@+id/button_arrow_back"
+        android:id="@+id/button_arrow_close"
         android:layout_width="11dp"
         android:layout_height="17dp"
         android:layout_marginStart="15dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_arrow_back_background"
+        android:id="@+id/button_arrow_close_background"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"

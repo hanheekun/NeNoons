@@ -3,7 +3,6 @@ package com.pixelro.nenoons.test;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ public class TestAddActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_add);
 
-        findViewById(R.id.button_arrow_back_background).setOnClickListener(v -> finish());
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(v -> finish());
         TvResult1 = (TextView)findViewById(R.id.textView_test_add_1);
         TvResult2 = (TextView)findViewById(R.id.textView_test_add_2);
         TvResult3 = (TextView)findViewById(R.id.textView_test_add_3);

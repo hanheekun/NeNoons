@@ -65,6 +65,9 @@ public class EYELAB {
             public static final String EX_DAY = "EX_DAY";
 
             public static final String EX_DAY_NUMBER = "EX_DAY_NUMBER";
+
+            public static final String EX_VIBRATOR = "EX_VIBRATOR";
+            public static final String EX_SOUND = "EX_SOUND";
         }
 
         public class TEST {

@@ -22,13 +22,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ex01BFragment extends Fragment implements View.OnClickListener {
+public class Ex01BFragment extends BaseFragment implements View.OnClickListener {
 
     public final static int EX_LEVEL_L = 1;
     public final static int EX_LEVEL_M = 2;
@@ -126,6 +127,23 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
         mProgressBar.setProgress(0);
 
         IvBalloon = (ImageView)view.findViewById(R.id.imageView_ex_1_balloon);
+
+        // 진동, 사운드 이전 기록으로 설정
+        if (mSm.getExVibrator()){
+            CbVibrator.setChecked(true);
+        }
+        else {
+            CbVibrator.setChecked(false);
+        }
+
+        if (mSm.getExSound()){
+            CbSound.setChecked(true);
+        }
+        else {
+            CbSound.setChecked(false);
+        }
+
+
     }
 
     @Override
@@ -141,6 +159,26 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
 
         if (mTimer != null){
             mTimer.cancel();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // 진동, 소리 최종 선택 저장
+        if(CbVibrator.isChecked()){
+            mSm.setExVibrator(true);
+        }
+        else {
+            mSm.setExVibrator(false);
+        }
+
+        if(CbSound.isChecked()){
+            mSm.setExSound(true);
+        }
+        else {
+            mSm.setExSound(false);
         }
 
     }
@@ -367,6 +405,7 @@ public class Ex01BFragment extends Fragment implements View.OnClickListener {
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         public void run() {
+
                                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                             fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01CFragment()).commit();

@@ -2,28 +2,22 @@ package com.pixelro.nenoons.menu.my;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
@@ -55,7 +49,7 @@ public class MySurveyActivity extends AppCompatActivity   implements View.OnClic
 
         mPersonalProfile = new PersonalProfile();
 
-        findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         findViewById(R.id.button_account_survey_next).setOnClickListener(this);
 
         SpLeft = (Spinner)( findViewById(R.id.spinner_survey_left));
@@ -184,7 +178,7 @@ public class MySurveyActivity extends AppCompatActivity   implements View.OnClic
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 onBackPressed();
                 break;
             case R.id.button_account_survey_next:

@@ -3,7 +3,6 @@ package com.pixelro.nenoons.account;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
 
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_profile_next).setOnClickListener(this);
 
         EtName = (EditText)(view.findViewById(R.id.editText_account_profile_name));
@@ -80,7 +79,7 @@ public class AccountProfileFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 //getActivity().onBackPressed();
                 break;
             case R.id.imageView_account_dob_example:

@@ -19,8 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,26 +28,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.kakao.auth.ErrorCode;
-import com.kakao.auth.IApplicationConfig;
-import com.kakao.auth.KakaoAdapter;
-import com.kakao.auth.KakaoSDK;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
-import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.OptionalBoolean;
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.EYELAB;
@@ -63,13 +54,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.pixelro.nenoons.account.AccountLoginFragment.removeKey;
-import static com.pixelro.nenoons.account.AccountLoginFragment.setString;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -121,7 +110,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
         // next button
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         BtnNext = (Button) (view.findViewById(R.id.button_account_id_next));
         BtnNext.setOnClickListener(this);
         BtnNext.setEnabled(false);
@@ -658,7 +647,7 @@ public class AccountIDFragment extends BaseFragment implements View.OnClickListe
         Context mContext =getContext();
 
         switch (view.getId()) {
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.imageButton_account_id_facebook:

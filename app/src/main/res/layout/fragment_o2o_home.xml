@@ -20,17 +20,17 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_arrow_back"
+        android:id="@+id/button_arrow_close"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@drawable/x_shape"
-        app:layout_constraintBottom_toBottomOf="@+id/button_arrow_back_background"
-        app:layout_constraintEnd_toEndOf="@+id/button_arrow_back_background"
-        app:layout_constraintStart_toStartOf="@+id/button_arrow_back_background"
-        app:layout_constraintTop_toTopOf="@+id/button_arrow_back_background" />
+        app:layout_constraintBottom_toBottomOf="@+id/button_arrow_close_background"
+        app:layout_constraintEnd_toEndOf="@+id/button_arrow_close_background"
+        app:layout_constraintStart_toStartOf="@+id/button_arrow_close_background"
+        app:layout_constraintTop_toTopOf="@+id/button_arrow_close_background" />
 
     <Button
-        android:id="@+id/button_arrow_back_background"
+        android:id="@+id/button_arrow_close_background"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@android:color/transparent"

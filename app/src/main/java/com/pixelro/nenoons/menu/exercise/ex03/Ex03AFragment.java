@@ -48,7 +48,7 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
 
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_ex_a_next).setOnClickListener(this);
 
         BtnLevelL = (Button)view.findViewById(R.id.btn_ex_a_l);
@@ -86,7 +86,7 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.button_ex_a_next:

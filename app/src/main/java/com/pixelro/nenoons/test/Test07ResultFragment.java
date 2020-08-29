@@ -10,17 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.pixelro.nenoons.EYELAB;
-import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
-import com.pixelro.nenoons.menu.exercise.ex03.Ex03Activity;
 import com.pixelro.nenoons.menu.my.MyColorActivity;
 import com.pixelro.nenoons.server.HttpTask;
 
@@ -71,7 +68,7 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         BtnReturn = (Button)view.findViewById(R.id.button_test_07_return);
         BtnReturn.setOnClickListener(this);
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_07_add).setOnClickListener(this);
         view.findViewById(R.id.button_test_07_color_setting).setOnClickListener(this);
 

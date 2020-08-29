@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +51,7 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
 
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
 
         SpLeft = (Spinner)( view.findViewById(R.id.spinner_survey_left));
@@ -70,7 +69,7 @@ public class AccountSurveyFragment extends BaseFragment implements View.OnClickL
         Context mContext =getContext();
 
         switch (view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.button_account_survey_next:

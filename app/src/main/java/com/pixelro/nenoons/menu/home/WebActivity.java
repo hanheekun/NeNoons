@@ -67,6 +67,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
         mUrl = intent.getExtras().getString("url");
         mToken = intent.getExtras().getString("token");
 
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
 
         // 웹뷰 시작
@@ -139,8 +140,11 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 finish();
+                break;
+            case R.id.button_arrow_back_background:
+                mWebView.goBack();
                 break;
         }
     }

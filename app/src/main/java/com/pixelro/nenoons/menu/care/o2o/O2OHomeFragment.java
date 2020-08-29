@@ -38,7 +38,7 @@ public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
 
         // 웹뷰 시작
         mWebView = (WebView) mView.findViewById(R.id.webView);
@@ -90,7 +90,7 @@ public class O2OHomeFragment extends Fragment  implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().finish();
                 break;
         }

@@ -40,7 +40,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 
@@ -68,7 +67,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ex_history_graph);
         mContext = getApplicationContext();
-        findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         chart = (BarChart)findViewById(R.id.barchart_ex_history);
 
         findViewById(R.id.button_ex_history_pre).setOnClickListener(this);
@@ -294,7 +293,7 @@ public class ExHistoryActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 onBackPressed();
                 break;
             case R.id.button_ex_history_pre:

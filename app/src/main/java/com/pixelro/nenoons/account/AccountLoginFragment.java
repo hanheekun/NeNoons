@@ -18,10 +18,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.auth0.android.jwt.JWT;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -29,7 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,7 +52,6 @@ import com.pixelro.nenoons.PersonalProfile;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.server.HttpTask;
-import com.pixelro.nenoons.server.JWTUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,7 +134,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
 
         mPersonalProfile = ((AccountActivity)getActivity()).mPersonalProfile;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.textView_account_login_forget).setOnClickListener(this);
         view.findViewById(R.id.imageButton_account_login_facebook).setOnClickListener(this);
         view.findViewById(R.id.imageButton_account_login_google).setOnClickListener(this);
@@ -624,7 +620,7 @@ public class AccountLoginFragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.textView_account_login_forget:    // 비밀번호 찾기

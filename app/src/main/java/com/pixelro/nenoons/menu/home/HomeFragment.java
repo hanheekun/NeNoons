@@ -1,6 +1,5 @@
 package com.pixelro.nenoons.menu.home;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -14,7 +13,6 @@ import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,7 +28,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
-import com.pixelro.nenoons.MainActivity;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.TestProfile;

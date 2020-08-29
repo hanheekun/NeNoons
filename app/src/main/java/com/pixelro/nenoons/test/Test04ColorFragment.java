@@ -63,7 +63,7 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
@@ -116,7 +116,7 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:

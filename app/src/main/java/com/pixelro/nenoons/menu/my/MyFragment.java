@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
 
+    private TextView TvEmail;
+    private TextView TvName;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         myViewModel =
@@ -92,8 +96,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         TextView version = (TextView) mView.findViewById(R.id.textView_my_ver);
         version.setText("" + versionName);
 
-        TextView email = (TextView) mView.findViewById(R.id.textView_my_email);
-        email.setText(mSm.getEmail());
+        TvEmail = (TextView) mView.findViewById(R.id.textView_my_email);
+        TvEmail.setText(mSm.getEmail());
 
         mView.findViewById(R.id.button_my_logout).setOnClickListener(this);
         mView.findViewById(R.id.button_my_my).setOnClickListener(this);
@@ -109,9 +113,9 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_version).setOnClickListener(this);
         mView.findViewById(R.id.button_my_survey).setOnClickListener(this);
 
-        TextView tvName = (TextView) mView.findViewById(R.id.textView_my_name);
+        TvName = (TextView) mView.findViewById(R.id.textView_my_name);
 
-        tvName.setText(mSm.getName());
+        TvName.setText(mSm.getName());
 
         // google
         // Initialize Firebase Auth
@@ -124,6 +128,16 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 20200829
+        Typeface face = mSm.getFontTypeface();
+        TvEmail.setTypeface(face);
+        TvName.setTypeface(face);
     }
 
     @Override

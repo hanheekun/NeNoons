@@ -7,7 +7,6 @@ package com.pixelro.nenoons.menu.exercise.history;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -93,7 +92,7 @@ public class ExHistoryActivity_calendar extends BaseActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 onBackPressed();
                 break;
 

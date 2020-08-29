@@ -1,6 +1,5 @@
 package com.pixelro.nenoons.test;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class Test05FontFragment extends Fragment  implements View.OnClickListene
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_test_next).setOnClickListener(this);
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
@@ -82,7 +81,7 @@ public class Test05FontFragment extends Fragment  implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.button_test_next:

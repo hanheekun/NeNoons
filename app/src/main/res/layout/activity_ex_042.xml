@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button_arrow_back"
+        android:id="@+id/button_arrow_close"
         android:layout_width="8dp"
         android:layout_height="14dp"
         android:layout_marginStart="22dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_arrow_back_background"
+        android:id="@+id/button_arrow_close_background"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="25dp"

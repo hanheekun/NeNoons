@@ -2,13 +2,11 @@ package com.pixelro.nenoons.menu.my;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pixelro.nenoons.R;
-import com.pixelro.nenoons.TestProfile;
 
 public class MyTosActivity extends AppCompatActivity{
 
@@ -19,7 +17,7 @@ public class MyTosActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tos);
 
-        findViewById(R.id.button_arrow_back_background).setOnClickListener(v -> finish());
+        findViewById(R.id.button_arrow_close_background).setOnClickListener(v -> finish());
 
     }
 

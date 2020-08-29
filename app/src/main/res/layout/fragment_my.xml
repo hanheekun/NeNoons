@@ -193,14 +193,6 @@
                 app:layout_constraintStart_toStartOf="@+id/button_my_logout"
                 app:layout_constraintTop_toBottomOf="@+id/button_my_logout" />
 
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Switch"
-                tools:layout_editor_absoluteX="186dp"
-                tools:layout_editor_absoluteY="478dp" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

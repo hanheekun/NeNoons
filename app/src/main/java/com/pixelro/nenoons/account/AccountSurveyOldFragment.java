@@ -45,7 +45,7 @@ public class AccountSurveyOldFragment extends Fragment implements View.OnClickLi
         super.onViewCreated(view, savedInstanceState);
         mView = view;
 
-        view.findViewById(R.id.button_arrow_back_background).setOnClickListener(this);
+        view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
         view.findViewById(R.id.button_account_survey_next).setOnClickListener(this);
 
 
@@ -77,7 +77,7 @@ public class AccountSurveyOldFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.button_arrow_back_background:
+            case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
             case R.id.button_account_survey_next:
