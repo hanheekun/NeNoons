@@ -113,7 +113,7 @@ public class MyColorActivity extends AppCompatActivity   implements View.OnClick
         switch(v.getId()){
 
             case R.id.button_test_next:
-                Toast.makeText(this,"적용예정입니다.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"적용예정입니다.", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.constraintlayout_color_1:

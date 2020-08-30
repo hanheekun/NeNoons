@@ -1,6 +1,7 @@
 package com.pixelro.nenoons.menu.exercise.ex01;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,6 +33,9 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    // 20200831
+    protected SharedPreferencesManager mSm;
 
     @Override
     public View onCreateView(
@@ -74,8 +79,28 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
             BtnLevelH.setEnabled(false);
         }
 
+        // 20200831
+        mSm = new SharedPreferencesManager(getActivity());
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 20200831 android minSDK 28로 설정, android 8.0
+        // context.getResources().getFont(R.font.dall01r); 코드 사용 가능
+        // mSm.getFontTypeface() 통해 TextView에 바로 적용
+        // mSm은 BaseFragment에 설정되어 있음
+        // BaseFragment 를 사용하지 않는다면
+        // protected SharedPreferencesManager mSm;
+        // mSm = new SharedPreferencesManager(getActivity()); 로 선언하고 사용
+        Typeface face = mSm.getFontTypeface();
+        BtnLevelL.setTypeface(face);
+        BtnLevelM.setTypeface(face);
+        BtnLevelH.setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_ex_a_next)).setTypeface(face);
+    }
 
     private void resetLevelButton(){
         BtnLevelL.setEnabled(true);

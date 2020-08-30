@@ -134,7 +134,13 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 
-        // 20200829
+        // 20200831 android minSDK 28로 설정, android 8.0
+        // context.getResources().getFont(R.font.dall01r); 코드 사용 가능
+        // mSm.getFontTypeface() 통해 TextView에 바로 적용
+        // mSm은 BaseFragment에 설정되어 있음
+        // BaseFragment 를 사용하지 않는다면
+        // protected SharedPreferencesManager mSm;
+        // mSm = new SharedPreferencesManager(getActivity()); 로 선언하고 사용
         Typeface face = mSm.getFontTypeface();
         TvEmail.setTypeface(face);
         TvName.setTypeface(face);
