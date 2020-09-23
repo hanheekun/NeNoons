@@ -40,9 +40,9 @@
 
     <ImageView
         android:id="@+id/imageView31"
-        android:layout_width="497dp"
-        android:layout_height="463dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="453dp"
+        android:layout_height="427dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ex_02_h"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,18 +85,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ex_face_2"
-        app:layout_constraintBottom_toTopOf="@+id/textView_ex_1_guide"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ex_4_guide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.10"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView_ex_1_guide"
+        android:id="@+id/textView_ex_4_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ex_bear_say_box"
         android:gravity="center"
-        android:text="눈운동 잘 하고 있나 지켜보고있음."
+        android:text="노란원을 눈으로 따라가 볼까요? "
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

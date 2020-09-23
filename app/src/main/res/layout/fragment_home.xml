@@ -90,7 +90,7 @@
                 android:id="@+id/imageView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="47dp"
+                android:layout_marginTop="44dp"
                 android:background="@drawable/nenoons_box_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +177,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/button_home_test" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/textView_home_17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"

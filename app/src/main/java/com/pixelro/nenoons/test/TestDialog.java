@@ -2,6 +2,7 @@ package com.pixelro.nenoons.test;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -11,10 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 
 public class TestDialog {
 
     private Context context;
+    protected SharedPreferencesManager mSm;
 
     public TestDialog(Context context) {
         this.context = context;
@@ -22,7 +25,7 @@ public class TestDialog {
 
     // 호출할 다이얼로그 함수를 정의한다.
     public void showDialog() {
-
+        mSm = new SharedPreferencesManager(context);
         // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
         final Dialog dlg = new Dialog(context);
 
@@ -52,10 +55,11 @@ public class TestDialog {
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
-
-
-        final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
+        Button okButton = (Button) dlg.findViewById(R.id.button_test_ok_dlg);
+        Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
+        Typeface face = mSm.getFontTypeface();
+        okButton.setTypeface(face);
+        tvContants.setTypeface(face);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,5 +7,6 @@ package com.pixelro.nenoons.distance;
 
 public abstract class IFaceEventListener {
     public abstract void intEvent(int eyeToEyeDistance, int eyeToCameraDistance);
+    public abstract void floatEvent(float LeftEye, float RightEye);
 
 }

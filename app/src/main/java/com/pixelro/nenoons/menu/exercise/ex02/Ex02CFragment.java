@@ -2,11 +2,17 @@ package com.pixelro.nenoons.menu.exercise.ex02;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.nenoons.server.HttpTask;
 
@@ -34,6 +41,9 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    protected SharedPreferencesManager mSm;
+   // private ImageView Iv_coin, Iv_coin2, Iv_coin3;
+    private View mView;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -46,9 +56,24 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context mContext =getContext();
+        mView =view;
+     /*   Animation coin_anim, bounce_anim,bounce_anim2;
 
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
-        view.findViewById(R.id.button_test_next).setOnClickListener(this);
+        bounce_anim2=AnimationUtils.loadAnimation(getContext(),R.anim.bounce_anim2);
+        bounce_anim =AnimationUtils.loadAnimation(getContext(),R.anim.bounce_anim);
+        coin_anim = AnimationUtils.loadAnimation(getContext(),R.anim.coin_anim);
+
+        Iv_coin = (ImageView)view.findViewById(R.id.imageView_coin_bounce1);
+        Iv_coin.startAnimation(coin_anim);
+
+        Iv_coin2 =(ImageView)view.findViewById(R.id.imageView_coin_bounce2);
+        Iv_coin2.startAnimation(bounce_anim);
+
+        Iv_coin3 =(ImageView)view.findViewById(R.id.imageView_coin_bounce3);
+        Iv_coin3.startAnimation(bounce_anim2); */
+
+        view.findViewById(R.id.button_ex2_prev).setOnClickListener(this);
+        view.findViewById(R.id.button_ex2_next).setOnClickListener(this);
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -68,6 +93,7 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
         exProfile.level = ((Ex02Activity)getActivity()).mCurLevel;
 
         String token = getToken(getActivity());
+
 
         // 전달
         HashMap<String, String> param = new HashMap<String, String>();
@@ -113,17 +139,30 @@ public class Ex02CFragment extends Fragment implements View.OnClickListener{
         new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_exercise", handler).execute(param);
 //        new HttpTask("http://192.168.1.162:4002/android/update_user_exercise", handler).execute(param);
 
+        mSm = new SharedPreferencesManager(getActivity());
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView_b82)).setTypeface(face);
+
+        ((Button)mView.findViewById(R.id.button_ex2_next)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_ex2_prev)).setTypeface(face);
+
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_test_prev:
+            case R.id.button_ex2_prev:
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_ex_02, new Ex02AFragment()).commit();
                 break;
-            case R.id.button_test_next:
+            case R.id.button_ex2_next:
                 getActivity().finish();
                 break;
         }

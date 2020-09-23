@@ -1,18 +1,22 @@
 package com.pixelro.nenoons.menu.exercise;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +24,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.fasterxml.jackson.databind.util.PrimitiveArrayBuilder;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.menu.exercise.ex01.Ex01Activity;
 import com.pixelro.nenoons.menu.exercise.ex02.Ex02Activity;
 import com.pixelro.nenoons.menu.exercise.ex03.Ex03Activity;
@@ -34,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,6 +52,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ExerciseFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
+    protected SharedPreferencesManager mSm;
+
     private ExerciseViewModel exerciseViewModel;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -54,6 +63,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
     private TextView Tvnumber;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         exerciseViewModel =
@@ -61,6 +71,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
         View root = inflater.inflate(R.layout.fragment_exercise, container, false);
 
         mView = root;
+        mSm = new SharedPreferencesManager(getActivity());
 
         root.findViewById(R.id.button_ex_01).setOnClickListener(this);
         root.findViewById(R.id.button_ex_02).setOnClickListener(this);
@@ -104,6 +115,7 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
         TvDate.setText(fourteen_format.format(date_now));
 
         Tvnumber = (TextView)root.findViewById(R.id.textView_ex_number);
+
 
         root.findViewById(R.id.textView_ex_number).setOnLongClickListener(this);
 
@@ -215,6 +227,11 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
     public void onResume() {
         super.onResume();
 
+        Typeface face = mSm.getFontTypeface();
+        Tvnumber.setTypeface(face);
+        TvDate.setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView44)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView14)).setTypeface(face);
         updateBoard();
 
     }
@@ -249,8 +266,9 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
             ((Button)mView.findViewById(R.id.button_ex_04)).setBackgroundResource(R.drawable.button_ex_04);
         }
 
-        //
+
         int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
+
         Tvnumber.setText("");
         String s= "오늘 ";
         SpannableString ss1=  new SpannableString(s);
@@ -265,6 +283,9 @@ public class ExerciseFragment extends Fragment implements View.OnClickListener, 
         ss1=  new SpannableString(s);
         ss1.setSpan(new RelativeSizeSpan(1f), 0,s.length(), 0); // set size
         Tvnumber.append(ss1);
+
+
+
     }
 
     @Override

@@ -240,8 +240,8 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
                     }
                 }
             } else {
-//                view.loadUrl(url);
-                Uri uri = Uri.parse(url);
+                view.loadUrl(url);
+               /* Uri uri = Uri.parse(url);
                 Intent intent1 = new Intent(Intent.ACTION_VIEW, uri);
                 try {
                     startActivity(intent1);
@@ -249,7 +249,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
                     view.loadData("<html><body></body></html>", "text/html", "euc-kr");
                     alertIsp.show();
                     return true;
-                }
+                }*/
                 return false;
             }
             return true;

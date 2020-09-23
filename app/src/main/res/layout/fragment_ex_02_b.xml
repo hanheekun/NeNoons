@@ -51,9 +51,9 @@
         android:id="@+id/imageView_ex_2_eye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="252dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/eye_ex_1_open" />
@@ -62,52 +62,45 @@
         android:id="@+id/textView_ex_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="60sp"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_ex_2_eye"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_ex_2_eye" />
-
-    <ImageView
-        android:id="@+id/imageView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ex_face_2"
-        app:layout_constraintBottom_toTopOf="@+id/textView_ex_1_guide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.10"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_ex_sound"
+        app:layout_constraintVertical_bias="0.779" />
 
     <TextView
-        android:id="@+id/textView_ex_1_guide"
+        android:id="@+id/textView_ex_2_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ex_bear_say_box"
         android:gravity="center"
-        android:text="눈운동 잘 하고 있나 지켜보고있음."
+        android:text="눈을 깜빡이면서 운동해봐요~"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.93" />
+
 
     <ProgressBar
         android:id="@+id/progressBar_count"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="230dp"
         android:layout_height="23dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:progressDrawable="@drawable/seekbar_ex_4"
+        app:layout_constraintBottom_toTopOf="@+id/textView_ex_2_guide"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ex_count" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_ex_2_eye"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

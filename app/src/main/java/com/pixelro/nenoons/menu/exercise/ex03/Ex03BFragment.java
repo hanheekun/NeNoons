@@ -1,5 +1,10 @@
 package com.pixelro.nenoons.menu.exercise.ex03;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -19,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,6 +49,8 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
     private CheckBox CbSound;
     private CheckBox CbVibrator;
     private TextView TvCount;
+    private float mLeftEyeValue =1.0f;
+    private float mRightEyeValue =1.0f;
 
     private int mCount = 0;
     private static final int mCountMax = 3;
@@ -61,6 +69,26 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ex_03_b, container, false);
     }
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
+                float Left = intent.getFloatExtra(EyeDistanceMeasureService.EXTRA_DATA_FLOAT, 0);
+                float Right = intent.getFloatExtra(EyeDistanceMeasureService.EXTRA_DATA_FLOAT, 0);
+
+                if(Left !=0 && Right !=0){
+                    mLeftEyeValue =Left;
+                    mRightEyeValue =Right;                }
+            }
+        }
+    };
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(EyeDistanceMeasureService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
+    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,7 +102,7 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
         //CbSound.setOnCheckedChangeListener(this);
         CbVibrator = (CheckBox)view.findViewById(R.id.checkBox_ex_vibrator);
         //CbVibrator.setOnCheckedChangeListener(this);
-        TvCount = (TextView)view.findViewById(R.id.textView_ex_count);
+        TvCount = (TextView)view.findViewById(R.id.textView_ex3_count);
         TvCount.setText("0 회");
 
         mTimer = new Timer();
@@ -110,7 +138,7 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
 
         //Toast.makeText(getActivity(),"level = " + ((Ex03Activity)getActivity()).curLevel,Toast.LENGTH_SHORT).show();
 
-        IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_2_eye);
+        IvEye = (ImageView) mView.findViewById(R.id.imageView_ex_3_eye);
 
         // for 진동
         mVibrator = (Vibrator) getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
@@ -134,13 +162,6 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
         }
     }
 
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mTimer.cancel();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -160,6 +181,23 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
             mSm.setExSound(false);
         }
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        Typeface face = mSm.getFontTypeface();
+        TvCount.setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_ex_3_guide)).setTypeface(face);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mGattUpdateReceiver);
+        mTimer.cancel();
     }
 
     private TimerTask TimaerTaskMaker (){
@@ -271,7 +309,9 @@ public class Ex03BFragment extends BaseFragment implements View.OnClickListener 
                             fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03CFragment()).commit();
                         }
 
-                        if (isClosed){
+                        // 200923 0.1초마다 진동하는 방식에서 1초마다 울리는 방식으로 변경
+                        if (isClosed && (mSecTick%10)==0){
+
                             if (CbVibrator.isChecked()){
                                 mVibrator.vibrate(70);
                             }

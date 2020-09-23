@@ -47,6 +47,8 @@ public class Ex01Activity extends AppCompatActivity  implements IEyeDistanceMeas
     private Ex01Activity mThis = null;
 
     public int mCurrentDistance = 0;
+    public float mLeftOpenValue =1.0f;
+    public float mRightOpenValue =1.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,47 +131,23 @@ public class Ex01Activity extends AppCompatActivity  implements IEyeDistanceMeas
             Log.d(TAG, "BleCommunicationService is already running...");
         }
     }
-
-    class SendMassgeHandler extends Handler {
-
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-
-            if (msg == null) {
-                Log.e(TAG, "msg is null");
-                return;
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
+                float Left = intent.getFloatExtra(EyeDistanceMeasureService.EXTRA_DATA_FLOAT,0);
+                float Right = intent.getFloatExtra(EyeDistanceMeasureService.EXTRA_DATA_FLOAT,0);
+                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
+                mCurrentDistance = distance;
+                mRightOpenValue = Right;
+                mLeftOpenValue = Left;
+                Log.d(TAG, "????????????????????????????????");
             }
 
-            switch (msg.what) {
-                case SEND_THREAD_DISTANCE_MEASURE_COMPLETE:
-                    Log.d(TAG, "msg.what=SEND_THREAD_DISTANCE_MEASURE_COMPLETE");
-                    Bundle bundle = msg.getData();
-                    final int distance = bundle.getInt("distance");
-                    int radius = (distance / 10) - 10;  //20cm ~ 40 cm를 유효한 범위로 잡기위해 radius값 조절
-                    Log.i(TAG, "SEND_THREAD_DISTANCE_MEASURE_COMPLETE:radius = " + distance);
-                    //setBackGroundBlur(radius);
-                    //Intent intent = new Intent(getApplicationContext(),LogInActivity.class);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            mCurrentDistance = distance;
-
-                        }
-                    });
-
-
-                    Log.i(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = " + distance);
-                    break;
-
-                default:
-                    break;
-            }
         }
-    }
+    };
 
     public boolean isServiceRunningCheck() {
         Log.d(TAG, "called");
@@ -287,19 +265,51 @@ public class Ex01Activity extends AppCompatActivity  implements IEyeDistanceMeas
         Log.d(TAG, "called:4");
     }
 
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+    class SendMassgeHandler extends Handler {
+
         @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
-                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
-                mCurrentDistance = distance;
-                Log.d(TAG, "????????????????????????????????");
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+
+            if (msg == null) {
+                Log.e(TAG, "msg is null");
+                return;
             }
 
+            switch (msg.what) {
+                case SEND_THREAD_DISTANCE_MEASURE_COMPLETE:
+                    Log.d(TAG, "msg.what=SEND_THREAD_DISTANCE_MEASURE_COMPLETE");
+                    Bundle bundle = msg.getData();
+                    final int distance = bundle.getInt("distance");
+                    final float LeftEyeOpenProb = bundle.getFloat("LeftEyeValue");
+                    final float RightEyeOpenProb = bundle.getFloat("RightEyeValue");
+                    int radius = (distance / 10) - 10;  //20cm ~ 40 cm를 유효한 범위로 잡기위해 radius값 조절
+                    Log.i(TAG, "SEND_THREAD_DISTANCE_MEASURE_COMPLETE:radius = " + distance);
+                    Log.i(TAG, "SEND_THREAD_DISTANCE_MEASURE_COMPLETE: EyeOpenValue =:("+LeftEyeOpenProb+","+RightEyeOpenProb+")");
+                    //setBackGroundBlur(radius);
+                    //Intent intent = new Intent(getApplicationContext(),LogInActivity.class);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            mCurrentDistance = distance;
+                            mLeftOpenValue = LeftEyeOpenProb;
+                            mRightOpenValue = RightEyeOpenProb;
+
+                        }
+                    });
+
+
+                    Log.i(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! = " + distance);
+                    break;
+
+                default:
+                    break;
+            }
         }
-    };
+    }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();

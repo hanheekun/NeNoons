@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
 import com.pixelro.nenoons.SharedPreferencesManager;
+
+import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -100,6 +103,11 @@ public class Ex01AFragment extends Fragment implements View.OnClickListener{
         BtnLevelM.setTypeface(face);
         BtnLevelH.setTypeface(face);
         ((Button)mView.findViewById(R.id.button_ex_a_next)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView69)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView76)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView79)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView81)).setTypeface(face);
+
     }
 
     private void resetLevelButton(){

@@ -2,11 +2,14 @@ package com.pixelro.nenoons.menu.exercise.ex01;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.server.HttpTask;
 
 import org.json.JSONException;
@@ -33,6 +37,9 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    protected SharedPreferencesManager mSm;
+    private View mView;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -45,9 +52,10 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context mContext =getContext();
+        mView =view;
 
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
-        view.findViewById(R.id.button_test_next).setOnClickListener(this);
+        view.findViewById(R.id.button_test_prev_a01).setOnClickListener(this);
+        view.findViewById(R.id.button_test_next_a01).setOnClickListener(this);
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -94,11 +102,7 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
                 //Toast.makeText(mContext, "error = " + error + " msg = " + msg, Toast.LENGTH_SHORT).show();
                 // progress 종료
 
-                if (error == "null") {
-
-
-
-
+                if (error != "null") {
                     //Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
                     System.out.println("저장 실패");
                 }
@@ -120,18 +124,31 @@ public class Ex01CFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView_a81)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_a82)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_test_prev_a01)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_test_next_a01)).setTypeface(face);
+
+    }
+    @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_test_prev:
+            case R.id.button_test_prev_a01:
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_ex_01, new Ex01AFragment()).commit();
                 break;
-            case R.id.button_test_next:
+            case R.id.button_test_next_a01:
                 getActivity().finish();
                 break;
         }
     }
+
+
 
     public String getToken(Context context){
         return (context.getSharedPreferences(EYELAB.APPDATA.NAME_ACCOUNT, Context.MODE_PRIVATE)).getString(EYELAB.APPDATA.ACCOUNT.TOKEN,"");

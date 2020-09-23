@@ -42,6 +42,7 @@ public class GooglyFaceTracker extends Tracker<Face> {
     private static final float EYE_CLOSED_THRESHOLD = 0.4f;
     private final IFaceEventListener faceEventListener;
 
+
     //private GraphicOverlay mOverlay;
     //private com.eyegalaxy.eyegalaxydemo.GooglyEyesGraphic mEyesGraphic;
 
@@ -56,6 +57,7 @@ public class GooglyFaceTracker extends Tracker<Face> {
     private boolean mPreviousIsRightOpen = true;
 
     DistanceMeasurer mDistanceMeasurer = null;
+    EyeOpenChecker mEyeOpenChecker = null;
 
     //==============================================================================================
     // Methods
@@ -64,8 +66,11 @@ public class GooglyFaceTracker extends Tracker<Face> {
     public GooglyFaceTracker(IFaceEventListener faceEventListener) {
         //mOverlay = overlay;
         this.faceEventListener = faceEventListener;
+
         if(mDistanceMeasurer == null)
             mDistanceMeasurer = new DistanceMeasurer();
+        if(mEyeOpenChecker == null)
+            mEyeOpenChecker = new EyeOpenChecker();
     }
 
     /**
@@ -117,8 +122,12 @@ public class GooglyFaceTracker extends Tracker<Face> {
 
         //calculate distance
         mDistanceMeasurer.calculateDistance(leftPosition, rightPosition);
+        //Opencheck
+        mEyeOpenChecker.EyeOpenUpdate(leftOpenScore,rightOpenScore);
         //update data to listener
         faceEventListener.intEvent(mDistanceMeasurer.mEyetoEyeDistance, mDistanceMeasurer.mEyetoUserDistance);
+        faceEventListener.floatEvent(mEyeOpenChecker.mLeftEyeOpenProb, mEyeOpenChecker.mRightEyeOpenProb);
+
         //mEyesGraphic.updateEyes(leftPosition, isLeftOpen, rightPosition, isRightOpen, faceEventListener);
     }
 

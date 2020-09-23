@@ -13,6 +13,7 @@ public interface IEyeDistanceMeasureServiceCallback {
     public enum EVENT_EyeDistanceMeasureService {
         UNKNOWN,
         DISTANCE_MEASER_COMPLETE,
+        EYE_OPEN_CHCEK_COMPLETE,
         SERVICE_BIND_COMPLETE,
     }
 

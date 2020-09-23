@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.distance.EyeDistanceMeasureService;
 
 import java.util.Timer;
@@ -146,11 +148,68 @@ public class Ex01BFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-    }
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
+                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
+
+                if(distance !=0) {
+                    TvDistance.setText(distance + "cm ");
+
+                    // 거리 확인
+                    if (mMode == LONG) {
+
+                        TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 55cm보다 멀리하세요");
+
+                        if (distance < 53) {
+                            if (mTimer == null) {
+
+                            } else {
+                                TvCntLong.setText("" + mTimerCountMAX);
+                                mTimerCount = 0;
+                                mTimer.cancel();
+                                mTimer = null;
+
+                                IvBalloon.setImageResource(mBalloonImage[0]);
+                            }
+                        } else {
+                            if (mTimer == null) {
+                                mTimer = new Timer();
+                                mTimer.schedule(TimaerTaskMaker(), 0, 1000);
+                            } else {
+
+                            }
+                        }
+                    } else if (mMode == SHORT) {
+
+                        TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 18~22cm로 유지하세요");
+
+                        if (distance > 23) {
+                            if (mTimer == null) {
+
+                            } else {
+                                TvCntShort.setText("" + mTimerCountMAX);
+                                mTimerCount = 0;
+                                mTimer.cancel();
+                                mTimer = null;
+
+                                IvBalloon.setImageResource(mBalloonImage[0]);
+                            }
+                        } else {
+                            if (mTimer == null) {
+                                mTimer = new Timer();
+                                mTimer.schedule(TimaerTaskMaker(), 0, 1000);
+                            } else {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     @Override
     public void onPause() {
@@ -183,74 +242,16 @@ public class Ex01BFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (EyeDistanceMeasureService.ACTION_DATA_AVAILABLE.equals(action)) {
-                int distance = intent.getIntExtra(EyeDistanceMeasureService.EXTRA_DATA, 0);
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 
-                TvDistance.setText(distance + "cm");
-
-                // 거리 확인
-                if (mMode == LONG){
-
-                    TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 55cm보다 멀리하세요");
-
-                    if (distance < 53){
-                        if (mTimer == null){
-
-                        }
-                        else {
-                            TvCntLong.setText("" + mTimerCountMAX);
-                            mTimerCount = 0;
-                            mTimer.cancel();
-                            mTimer = null;
-
-                            IvBalloon.setImageResource(mBalloonImage[0]);
-                        }
-                    }
-                    else {
-                        if (mTimer == null){
-                            mTimer = new Timer();
-                            mTimer.schedule(TimaerTaskMaker(),0,1000);
-                        }
-                        else {
-
-                        }
-                    }
-                }
-                else if (mMode == SHORT){
-
-                    TvGuide.setText("정면 카메라를 보면서\n화면과의 거리를 18~22cm로 유지하세요");
-
-                    if (distance > 23){
-                        if (mTimer == null){
-
-                        }
-                        else {
-                            TvCntShort.setText("" + mTimerCountMAX);
-                            mTimerCount = 0;
-                            mTimer.cancel();
-                            mTimer = null;
-
-                            IvBalloon.setImageResource(mBalloonImage[0]);
-                        }
-                    }
-                    else {
-                        if (mTimer == null){
-                            mTimer = new Timer();
-                            mTimer.schedule(TimaerTaskMaker(),0,1000);
-                        }
-                        else {
-
-                        }
-                    }
-                }
-
-            }
-        }
-    };
+        Typeface face = mSm.getFontTypeface();
+        TvDistance.setTypeface(face);
+        TvGuide.setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView66)).setTypeface(face);
+    }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();

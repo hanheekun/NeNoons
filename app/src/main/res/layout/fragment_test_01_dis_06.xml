@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_test_next"
+        android:id="@+id/button_test_next_06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
@@ -35,12 +35,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_test_prev"
+        app:layout_constraintStart_toEndOf="@+id/button_test_prev_06"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.939" />
 
     <Button
-        android:id="@+id/button_test_prev"
+        android:id="@+id/button_test_prev_06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_w"
@@ -48,13 +48,13 @@
         android:textColor="#0143be"
         android:textSize="20sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintEnd_toStartOf="@+id/button_test_next_06"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+        app:layout_constraintTop_toTopOf="@+id/button_test_next_06" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/textView37_06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -73,7 +73,7 @@
         android:src="@drawable/test_result_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37_06" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -83,13 +83,14 @@
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37_06" />
 
     <TextView
-        android:id="@+id/textView_test_02_command"
+        android:id="@+id/textView_test_02_command_06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:lineSpacingExtra="3dp"
         android:text="바르게 측정하셨나요? \n다음 테스트를 진행해주세요."
         android:textColor="#000000"
         android:textSize="20sp"
@@ -100,7 +101,7 @@
         app:layout_constraintVertical_bias="0.35" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/textView39_06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="85dp"

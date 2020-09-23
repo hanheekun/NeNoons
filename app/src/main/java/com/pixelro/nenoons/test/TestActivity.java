@@ -319,7 +319,7 @@ public class TestActivity extends BaseActivity  implements IEyeDistanceMeasureSe
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
+        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok_dlg);
         final Button cancelButton = (Button) dlg.findViewById(R.id.button_test_cancel);
 
         okButton.setOnClickListener(new View.OnClickListener() {

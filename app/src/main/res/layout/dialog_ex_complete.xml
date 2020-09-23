@@ -7,18 +7,19 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="412dp"
-        android:layout_height="216dp"
+        android:layout_width="428dp"
+        android:layout_height="398dp"
         android:background="@drawable/home_white_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dialog_box_white"/>
 
     <Button
-        android:id="@+id/button_test_ok"
+        android:id="@+id/button_cpl_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="55dp"
         android:background="@drawable/btn_m_b"
         android:text="확 인"
         android:textColor="#FFFFFF"
@@ -26,21 +27,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5_cpl" />
 
     <Button
-        android:id="@+id/button_test_cancel"
+        android:id="@+id/button_cpl_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="취소"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/button_test_ok"
-        app:layout_constraintStart_toStartOf="@+id/button_test_ok"
-        app:layout_constraintTop_toTopOf="@+id/button_test_ok" />
+        app:layout_constraintEnd_toEndOf="@+id/button_cpl_ok"
+        app:layout_constraintStart_toStartOf="@+id/button_cpl_ok"
+        app:layout_constraintTop_toTopOf="@+id/button_cpl_ok" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView5_cpl"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -49,8 +50,9 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.329" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

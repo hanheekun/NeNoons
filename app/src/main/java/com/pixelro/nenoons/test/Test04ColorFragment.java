@@ -1,5 +1,6 @@
 package com.pixelro.nenoons.test;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 
@@ -21,6 +24,7 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
 
     private final static String TAG = AccountHelloFragment.class.getSimpleName();
     private View mView;
+    protected SharedPreferencesManager mSm;
     private ConstraintLayout ClColor1;
     private ConstraintLayout ClColor2;
     private ConstraintLayout ClColor3;
@@ -64,7 +68,7 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         mView = view;
 
         view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
-        view.findViewById(R.id.button_test_next).setOnClickListener(this);
+        view.findViewById(R.id.button_test_next_cl1).setOnClickListener(this);
         view.findViewById(R.id.button_test_prev).setOnClickListener(this);
 
         ClColor1 = (ConstraintLayout)view.findViewById(R.id.constraintlayout_color_1);
@@ -102,8 +106,16 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         ClColor5.setOnClickListener(this);
         ClColor6.setOnClickListener(this);
 
+        mSm = new SharedPreferencesManager(getActivity());
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView37_cl1)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_test_02_command_cl1)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_test_next_cl1)).setTypeface(face);
+         }
     private void setAllColorButtonReset(){
         FlColor1.setBackgroundResource(0);
         FlColor2.setBackgroundResource(0);
@@ -119,7 +131,7 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
             case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
-            case R.id.button_test_next:
+            case R.id.button_test_next_cl1:
                 NavHostFragment.findNavController(Test04ColorFragment.this).navigate(R.id.action_navigation_test_04_color_to_navigation_test_05_font);
                 break;
             case R.id.button_test_prev:
@@ -177,6 +189,6 @@ public class Test04ColorFragment extends Fragment  implements View.OnClickListen
         }
 
         //((TextView)mView.findViewById(R.id.textView_test_02_command)).setText("다음을 눌러주세요.");
-        ((Button)mView.findViewById(R.id.button_test_next)).setEnabled(true);
+        ((Button)mView.findViewById(R.id.button_test_next_cl1)).setEnabled(true);
     }
 }

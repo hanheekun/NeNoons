@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_test_next"
+        android:id="@+id/button_test_next_rg1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
@@ -48,13 +48,13 @@
         android:textColor="#0143be"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintEnd_toStartOf="@+id/button_test_next_rg1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+        app:layout_constraintTop_toTopOf="@+id/button_test_next_rg1" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/textView37_rg1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -73,7 +73,7 @@
         android:src="@drawable/test_02_gr_01"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37_rg1" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -83,10 +83,10 @@
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37_rg1" />
 
     <TextView
-        android:id="@+id/textView_test_02_command"
+        android:id="@+id/textView_test_02_command_rg1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

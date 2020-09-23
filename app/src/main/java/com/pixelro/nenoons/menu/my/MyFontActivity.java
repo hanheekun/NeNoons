@@ -77,7 +77,7 @@ public class MyFontActivity extends AppCompatActivity   implements View.OnClickL
         switch(v.getId()){
 
             case R.id.button_test_next:
-                Toast.makeText(this,"적용예정입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"적용 되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.frameLayout_font_1:

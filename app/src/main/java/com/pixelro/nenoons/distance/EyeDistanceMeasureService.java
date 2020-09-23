@@ -1,6 +1,7 @@
 package com.pixelro.nenoons.distance;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +50,8 @@ public class EyeDistanceMeasureService extends Service implements SensorEventLis
             "com.pixelro.eyecare.ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA =
             "com.pixelro.eyecare.EXTRA_DATA";
-
+    public final static String EXTRA_DATA_FLOAT =
+            "com.pixelro.eyecare.EXTRA_DATA_FLOAT";
 
     private CameraSource mCameraSource = null;
     private boolean mCameraFacing = true;   //have to check camera is facing or not. if not facing, have to notify to user
@@ -174,6 +176,12 @@ public class EyeDistanceMeasureService extends Service implements SensorEventLis
         sendBroadcast(intent);
     }
 
+    private void broadcastUpdate2(final String action, final float data) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_DATA_FLOAT, data);
+        sendBroadcast(intent);
+    }
+
     @NonNull
     private FaceDetector createFaceDetector(Context context) {
         // have to check google service is not connected (rainbell todo)
@@ -209,6 +217,20 @@ public class EyeDistanceMeasureService extends Service implements SensorEventLis
                         sendMessage(eyeToCameraDistance);
                     }
                 });*/
+            }
+            @Override
+            public void floatEvent(final float LeftEyeOpenProb, final float RightEyeOpenProb){
+                if(mIEyeDistanceMeasureServiceCallback !=null){
+                    Bundle bundle = new Bundle();
+                    float Left = LeftEyeOpenProb;
+                    float Right = RightEyeOpenProb;
+                    bundle.putFloat("LeftEyeValue",Left);
+                    bundle.putFloat("RightEyeValue",Right);
+                    broadcastUpdate2(ACTION_DATA_AVAILABLE,Left);
+                    broadcastUpdate2(ACTION_DATA_AVAILABLE,Right);
+                    Log.i(TAG, "sta2002: EyeOpenValue: Left=" +Left +"Right="+Right );
+                    mIEyeDistanceMeasureServiceCallback.onEvent_IEyeDistanceMeasureServiceCallback(IEyeDistanceMeasureServiceCallback.EVENT_EyeDistanceMeasureService.EYE_OPEN_CHCEK_COMPLETE, bundle);
+                }
             }
         };
 
@@ -275,6 +297,7 @@ public class EyeDistanceMeasureService extends Service implements SensorEventLis
         // check that the device has play services available.
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());
+
 
         if (mCameraSource != null) {
             try {

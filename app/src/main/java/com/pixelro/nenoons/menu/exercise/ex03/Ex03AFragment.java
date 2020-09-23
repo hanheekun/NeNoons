@@ -1,11 +1,13 @@
 package com.pixelro.nenoons.menu.exercise.ex03;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,7 +34,7 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    protected SharedPreferencesManager mSm;
 
 
     @Override
@@ -49,11 +52,11 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
         mView = view;
 
         view.findViewById(R.id.button_arrow_close_background).setOnClickListener(this);
-        view.findViewById(R.id.button_ex_a_next).setOnClickListener(this);
+        view.findViewById(R.id.button_ex_c_next).setOnClickListener(this);
 
-        BtnLevelL = (Button)view.findViewById(R.id.btn_ex_a_l);
-        BtnLevelM = (Button)view.findViewById(R.id.btn_ex_a_m);
-        BtnLevelH = (Button)view.findViewById(R.id.btn_ex_a_h);
+        BtnLevelL = (Button)view.findViewById(R.id.btn_ex_c_l);
+        BtnLevelM = (Button)view.findViewById(R.id.btn_ex_c_m);
+        BtnLevelH = (Button)view.findViewById(R.id.btn_ex_c_h);
 
         BtnLevelL.setOnClickListener(this);
         BtnLevelM.setOnClickListener(this);
@@ -74,8 +77,22 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
             BtnLevelH.setEnabled(false);
         }
 
+        mSm = new SharedPreferencesManager(getActivity());
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        Typeface face = mSm.getFontTypeface();
+        BtnLevelH.setTypeface(face);
+        BtnLevelL.setTypeface(face);
+        BtnLevelM.setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_ex_c_next)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_c69)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_c76)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_c79)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_c81)).setTypeface(face);
+    }
 
     private void resetLevelButton(){
         BtnLevelL.setEnabled(true);
@@ -89,7 +106,7 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
             case R.id.button_arrow_close_background:
                 getActivity().onBackPressed();
                 break;
-            case R.id.button_ex_a_next:
+            case R.id.button_ex_c_next:
 
                 // set time, level
                 if (!BtnLevelL.isEnabled()){
@@ -114,15 +131,15 @@ public class Ex03AFragment extends Fragment implements View.OnClickListener{
                 fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03BFragment()).commit();
 
                 break;
-             case R.id.btn_ex_a_l:
+             case R.id.btn_ex_c_l:
                 resetLevelButton();
                 BtnLevelL.setEnabled(false);
                 break;
-            case R.id.btn_ex_a_m:
+            case R.id.btn_ex_c_m:
                 resetLevelButton();
                 BtnLevelM.setEnabled(false);
                 break;
-            case R.id.btn_ex_a_h:
+            case R.id.btn_ex_c_h:
                 resetLevelButton();
                 BtnLevelH.setEnabled(false);
                 break;

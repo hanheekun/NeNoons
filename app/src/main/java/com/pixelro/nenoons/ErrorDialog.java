@@ -38,7 +38,7 @@ public class ErrorDialog {
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
         TextView TvMessage =  (TextView)dlg.findViewById(R.id.textView_account_dialog);
         TvMessage.setText(message); // 로그인 정보를\n확인해 주세요.
-        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok);
+        final Button okButton = (Button) dlg.findViewById(R.id.button_test_ok_dlg);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

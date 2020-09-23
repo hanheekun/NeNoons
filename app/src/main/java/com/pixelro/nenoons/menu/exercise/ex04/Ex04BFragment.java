@@ -2,6 +2,7 @@ package com.pixelro.nenoons.menu.exercise.ex04;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.pixelro.nenoons.BaseFragment;
 import com.pixelro.nenoons.R;
+
+import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -123,6 +126,14 @@ public class Ex04BFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView_ex_4_guide)).setTypeface(face);
+
+    }
 
     @Override
     public void onPause() {
@@ -206,7 +217,7 @@ public class Ex04BFragment extends BaseFragment implements View.OnClickListener 
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -520); // -440
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", -480); // -440
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();
@@ -278,7 +289,7 @@ public class Ex04BFragment extends BaseFragment implements View.OnClickListener 
                                 @Override
                                 public void run() {
                                     AnimatorSet resAniSet = new AnimatorSet();
-                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 520);
+                                    ObjectAnimator red = ObjectAnimator.ofFloat(image,"translationX", 480);
                                     resAniSet.play(red);
                                     resAniSet.setDuration(mPathMoveTimeMS);
                                     resAniSet.start();

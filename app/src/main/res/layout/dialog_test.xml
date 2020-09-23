@@ -15,7 +15,7 @@
         app:srcCompat="@drawable/dialog_box_white" />
 
     <Button
-        android:id="@+id/button_test_ok"
+        android:id="@+id/button_test_ok_dlg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_m_b"
@@ -36,9 +36,9 @@
         android:layout_marginTop="60dp"
         android:text="취소"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/button_test_ok"
-        app:layout_constraintStart_toStartOf="@+id/button_test_ok"
-        app:layout_constraintTop_toTopOf="@+id/button_test_ok" />
+        app:layout_constraintEnd_toEndOf="@+id/button_test_ok_dlg"
+        app:layout_constraintStart_toStartOf="@+id/button_test_ok_dlg"
+        app:layout_constraintTop_toTopOf="@+id/button_test_ok_dlg" />
 
     <TextView
         android:id="@+id/textView_test_first_dialog"
@@ -46,8 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
         android:textColor="#000000"
+        android:lineSpacingExtra="3dp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_test_ok"
+        app:layout_constraintBottom_toTopOf="@+id/button_test_ok_dlg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />

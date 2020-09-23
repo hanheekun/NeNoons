@@ -7,21 +7,22 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/textView82"
+        android:id="@+id/textView_b82"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="258dp"
         android:gravity="center"
+        android:lineSpacingExtra="5dp"
         android:text="눈 건강을 위해\n눈운동을 꾸준히 해주세요."
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_test_next"
+        android:id="@+id/button_ex2_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
@@ -31,12 +32,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_test_prev"
+        app:layout_constraintStart_toEndOf="@+id/button_ex2_prev"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.939" />
 
     <Button
-        android:id="@+id/button_test_prev"
+        android:id="@+id/button_ex2_prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_w"
@@ -44,9 +45,9 @@
         android:textColor="#0143be"
         android:textSize="20sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintEnd_toStartOf="@+id/button_ex2_next"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+        app:layout_constraintTop_toTopOf="@+id/button_ex2_next" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

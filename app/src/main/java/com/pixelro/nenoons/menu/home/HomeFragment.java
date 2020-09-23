@@ -6,6 +6,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import com.pixelro.nenoons.test.TestActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -71,15 +73,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
         Geocoder geocoder;
 
-    private TextView TvAge;
+    protected SharedPreferencesManager mSm;
     private TextView TvExNumber;
     private TextView TvScreenTime;
 
     public boolean mTest = false;
-
-    private SharedPreferencesManager mSm;
-
-
+    private TextView TvAge,Tv_test;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -100,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         geocoder = new Geocoder(getActivity().getApplicationContext());
 
         mSm = new SharedPreferencesManager(getActivity());
+
 
         root.findViewById(R.id.button_home_address).setOnClickListener(this);
         TvAddress = (TextView) root.findViewById(R.id.textView_home_address);
@@ -190,6 +190,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         TvAge = (TextView) root.findViewById(R.id.textView_home_age);
+        Tv_test = (TextView) root.findViewById(R.id.textView_home_17);
         TvExNumber = (TextView) root.findViewById(R.id.textView_home_ex_number);
         TvScreenTime = (TextView) root.findViewById(R.id.textView_home_screen_time);
 
@@ -461,8 +462,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 
         refrashBoard();
-
+        Typeface face = mSm.getFontTypeface();
         TvAddress.setText(mSm.getAddress());
+        Tv_test.setTypeface(face);
 
         mBannerWebView.loadUrl("https://www.nenoons.com/app-banner");
 //        if (mBannerWebView !=null) {

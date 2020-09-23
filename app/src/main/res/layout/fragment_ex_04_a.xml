@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_ex_a_next"
+        android:id="@+id/button_ex_4_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ex_a_m" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ex_d_m" />
 
     <TextView
-        android:id="@+id/textView69"
+        android:id="@+id/textView_d69"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
@@ -63,15 +63,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView76"
+        android:id="@+id/textView_d76"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="H 따라하기"
         android:textColor="#153dc9"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@+id/textView69"
-        app:layout_constraintTop_toBottomOf="@+id/textView69" />
+        app:layout_constraintStart_toStartOf="@+id/textView_d69"
+        app:layout_constraintTop_toBottomOf="@+id/textView_d69" />
 
     <View
         android:id="@+id/view3"
@@ -97,18 +97,19 @@
         app:srcCompat="@drawable/ex_character_a" />
 
     <TextView
-        android:id="@+id/textView79"
+        android:id="@+id/textView_d79"
         android:layout_width="200dp"
         android:layout_height="165dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
+        android:lineSpacingExtra="3dp"
         android:text=" #운동방법\n점을 따라움직이세요. \n\n #효과\n일을 하다가 잠시 휴식 시간을 가질 때 꾸준히 한다면 눈이 건강해 질 수 있어요. "
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <TextView
-        android:id="@+id/textView81"
+        android:id="@+id/textView_d81"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -121,7 +122,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <Button
-        android:id="@+id/btn_ex_a_l"
+        android:id="@+id/btn_ex_d_l"
         android:layout_width="84dp"
         android:layout_height="27dp"
         android:layout_marginTop="24dp"
@@ -130,14 +131,14 @@
         android:enabled="false"
         android:text="쉬움"
         android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/btn_ex_a_m"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ex_d_m"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_d81" />
 
     <Button
-        android:id="@+id/btn_ex_a_h"
+        android:id="@+id/btn_ex_d_h"
         android:layout_width="84dp"
         android:layout_height="27dp"
         android:background="@drawable/btn_xxs_w"
@@ -145,20 +146,20 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_ex_a_m"
-        app:layout_constraintTop_toTopOf="@+id/btn_ex_a_m" />
+        app:layout_constraintStart_toEndOf="@+id/btn_ex_d_m"
+        app:layout_constraintTop_toTopOf="@+id/btn_ex_d_m" />
 
     <Button
-        android:id="@+id/btn_ex_a_m"
+        android:id="@+id/btn_ex_d_m"
         android:layout_width="84dp"
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/btn_xxs_w"
         android:text="보통"
         android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/btn_ex_a_h"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ex_d_h"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_ex_a_l"
-        app:layout_constraintTop_toTopOf="@+id/btn_ex_a_l" />
+        app:layout_constraintStart_toEndOf="@+id/btn_ex_d_l"
+        app:layout_constraintTop_toTopOf="@+id/btn_ex_d_l" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.apollographql.apollo.subscription.SubscriptionConnectionParamsProvider;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -64,7 +67,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView TvEmail;
     private TextView TvName;
-
+    private Button mButton;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         myViewModel =
@@ -84,6 +87,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         PackageInfo pi = null;
         try {
             pi = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
@@ -99,6 +103,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         TvEmail = (TextView) mView.findViewById(R.id.textView_my_email);
         TvEmail.setText(mSm.getEmail());
 
+
         mView.findViewById(R.id.button_my_logout).setOnClickListener(this);
         mView.findViewById(R.id.button_my_my).setOnClickListener(this);
         mView.findViewById(R.id.button_my_basket).setOnClickListener(this);
@@ -113,8 +118,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         mView.findViewById(R.id.button_my_version).setOnClickListener(this);
         mView.findViewById(R.id.button_my_survey).setOnClickListener(this);
 
-        TvName = (TextView) mView.findViewById(R.id.textView_my_name);
 
+        TvName = (TextView) mView.findViewById(R.id.textView_my_name);
         TvName.setText(mSm.getName());
 
         // google
@@ -132,23 +137,26 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
-        super.onResume();
+            super.onResume();
 
-        // 20200831 android minSDK 28로 설정, android 8.0
-        // context.getResources().getFont(R.font.dall01r); 코드 사용 가능
-        // mSm.getFontTypeface() 통해 TextView에 바로 적용
-        // mSm은 BaseFragment에 설정되어 있음
-        // BaseFragment 를 사용하지 않는다면
-        // protected SharedPreferencesManager mSm;
-        // mSm = new SharedPreferencesManager(getActivity()); 로 선언하고 사용
-        Typeface face = mSm.getFontTypeface();
-        TvEmail.setTypeface(face);
-        TvName.setTypeface(face);
-    }
+            // 20200831 android minSDK 28로 설정, android 8.0
+            // context.getResources().getFont(R.font.dall01r); 코드 사용 가능
+            // mSm.getFontTypeface() 통해 TextView에 바로 적용
+            // mSm은 BaseFragment에 설정되어 있음
+            // BaseFragment 를 사용하지 않는다면
+            // protected SharedPreferencesManager mSm;
+            // mSm = new SharedPreferencesManager(getActivity()); 로 선언하고 사용
+            Typeface face = mSm.getFontTypeface();
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+            TvEmail.setTypeface(face);
+            TvName.setTypeface(face);
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
             case R.id.button_my_logout:
 
                 OkCancelDialog dlg = new OkCancelDialog(getActivity(), "로그아웃 할까요?");

@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_test_next"
+        android:id="@+id/button_test_next_rg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_s_b"
@@ -50,13 +50,13 @@
         android:textColor="#0143be"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/button_test_next"
+        app:layout_constraintEnd_toStartOf="@+id/button_test_next_rg2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button_test_next" />
+        app:layout_constraintTop_toTopOf="@+id/button_test_next_rg2" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/textView37_rg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -75,10 +75,10 @@
         android:src="@drawable/combined_shape_2line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+        app:layout_constraintTop_toBottomOf="@+id/textView37_rg2" />
 
     <TextView
-        android:id="@+id/textView_test_02_command"
+        android:id="@+id/textView_test_02_command_rg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -115,31 +115,31 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView66"
+        android:id="@+id/textView66_rg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="화면과의 실시간 거리"
         android:textColor="#2e4fa2"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView_test_02_distance"
+        app:layout_constraintEnd_toStartOf="@+id/textView_test_02_distance_rg2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup_test_02" />
 
     <TextView
-        android:id="@+id/textView_test_02_distance"
+        android:id="@+id/textView_test_02_distance_rg2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="- cm"
         android:textColor="#b1b1b1"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView66"
+        app:layout_constraintBottom_toBottomOf="@+id/textView66_rg2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView66"
-        app:layout_constraintTop_toTopOf="@+id/textView66" />
+        app:layout_constraintStart_toEndOf="@+id/textView66_rg2"
+        app:layout_constraintTop_toTopOf="@+id/textView66_rg2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

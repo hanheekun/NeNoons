@@ -9,8 +9,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -21,6 +23,8 @@ import com.pixelro.nenoons.test.Test04ColorFragment;
 import com.pixelro.nenoons.test.TestActivity;
 
 public class MyColorActivity extends AppCompatActivity   implements View.OnClickListener{
+
+
 
     private SharedPreferencesManager mSm;
 
@@ -96,6 +100,7 @@ public class MyColorActivity extends AppCompatActivity   implements View.OnClick
         ClColor4.setOnClickListener(this);
         ClColor5.setOnClickListener(this);
         ClColor6.setOnClickListener(this);
+
 
     }
 

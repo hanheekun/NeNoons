@@ -2,11 +2,14 @@ package com.pixelro.nenoons.menu.exercise.ex03;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.ExProfile;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.server.HttpTask;
 
 import org.json.JSONException;
@@ -33,6 +37,10 @@ public class Ex03CFragment extends Fragment implements View.OnClickListener{
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    protected SharedPreferencesManager mSm;
+    private View mView;
+
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -45,12 +53,14 @@ public class Ex03CFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context mContext =getContext();
+        mView =view;
 
-        view.findViewById(R.id.button_test_prev).setOnClickListener(this);
-        view.findViewById(R.id.button_test_next).setOnClickListener(this);
+        view.findViewById(R.id.button_ex3_prev).setOnClickListener(this);
+        view.findViewById(R.id.button_ex3_next).setOnClickListener(this);
 
         sharedPreferences = getActivity().getSharedPreferences(EYELAB.APPDATA.NAME_EXERCISE,MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
 
         int curTotalEXNumber = sharedPreferences.getInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,0);
         editor.putInt(EYELAB.APPDATA.EXERCISE.EX_DAY_NUMBER,++curTotalEXNumber);
@@ -112,17 +122,30 @@ public class Ex03CFragment extends Fragment implements View.OnClickListener{
         new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_exercise", handler).execute(param);
 //        new HttpTask("http://192.168.1.162:4002/android/update_user_exercise", handler).execute(param);
 
+        mSm = new SharedPreferencesManager(getActivity());
+
     }
 
+   @Override
+    public void onResume(){
+        super.onResume();
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView_c82)).setTypeface(face);
+        ((TextView)mView.findViewById(R.id.textView_c83)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_ex3_next)).setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_ex3_prev)).setTypeface(face);
+
+
+    }
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_test_prev:
+            case R.id.button_ex3_prev:
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_ex_03, new Ex03AFragment()).commit();
                 break;
-            case R.id.button_test_next:
+            case R.id.button_ex3_next:
                 getActivity().finish();
                 break;
         }

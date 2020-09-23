@@ -3,6 +3,7 @@ package com.pixelro.nenoons.test;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.pixelro.nenoons.EYELAB;
 import com.pixelro.nenoons.R;
+import com.pixelro.nenoons.SharedPreferencesManager;
 import com.pixelro.nenoons.TestProfile;
 import com.pixelro.nenoons.account.AccountHelloFragment;
 import com.pixelro.nenoons.menu.my.MyColorActivity;
@@ -38,6 +40,7 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
     private TextView TvAge;
     private TextView TvResult;
     private int mDistance;
+    protected SharedPreferencesManager mSm;
 
     private Button BtnReturn;
 
@@ -203,9 +206,22 @@ public class Test07ResultFragment extends Fragment  implements View.OnClickListe
         new HttpTask("https://nenoonsapi.du.r.appspot.com/android/update_user_test", handler).execute(param);
 //        new HttpTask("http://192.168.1.162:4002/android/update_user_test", handler).execute(param);
 
-
+    mSm = new SharedPreferencesManager(getActivity());
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        Typeface face = mSm.getFontTypeface();
+        ((TextView)mView.findViewById(R.id.textView37_rs)).setTypeface(face);
+        TvResult.setTypeface(face);
+        TvAge.setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_test_07_add)).setTypeface(face);
+        BtnReturn.setTypeface(face);
+        ((Button)mView.findViewById(R.id.button_test_07_color_setting)).setTypeface(face);
+
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
